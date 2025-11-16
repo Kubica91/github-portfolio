@@ -1,0 +1,57 @@
+{
+    "browserslist": [
+        "> 0.1%"
+    ],
+    "dependencies": {
+        "guid-typescript": "^1.0.9",
+        "i18next": "^23.11.4",
+        "react": "^18.3.1",
+        "react-device-detect": "^2.2.3",
+        "react-dom": "^18.3.1",
+        "react-i18next": "^15.0.2",
+        "react-icons": "^5.3.0",
+        "react-router-dom": "^6.25.0",
+        "react-toastify": "^11.0.2"
+    },
+    "devDependencies": {
+        "@testing-library/react": "^16.0.1",
+        "@types/node": "^20.14.8",
+        "@types/react": "^18.3.8",
+        "@types/react-dom": "^18.3.0",
+        "@typescript-eslint/eslint-plugin": "^8.6.0",
+        "@typescript-eslint/parser": "^8.6.0",
+        "@vitejs/plugin-react-swc": "^3.7.0",
+        "@vitest/browser": "^2.1.1",
+        "@vitest/coverage-v8": "^2.1.1",
+        "autoprefixer": "^10.4.20",
+        "cssnano": "^7.0.6",
+        "eslint": "8.57.0",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-plugin-react": "^7.36.1",
+        "eslint-plugin-react-hooks": "^4.6.2",
+        "eslint-plugin-react-refresh": "^0.4.12",
+        "jsdom": "^25.0.1",
+        "postcss": "^8.4.47",
+        "postcss-import": "^16.1.0",
+        "postcss-preset-env": "^10.0.3",
+        "prettier": "^3.3.3",
+        "prettier-plugin-classnames": "^0.7.3",
+        "prettier-plugin-tailwindcss": "^0.6.6",
+        "tailwindcss": "^3.4.12",
+        "typescript": "^5.6.2",
+        "vite": "^5.4.7",
+        "vite-plugin-checker": "^0.8.0",
+        "vitest": "^2.1.1"
+    },
+    "name": "proco-slovo",
+    "private": true,
+    "scripts": {
+        "build": "tsc && vite build",
+        "dev": "pnpm i && vite",
+        "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+        "preview": "vite preview",
+        "test": "vitest"
+    },
+    "type": "module",
+    "version": "0.0.0"
+}
