@@ -7,9 +7,7 @@ import checker from "vite-plugin-checker";
 // https://vitejs.dev/config/
 export default defineConfig({
     plugins: [react(), checker({ typescript: true })],
-    server: {
-        port: 3000,
-    },
+    base: "/github-portfolio",
     test: {
         environment: "jsdom",
         globals: true,

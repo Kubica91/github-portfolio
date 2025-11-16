@@ -1,8 +1,22 @@
 {
+    "name": "github-portfolio",
+    "homepage": "https://kubica91.github.io/github-portfolio/",
+    "type": "module",
+    "version": "0.0.0",
+    "scripts": {
+        "dev": "pnpm i && vite",
+        "build": "tsc && vite build",
+        "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+        "preview": "vite preview",
+        "test": "vitest",
+        "predeploy": "pnpm i && pnpm run build",
+        "deploy": "gh-pages -d dist"
+    },
     "browserslist": [
         "> 0.1%"
     ],
     "dependencies": {
+        "gh-pages": "^6.3.0",
         "guid-typescript": "^1.0.9",
         "i18next": "^23.11.4",
         "react": "^18.3.1",
@@ -42,16 +56,6 @@
         "vite": "^5.4.7",
         "vite-plugin-checker": "^0.8.0",
         "vitest": "^2.1.1"
-    },
-    "name": "proco-slovo",
-    "private": true,
-    "scripts": {
-        "build": "tsc && vite build",
-        "dev": "pnpm i && vite",
-        "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-        "preview": "vite preview",
-        "test": "vitest"
-    },
-    "type": "module",
-    "version": "0.0.0"
+    }
 }
+
