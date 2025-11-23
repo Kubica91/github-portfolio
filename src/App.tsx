@@ -6,7 +6,7 @@ const App = () => {
 
     return (
         <div className="flex h-screen w-screen flex-col items-center justify-center gap-3 bg-neutral-900 text-white">
-            <span>{t("Zdar, test")}</span>
+            <span>{t("Spravuje se...")}</span>
 
             <ToastContainer
                 position="top-center"

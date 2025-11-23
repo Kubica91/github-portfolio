@@ -4,7 +4,7 @@ import { initReactI18next } from "react-i18next";
 const resources = {
     cs: {
         translation: {
-            "Zdar, test": "Zdar, test aaaaa",
+            "Spravuje se...": "Spravuje se...",
         },
     },
 };
