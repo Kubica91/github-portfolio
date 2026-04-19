@@ -75,7 +75,7 @@ const CvPage = () => {
             </header>
 
             {/* Content */}
-            <main className="mx-auto max-w-4xl space-y-10 px-6 py-12">
+            <main className="mx-auto max-w-4xl space-y-4 px-6 py-4">
                 {/* Profile */}
                 <section className="rounded-2xl border border-blue-200 bg-white p-8 shadow-sm no-boarder">
                     <SectionTitle
@@ -104,7 +104,7 @@ const CvPage = () => {
                         title={t("WorkExperience.Title")}
                         subtitle={t("WorkExperience.Company")}
                     >
-                        <ul className="mb-4 space-y-1.5 text-gray-600">
+                        <ul className="space-y-1.5 text-gray-600">
                             <li className="flex items-start gap-2">
                                 <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500" />
                                 {t("WorkExperience.CadBimVisualization")}
@@ -234,9 +234,7 @@ const CvPage = () => {
                             period={t("Education.HighSchool.Period")}
                             title={t("Education.HighSchool.Name")}
                             subtitle={t("Education.HighSchool.Field")}
-                        >
-                            <></>
-                        </TimelineItem>
+                        />
                     </div>
                 </section>
 
