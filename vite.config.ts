@@ -8,13 +8,4 @@ import checker from "vite-plugin-checker";
 export default defineConfig({
     plugins: [react(), checker({ typescript: true })],
     base: "/github-portfolio",
-    test: {
-        environment: "jsdom",
-        globals: true,
-        setupFiles: "./src/tests/setup.ts",
-        coverage: {
-            provider: "v8",
-            all: false,
-        },
-    },
 });
