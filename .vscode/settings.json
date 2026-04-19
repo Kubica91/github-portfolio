@@ -2,19 +2,18 @@
     "git.autofetch": true,
     "git.confirmSync": false,
     "git.enableSmartCommit": true,
-    "typescript.updateImportsOnFileMove.enabled": "always",
+    "js/ts.updateImportsOnFileMove.enabled": "always",
+    "js/ts.preferences.includePackageJsonAutoImports": "on",
     "explorer.confirmDelete": false,
     "files.autoSave": "off",
     "explorer.confirmDragAndDrop": false,
-    "javascript.updateImportsOnFileMove.enabled": "always",
-    "typescript.preferences.includePackageJsonAutoImports": "on",
     "editor.linkedEditing": true,
     "diffEditor.ignoreTrimWhitespace": false,
     "[json]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[typescriptreact]": {
-        "editor.defaultFormatter": "vscode.typescript-language-features"
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": "always",
@@ -31,5 +30,7 @@
     "tailwindCSS.classAttributes": ["class", "className", "ngClass", ".*Styles"],
     "editor.quickSuggestions": {
         "strings": true
-    }
+    },
+    "css.customData": [],
+    "css.lint.unknownAtRules": "ignore"
 }

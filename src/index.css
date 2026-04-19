@@ -5,3 +5,14 @@
 body {
     font-family: "Consolas";
 }
+
+/* PDF export: prevent sections from being split across pages */
+section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+}
+
+.rounded-2xl {
+    break-inside: avoid;
+    page-break-inside: avoid;
+}

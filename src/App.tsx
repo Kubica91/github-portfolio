@@ -1,12 +1,10 @@
-import { useTranslation } from "react-i18next";
 import { ToastContainer } from "react-toastify";
+import CvPage from "./cv/CvPage";
 
 const App = () => {
-    const { t } = useTranslation();
-
     return (
-        <div className="flex h-screen w-screen flex-col items-center justify-center gap-3 bg-neutral-900 text-white">
-            <span>{t("Spravuje se...")}</span>
+        <>
+            <CvPage />
 
             <ToastContainer
                 position="top-center"
@@ -14,7 +12,7 @@ const App = () => {
                 pauseOnFocusLoss
                 theme="dark"
             />
-        </div>
+        </>
     );
 };
 

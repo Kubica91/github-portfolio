@@ -19,11 +19,15 @@
         }
     },
     "plugins": ["@typescript-eslint", "react", "react-refresh"],
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    },
     "rules": {
         "react/react-in-jsx-scope": "off",
         "camelcase": "error",
         "spaced-comment": ["error", "always", { "markers": ["/"] }],
-        "quotes": ["warn", "double"],
         "no-duplicate-imports": "error",
         "react/jsx-fragments": "error",
         "react/self-closing-comp": [
@@ -35,6 +39,6 @@
         ],
         "react-refresh/only-export-components": "off",
         "no-unused-vars": "off",
-        "@typescript-eslint/no-unused-vars": "off"
+        "@typescript-eslint/no-unused-vars": "warn"
     }
 }
