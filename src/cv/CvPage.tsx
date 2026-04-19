@@ -7,42 +7,12 @@ import TimelineItem from "./components/TimelineItem";
 const CvPage = () => {
     const { t } = useTranslation();
 
-    const handleDownloadPdf = async () => {
-        const { default: html2pdf } = await import("html2pdf.js");
-        const element = document.getElementById("cv-content");
-
-        if (!element) return;
-
-        // Hide the download button during PDF generation
-        const btn = document.getElementById("pdf-download-btn");
-        if (btn) btn.style.display = "none";
-
-        html2pdf()
-            .set({
-                margin: [10, 10, 10, 10],
-                filename: "Jakub_Petran_CV.pdf",
-                image: { type: "jpeg", quality: 0.98 },
-                html2canvas: {
-                    scale: 2,
-                    useCORS: true,
-                    letterRendering: true,
-                    scrollY: 0,
-                    windowWidth: element.scrollWidth,
-                },
-                jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-            })
-            .from(element)
-            .save()
-            .then(() => {
-                if (btn) btn.style.display = "";
-            });
+    const handleDownloadPdf = () => {
+        window.print();
     };
 
     return (
-        <div
-            id="cv-content"
-            className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50"
-        >
+        <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
             {/* Header */}
             <header className="relative bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900">
                 <div className="absolute inset-0 overflow-hidden opacity-10">
@@ -82,10 +52,9 @@ const CvPage = () => {
                             </div>
 
                             <button
-                                id="pdf-download-btn"
                                 onClick={handleDownloadPdf}
                                 className="mt-6 inline-flex items-center gap-2 rounded-full bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors print:hidden
-                                    hover:bg-blue-500"
+                                    hover:bg-blue-500 no-print"
                             >
                                 <FiDownload />
                                 {t("DownloadPdf")}
@@ -98,7 +67,7 @@ const CvPage = () => {
             {/* Content */}
             <main className="mx-auto max-w-4xl space-y-10 px-6 py-12">
                 {/* Profile */}
-                <section className="rounded-2xl border border-white/60 bg-white p-8 shadow-sm">
+                <section className="rounded-2xl border border-blue-200 bg-white p-8 shadow-sm no-boarder">
                     <SectionTitle
                         icon={<FiUser />}
                         title={t("Profile")}
@@ -114,7 +83,7 @@ const CvPage = () => {
                 </section>
 
                 {/* Experience */}
-                <section className="rounded-2xl border border-white/60 bg-white p-8 shadow-sm">
+                <section className="rounded-2xl border border-blue-200 bg-white p-8 shadow-sm no-boarder">
                     <SectionTitle
                         icon={<FiBriefcase />}
                         title={t("WorkExperience")}
@@ -185,7 +154,7 @@ const CvPage = () => {
                 </section>
 
                 {/* Skills */}
-                <section className="rounded-2xl border border-white/60 bg-white p-8 shadow-sm">
+                <section className="rounded-2xl border border-blue-200 bg-white p-8 shadow-sm no-boarder">
                     <SectionTitle
                         icon={<FiCode />}
                         title={t("TechnicalSkills")}
@@ -225,7 +194,7 @@ const CvPage = () => {
                 </section>
 
                 {/* Education */}
-                <section className="rounded-2xl border border-white/60 bg-white p-8 shadow-sm">
+                <section className="rounded-2xl border border-blue-200 bg-white p-8 shadow-sm no-boarder">
                     <SectionTitle
                         icon={<FiBookOpen />}
                         title={t("Education")}
@@ -261,7 +230,7 @@ const CvPage = () => {
                 </section>
 
                 {/* Certifications */}
-                <section className="rounded-2xl border border-white/60 bg-white p-8 shadow-sm">
+                <section className="rounded-2xl border border-blue-200 bg-white p-8 shadow-sm no-boarder">
                     <SectionTitle
                         icon={<FiAward />}
                         title={t("Certifications")}
@@ -295,7 +264,7 @@ const CvPage = () => {
                 </section>
 
                 {/* Projects */}
-                <section className="rounded-2xl border border-white/60 bg-white p-8 shadow-sm">
+                <section className="rounded-2xl border border-blue-200 bg-white p-8 shadow-sm no-boarder">
                     <SectionTitle
                         icon={<FiFolder />}
                         title={t("Projects")}
@@ -332,7 +301,7 @@ const CvPage = () => {
                 </section>
 
                 {/* Languages */}
-                <section className="rounded-2xl border border-white/60 bg-white p-8 shadow-sm">
+                <section className="rounded-2xl border border-blue-200 bg-white p-8 shadow-sm no-boarder">
                     <SectionTitle
                         icon={<FiGlobe />}
                         title={t("Languages")}
