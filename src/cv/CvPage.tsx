@@ -14,14 +14,8 @@ const CvPage = () => {
     return (
         <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
             {/* Header */}
-            <header className="relative bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900">
-                <div className="absolute inset-0 overflow-hidden opacity-10">
-                    <div className="absolute -right-20 -top-20 h-96 w-96 rounded-full bg-blue-400 blur-3xl" />
-
-                    <div className="absolute -bottom-20 -left-20 h-96 w-96 rounded-full bg-blue-600 blur-3xl" />
-                </div>
-
-                <div className="relative mx-auto max-w-4xl px-6 py-16 sm:py-20">
+            <header className="bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900">
+                <div className="mx-auto max-w-4xl px-6 py-16 sm:py-20">
                     <div className="flex flex-col items-center gap-8 sm:flex-row sm:items-start sm:text-left">
                         <img
                             src="/github-portfolio/images/profile.jpg"
