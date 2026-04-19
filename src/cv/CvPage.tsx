@@ -201,14 +201,14 @@ const CvPage = () => {
                     >
                         <div className="rounded-lg border border-gray-200 bg-gray-50 p-4 text-sm text-gray-600">
                             <span className="font-semibold text-gray-800">{t("Education.ThesisLabel")}</span> {t("Education.ThesisTitle")}
-                            {/* <a
+                            <a
                                 href="https://dspace.tul.cz/items/2a2a2308-13d1-4b9b-9c96-6c75c33cc25e"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="ml-2 inline-flex items-center gap-1 text-blue-600 hover:underline"
                             >
                                 {t("Education.ThesisLink")} ↗
-                            </a> */}
+                            </a>
                         </div>
                     </TimelineItem>
 
