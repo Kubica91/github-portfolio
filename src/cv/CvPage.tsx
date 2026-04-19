@@ -1,5 +1,16 @@
 import { useTranslation } from "react-i18next";
-import { FiAward, FiBookOpen, FiBriefcase, FiCode, FiDownload, FiFolder, FiGlobe, FiMail, FiMapPin, FiUser } from "react-icons/fi";
+import {
+    FiAward,
+    FiBookOpen,
+    FiBriefcase,
+    FiCode,
+    FiDownload,
+    FiFolder,
+    FiGlobe,
+    FiMail,
+    FiMapPin,
+    FiUser,
+} from "react-icons/fi";
 import SectionTitle from "./components/SectionTitle";
 import SkillCategory from "./components/SkillCategory";
 import TimelineItem from "./components/TimelineItem";
@@ -24,12 +35,17 @@ const CvPage = () => {
                         />
 
                         <div className="flex flex-1 flex-col items-center sm:items-start">
-                            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-400/30 bg-blue-500/10 px-4 py-1.5 text-sm text-blue-300">
+                            <div
+                                className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-400/30 bg-blue-500/10 px-4 py-1.5 text-sm
+                                    text-blue-300"
+                            >
                                 <span className="h-2 w-2 rounded-full bg-green-400" />
                                 {t("OpenToOpportunities")}
                             </div>
 
-                            <h1 className="mb-3 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">Jakub Petráň</h1>
+                            <h1 className="mb-3 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+                                Jakub Petráň
+                            </h1>
 
                             <p className="mb-6 text-lg font-medium text-blue-200 sm:text-xl">{t("Subtitle")}</p>
 
@@ -47,8 +63,8 @@ const CvPage = () => {
 
                             <button
                                 onClick={handleDownloadPdf}
-                                className="mt-6 inline-flex items-center gap-2 rounded-full bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors print:hidden
-                                    hover:bg-blue-500 no-print"
+                                className="mt-6 inline-flex items-center gap-2 rounded-full bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white
+                                    transition-colors print:hidden hover:bg-blue-500 no-print"
                             >
                                 <FiDownload />
                                 {t("DownloadPdf")}
@@ -200,7 +216,8 @@ const CvPage = () => {
                         subtitle={t("Education.Degree")}
                     >
                         <div className="rounded-lg border border-gray-200 bg-gray-50 p-4 text-sm text-gray-600">
-                            <span className="font-semibold text-gray-800">{t("Education.ThesisLabel")}</span> {t("Education.ThesisTitle")}
+                            <span className="font-semibold text-gray-800">{t("Education.ThesisLabel")}</span>{" "}
+                            {t("Education.ThesisTitle")}
                             <a
                                 href="https://dspace.tul.cz/items/2a2a2308-13d1-4b9b-9c96-6c75c33cc25e"
                                 target="_blank"
@@ -281,6 +298,11 @@ const CvPage = () => {
                                 desc: t("Projects.WordGameDesc"),
                                 emoji: "💬",
                             },
+                            {
+                                title: t("Projects.CodingGames"),
+                                desc: t("Projects.CodingGamesDesc"),
+                                emoji: "☢️",
+                            },
                         ].map((project) => (
                             <div
                                 key={project.title}
@@ -312,7 +334,9 @@ const CvPage = () => {
                             >
                                 <div className="mb-1 flex items-center justify-between">
                                     <span className="font-semibold text-gray-900">{l.lang}</span>
-                                    <span className="rounded-full bg-blue-100 px-2 py-0.5 text-xs font-bold text-blue-700">{l.level}</span>
+                                    <span className="rounded-full bg-blue-100 px-2 py-0.5 text-xs font-bold text-blue-700">
+                                        {l.level}
+                                    </span>
                                 </div>
                                 <div className="h-2 overflow-hidden rounded-full bg-gray-200">
                                     <div
@@ -327,7 +351,7 @@ const CvPage = () => {
             </main>
 
             {/* Footer */}
-            <footer className="border-t border-gray-200 bg-white py-8 text-center text-sm text-gray-400">
+            <footer className="border-t border-gray-200 bg-white py-8 text-center text-sm text-gray-400 no-print">
                 © {new Date().getFullYear()} Jakub Petráň
             </footer>
         </div>
