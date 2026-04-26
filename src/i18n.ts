@@ -22,8 +22,7 @@ const resources = {
             "WorkExperience.Company": "Proconom Software s.r.o., Liberec",
             "WorkExperience.CadBimVisualization": "Vývoj webových aplikací pro 3D vizualizaci CAD/BIM modelů",
             "WorkExperience.ForgeViewer": "Autodesk Forge Viewer – projekt vedu a vyvíjím od začátku",
-            "WorkExperience.ThreeJsViewer":
-                "Prohlížečka 3D modelů v Three.js – vytvořena od základu pro webové prostředí",
+            "WorkExperience.ThreeJsViewer": "Prohlížečka 3D modelů v Three.js – vytvořena od základu pro webové prostředí",
             "WorkExperience.PointCloud": "Implementace a vizualizace vlastních formátů point cloudových modelů",
             "WorkExperience.FrontendStack": "Frontend: React, TypeScript, Autodesk Forge Viewer, Three.js",
             "WorkExperience.BackendStack": "Backend: .NET (C#), REST API",
@@ -61,8 +60,7 @@ const resources = {
             "Projects.Experimental": "Experimentální projekty",
             "Projects.ExperimentalDesc": "Oblast 3D a vizualizace",
             "Projects.WordGame": "Hádej slovo – firemní webová hra",
-            "Projects.WordGameDesc":
-                "Fullstack webová aplikace s React frontendem a vlastním .NET backendem (REST API).",
+            "Projects.WordGameDesc": "Fullstack webová aplikace s React frontendem a vlastním .NET backendem (REST API).",
             "Projects.CodingGames": "Kódovací výzvy",
             "Projects.CodingGamesDesc": "Řešení algoritmických úloh a kódovacích výzev na platformě codingame.com",
 
