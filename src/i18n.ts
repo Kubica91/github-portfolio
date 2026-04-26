@@ -12,9 +12,9 @@ const resources = {
             Profile: "Profil",
             "Profile.Focus": "Fullstack developer se zaměřením na 3D vizualizace, webové aplikace a cloudová řešení.",
             "Profile.CadBimExperience":
-                "Mám více než 5 let zkušeností s vývojem aplikací pro práci s CAD/BIM modely, včetně interaktivní vizualizace ve webu (React, TypeScript, Autodesk Forge, Three.js) a backendu v .NET.",
+                "Mám více než 5 let zkušeností s programováním a vývojem aplikací pro práci s CAD/BIM modely, včetně interaktivní vizualizace ve webu a backendu v .NET.",
             "Profile.AdditionalSkills":
-                "Zkušenosti zahrnují také AR/VR aplikace v Unity a práci s velkými daty (3D modely). V Unity mám zkušenosti s vývojem mobilních her pro Android, iOS a Windows.",
+                "Mám také zkušenosti s Unity enginem, které zahrnují AR/VR aplikace a mobilní hry pro Android i iOS.",
 
             WorkExperience: "Pracovní zkušenosti",
             "WorkExperience.Period": "04/2021 – současnost",

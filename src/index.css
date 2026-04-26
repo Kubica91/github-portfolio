@@ -24,9 +24,4 @@ body {
         border: none !important;
         box-shadow: none !important;
     }
-
-    .rounded-2xl {
-        break-inside: avoid;
-        page-break-inside: avoid;
-    }
 }

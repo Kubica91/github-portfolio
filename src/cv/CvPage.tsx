@@ -9,6 +9,9 @@ import {
     FiGlobe,
     FiMail,
     FiMapPin,
+    FiMessageSquare,
+    FiPackage,
+    FiSmartphone,
     FiUser,
 } from "react-icons/fi";
 import SectionTitle from "./components/SectionTitle";
@@ -26,7 +29,7 @@ const CvPage = () => {
         <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
             {/* Header */}
             <header className="bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900">
-                <div className="mx-auto max-w-4xl px-6 py-16 sm:py-20">
+                <div className="mx-auto max-w-4xl px-6 py-10">
                     <div className="flex flex-col items-center gap-8 sm:flex-row sm:items-start sm:text-left">
                         <img
                             src="/github-portfolio/images/profile.jpg"
@@ -284,30 +287,28 @@ const CvPage = () => {
                             {
                                 title: t("Projects.UnityGames"),
                                 desc: t("Projects.UnityGamesDesc"),
-                                emoji: "🎮",
-                            },
-                            {
-                                title: t("Projects.Experimental"),
-                                desc: t("Projects.ExperimentalDesc"),
-                                emoji: "🧪",
+                                emoji: <FiSmartphone />,
                             },
                             {
                                 title: t("Projects.WordGame"),
                                 desc: t("Projects.WordGameDesc"),
-                                emoji: "💬",
+                                emoji: <FiMessageSquare />,
                             },
                             {
                                 title: t("Projects.CodingGames"),
                                 desc: t("Projects.CodingGamesDesc"),
-                                emoji: "☢️",
+                                emoji: <FiPackage />,
                             },
                         ].map((project) => (
                             <div
                                 key={project.title}
                                 className="rounded-xl border border-gray-200 p-4 transition-shadow hover:shadow-md"
                             >
-                                <div className="mb-2 text-2xl">{project.emoji}</div>
-                                <h3 className="font-bold text-gray-900">{project.title}</h3>
+                                <div className="py-2 flex flex-row gap-2">
+                                    <div className="text-2xl">{project.emoji}</div>
+                                    <h3 className="font-bold text-gray-900">{project.title}</h3>
+                                </div>
+
                                 <p className="text-sm text-gray-500">{project.desc}</p>
                             </div>
                         ))}
