@@ -26,7 +26,7 @@ const CurriculumVitaePage = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+        <div className="w-full h-full bg-gradient-to-br from-slate-50 to-blue-50 overflow-auto">
             {/* Header */}
             <header className="bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900">
                 <div className="mx-auto max-w-4xl px-6 py-10">

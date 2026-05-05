@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const TopNavigationBar = () => {
     return (
-        <nav className="sticky top-0 z-50 bg-slate-800/80 backdrop-blur-md border-b border-slate-700 no-print">
+        <nav className="bg-slate-800/80 border-b border-slate-700 no-print">
             <div className="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
                 <Link
                     to="/"

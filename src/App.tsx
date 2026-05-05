@@ -8,28 +8,30 @@ import UnityGames from "./unityGames/UnityGames";
 
 const App = () => {
     return (
-        <div className="w-screen h-screen bg-slate-900 text-slate-100 font-sans">
+        <div className="w-screen h-screen flex flex-col bg-slate-900 text-slate-100 font-sans overflow-hidden">
             <BrowserRouter>
                 <TopNavigationBar />
 
-                <Routes>
-                    <Route
-                        path="/"
-                        element={<HomePage />}
-                    />
-                    <Route
-                        path="/cv"
-                        element={<CurriculumVitaePage />}
-                    />
-                    <Route
-                        path="/unity"
-                        element={<UnityGames />}
-                    />
-                    <Route
-                        path="/threejs"
-                        element={<ChessMainPage />}
-                    />
-                </Routes>
+                <div className="flex-grow overflow-hidden">
+                    <Routes>
+                        <Route
+                            path="/"
+                            element={<HomePage />}
+                        />
+                        <Route
+                            path="/cv"
+                            element={<CurriculumVitaePage />}
+                        />
+                        <Route
+                            path="/unity"
+                            element={<UnityGames />}
+                        />
+                        <Route
+                            path="/threejs"
+                            element={<ChessMainPage />}
+                        />
+                    </Routes>
+                </div>
             </BrowserRouter>
 
             <ToastContainer
