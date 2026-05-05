@@ -18,7 +18,7 @@ import SectionTitle from "./components/SectionTitle";
 import SkillCategory from "./components/SkillCategory";
 import TimelineItem from "./components/TimelineItem";
 
-const CvPage = () => {
+const CurriculumVitaePage = () => {
     const { t } = useTranslation();
 
     const handleDownloadPdf = () => {
@@ -354,4 +354,4 @@ const CvPage = () => {
     );
 };
 
-export default CvPage;
+export default CurriculumVitaePage;
