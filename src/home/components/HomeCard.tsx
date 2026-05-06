@@ -5,13 +5,19 @@ interface HomeCardProps {
     link: string;
     icon: JSX.Element;
     desc: string;
+    widthClass?: string;
 }
 
-const HomeCard = ({ title, link, icon, desc }: HomeCardProps) => {
+const HomeCard = ({ title, link, icon, desc, widthClass = "w-80" }: HomeCardProps) => {
+    const handleClick = () => {
+        localStorage.setItem("lastHomePageSection", link);
+    };
     return (
         <Link
             to={link}
-            className="group p-8 bg-slate-800 rounded-2xl border border-slate-700 hover:border-cyan-500/50 transition-all hover:-translate-y-2"
+            onClick={handleClick}
+            className={`group p-8 bg-slate-800 rounded-2xl border border-slate-700 hover:border-cyan-500/50 transition-all hover:-translate-y-2 flex
+                flex-col items-center ${widthClass}`}
         >
             <div className="mb-4 flex justify-center">{icon}</div>
 

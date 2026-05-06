@@ -4,7 +4,10 @@ import CurriculumVitaePage from "./curriculumVitae/CurriculumVitaePage";
 import HomePage from "./home/HomePage";
 import ChessMainPage from "./threeJsGames/chess/ChessMainPage";
 import TopNavigationBar from "./topNavigationBar/TopNavigationBar";
-import UnityGames from "./unityGames/UnityGames";
+import UnityDeffTheBase from "./unityGames/UnityDeffTheBase";
+import UnityFindACoin from "./unityGames/UnityFindACoin";
+import UnityHideAndSeek from "./unityGames/UnityHideAndSeek";
+import UnityPruzina from "./unityGames/UnityPruzina";
 
 const App = () => {
     return (
@@ -12,7 +15,7 @@ const App = () => {
             <BrowserRouter>
                 <TopNavigationBar />
 
-                <div className="flex-grow overflow-hidden">
+                <div className="w-full h-full flex-grow overflow-hidden">
                     <Routes>
                         <Route
                             path="/"
@@ -23,11 +26,23 @@ const App = () => {
                             element={<CurriculumVitaePage />}
                         />
                         <Route
-                            path="/unity"
-                            element={<UnityGames />}
+                            path="/unity/findacoin"
+                            element={<UnityFindACoin />}
                         />
                         <Route
-                            path="/threejs"
+                            path="/unity/deffthebase"
+                            element={<UnityDeffTheBase />}
+                        />
+                        <Route
+                            path="/unity/hideandseek"
+                            element={<UnityHideAndSeek />}
+                        />
+                        <Route
+                            path="/unity/pruzina"
+                            element={<UnityPruzina />}
+                        />
+                        <Route
+                            path="/threejs/sachy"
                             element={<ChessMainPage />}
                         />
                     </Routes>

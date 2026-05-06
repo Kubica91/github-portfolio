@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
-import { BoxGeometry, Mesh, MeshBasicMaterial, PerspectiveCamera, Scene, WebGLRenderer } from "three";
+import { PerspectiveCamera, Scene, WebGLRenderer } from "three";
+import { GetPawnGeometry } from "./ChessUtils";
 
 const ChessMainPage = () => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -14,16 +15,15 @@ const ChessMainPage = () => {
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setAnimationLoop(animate);
 
-        const geometry = new BoxGeometry(1, 1, 1);
-        const material = new MeshBasicMaterial({ color: 0x00ff00 });
-        const cube = new Mesh(geometry, material);
-        scene.add(cube);
+        const pawn = GetPawnGeometry();
+        scene.add(pawn);
 
         camera.position.z = 5;
 
         function animate(time: number) {
-            cube.rotation.x = time / 2000;
-            cube.rotation.y = time / 1000;
+            pawn.rotation.x = time / 1000;
+            pawn.rotation.y = time / 1000;
+            pawn.rotation.z = time / 1000;
 
             renderer.render(scene, camera);
         }

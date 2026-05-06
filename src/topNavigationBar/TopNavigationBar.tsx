@@ -16,21 +16,7 @@ const TopNavigationBar = () => {
                         to="/cv"
                         className="hover:text-cyan-400 transition-colors"
                     >
-                        CV
-                    </Link>
-
-                    <Link
-                        to="/unity"
-                        className="hover:text-cyan-400 transition-colors"
-                    >
-                        Unity
-                    </Link>
-
-                    <Link
-                        to="/threejs"
-                        className="hover:text-cyan-400 transition-colors"
-                    >
-                        Three.js
+                        Životopis
                     </Link>
                 </div>
             </div>

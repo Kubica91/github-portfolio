@@ -9,6 +9,7 @@ const TimelineItem = ({ period, title, subtitle, children }: TimelineItemProps) 
     <div className="flex">
         <div className="flex flex-col items-center mr-4 pt-px">
             <div className="h-4 w-4 rounded-full border-[3px] border-blue-600 bg-white" />
+
             <div className="flex-1 w-px bg-blue-200" />
         </div>
 
