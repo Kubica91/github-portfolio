@@ -6,7 +6,7 @@ const HomePage = () => {
     const cvSection = [
         {
             title: "Životopis",
-            link: "/cv",
+            link: "/github-portfolio/cv",
             icon: <LuUser className="w-8 h-8 text-cyan-400" />,
             desc: "Kompletní přehled zkušeností, vzdělání a technologií, se kterými pracuji.",
         },
@@ -15,25 +15,25 @@ const HomePage = () => {
     const unityGames = [
         {
             title: "Find a Coin",
-            link: "/unity/findacoin",
+            link: "/github-portfolio/unity/findacoin",
             icon: <LuGamepad2 className="w-8 h-8 text-purple-400" />,
             desc: "Hra Find a Coin vytvořená v Unity. Zahrajte si přímo v prohlížeči.",
         },
         {
             title: "Deff The Base",
-            link: "/unity/deffthebase",
+            link: "/github-portfolio/unity/deffthebase",
             icon: <LuGamepad2 className="w-8 h-8 text-green-400" />,
             desc: "Hra Deff The Base vytvořená v Unity. Zahrajte si přímo v prohlížeči.",
         },
         {
             title: "Hide and Seek",
-            link: "/unity/hideandseek",
+            link: "/github-portfolio/unity/hideandseek",
             icon: <LuGamepad2 className="w-8 h-8 text-red-400" />,
             desc: "Hra Hide and Seek vytvořená v Unity. Zahrajte si přímo v prohlížeči.",
         },
         {
             title: "Pružina",
-            link: "/unity/pruzina",
+            link: "/github-portfolio/unity/pruzina",
             icon: <LuGamepad2 className="w-8 h-8 text-blue-400" />,
             desc: "Hra Pružina vytvořená v Unity. Zahrajte si přímo v prohlížeči.",
         },
@@ -42,7 +42,7 @@ const HomePage = () => {
     const threeJsGames = [
         {
             title: "Šachy 3D (Three.js)",
-            link: "/threejs/sachy",
+            link: "/github-portfolio/threejs/sachy",
             icon: <LuCode className="w-8 h-8 text-yellow-400" />,
             desc: "3D šachy v prohlížeči s využitím Three.js.",
         },

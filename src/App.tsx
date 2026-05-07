@@ -18,31 +18,31 @@ const App = () => {
                 <div className="w-full h-full flex-grow overflow-hidden">
                     <Routes>
                         <Route
-                            path="/"
+                            path="/github-portfolio"
                             element={<HomePage />}
                         />
                         <Route
-                            path="/cv"
+                            path="/github-portfolio/cv"
                             element={<CurriculumVitaePage />}
                         />
                         <Route
-                            path="/unity/findacoin"
+                            path="/github-portfolio/unity/findacoin"
                             element={<UnityFindACoin />}
                         />
                         <Route
-                            path="/unity/deffthebase"
+                            path="/github-portfolio/unity/deffthebase"
                             element={<UnityDeffTheBase />}
                         />
                         <Route
-                            path="/unity/hideandseek"
+                            path="/github-portfolio/unity/hideandseek"
                             element={<UnityHideAndSeek />}
                         />
                         <Route
-                            path="/unity/pruzina"
+                            path="/github-portfolio/unity/pruzina"
                             element={<UnityPruzina />}
                         />
                         <Route
-                            path="/threejs/sachy"
+                            path="/github-portfolio/threejs/sachy"
                             element={<ChessMainPage />}
                         />
                     </Routes>
