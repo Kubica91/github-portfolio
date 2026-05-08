@@ -1,18 +1,8 @@
 import { useEffect, useRef } from "react";
-import {
-    AmbientLight,
-    DirectionalLight,
-    Group,
-    Mesh,
-    MeshStandardMaterial,
-    PCFShadowMap,
-    PerspectiveCamera,
-    PlaneGeometry,
-    Scene,
-    WebGLRenderer,
-} from "three";
+import { AmbientLight, DirectionalLight, Group, PCFShadowMap, PerspectiveCamera, Scene, WebGLRenderer } from "three";
 import {
     GetBishopGeometry,
+    GetChessboardGeometry,
     GetKingGeometry,
     GetKnightGeometry,
     GetPawnGeometry,
@@ -21,66 +11,80 @@ import {
 } from "./ChessGeometryUtils";
 
 const ChessMainPage = () => {
+    const containerRef = useRef<HTMLDivElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
     useEffect(() => {
-        if (!canvasRef.current) return;
+        const ThreeJsInit = async () => {
+            if (!canvasRef.current || !containerRef.current) return;
 
-        const scene = new Scene();
-        const camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const scene = new Scene();
+            const camera = new PerspectiveCamera(
+                75,
+                containerRef.current.clientWidth / containerRef.current.clientHeight,
+                0.1,
+                1000
+            );
 
-        const renderer = new WebGLRenderer({ canvas: canvasRef.current });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setAnimationLoop(animate);
+            const renderer = new WebGLRenderer({ canvas: canvasRef.current });
+            renderer.setSize(containerRef.current.clientWidth, containerRef.current.clientHeight);
+            renderer.setAnimationLoop(animate);
 
-        const figures = [
-            GetPawnGeometry(),
-            GetRookGeometry(),
-            GetKnightGeometry(),
-            GetBishopGeometry(),
-            GetQueenGeometry(),
-            GetKingGeometry(),
-        ];
+            const figures = [
+                GetPawnGeometry(),
+                GetRookGeometry(),
+                GetKnightGeometry(),
+                GetBishopGeometry(),
+                GetQueenGeometry(),
+                GetKingGeometry(),
+            ];
 
-        const mainGroup = new Group();
-        for (let i = 0; i < figures.length; i++) {
-            const figure = figures[i];
-            figure.position.x = (i - 2.5) * 1.5;
-            mainGroup.add(figure);
-        }
-        scene.add(mainGroup);
+            const mainGroup = new Group();
+            for (let i = 0; i < figures.length; i++) {
+                const figure = figures[i];
 
-        const plane = new Mesh(new PlaneGeometry(9, 9), new MeshStandardMaterial({ color: 0x888888 }));
-        plane.rotation.x = -Math.PI / 2;
-        plane.position.y = -0.01;
-        plane.receiveShadow = true;
-        plane.castShadow = false;
-        scene.add(plane);
+                figure.position.x = (i - 2.5) * 1.5;
+                mainGroup.add(figure);
+            }
+            scene.add(mainGroup);
 
-        const ambientLight = new AmbientLight(0xffffff, 0.5);
-        scene.add(ambientLight);
+            const board = await GetChessboardGeometry();
+            scene.add(board);
 
-        const dirLight = new DirectionalLight(0xffffff, 1);
-        dirLight.position.set(2, 5, 2);
-        dirLight.target = mainGroup;
-        dirLight.castShadow = true;
-        dirLight.shadow.mapSize.width = 1024;
-        dirLight.shadow.mapSize.height = 1024;
-        scene.add(dirLight);
+            const ambientLight = new AmbientLight(0xffffff, 0.5);
+            scene.add(ambientLight);
 
-        renderer.shadowMap.enabled = true;
-        renderer.shadowMap.type = PCFShadowMap;
+            const dirLight = new DirectionalLight(0xffffff, 1);
+            dirLight.position.set(2, 5, 2);
+            dirLight.target = mainGroup;
+            dirLight.castShadow = true;
+            dirLight.shadow.mapSize.width = 1024;
+            dirLight.shadow.mapSize.height = 1024;
+            scene.add(dirLight);
 
-        camera.position.set(0, 4, 8);
-        camera.lookAt(0, 0, 0);
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = PCFShadowMap;
 
-        function animate(time: number) {
-            mainGroup.rotation.y = time / 1000;
-            renderer.render(scene, camera);
-        }
+            camera.position.set(0, 8, 0);
+            camera.lookAt(0, 0, 0);
+
+            function animate(time: number) {
+                mainGroup.rotation.y = time / 1000;
+                renderer.render(scene, camera);
+            }
+        };
+
+        ThreeJsInit();
     }, [canvasRef]);
 
-    return <canvas ref={canvasRef} />;
+    return (
+        <div
+            className="w-full h-full"
+            ref={containerRef}
+        >
+            <canvas ref={canvasRef} />
+        </div>
+    );
 };
 
 export default ChessMainPage;

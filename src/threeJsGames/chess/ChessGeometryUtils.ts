@@ -1,4 +1,6 @@
-import { ConeGeometry, CylinderGeometry, Group, Mesh, MeshStandardMaterial, SphereGeometry } from "three";
+import { BoxGeometry, ConeGeometry, CylinderGeometry, Group, Mesh, MeshStandardMaterial, SphereGeometry } from "three";
+import { TextGeometry } from "three/addons/geometries/TextGeometry.js";
+import { FontLoader } from "three/addons/loaders/FontLoader.js";
 
 const material = new MeshStandardMaterial({ color: 0xffffff });
 
@@ -195,4 +197,90 @@ export const GetKingGeometry = () => {
     addAndShadow(king, crossHorz);
 
     return king;
+};
+
+export const GetChessboardGeometry = async () => {
+    const squareSize = 1.2;
+    const boardSize = 8 * squareSize;
+    const board = new Group();
+
+    const whiteMat = new MeshStandardMaterial({ color: 0xfafafa });
+    const blackMat = new MeshStandardMaterial({ color: 0x222222 });
+
+    for (let x = 0; x < 8; x++) {
+        for (let z = 0; z < 8; z++) {
+            const isWhite = (x + z) % 2 === 0;
+            const mat = isWhite ? whiteMat : blackMat;
+
+            const square = new Mesh(new BoxGeometry(squareSize, 0.06, squareSize), mat);
+            square.position.x = (x - 3.5) * squareSize;
+            square.position.z = (z - 3.5) * squareSize;
+            square.position.y = 0.03;
+            square.receiveShadow = true;
+            board.add(square);
+        }
+    }
+
+    const base = new Mesh(
+        new BoxGeometry(boardSize + 0.6, 0.08, boardSize + 0.6),
+        new MeshStandardMaterial({ color: 0x333333 })
+    );
+    base.position.y = -0.04;
+    base.receiveShadow = true;
+    board.add(base);
+
+    const loader = new FontLoader();
+    const font = await loader.loadAsync("/github-portfolio/fonts/gentilis_regular.typeface.json");
+
+    const textMat = new MeshStandardMaterial({ color: 0xfafafa });
+    const textSize = 0.18;
+    const textDepth = 0.01;
+
+    for (let x = 0; x < 8; x++) {
+        const letter = String.fromCharCode(97 + x);
+
+        const textGeo = new TextGeometry(letter.toUpperCase(), {
+            font: font,
+            size: textSize,
+            depth: textDepth,
+        });
+
+        const meshTop = new Mesh(textGeo, textMat);
+        meshTop.position.x = -4 * squareSize + squareSize / 2 + x * squareSize + textSize / 2;
+        meshTop.position.z = -4 * squareSize - textSize - 0.05;
+        meshTop.rotation.x = -Math.PI / 2;
+        meshTop.rotation.z = Math.PI;
+        board.add(meshTop);
+
+        const meshBottom = new Mesh(textGeo, textMat);
+        meshBottom.position.x = -4 * squareSize + squareSize / 2 + x * squareSize - textSize / 2;
+        meshBottom.position.z = 4 * squareSize + textSize + 0.05;
+        meshBottom.rotation.x = -Math.PI / 2;
+        board.add(meshBottom);
+    }
+
+    for (let z = 0; z < 8; z++) {
+        const number = (z + 1).toString();
+
+        const textGeo = new TextGeometry(number.toUpperCase(), {
+            font: font,
+            size: textSize,
+            depth: textDepth,
+        });
+
+        const meshLeft = new Mesh(textGeo, textMat);
+        meshLeft.position.x = -4 * squareSize - textSize - 0.05;
+        meshLeft.position.z = 4 * squareSize - squareSize / 2 - z * squareSize + textSize / 2;
+        meshLeft.rotation.x = -Math.PI / 2;
+        board.add(meshLeft);
+
+        const meshRight = new Mesh(textGeo, textMat);
+        meshRight.position.x = 4 * squareSize + textSize + 0.05;
+        meshRight.position.z = 4 * squareSize - squareSize / 2 - z * squareSize - textSize / 2;
+        meshRight.rotation.x = -Math.PI / 2;
+        meshRight.rotation.z = -Math.PI;
+        board.add(meshRight);
+    }
+
+    return board;
 };

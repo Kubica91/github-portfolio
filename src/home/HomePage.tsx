@@ -79,22 +79,6 @@ const HomePage = () => {
 
                 <div className="flex flex-col gap-8">
                     <div>
-                        <h2 className="text-2xl font-bold mb-4 text-cyan-400 text-center">Životopis</h2>
-                        <div className="flex flex-wrap justify-center gap-6 pt-2 overflow-x-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-800">
-                            {cvSection.map((section) => (
-                                <HomeCard
-                                    key={section.link}
-                                    title={section.title}
-                                    link={section.link}
-                                    icon={section.icon}
-                                    desc={section.desc}
-                                    widthClass="w-80"
-                                />
-                            ))}
-                        </div>
-                    </div>
-
-                    <div>
                         <h2 className="text-2xl font-bold mb-4 text-purple-400 text-center">Unity Hry</h2>
                         <div className="flex flex-wrap justify-center gap-6 pt-2 overflow-x-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-800">
                             {unityGames.map((section) => (
@@ -114,6 +98,22 @@ const HomePage = () => {
                         <h2 className="text-2xl font-bold mb-4 text-yellow-400 text-center">Three.js Projekty</h2>
                         <div className="flex flex-wrap justify-center gap-6 pt-2 overflow-x-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-800">
                             {threeJsGames.map((section) => (
+                                <HomeCard
+                                    key={section.link}
+                                    title={section.title}
+                                    link={section.link}
+                                    icon={section.icon}
+                                    desc={section.desc}
+                                    widthClass="w-80"
+                                />
+                            ))}
+                        </div>
+                    </div>
+
+                    <div>
+                        <h2 className="text-2xl font-bold mb-4 text-cyan-400 text-center">Životopis</h2>
+                        <div className="flex flex-wrap justify-center gap-6 pt-2 overflow-x-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-800">
+                            {cvSection.map((section) => (
                                 <HomeCard
                                     key={section.link}
                                     title={section.title}
