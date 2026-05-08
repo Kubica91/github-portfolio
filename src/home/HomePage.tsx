@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { LuCode, LuGamepad2, LuUser } from "react-icons/lu";
+import usePersistentScroll from "../hooks/usePersistentScroll";
 import HomeCard from "./components/HomeCard";
 
 const HomePage = () => {
@@ -48,28 +49,21 @@ const HomePage = () => {
         },
     ];
 
-    // refs for scrollable sections
-    const cvRef = useRef<HTMLDivElement>(null);
-    const unityRef = useRef<HTMLDivElement>(null);
-    const threeRef = useRef<HTMLDivElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const scroll = usePersistentScroll("homePageScroll", containerRef);
 
     useEffect(() => {
-        const last = localStorage.getItem("lastHomePageSection");
-        if (last) {
-            if (last.startsWith("/cv") && cvRef.current) {
-                cvRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
-            } else if (last.startsWith("/unity") && unityRef.current) {
-                unityRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
-            } else if (last.startsWith("/threejs") && threeRef.current) {
-                threeRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
-            }
-            localStorage.removeItem("lastHomePageSection");
+        if (scroll !== undefined && containerRef.current) {
+            containerRef.current.scrollTo({ top: scroll, behavior: "auto" });
         }
-    }, []);
+    }, [scroll]);
 
     return (
-        <div className="w-full h-full overflow-auto">
-            <div className="max-w-5xl mx-auto px-4 py-10 flex flex-col gap-12 justify-items-center overflow-auto">
+        <div
+            ref={containerRef}
+            className="w-full h-full overflow-auto"
+        >
+            <div className="max-w-5xl mx-auto px-4 py-10 flex flex-col gap-12 justify-items-center">
                 <h1 className="text-5xl font-extrabold text-center">Vítejte na mém portfoliu</h1>
 
                 <p className="text-slate-400 text-lg text-center">
@@ -84,7 +78,7 @@ const HomePage = () => {
                 </p>
 
                 <div className="flex flex-col gap-8">
-                    <div ref={cvRef}>
+                    <div>
                         <h2 className="text-2xl font-bold mb-4 text-cyan-400 text-center">Životopis</h2>
                         <div className="flex flex-wrap justify-center gap-6 pt-2 overflow-x-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-800">
                             {cvSection.map((section) => (
@@ -100,7 +94,7 @@ const HomePage = () => {
                         </div>
                     </div>
 
-                    <div ref={unityRef}>
+                    <div>
                         <h2 className="text-2xl font-bold mb-4 text-purple-400 text-center">Unity Hry</h2>
                         <div className="flex flex-wrap justify-center gap-6 pt-2 overflow-x-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-800">
                             {unityGames.map((section) => (
@@ -116,7 +110,7 @@ const HomePage = () => {
                         </div>
                     </div>
 
-                    <div ref={threeRef}>
+                    <div>
                         <h2 className="text-2xl font-bold mb-4 text-yellow-400 text-center">Three.js Projekty</h2>
                         <div className="flex flex-wrap justify-center gap-6 pt-2 overflow-x-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-800">
                             {threeJsGames.map((section) => (

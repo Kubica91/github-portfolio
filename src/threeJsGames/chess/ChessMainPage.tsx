@@ -5,7 +5,7 @@ import {
     Group,
     Mesh,
     MeshStandardMaterial,
-    PCFSoftShadowMap,
+    PCFShadowMap,
     PerspectiveCamera,
     PlaneGeometry,
     Scene,
@@ -69,7 +69,7 @@ const ChessMainPage = () => {
         scene.add(dirLight);
 
         renderer.shadowMap.enabled = true;
-        renderer.shadowMap.type = PCFSoftShadowMap;
+        renderer.shadowMap.type = PCFShadowMap;
 
         camera.position.set(0, 4, 8);
         camera.lookAt(0, 0, 0);
