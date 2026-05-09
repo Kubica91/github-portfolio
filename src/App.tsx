@@ -11,11 +11,11 @@ import UnityPruzina from "./unityGames/UnityPruzina";
 
 const App = () => {
     return (
-        <div className="w-screen h-screen flex flex-col bg-slate-900 text-slate-100 font-sans overflow-hidden">
+        <div className="w-screen h-screen flex flex-col bg-slate-900 text-slate-100 font-sans overflow-hidden print:h-auto print:overflow-visible">
             <BrowserRouter>
                 <TopNavigationBar />
 
-                <div className="w-full h-full flex-grow overflow-hidden">
+                <div className="w-full h-full flex-grow overflow-hidden print:h-auto print:overflow-visible">
                     <Routes>
                         <Route
                             path="/github-portfolio"

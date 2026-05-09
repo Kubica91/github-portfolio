@@ -9,11 +9,9 @@ import {
     FiGlobe,
     FiMail,
     FiMapPin,
-    FiMessageSquare,
-    FiPackage,
-    FiSmartphone,
     FiUser,
 } from "react-icons/fi";
+import { LuCode, LuGamepad2, LuMessageSquare } from "react-icons/lu";
 import SectionTitle from "./components/SectionTitle";
 import SkillCategory from "./components/SkillCategory";
 import TimelineItem from "./components/TimelineItem";
@@ -26,7 +24,7 @@ const CurriculumVitaePage = () => {
     };
 
     return (
-        <div className="w-full h-full bg-gradient-to-br from-slate-50 to-blue-50 overflow-auto">
+        <div className="w-full h-full bg-gradient-to-br from-slate-50 to-blue-50 overflow-auto print:h-auto print:overflow-visible">
             {/* Header */}
             <header className="bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900">
                 <div className="mx-auto max-w-4xl px-6 py-10">
@@ -284,25 +282,32 @@ const CurriculumVitaePage = () => {
                             {
                                 title: t("Projects.UnityGames"),
                                 desc: t("Projects.UnityGamesDesc"),
-                                emoji: <FiSmartphone />,
+                                icon: <LuGamepad2 />,
                             },
                             {
                                 title: t("Projects.WordGame"),
                                 desc: t("Projects.WordGameDesc"),
-                                emoji: <FiMessageSquare />,
+                                icon: <LuMessageSquare />,
                             },
                             {
                                 title: t("Projects.CodingGames"),
                                 desc: t("Projects.CodingGamesDesc"),
-                                emoji: <FiPackage />,
+                                icon: <LuCode />,
                             },
                         ].map((project) => (
                             <div
                                 key={project.title}
-                                className="rounded-xl border border-gray-200 p-4 transition-shadow hover:shadow-md"
+                                className="rounded-xl border border-gray-200 p-4 transition-all hover:shadow-md hover:border-blue-200"
                             >
-                                <div className="py-2 flex flex-row gap-2">
-                                    <div className="text-2xl">{project.emoji}</div>
+                                <div className="mb-3 flex items-center gap-3">
+                                    <div
+                                        className={
+                                            "flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-lg text-gray-900"
+                                        }
+                                    >
+                                        {project.icon}
+                                    </div>
+
                                     <h3 className="font-bold text-gray-900">{project.title}</h3>
                                 </div>
 
@@ -330,10 +335,12 @@ const CurriculumVitaePage = () => {
                             >
                                 <div className="mb-1 flex items-center justify-between">
                                     <span className="font-semibold text-gray-900">{l.lang}</span>
+
                                     <span className="rounded-full bg-blue-100 px-2 py-0.5 text-xs font-bold text-blue-700">
                                         {l.level}
                                     </span>
                                 </div>
+
                                 <div className="h-2 overflow-hidden rounded-full bg-gray-200">
                                     <div
                                         className="h-full rounded-full bg-gradient-to-r from-blue-500 to-blue-600 transition-all"
