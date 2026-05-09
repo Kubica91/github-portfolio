@@ -217,9 +217,49 @@ const UnityDeffTheBase = () => {
                     </p>
                 </section>
 
+                {/* Audio */}
+                <section className="border-t border-slate-700/50 pt-10">
+                    <h2 className="text-2xl font-bold text-white mb-2">9. Hudba a zvukové efekty</h2>
+
+                    <p className="text-slate-300 leading-relaxed mb-6">
+                        Hra disponuje vlastní hudební stopou - odlišnou melodií pro{" "}
+                        <strong className="text-white">hlavní menu</strong> a pro{" "}
+                        <strong className="text-white">průběh hry</strong>. Vedle hudby obsahuje hra rozsáhlou sadu zvukových
+                        efektů, které reagují na každou herní akci a přispívají k celkové atmosféře. Hlasitost hudby i efektů
+                        lze nastavit nezávisle v nastavení hry.
+                    </p>
+
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                        {[
+                            { label: "Střela Minigunu", desc: "Zvuk při každém výstřelu věže" },
+                            { label: "Zásah střely", desc: "Zvuk při dopadu projektilu na cíl" },
+                            { label: "Střela Rocket Launcheru", desc: "Zvuk odpálení rakety" },
+                            { label: "Splash rakety", desc: "Výbuch při plošném dopadu rakety" },
+                            { label: "Zásah nepřítele", desc: "Zvuk při poškození nepřítele" },
+                            { label: "Výstřel Bosse", desc: "Specifický zvuk tankové palby" },
+                            { label: "Tlačítka", desc: "Zpětná vazba při klepnutí na UI prvky" },
+                            { label: "Vylepšení budovy", desc: "Zvuk při provedení upgradu" },
+                            { label: "Oprava budovy", desc: "Zvuk při opravě poškozené struktury" },
+                            { label: "Zničení budovy", desc: "Zvuk při pádu vlastní struktury" },
+                            { label: "Položení budovy", desc: "Potvrzení při umístění nové stavby" },
+                            { label: "Vygenerování štítu", desc: "Zvuk aktivace Shield Generatoru" },
+                            { label: "A hromada dalších", desc: "..." },
+                        ].map(({ label, desc }) => (
+                            <div
+                                key={label}
+                                className="bg-slate-800/50 border border-slate-700/40 rounded-xl p-3"
+                            >
+                                <p className="text-white text-sm font-semibold">{label}</p>
+
+                                <p className="text-slate-400 text-xs mt-0.5">{desc}</p>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
                 {/* Animation detail */}
                 <section className="border-t border-slate-700/50 pt-10">
-                    <h2 className="text-2xl font-bold text-white mb-2">9. Technické zpracování animací</h2>
+                    <h2 className="text-2xl font-bold text-white mb-2">10. Technické zpracování animací</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-10">
                         Všechny animace ve hře jsou implementovány jako sekvence sprite obrázků přepínáných ve smyčce -
@@ -257,8 +297,10 @@ const UnityDeffTheBase = () => {
 
                         <p className="text-slate-300 leading-relaxed mb-4">
                             Rocket Launcher využívá <strong className="text-white">16 snímků</strong> pro tři stavy: idle,
-                            nabíjení (reload) a zničení. Vystřelená raketa má navíc vlastní sadu snímků - její let a dopad
-                            jsou animovány jako samostatná sprite sekvence nezávislá na věži.
+                            nabíjení (reload) a zničení. Na rozdíl od Minigunu způsobuje raketa při dopadu{" "}
+                            <strong className="text-white">plošné poškození (splash damage)</strong> - zasahuje všechny
+                            nepřátele v okolí místa dopadu. Vystřelená raketa má vlastní sadu snímků. Její let a výbuch jsou
+                            animovány jako samostatná sprite sekvence nezávislá na věži.
                         </p>
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl bg-slate-800/30 flex justify-center">
