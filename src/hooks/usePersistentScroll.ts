@@ -1,16 +1,16 @@
 import { RefObject, useEffect, useRef, useState } from "react";
 
 /**
- * Ukládá scroll pozici do localStorage při unmountu a obnovuje ji při mountu.
+ * Ukládá scroll pozici do sessionStorage při unmountu a obnovuje ji při mountu.
  *
- * @param key Klíč v localStorage
+ * @param key Klíč v sessionStorage
  * @param containerRef Ref na scrollovatelný kontejner
  * @returns Scroll pozice načtená ze storage (při mountu)
  */
 const usePersistentScroll = (key: string, containerRef: RefObject<HTMLDivElement>): number | undefined => {
     const [initialValue] = useState<number | undefined>(() => {
         try {
-            const item = localStorage.getItem(key);
+            const item = sessionStorage.getItem(key);
             if (item !== null) {
                 return JSON.parse(item) as number;
             }
@@ -35,9 +35,9 @@ const usePersistentScroll = (key: string, containerRef: RefObject<HTMLDivElement
             el.removeEventListener("scroll", handleScroll);
             const val = scrollTopRef.current;
             if (val === undefined) {
-                localStorage.removeItem(key);
+                sessionStorage.removeItem(key);
             } else {
-                localStorage.setItem(key, JSON.stringify(val));
+                sessionStorage.setItem(key, JSON.stringify(val));
             }
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps

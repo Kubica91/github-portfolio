@@ -32,7 +32,7 @@ const CurriculumVitaePage = () => {
                 <div className="mx-auto max-w-4xl px-6 py-10">
                     <div className="flex flex-col items-center gap-8 sm:flex-row sm:items-start sm:text-left">
                         <img
-                            src="/github-portfolio/images/profile.jpg"
+                            src="/github-portfolio/images/cv/profile.jpg"
                             alt="Jakub Petráň"
                             className="h-36 w-36 shrink-0 rounded-2xl border-4 border-blue-400/30 object-cover shadow-lg"
                         />
