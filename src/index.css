@@ -7,6 +7,12 @@ body {
 }
 
 @media print {
+    html,
+    body {
+        height: auto !important;
+        overflow: visible !important;
+    }
+
     body {
         margin: 0;
     }

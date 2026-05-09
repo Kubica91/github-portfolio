@@ -24,9 +24,9 @@ const CurriculumVitaePage = () => {
     };
 
     return (
-        <div className="w-full h-full bg-gradient-to-br from-slate-50 to-blue-50 overflow-auto print:h-auto print:overflow-visible">
+        <div className="w-full h-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 overflow-auto print:h-auto print:overflow-visible print:bg-white">
             {/* Header */}
-            <header className="bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900">
+            <header className="bg-gradient-to-r from-slate-900 via-blue-900/40 to-slate-900 border-b border-slate-700/50">
                 <div className="mx-auto max-w-4xl px-6 py-10">
                     <div className="flex flex-col items-center gap-8 sm:flex-row sm:items-start sm:text-left">
                         <img
@@ -47,7 +47,7 @@ const CurriculumVitaePage = () => {
 
                             <p className="mb-6 text-lg font-medium text-blue-200 sm:text-xl">{t("Subtitle")}</p>
 
-                            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-gray-300">
+                            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-slate-300">
                                 <span className="flex items-center gap-1.5">
                                     <FiMapPin className="text-blue-400" />
                                     {t("Location")}
@@ -61,8 +61,7 @@ const CurriculumVitaePage = () => {
 
                             <button
                                 onClick={handleDownloadPdf}
-                                className="mt-6 inline-flex items-center gap-2 rounded-full bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors
-                                    print:hidden hover:bg-blue-500 no-print"
+                                className="mt-6 inline-flex items-center gap-2 rounded-full bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-blue-500 no-print"
                             >
                                 <FiDownload />
                                 {t("DownloadPdf")}
@@ -73,15 +72,15 @@ const CurriculumVitaePage = () => {
             </header>
 
             {/* Content */}
-            <main className="mx-auto max-w-4xl space-y-4 px-6 py-4">
+            <main className="mx-auto max-w-4xl space-y-4 px-6 py-6">
                 {/* Profile */}
-                <section className="rounded-2xl border border-blue-200 bg-white p-8 shadow-sm no-boarder">
+                <section className="rounded-2xl border border-slate-700/50 bg-slate-800/50 p-8 no-boarder print:bg-white print:border-gray-200">
                     <SectionTitle
                         icon={<FiUser />}
                         title={t("Profile")}
                     />
 
-                    <div className="space-y-3 text-gray-600 leading-relaxed">
+                    <div className="space-y-3 text-slate-300 leading-relaxed print:text-gray-600">
                         <p>{t("Profile.Focus")}</p>
 
                         <p>{t("Profile.CadBimExperience")}</p>
@@ -91,7 +90,7 @@ const CurriculumVitaePage = () => {
                 </section>
 
                 {/* Experience */}
-                <section className="rounded-2xl border border-blue-200 bg-white p-8 shadow-sm no-boarder">
+                <section className="rounded-2xl border border-slate-700/50 bg-slate-800/50 p-8 no-boarder print:bg-white print:border-gray-200">
                     <SectionTitle
                         icon={<FiBriefcase />}
                         title={t("WorkExperience")}
@@ -102,7 +101,7 @@ const CurriculumVitaePage = () => {
                         title={t("WorkExperience.Title")}
                         subtitle={t("WorkExperience.Company")}
                     >
-                        <ul className="space-y-1.5 text-gray-600">
+                        <ul className="space-y-1.5 text-slate-300 print:text-gray-600">
                             <li className="flex items-start gap-2">
                                 <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500" />
                                 {t("WorkExperience.CadBimVisualization")}
@@ -162,7 +161,7 @@ const CurriculumVitaePage = () => {
                 </section>
 
                 {/* Skills */}
-                <section className="rounded-2xl border border-blue-200 bg-white p-8 shadow-sm no-boarder">
+                <section className="rounded-2xl border border-slate-700/50 bg-slate-800/50 p-8 no-boarder print:bg-white print:border-gray-200">
                     <SectionTitle
                         icon={<FiCode />}
                         title={t("TechnicalSkills")}
@@ -202,7 +201,7 @@ const CurriculumVitaePage = () => {
                 </section>
 
                 {/* Education */}
-                <section className="rounded-2xl border border-blue-200 bg-white p-8 shadow-sm no-boarder">
+                <section className="rounded-2xl border border-slate-700/50 bg-slate-800/50 p-8 no-boarder print:bg-white print:border-gray-200">
                     <SectionTitle
                         icon={<FiBookOpen />}
                         title={t("Education")}
@@ -213,14 +212,14 @@ const CurriculumVitaePage = () => {
                         title={t("Education.University")}
                         subtitle={t("Education.Degree")}
                     >
-                        <div className="rounded-lg border border-gray-200 bg-gray-50 p-4 text-sm text-gray-600">
-                            <span className="font-semibold text-gray-800">{t("Education.ThesisLabel")}</span>{" "}
+                        <div className="rounded-lg border border-slate-700/50 bg-slate-900/50 p-4 text-sm text-slate-300 print:bg-gray-50 print:border-gray-200 print:text-gray-600">
+                            <span className="font-semibold text-slate-100 print:text-gray-800">{t("Education.ThesisLabel")}</span>{" "}
                             {t("Education.ThesisTitle")}
                             <a
                                 href="https://dspace.tul.cz/items/2a2a2308-13d1-4b9b-9c96-6c75c33cc25e"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="ml-2 inline-flex items-center gap-1 text-blue-600 hover:underline"
+                                className="ml-2 inline-flex items-center gap-1 text-blue-400 hover:underline print:text-blue-600"
                             >
                                 {t("Education.ThesisLink")} ↗
                             </a>
@@ -237,7 +236,7 @@ const CurriculumVitaePage = () => {
                 </section>
 
                 {/* Certifications */}
-                <section className="rounded-2xl border border-blue-200 bg-white p-8 shadow-sm no-boarder">
+                <section className="rounded-2xl border border-slate-700/50 bg-slate-800/50 p-8 no-boarder print:bg-white print:border-gray-200">
                     <SectionTitle
                         icon={<FiAward />}
                         title={t("Certifications")}
@@ -256,14 +255,14 @@ const CurriculumVitaePage = () => {
                         ].map((cert) => (
                             <div
                                 key={cert.name}
-                                className="flex items-center gap-4 rounded-xl border border-blue-100 bg-gradient-to-r from-blue-50 to-white p-4"
+                                className="flex items-center gap-4 rounded-xl border border-slate-700/50 bg-slate-900/30 p-4 print:bg-white print:border-gray-200"
                             >
                                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-blue-600 text-xl text-white">
                                     <FiAward />
                                 </div>
                                 <div>
-                                    <p className="font-bold text-gray-900">{cert.name}</p>
-                                    <p className="text-sm text-gray-500">{cert.issuer}</p>
+                                    <p className="font-bold text-white print:text-gray-900">{cert.name}</p>
+                                    <p className="text-sm text-slate-400 print:text-gray-500">{cert.issuer}</p>
                                 </div>
                             </div>
                         ))}
@@ -271,7 +270,7 @@ const CurriculumVitaePage = () => {
                 </section>
 
                 {/* Projects */}
-                <section className="rounded-2xl border border-blue-200 bg-white p-8 shadow-sm no-boarder">
+                <section className="rounded-2xl border border-slate-700/50 bg-slate-800/50 p-8 no-boarder print:bg-white print:border-gray-200">
                     <SectionTitle
                         icon={<FiFolder />}
                         title={t("Projects")}
@@ -283,42 +282,40 @@ const CurriculumVitaePage = () => {
                                 title: t("Projects.UnityGames"),
                                 desc: t("Projects.UnityGamesDesc"),
                                 icon: <LuGamepad2 />,
+                                color: "bg-purple-600",
                             },
                             {
                                 title: t("Projects.WordGame"),
                                 desc: t("Projects.WordGameDesc"),
                                 icon: <LuMessageSquare />,
+                                color: "bg-blue-600",
                             },
                             {
                                 title: t("Projects.CodingGames"),
                                 desc: t("Projects.CodingGamesDesc"),
                                 icon: <LuCode />,
+                                color: "bg-yellow-500",
                             },
                         ].map((project) => (
                             <div
                                 key={project.title}
-                                className="rounded-xl border border-gray-200 p-4 transition-all hover:shadow-md hover:border-blue-200"
+                                className="rounded-xl border border-slate-700/50 bg-slate-900/30 p-4 transition-all hover:shadow-lg hover:border-cyan-500/50 hover:-translate-y-1 print:bg-white print:border-gray-200"
                             >
                                 <div className="mb-3 flex items-center gap-3">
-                                    <div
-                                        className={
-                                            "flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-lg text-gray-900"
-                                        }
-                                    >
+                                    <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${project.color} text-lg text-white`}>
                                         {project.icon}
                                     </div>
-
-                                    <h3 className="font-bold text-gray-900">{project.title}</h3>
+                                    <h3 className="font-bold text-white print:text-gray-900">{project.title}</h3>
                                 </div>
 
-                                <p className="text-sm text-gray-500">{project.desc}</p>
+                                <p className="text-sm text-slate-400 print:text-gray-500">{project.desc}</p>
                             </div>
                         ))}
                     </div>
                 </section>
 
                 {/* Languages */}
-                <section className="rounded-2xl border border-blue-200 bg-white p-8 shadow-sm no-boarder">
+                <section className="rounded-2xl border border-slate-700/50 bg-slate-800/50 p-8 no-boarder print:bg-white print:border-gray-200">
                     <SectionTitle
                         icon={<FiGlobe />}
                         title={t("Languages")}
@@ -334,16 +331,14 @@ const CurriculumVitaePage = () => {
                                 className="min-w-[180px] flex-1"
                             >
                                 <div className="mb-1 flex items-center justify-between">
-                                    <span className="font-semibold text-gray-900">{l.lang}</span>
-
-                                    <span className="rounded-full bg-blue-100 px-2 py-0.5 text-xs font-bold text-blue-700">
+                                    <span className="font-semibold text-white print:text-gray-900">{l.lang}</span>
+                                    <span className="rounded-full bg-blue-900/50 px-2 py-0.5 text-xs font-bold text-blue-300 print:bg-blue-100 print:text-blue-700">
                                         {l.level}
                                     </span>
                                 </div>
-
-                                <div className="h-2 overflow-hidden rounded-full bg-gray-200">
+                                <div className="h-2 overflow-hidden rounded-full bg-slate-700 print:bg-gray-200">
                                     <div
-                                        className="h-full rounded-full bg-gradient-to-r from-blue-500 to-blue-600 transition-all"
+                                        className="h-full rounded-full bg-gradient-to-r from-blue-500 to-blue-400 transition-all"
                                         style={{ width: `${l.pct}%` }}
                                     />
                                 </div>
@@ -354,7 +349,7 @@ const CurriculumVitaePage = () => {
             </main>
 
             {/* Footer */}
-            <footer className="border-t border-gray-200 bg-white py-8 text-center text-sm text-gray-400 no-print">
+            <footer className="border-t border-slate-700/50 py-8 text-center text-sm text-slate-500 no-print">
                 © {new Date().getFullYear()} Jakub Petráň
             </footer>
         </div>
