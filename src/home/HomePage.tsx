@@ -18,25 +18,25 @@ const HomePage = () => {
             title: "Find a Coin",
             link: "/github-portfolio/unity/findacoin",
             icon: <LuGamepad2 className="w-8 h-8 text-purple-400" />,
-            desc: "Hra Find a Coin vytvořená v Unity. Zahrajte si přímo v prohlížeči.",
+            desc: "Má první hra v Unity. 2D platformer se třemi levely, pixel art grafikou a vlastní hudbou. V každém levelu hráč sbírá 5 mincí.",
         },
         {
             title: "Deff The Base",
             link: "/github-portfolio/unity/deffthebase",
             icon: <LuGamepad2 className="w-8 h-8 text-green-400" />,
-            desc: "Hra Deff The Base vytvořená v Unity. Zahrajte si přímo v prohlížeči.",
+            desc: "Mobilní tower defense hra pro Android a iOS. Hráč brání základnu před vlnami nepřátel věžemi, zdmi a generátory štítů. Každé desáté kolo přicházejí tancí Bossové.",
         },
         {
             title: "Hide and Seek",
             link: "/github-portfolio/unity/hideandseek",
             icon: <LuGamepad2 className="w-8 h-8 text-red-400" />,
-            desc: "Hra Hide and Seek vytvořená v Unity. Zahrajte si přímo v prohlížeči.",
+            desc: "PC hra na schovávanou s podporou klávesnice i gamepadu. Tma a zorné pole jsou implementovány přes shader, lovci a zloději mají vlastní AI.",
         },
         {
-            title: "Pružina",
-            link: "/github-portfolio/unity/pruzina",
+            title: "Jumping Jello",
+            link: "/github-portfolio/unity/jumpingjello",
             icon: <LuGamepad2 className="w-8 h-8 text-blue-400" />,
-            desc: "Hra Pružina vytvořená v Unity. Zahrajte si přímo v prohlížeči.",
+            desc: "Moje největší mobilní hra pro Android a iOS. 2D platformer s 8 levely a 4 nekonečnými infinity levely, 6 odemykatelnými skiny, achievement systémem a vlastními shadery.",
         },
     ];
 

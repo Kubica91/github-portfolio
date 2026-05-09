@@ -7,7 +7,7 @@ import TopNavigationBar from "./topNavigationBar/TopNavigationBar";
 import UnityDeffTheBase from "./unityGames/UnityDeffTheBase";
 import UnityFindACoin from "./unityGames/UnityFindACoin";
 import UnityHideAndSeek from "./unityGames/UnityHideAndSeek";
-import UnityPruzina from "./unityGames/UnityPruzina";
+import UnityJumpingJello from "./unityGames/UnityJumpingJello";
 
 const App = () => {
     return (
@@ -38,8 +38,8 @@ const App = () => {
                             element={<UnityHideAndSeek />}
                         />
                         <Route
-                            path="/github-portfolio/unity/pruzina"
-                            element={<UnityPruzina />}
+                            path="/github-portfolio/unity/jumpingjello"
+                            element={<UnityJumpingJello />}
                         />
                         <Route
                             path="/github-portfolio/threejs/sachy"
