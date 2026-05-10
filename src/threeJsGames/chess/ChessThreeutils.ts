@@ -2,8 +2,6 @@ import {
     AmbientLight,
     DirectionalLight,
     Group,
-    LineBasicMaterial,
-    LineSegments,
     Mesh,
     MeshStandardMaterial,
     PCFShadowMap,
@@ -12,6 +10,8 @@ import {
     Scene,
     WebGLRenderer,
 } from "three";
+import { LineMaterial } from "three/addons/lines/LineMaterial.js";
+import { LineSegments2 } from "three/addons/lines/LineSegments2.js";
 import {
     ChessGroup,
     EDGE_DEFAULT_COLOR,
@@ -122,41 +122,35 @@ export const GetPieceByRaycast = (piecesGroup: Group, raycaster: Raycaster): Che
 
 export const HighlightPiece = (piece: ChessGroup) => {
     piece.traverse((child) => {
-        const line = child as LineSegments;
-
-        if (line.isLineSegments) {
-            (line.material as LineBasicMaterial).color.setHex(EDGE_HIGHLIGHT_COLOR);
-        }
+        if (!(child instanceof LineSegments2)) return;
+        (child.material as LineMaterial).color.setHex(EDGE_HIGHLIGHT_COLOR);
     });
 };
 
 export const ClearHighlightedPiece = (piece: ChessGroup) => {
     piece.traverse((child) => {
-        const line = child as LineSegments;
-
-        if (line.isLineSegments) {
-            (line.material as LineBasicMaterial).color.setHex(EDGE_DEFAULT_COLOR);
-        }
+        if (!(child instanceof LineSegments2)) return;
+        (child.material as LineMaterial).color.setHex(EDGE_DEFAULT_COLOR);
     });
 };
 
 export const SelectPiece = (piece: ChessGroup) => {
     piece.traverse((child) => {
+        if (child instanceof LineSegments2) return;
         const mesh = child as Mesh;
         if (!mesh.isMesh) return;
 
-        const material = mesh.material as MeshStandardMaterial;
-        material.emissive.setHex(SELECTED_EMISSIVE_COLOR);
+        (mesh.material as MeshStandardMaterial).emissive.setHex(SELECTED_EMISSIVE_COLOR);
     });
 };
 
 export const ClearSelectedPiece = (piece: ChessGroup) => {
     piece.traverse((child) => {
+        if (child instanceof LineSegments2) return;
         const mesh = child as Mesh;
         if (!mesh.isMesh) return;
 
-        const material = mesh.material as MeshStandardMaterial;
-        material.emissive.setHex(EDGE_DEFAULT_COLOR);
+        (mesh.material as MeshStandardMaterial).emissive.setHex(EDGE_DEFAULT_COLOR);
     });
 };
 

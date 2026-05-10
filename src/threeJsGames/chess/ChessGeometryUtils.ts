@@ -4,13 +4,14 @@ import {
     CylinderGeometry,
     EdgesGeometry,
     Group,
-    LineBasicMaterial,
-    LineSegments,
     Mesh,
     MeshStandardMaterial,
     SphereGeometry,
 } from "three";
 import { TextGeometry } from "three/addons/geometries/TextGeometry.js";
+import { LineMaterial } from "three/addons/lines/LineMaterial.js";
+import { LineSegments2 } from "three/addons/lines/LineSegments2.js";
+import { LineSegmentsGeometry } from "three/addons/lines/LineSegmentsGeometry.js";
 import { FontLoader } from "three/addons/loaders/FontLoader.js";
 
 export type ChessPieceColor = "white" | "black";
@@ -89,6 +90,7 @@ export class KingGroup extends Group {
 }
 
 export const EDGE_DEFAULT_COLOR = 0x000000;
+export const EDGE_LINEWIDTH = 0.015;
 export const SQUARE_SIZE = 1.2;
 export const EDGE_HIGHLIGHT_COLOR = 0xffd54a;
 export const SELECTED_EMISSIVE_COLOR = 0xff7043;
@@ -102,9 +104,15 @@ const addAndShadow = (group: Group, mesh: Mesh) => {
     mesh.castShadow = true;
     mesh.receiveShadow = true;
 
-    const edges = new LineSegments(
-        new EdgesGeometry(mesh.geometry, 25),
-        new LineBasicMaterial({ color: EDGE_DEFAULT_COLOR })
+    const edgesGeo = new EdgesGeometry(mesh.geometry, 25);
+    const lineGeo = new LineSegmentsGeometry().fromEdgesGeometry(edgesGeo);
+    const edges = new LineSegments2(
+        lineGeo,
+        new LineMaterial({
+            color: EDGE_DEFAULT_COLOR,
+            linewidth: EDGE_LINEWIDTH,
+            worldUnits: true,
+        })
     );
     edges.raycast = () => {};
     mesh.add(edges);
