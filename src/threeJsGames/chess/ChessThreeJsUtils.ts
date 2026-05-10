@@ -13,7 +13,9 @@ import {
 import { LineMaterial } from "three/addons/lines/LineMaterial.js";
 import { LineSegments2 } from "three/addons/lines/LineSegments2.js";
 import {
+    BoardState,
     ChessGroup,
+    ChessPieceGroup,
     EDGE_DEFAULT_COLOR,
     EDGE_HIGHLIGHT_COLOR,
     GetBishopGeometry,
@@ -26,6 +28,17 @@ import {
     SELECTED_EMISSIVE_COLOR,
     SQUARE_SIZE,
 } from "./ChessGeometryUtils";
+
+export const BuildBoardState = (piecesGroup: Group): BoardState => {
+    const board: BoardState = Array.from({ length: 8 }, () => Array<ChessPieceGroup | null>(8).fill(null));
+    for (const child of piecesGroup.children) {
+        if (child instanceof ChessPieceGroup) {
+            const { x, y } = child.chessPosition;
+            board[y][x] = child;
+        }
+    }
+    return board;
+};
 
 export const InitializeChessPieces = (piecesGroup: Group) => {
     while (piecesGroup.children.length > 0) {
@@ -153,4 +166,3 @@ export const ClearSelectedPiece = (piece: ChessGroup) => {
         (mesh.material as MeshStandardMaterial).emissive.setHex(EDGE_DEFAULT_COLOR);
     });
 };
-

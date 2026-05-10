@@ -1,19 +1,21 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Group, PerspectiveCamera, Raycaster, Scene, Vector2, WebGLRenderer } from "three";
 import HorizontalSplitter from "../../components/HorizontalSplitter";
-import { ChessGroup } from "./ChessGeometryUtils";
+import { BoardState, ChessGroup } from "./ChessGeometryUtils";
 import {
+    BuildBoardState,
     ClearHighlightedPiece,
     ClearSelectedPiece,
     GetPieceByRaycast,
     HighlightPiece,
     InitializeChessScene,
     SelectPiece,
-} from "./ChessThreeutils";
+} from "./ChessThreeJsUtils";
 import ChessContent from "./components/ChessContent";
 
 const ChessMainPage = () => {
     const [selectedPiece, setSelectedPiece] = useState<ChessGroup | null>(null);
+    const [board, setBoard] = useState<BoardState>(() => Array.from({ length: 8 }, () => Array(8).fill(null)));
 
     const containerRef = useRef<HTMLDivElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -37,6 +39,8 @@ const ChessMainPage = () => {
             cameraRef.current = camera;
             rendererRef.current = renderer;
             piecesGroupRef.current = piecesGroup;
+
+            setBoard(BuildBoardState(piecesGroup));
         };
 
         InitCanvas();
@@ -125,7 +129,10 @@ const ChessMainPage = () => {
                 />
             </div>
 
-            <ChessContent selectedPiece={selectedPiece} />
+            <ChessContent
+                selectedPiece={selectedPiece}
+                board={board}
+            />
         </HorizontalSplitter>
     );
 };

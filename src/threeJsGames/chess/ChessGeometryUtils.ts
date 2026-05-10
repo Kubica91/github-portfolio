@@ -13,79 +13,280 @@ import { LineMaterial } from "three/addons/lines/LineMaterial.js";
 import { LineSegments2 } from "three/addons/lines/LineSegments2.js";
 import { LineSegmentsGeometry } from "three/addons/lines/LineSegmentsGeometry.js";
 import { FontLoader } from "three/addons/loaders/FontLoader.js";
+import { isEnemy, isInBounds, pieceAt } from "../ChessMoveUtils";
 
 export type ChessPieceColor = "white" | "black";
-
-export type ChessGroup = PawnGroup | RookGroup | KnightGroup | BishopGroup | QueenGroup | KingGroup;
+export type ChessPieceType = "pawn" | "rook" | "knight" | "bishop" | "queen" | "king";
+export type ChessGroup = ChessPieceGroup;
+export type BoardState = (ChessPieceGroup | null)[][];
 
 export interface ChessPosition {
     x: number;
     y: number;
 }
 
-export class PawnGroup extends Group {
+export const positionToAlgebraic = (p: ChessPosition): string => String.fromCharCode(97 + p.x).toUpperCase() + (p.y + 1);
+
+export abstract class ChessPieceGroup extends Group {
     chessColor: ChessPieceColor;
     chessPosition: ChessPosition;
+    hasMoved: boolean = false;
 
     constructor(chessColor: ChessPieceColor, chessPosition: ChessPosition) {
         super();
         this.chessColor = chessColor;
         this.chessPosition = chessPosition;
     }
-}
 
-export class RookGroup extends Group {
-    chessColor: ChessPieceColor;
-    chessPosition: ChessPosition;
+    abstract getType(): ChessPieceType;
 
-    constructor(chessColor: ChessPieceColor, chessPosition: ChessPosition) {
-        super();
-        this.chessColor = chessColor;
-        this.chessPosition = chessPosition;
+    abstract getPossibleMoves(board: BoardState): ChessPosition[];
+
+    canMoveTo(target: ChessPosition, board: BoardState): boolean {
+        return this.getPossibleMoves(board).some((m) => m.x === target.x && m.y === target.y);
+    }
+
+    getAlgebraicPosition(): string {
+        return positionToAlgebraic(this.chessPosition);
+    }
+
+    getDisplayName(): string {
+        const type = this.getType();
+        return type.charAt(0).toUpperCase() + type.slice(1);
     }
 }
 
-export class KnightGroup extends Group {
-    chessColor: ChessPieceColor;
-    chessPosition: ChessPosition;
+export class PawnGroup extends ChessPieceGroup {
+    getType(): ChessPieceType {
+        return "pawn";
+    }
 
-    constructor(chessColor: ChessPieceColor, chessPosition: ChessPosition) {
-        super();
-        this.chessColor = chessColor;
-        this.chessPosition = chessPosition;
+    getPossibleMoves(board: BoardState): ChessPosition[] {
+        const moves: ChessPosition[] = [];
+        const dir = this.chessColor === "white" ? 1 : -1;
+        const startY = this.chessColor === "white" ? 1 : 6;
+        const { x, y } = this.chessPosition;
+
+        const oneStep = { x, y: y + dir };
+        if (isInBounds(oneStep) && pieceAt(board, oneStep) === null) {
+            moves.push(oneStep);
+
+            const twoStep = { x, y: y + 2 * dir };
+            if (y === startY && pieceAt(board, twoStep) === null) moves.push(twoStep);
+        }
+
+        for (const dx of [-1, 1]) {
+            const cap = { x: x + dx, y: y + dir };
+            if (!isInBounds(cap)) continue;
+
+            const occupant = pieceAt(board, cap);
+            if (isEnemy(occupant, this.chessColor)) moves.push(cap);
+        }
+
+        return moves;
     }
 }
 
-export class BishopGroup extends Group {
-    chessColor: ChessPieceColor;
-    chessPosition: ChessPosition;
+export class RookGroup extends ChessPieceGroup {
+    getType(): ChessPieceType {
+        return "rook";
+    }
 
-    constructor(chessColor: ChessPieceColor, chessPosition: ChessPosition) {
-        super();
-        this.chessColor = chessColor;
-        this.chessPosition = chessPosition;
+    getPossibleMoves(board: BoardState): ChessPosition[] {
+        const moves: ChessPosition[] = [];
+        const { x, y } = this.chessPosition;
+
+        const directions = [
+            { dx: 1, dy: 0 },
+            { dx: -1, dy: 0 },
+            { dx: 0, dy: 1 },
+            { dx: 0, dy: -1 },
+        ];
+
+        for (let i = 0; i < directions.length; i++) {
+            const { dx, dy } = directions[i];
+
+            for (let j = 1; j < 8; j++) {
+                const target = { x: x + dx * j, y: y + dy * j };
+                if (!isInBounds(target)) break;
+
+                const occupant = pieceAt(board, target);
+                if (isEnemy(occupant, this.chessColor)) {
+                    moves.push(target);
+                    break;
+                }
+
+                if (occupant !== null) break;
+
+                moves.push(target);
+            }
+        }
+
+        return moves;
     }
 }
 
-export class QueenGroup extends Group {
-    chessColor: ChessPieceColor;
-    chessPosition: ChessPosition;
+export class KnightGroup extends ChessPieceGroup {
+    getType(): ChessPieceType {
+        return "knight";
+    }
 
-    constructor(chessColor: ChessPieceColor, chessPosition: ChessPosition) {
-        super();
-        this.chessColor = chessColor;
-        this.chessPosition = chessPosition;
+    getPossibleMoves(board: BoardState): ChessPosition[] {
+        const moves: ChessPosition[] = [];
+        const { x, y } = this.chessPosition;
+
+        const positions = [
+            { dx: -1, dy: 2 },
+            { dx: 1, dy: 2 },
+            { dx: -2, dy: 1 },
+            { dx: -2, dy: -1 },
+            { dx: 2, dy: 1 },
+            { dx: 2, dy: -1 },
+            { dx: -1, dy: -2 },
+            { dx: 1, dy: -2 },
+        ];
+
+        for (let i = 0; i < positions.length; i++) {
+            const { dx, dy } = positions[i];
+
+            const target = { x: x + dx, y: y + dy };
+            if (!isInBounds(target)) continue;
+
+            const occupant = pieceAt(board, target);
+            if (isEnemy(occupant, this.chessColor)) {
+                moves.push(target);
+                continue;
+            }
+
+            if (occupant !== null) continue;
+
+            moves.push(target);
+        }
+
+        return moves;
     }
 }
 
-export class KingGroup extends Group {
-    chessColor: ChessPieceColor;
-    chessPosition: ChessPosition;
+export class BishopGroup extends ChessPieceGroup {
+    getType(): ChessPieceType {
+        return "bishop";
+    }
 
-    constructor(chessColor: ChessPieceColor, chessPosition: ChessPosition) {
-        super();
-        this.chessColor = chessColor;
-        this.chessPosition = chessPosition;
+    getPossibleMoves(board: BoardState): ChessPosition[] {
+        const moves: ChessPosition[] = [];
+        const { x, y } = this.chessPosition;
+
+        const directions = [
+            { dx: -1, dy: 1 },
+            { dx: -1, dy: -1 },
+            { dx: 1, dy: 1 },
+            { dx: 1, dy: -1 },
+        ];
+
+        for (let i = 0; i < directions.length; i++) {
+            const { dx, dy } = directions[i];
+
+            for (let j = 1; j < 8; j++) {
+                const target = { x: x + dx * j, y: y + dy * j };
+                if (!isInBounds(target)) break;
+
+                const occupant = pieceAt(board, target);
+                if (isEnemy(occupant, this.chessColor)) {
+                    moves.push(target);
+                    break;
+                }
+
+                if (occupant !== null) break;
+
+                moves.push(target);
+            }
+        }
+
+        return moves;
+    }
+}
+
+export class QueenGroup extends ChessPieceGroup {
+    getType(): ChessPieceType {
+        return "queen";
+    }
+
+    getPossibleMoves(board: BoardState): ChessPosition[] {
+        const moves: ChessPosition[] = [];
+        const { x, y } = this.chessPosition;
+
+        const directions = [
+            { dx: -1, dy: 1 },
+            { dx: -1, dy: 0 },
+            { dx: -1, dy: -1 },
+            { dx: 0, dy: 1 },
+            { dx: 0, dy: -1 },
+            { dx: 1, dy: 1 },
+            { dx: 1, dy: 0 },
+            { dx: 1, dy: -1 },
+        ];
+
+        for (let i = 0; i < directions.length; i++) {
+            const { dx, dy } = directions[i];
+
+            for (let j = 1; j < 8; j++) {
+                const target = { x: x + dx * j, y: y + dy * j };
+                if (!isInBounds(target)) break;
+
+                const occupant = pieceAt(board, target);
+                if (isEnemy(occupant, this.chessColor)) {
+                    moves.push(target);
+                    break;
+                }
+
+                if (occupant !== null) break;
+
+                moves.push(target);
+            }
+        }
+
+        return moves;
+    }
+}
+
+export class KingGroup extends ChessPieceGroup {
+    getType(): ChessPieceType {
+        return "king";
+    }
+
+    getPossibleMoves(board: BoardState): ChessPosition[] {
+        const moves: ChessPosition[] = [];
+        const { x, y } = this.chessPosition;
+
+        const directions = [
+            { dx: -1, dy: 1 },
+            { dx: -1, dy: 0 },
+            { dx: -1, dy: -1 },
+            { dx: 0, dy: 1 },
+            { dx: 0, dy: -1 },
+            { dx: 1, dy: 1 },
+            { dx: 1, dy: 0 },
+            { dx: 1, dy: -1 },
+        ];
+
+        for (let i = 0; i < directions.length; i++) {
+            const { dx, dy } = directions[i];
+
+            const target = { x: x + dx, y: y + dy };
+            if (!isInBounds(target)) continue;
+
+            const occupant = pieceAt(board, target);
+            if (isEnemy(occupant, this.chessColor)) {
+                moves.push(target);
+                continue;
+            }
+
+            if (occupant !== null) continue;
+
+            moves.push(target);
+        }
+
+        return moves;
     }
 }
 
