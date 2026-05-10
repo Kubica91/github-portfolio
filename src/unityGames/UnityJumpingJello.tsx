@@ -3,15 +3,14 @@ const UnityJumpingJello = () => {
         <div className="w-full h-full overflow-auto bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-slate-100">
             {/* Hero */}
             <div className="max-w-4xl mx-auto px-6 py-10">
-                <h1 className="text-4xl font-extrabold tracking-tight text-white mb-3">Jumping Jello - 2D Platformer</h1>
+                <h1 className="text-4xl font-extrabold tracking-tight text-white mb-3">Jumping Jello</h1>
+                <p className="text-sm font-medium tracking-wide uppercase text-blue-400 mb-4">2D Platformer</p>
 
                 <p className="text-slate-300 text-lg leading-relaxed max-w-2xl">
-                    Moje největší a nejpropracovanější mobilní hra vyvíjená v enginu{" "}
-                    <strong className="text-white">Unity</strong>. Jde o 2D platformer, kde hráč skáče po plošinách, sbírá
-                    ovoce a odemyká nové skiny. Veškeré programování v <strong className="text-white">C#</strong>, návrh
-                    levelů, systémy achievementů, procedurálně generované infinity levely i technické věci jako shadery a
-                    animace kostí jsem měl kompletně na starost já. Veškerou grafiku a ilustrace navrhl a nakreslil můj
-                    bratranec.
+                    Mobilní 2D platformer v <strong className="text-white">Unity</strong>. Hráč skáče po plošinách, sbírá
+                    ovoce a odemyká skiny. Programování v <strong className="text-white">C#</strong>, návrh levelů,
+                    achievement systém, procedurální infinity levely, shadery a animace kostí - to vše jsem měl na starost
+                    já. Grafiku a ilustrace navrhl a nakreslil můj bratranec.
                 </p>
 
                 <div className="flex flex-wrap gap-2 mt-6">
@@ -39,29 +38,24 @@ const UnityJumpingJello = () => {
             <div className="max-w-4xl mx-auto px-6 py-10 space-y-14">
                 {/* Skins */}
                 <section>
-                    <h2 className="text-2xl font-bold text-white mb-1">1. Menu – výběr skinů</h2>
+                    <h2 className="text-2xl font-bold text-white mb-1">1. Menu - výběr skinů</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        Po spuštění hry se hráč dostane na obrazovku výběru skinů zasazenou do{" "}
-                        <strong className="text-white">retro rámu televizoru</strong>. K dispozici je šest hratelných postav:{" "}
-                        <strong className="text-white">Jello</strong> (zelený rosol, odemčen od začátku),{" "}
-                        <strong className="text-white">Blackrook</strong> a <strong className="text-white">Whiterook</strong>{" "}
-                        (šachové figurky věže), <strong className="text-white">Pencil</strong> (tužka),{" "}
-                        <strong className="text-white">Monster</strong> (jednooký fialový netvor) a{" "}
-                        <strong className="text-white">Snowman</strong> (sněhulák). Zamčené skiny jsou zobrazeny normálně -
-                        po kliknutí na ně se panel otočí a odhalí úkol potřebný k odemčení. Podmínky odemčení jsou:{" "}
-                        <strong className="text-white">Blackrook</strong> - nasbírat 10 ovoce v levelu 1,{" "}
-                        <strong className="text-white">Pencil</strong> - dokončit level 2 do 3 minut,{" "}
-                        <strong className="text-white">Whiterook</strong> - nasbírat celkem 50 ovoce,{" "}
-                        <strong className="text-white">Monster</strong> - najít secret item v levelu 3,{" "}
-                        <strong className="text-white">Snowman</strong> - najít secret item v levelu 7.
+                        Obrazovka výběru skinů v <strong className="text-white">retro rámu televizoru</strong>. Šest postav:{" "}
+                        <strong className="text-white">Jello</strong> (odemčen od začátku),{" "}
+                        <strong className="text-white">Blackrook</strong>, <strong className="text-white">Whiterook</strong>,{" "}
+                        <strong className="text-white">Pencil</strong>, <strong className="text-white">Monster</strong> a{" "}
+                        <strong className="text-white">Snowman</strong>. Klik na zamčený skin otočí panel a ukáže podmínku
+                        odemčení: Blackrook - 10 ovoce v levelu 1, Pencil - level 2 do 3 minut, Whiterook - 50 ovoce celkem,
+                        Monster - secret v levelu 3, Snowman - secret v levelu 7.
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl mb-4">
                         <img
                             src="/github-portfolio/images/jumpingJello/skins.webp"
                             alt="Výběr skinů - všechny postavy"
-                            className="w-full object-cover" loading="lazy"
+                            className="w-full object-cover"
+                            loading="lazy"
                         />
                     </div>
 
@@ -73,7 +67,8 @@ const UnityJumpingJello = () => {
                         <img
                             src="/github-portfolio/images/jumpingJello/skins_task.webp"
                             alt="Úkol pro odemčení skinu Rookblack"
-                            className="w-full object-cover" loading="lazy"
+                            className="w-full object-cover"
+                            loading="lazy"
                         />
                     </div>
 
@@ -85,14 +80,12 @@ const UnityJumpingJello = () => {
 
                 {/* Level select - open levels */}
                 <section>
-                    <h2 className="text-2xl font-bold text-white mb-1">2. Menu – výběr levelů</h2>
+                    <h2 className="text-2xl font-bold text-white mb-1">2. Menu - výběr levelů</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        Spodní lišta s číslicemi <strong className="text-white">S, 1–12</strong> slouží jako navigátor mezi
-                        všemi herními obrazovkami - <strong className="text-white">S</strong> = skiny, čísla 1–8 jsou
-                        normální levely, 9–12 jsou infinity levely. Ve výhledu televizoru se vždy zobrazí náhled daného
-                        levelu s pozadím odpovídajícím prostředí - les, jeskyně, město nebo sníh. Nad náhledem jsou vidět
-                        aktuální statistiky: počet sebraného ovoce a procentuální postup.
+                        Lišta <strong className="text-white">S, 1-12</strong> naviguje mezi obrazovkami: S = skiny, 1-8
+                        normální levely, 9-12 infinity. Televizor zobrazuje náhled levelu s odpovídajícím prostředím (les,
+                        jeskyně, město, sníh) a aktuální statistiky.
                     </p>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
@@ -101,7 +94,8 @@ const UnityJumpingJello = () => {
                                 <img
                                     src="/github-portfolio/images/jumpingJello/menu_level_1.webp"
                                     alt="Menu - Level 1 les"
-                                    className="w-full object-cover" loading="lazy"
+                                    className="w-full object-cover"
+                                    loading="lazy"
                                 />
                             </div>
 
@@ -113,7 +107,8 @@ const UnityJumpingJello = () => {
                                 <img
                                     src="/github-portfolio/images/jumpingJello/menu_level_3.webp"
                                     alt="Menu - Level 3 jeskyně"
-                                    className="w-full object-cover" loading="lazy"
+                                    className="w-full object-cover"
+                                    loading="lazy"
                                 />
                             </div>
 
@@ -127,7 +122,8 @@ const UnityJumpingJello = () => {
                                 <img
                                     src="/github-portfolio/images/jumpingJello/menu_level_5.webp"
                                     alt="Menu - Level 5 město"
-                                    className="w-full object-cover" loading="lazy"
+                                    className="w-full object-cover"
+                                    loading="lazy"
                                 />
                             </div>
 
@@ -139,7 +135,8 @@ const UnityJumpingJello = () => {
                                 <img
                                     src="/github-portfolio/images/jumpingJello/menu_level_7.webp"
                                     alt="Menu - Level 7 sníh"
-                                    className="w-full object-cover" loading="lazy"
+                                    className="w-full object-cover"
+                                    loading="lazy"
                                 />
                             </div>
 
@@ -152,13 +149,12 @@ const UnityJumpingJello = () => {
 
                 {/* Locked levels */}
                 <section>
-                    <h2 className="text-2xl font-bold text-white mb-1">3. Menu – zamčené levely</h2>
+                    <h2 className="text-2xl font-bold text-white mb-1">3. Menu - zamčené levely</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        Pokud hráč nesplnil podmínky pro odemčení, level se zobrazí se šedým pozadím a hláškou{" "}
-                        <strong className="text-white">LEVEL IS LOCKED</strong>. U normálních levelů je zobrazeno, kolik
-                        levelů bylo dokončeno a kolik ovoce celkem sesbíráno. Infinity levely mají vlastní podmínku odemčení
-                        - například nejprve dokončit level 7 a 8.
+                        Nesplněné podmínky zobrazí šedé pozadí a <strong className="text-white">LEVEL IS LOCKED</strong>. U
+                        normálních levelů je vidět počet dokončených levelů a sebraného ovoce. Infinity levely mají vlastní
+                        podmínky - např. dokončit level 7 a 8.
                     </p>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -167,7 +163,8 @@ const UnityJumpingJello = () => {
                                 <img
                                     src="/github-portfolio/images/jumpingJello/menu_level_8_closed.webp"
                                     alt="Menu - Level 8 zamčen"
-                                    className="w-full object-cover" loading="lazy"
+                                    className="w-full object-cover"
+                                    loading="lazy"
                                 />
                             </div>
 
@@ -181,7 +178,8 @@ const UnityJumpingJello = () => {
                                 <img
                                     src="/github-portfolio/images/jumpingJello/menu_level_12_closed.webp"
                                     alt="Menu - Infinity Level 4 zamčen"
-                                    className="w-full object-cover" loading="lazy"
+                                    className="w-full object-cover"
+                                    loading="lazy"
                                 />
                             </div>
 
@@ -194,22 +192,20 @@ const UnityJumpingJello = () => {
 
                 {/* Jump Meter */}
                 <section>
-                    <h2 className="text-2xl font-bold text-white mb-1">4. Hra – Jump Meter</h2>
+                    <h2 className="text-2xl font-bold text-white mb-1">4. Hra - Jump Meter</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        Základní herní mechanika stojí na{" "}
-                        <strong className="text-white">přidržení prstu na obrazovce</strong>. Čím déle hráč drží, tím vyšší
-                        skok postavička provede - maximum je dosaženo po přibližně jedné sekundě. Aktuální síla skoku je
-                        vizualizována přes <strong className="text-white">Jump Meter</strong> - kruhový ukazatel uprostřed
-                        obrazovky, kde se barevné tečky postupně rozsvěcují dokola od spodního bodu po 360°. Horní lišta
-                        zobrazuje celkový postup hráče mapou, vlevo nahoře je počet sebraného ovoce.
+                        Přidržení prstu nabíjí skok - maximum po cca jedné sekundě. Síla je vizualizována přes{" "}
+                        <strong className="text-white">Jump Meter</strong>: kruhový ukazatel, kde se tečky rozsvěcejí po
+                        360°. Horní lišta ukazuje postup mapou, vlevo nahoře počet ovoce.
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
                             src="/github-portfolio/images/jumpingJello/jump_meter.webp"
                             alt="Jump Meter - ukazatel síly skoku"
-                            className="w-full object-cover" loading="lazy"
+                            className="w-full object-cover"
+                            loading="lazy"
                         />
                     </div>
 
@@ -220,13 +216,11 @@ const UnityJumpingJello = () => {
 
                 {/* Fruits */}
                 <section>
-                    <h2 className="text-2xl font-bold text-white mb-1">5. Hra – ovoce a sbírání</h2>
+                    <h2 className="text-2xl font-bold text-white mb-1">5. Hra - ovoce a sbírání</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        V každém levelu je rozmístěno <strong className="text-white">10 kusů ovoce</strong>, které hráč sbírá
-                        skákáním. Ovoce visí ve vzduchu nebo je umístěno na platformách a je nutné ho dosáhnout přesně
-                        odměřeným skokem. Ve hře se objevuje více druhů - banány, třešně, hrozny, meloun i švestka. Celkový
-                        počet sebraného ovoce se počítá napříč levely a slouží jako podmínka pro odemykání dalších levelů i
+                        <strong className="text-white">10 kusů ovoce</strong> v každém levelu - banány, třešně, hrozny,
+                        meloun, švestka. Celkový počet se počítá napříč levely a slouží jako podmínka pro odemykání levelů i
                         skinů.
                     </p>
 
@@ -234,7 +228,8 @@ const UnityJumpingJello = () => {
                         <img
                             src="/github-portfolio/images/jumpingJello/level_all_foods.webp"
                             alt="Všechny druhy ovoce v levelu"
-                            className="w-full object-cover" loading="lazy"
+                            className="w-full object-cover"
+                            loading="lazy"
                         />
                     </div>
 
@@ -245,21 +240,19 @@ const UnityJumpingJello = () => {
 
                 {/* Moving platforms */}
                 <section>
-                    <h2 className="text-2xl font-bold text-white mb-1">6. Hra – pohyblivé platformy</h2>
+                    <h2 className="text-2xl font-bold text-white mb-1">6. Hra - pohyblivé platformy</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        Od třetího levelu se na mapách začínají objevovat{" "}
-                        <strong className="text-white">pohyblivé platformy</strong>. Hráč musí správně načasovat skok tak,
-                        aby se na pohybující se platformu trefil - špatné načasování znamená pád a návrat na nejbližší
-                        checkpoint. Ve spodní části záběru je vidět pohled z Unity editoru s přesným rozmístěním platforem v
-                        levelu.
+                        Od třetího levelu se na mapách objevují <strong className="text-white">pohyblivé platformy</strong>.
+                        Hráč musí načasovat skok - špatné načasování znamená pád a návrat na checkpoint.
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
                             src="/github-portfolio/images/jumpingJello/level_moving_platform.webp"
                             alt="Pohyblivá platforma v jeskyňovém levelu"
-                            className="w-full object-cover" loading="lazy"
+                            className="w-full object-cover"
+                            loading="lazy"
                         />
                     </div>
 
@@ -270,28 +263,26 @@ const UnityJumpingJello = () => {
 
                 {/* Drone enemy */}
                 <section>
-                    <h2 className="text-2xl font-bold text-white mb-1">7. Hra – droni a zmrzlé platformy</h2>
+                    <h2 className="text-2xl font-bold text-white mb-1">7. Hra - droni a zmrzlé platformy</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        Od levelu 5 se v městském a zasněženém prostředí začínají objevovat{" "}
-                        <strong className="text-white">dronoví nepřátelé</strong>. Dron nelze zabít - jeho jedinou hrozbou je{" "}
-                        <strong className="text-white">laserový výstřel směrem nahoru</strong>, který okamžitě zabíjí. Hráč
-                        musí počkat, až dron přejde do fáze nabíjení, a teprve pak bezpečně přeskočit. Špatné načasování
-                        znamená okamžitou smrt a návrat na checkpoint.
+                        Od levelu 5 se objevují <strong className="text-white">dronoví nepřátelé</strong>. Dron nelze zabít -
+                        hrozí <strong className="text-white">laserovým výstřelem nahoru</strong>, který okamžitě zabíjí. Hráč
+                        musí počkat na fázi nabíjení a pak přeskočit.
                     </p>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        V levelech 7 a 8 přibývá další překážka -{" "}
-                        <strong className="text-white">zmrzlé klouzavé platformy</strong>. Povrch ledu výrazně snižuje tření,
-                        takže hráč po přistání nekontrolovaně klouže a může snadno sjet z okraje do propasti. Kombinace
-                        kluzkých platforem s dronovými lasery tvoří nejobtížnější část hry.
+                        Levely 7 a 8 přidávají <strong className="text-white">zmrzlé klouzavé platformy</strong>. Led snižuje
+                        tření, hráč po přistání klouže a může sjet do propasti. Kombinace s lasery drona tvoří nejobtížnější
+                        pasáže.
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
                             src="/github-portfolio/images/jumpingJello/level_drone.webp"
                             alt="Dron a zmrzlé platformy v zasněženém levelu"
-                            className="w-full object-cover" loading="lazy"
+                            className="w-full object-cover"
+                            loading="lazy"
                         />
                     </div>
 
@@ -302,15 +293,13 @@ const UnityJumpingJello = () => {
 
                 {/* Secret */}
                 <section>
-                    <h2 className="text-2xl font-bold text-white mb-1">8. Hra – secret platformy</h2>
+                    <h2 className="text-2xl font-bold text-white mb-1">8. Hra - secret platformy</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        V levelu 3 a levelu 7 je ukryta <strong className="text-white">secret platforma</strong>. Na jedné z
-                        platforem v levelu je nenápadně umístěn skrytý znak „secret", který je naznačen v levé části
-                        obrazovky hvězdičkovým počítadlem (<strong className="text-white">0/1</strong>). Když hráč tuto
-                        platformu najde a vstoupí na ni, hra ho dostane dolů do skryté oblasti, kde na něj čeká{" "}
-                        <strong className="text-white">secret hvězda</strong> v podobě zásvitné ikony - a s ní i bednička se
-                        speciálním secretním skinem jako odměna za objevení skrytého místa.
+                        Levely 3 a 7 obsahují <strong className="text-white">secret platformu</strong>. Nenápadný skrytý znak
+                        na jedné z platforem - hvězdičkové počítadlo vlevo (<strong className="text-white">0/1</strong>)
+                        naznačuje existenci sekretu. Vstup teleportuje hráče do skryté oblasti s{" "}
+                        <strong className="text-white">secret hvězdou</strong> a bedničkou se speciálním skinem.
                     </p>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -319,7 +308,8 @@ const UnityJumpingJello = () => {
                                 <img
                                     src="/github-portfolio/images/jumpingJello/secret_platform.webp"
                                     alt="Secret platforma se skrytým znakem"
-                                    className="w-full object-cover" loading="lazy"
+                                    className="w-full object-cover"
+                                    loading="lazy"
                                 />
                             </div>
 
@@ -333,7 +323,8 @@ const UnityJumpingJello = () => {
                                 <img
                                     src="/github-portfolio/images/jumpingJello/secret_ikon_box.webp"
                                     alt="Secret hvězda a secret skin box"
-                                    className="w-full object-cover" loading="lazy"
+                                    className="w-full object-cover"
+                                    loading="lazy"
                                 />
                             </div>
 
@@ -349,20 +340,17 @@ const UnityJumpingJello = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">9. Achievement systém</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        Hra obsahuje propracovaný{" "}
-                        <strong className="text-white">systém achievementů a odemykání obsahu</strong>. Při splnění podmínky
-                        se v pravém dolním rohu (nebo vlevo) zobrazí notifikační banner, který hráče informuje o novém
-                        úspěchu - odemčení nového skinu nebo zpřístupnění dalšího levelu. Achievementy jsou sledovány i v
-                        průběhu hry: v pravém dolním rohu se zobrazuje časovač{" "}
-                        <strong className="text-white">Achievement: čas</strong>, který monitoruje, jak rychle hráč
-                        postupuje.
+                        Při splnění podmínky se v rohu obrazovky zobrazí notifikační banner - odemčení skinu nebo
+                        zpřístupnění levelu. Časovač <strong className="text-white">Achievement: čas</strong> v pravém dolním
+                        rohu měří rychlost postupu.
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl mb-4">
                         <img
                             src="/github-portfolio/images/jumpingJello/level_achivement_done.webp"
                             alt="Achievement unlocked - nový skin a level"
-                            className="w-full object-cover" loading="lazy"
+                            className="w-full object-cover"
+                            loading="lazy"
                         />
                     </div>
 
@@ -375,7 +363,8 @@ const UnityJumpingJello = () => {
                         <img
                             src="/github-portfolio/images/jumpingJello/level_achivement_text.webp"
                             alt="Achievement timer v průběhu hry"
-                            className="w-full object-cover" loading="lazy"
+                            className="w-full object-cover"
+                            loading="lazy"
                         />
                     </div>
 
@@ -389,17 +378,16 @@ const UnityJumpingJello = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">10. Dokončení levelu</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        Po dosažení vítězné platformy se zobrazí obrazovka <strong className="text-white">LEVEL DONE</strong>{" "}
-                        se shrnutím výkonu hráče: počet sebraného ovoce, počet pokusů a čas průchodu. Z obrazovky lze level
-                        zopakovat nebo se vrátit do menu. Postavička vesele poskakuje na zlatém sloupu v levé části
-                        obrazovky.
+                        Obrazovka <strong className="text-white">LEVEL DONE</strong> shrnuje výkon: počet ovoce, pokusy a čas
+                        průchodu. Lze zopakovat level nebo se vrátit do menu.
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
                             src="/github-portfolio/images/jumpingJello/winning.webp"
                             alt="Level Done obrazovka s výsledky"
-                            className="w-full object-cover" loading="lazy"
+                            className="w-full object-cover"
+                            loading="lazy"
                         />
                     </div>
 
@@ -413,13 +401,9 @@ const UnityJumpingJello = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">11. Infinity levely</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        Po odemčení prvního infinity levelu se v navigační liště zpřístupní pozice 9–12. Jde o čtyři
-                        speciální <strong className="text-white">nekonečné levely</strong>, kde platformy pokračují
-                        donekonečna - cílem není dosáhnout konkrétního cíle, ale přežít co nejdéle a dostat se co nejvýše.
-                        Score je zobrazeno vlevo nahoře a roste s každou další platformou. Infinity levely sdílejí grafická
-                        prostředí s normálními levely, ale jejich rozmístění platforem je vygenerováno dynamicky. Ve spodní
-                        části záběru je vidět Unity editor s animačními klíčovými snímky, ukazující jak jsou pohyby platforem
-                        nastaveny v timeline.
+                        Pozice 9-12 v liště. Čtyři <strong className="text-white">nekonečné levely</strong> s dynamicky
+                        generovanými platformami. Cílem je přežít co nejdéle a dosáhnout nejvyššího skóre. Grafická prostředí
+                        sdílejí s normálními levely.
                     </p>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
@@ -428,7 +412,8 @@ const UnityJumpingJello = () => {
                                 <img
                                     src="/github-portfolio/images/jumpingJello/menu_level_9_infinity.webp"
                                     alt="Menu - Infinity Level 1"
-                                    className="w-full object-cover" loading="lazy"
+                                    className="w-full object-cover"
+                                    loading="lazy"
                                 />
                             </div>
 
@@ -442,7 +427,8 @@ const UnityJumpingJello = () => {
                                 <img
                                     src="/github-portfolio/images/jumpingJello/menu_level_12_closed.webp"
                                     alt="Menu - Infinity Level 4 zamčen"
-                                    className="w-full object-cover" loading="lazy"
+                                    className="w-full object-cover"
+                                    loading="lazy"
                                 />
                             </div>
 
@@ -456,7 +442,8 @@ const UnityJumpingJello = () => {
                         <img
                             src="/github-portfolio/images/jumpingJello/infinity_level.webp"
                             alt="Gameplay infinity levelu s editorem"
-                            className="w-full object-cover" loading="lazy"
+                            className="w-full object-cover"
+                            loading="lazy"
                         />
                     </div>
 
@@ -468,24 +455,22 @@ const UnityJumpingJello = () => {
 
                 {/* Bones & animation */}
                 <section className="border-t border-slate-700/50 pt-10">
-                    <h2 className="text-2xl font-bold text-white mb-2">12. Technické – kosti a animace postav</h2>
+                    <h2 className="text-2xl font-bold text-white mb-2">12. Technické - kosti a animace postav</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-6">
-                        Na rozdíl od běžných sprite-sheet animací jsou postavy v Jumping Jello animovány pomocí{" "}
-                        <strong className="text-white">kostního rigu</strong>. Každá postava je rozdělena na tělesné části
-                        (hlava, trup, končetiny), které jsou propojeny hierarchií kostí přes Unity komponenty{" "}
+                        Postavy jsou animovány <strong className="text-white">kostním rigem</strong>, ne sprite sheety. Tělo
+                        rozdělené na části (hlava, trup, končetiny) propojené přes{" "}
                         <strong className="text-white">Sprite Skin</strong> a{" "}
-                        <strong className="text-white">IK Manager 2D</strong>. Animace pak nevzniká přepínáním obrázků, ale
-                        přímou manipulací s polohou a rotací kostí v čase - výsledkem je plynulý a přirozený pohyb. Přechody
-                        mezi stavy (idle, skok, přistání) jsou řízeny přes Unity komponent{" "}
-                        <strong className="text-white">Animator</strong> s parametrickými podmínkami.
+                        <strong className="text-white">IK Manager 2D</strong>. Pohyb vzniká manipulací s polohou a rotací
+                        kostí. Přechody (idle, skok, přistání) řídí <strong className="text-white">Animator</strong>.
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
                             src="/github-portfolio/images/jumpingJello/animator_character.webp"
                             alt="Kostní rig a Animator postavy Snowman"
-                            className="w-full object-cover" loading="lazy"
+                            className="w-full object-cover"
+                            loading="lazy"
                         />
                     </div>
 
@@ -497,13 +482,12 @@ const UnityJumpingJello = () => {
 
                 {/* Shaders */}
                 <section className="border-t border-slate-700/50 pt-10">
-                    <h2 className="text-2xl font-bold text-white mb-2">13. Technické – shadery</h2>
+                    <h2 className="text-2xl font-bold text-white mb-2">13. Technické - shadery</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-10">
-                        Hra obsahuje dva vlastní shadery vytvořené v Unity{" "}
-                        <strong className="text-white">Shader Graph</strong>. Shadery jsou složeny z vizuálních uzlů (nodes)
-                        bez psaní kódu - každý uzel představuje matematickou operaci nebo vzorkování textury. Výsledný shader
-                        je zkompilován do HLSL a nasazen jako materiál na konkrétní objekt ve scéně.
+                        Dva vlastní shadery v Unity <strong className="text-white">Shader Graph</strong>. Vizuální uzly
+                        (nodes) bez psaní kódu - každý uzel je matematická operace nebo vzorkování textury. Výsledek se
+                        kompiluje do HLSL a nasadí jako materiál.
                     </p>
 
                     {/* Laser drone shader */}
@@ -511,21 +495,19 @@ const UnityJumpingJello = () => {
                         <h3 className="text-xl font-semibold text-white mb-1">Shader laserového drona (DronLaser)</h3>
 
                         <p className="text-slate-300 leading-relaxed mb-4">
-                            Shader pro laserový paprsek dronového nepřítele. Graf kombinuje{" "}
-                            <strong className="text-white">časově animovanou noise texturu</strong> (pulsující vzor) s
-                            gradientovou barvou (zelená → žlutá → červená) pro vizuální efekt energie. Exponovanými parametry
-                            jsou <strong className="text-white">LaserEdgeSmoothness</strong>,{" "}
-                            <strong className="text-white">LaserThickness</strong>,{" "}
-                            <strong className="text-white">LaserSpeed</strong> a{" "}
-                            <strong className="text-white">LaserScale</strong> - díky tomu lze laser snadno ladit přímo v
-                            inspectoru bez úpravy grafu. Výsledkem je živý, pulsující laserový efekt.
+                            Laserový paprsek dronového nepřítele. Časově animovaná noise textura s barevným gradientem
+                            (zelená → žlutá → červená). Parametry <strong className="text-white">LaserEdgeSmoothness</strong>
+                            , <strong className="text-white">Thickness</strong>,{" "}
+                            <strong className="text-white">Speed</strong> a <strong className="text-white">Scale</strong> lze
+                            ladit přímo v inspectoru.
                         </p>
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                             <img
                                 src="/github-portfolio/images/jumpingJello/laser_drone_shader.webp"
                                 alt="Shader Graph laserového drona"
-                                className="w-full object-cover" loading="lazy"
+                                className="w-full object-cover"
+                                loading="lazy"
                             />
                         </div>
 
@@ -540,20 +522,18 @@ const UnityJumpingJello = () => {
                         <h3 className="text-xl font-semibold text-white mb-1">Shader efektu zásahu postavy</h3>
 
                         <p className="text-slate-300 leading-relaxed mb-4">
-                            Druhý shader vytváří <strong className="text-white">efekt burn/dissolve</strong> - vizuální
-                            reakci na zásah nebo poškození postavy. Noise textura je kombinována s{" "}
-                            <strong className="text-white">step/threshold</strong> operacemi tak, aby postupně „rozpouštěla"
-                            sprite od okrajů dovnitř. Výrazná <strong className="text-white">růžová/magenta kontura</strong>{" "}
-                            na okraji dissolve efektu zvýrazňuje okamžik zásahu a dává hráči jasnou vizuální zpětnou vazbu.
-                            Výsledný efekt je vidět přímo v náhledu shaderu vpravo dole - postava se rozpadá s výrazným
-                            barevným okrajem.
+                            <strong className="text-white">Burn/dissolve efekt</strong> při zásahu postavy. Noise textura s{" "}
+                            <strong className="text-white">step/threshold</strong> operacemi postupně rozpouští sprite od
+                            okrajů. <strong className="text-white">Růžová kontura</strong> na okraji dissolve efektu dává
+                            vizuální zpětnou vazbu.
                         </p>
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                             <img
                                 src="/github-portfolio/images/jumpingJello/character_dron_shader.webp"
                                 alt="Shader efektu zásahu - burn dissolve"
-                                className="w-full object-cover" loading="lazy"
+                                className="w-full object-cover"
+                                loading="lazy"
                             />
                         </div>
 

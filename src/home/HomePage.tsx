@@ -9,7 +9,7 @@ const HomePage = () => {
             title: "Životopis",
             link: "/github-portfolio/cv",
             icon: <LuUser className="w-8 h-8 text-cyan-400" />,
-            desc: "Kompletní přehled zkušeností, vzdělání a technologií, se kterými pracuji.",
+            desc: "Zkušenosti, vzdělání, certifikace a technologie.",
         },
     ];
 
@@ -18,25 +18,25 @@ const HomePage = () => {
             title: "Find a Coin",
             link: "/github-portfolio/unity/findacoin",
             icon: <LuGamepad2 className="w-8 h-8 text-purple-400" />,
-            desc: "Má první hra v Unity. 2D platformer se třemi levely, pixel art grafikou a vlastní hudbou. V každém levelu hráč sbírá 5 mincí.",
+            desc: "2D platformer se třemi levely, pixel art grafikou a vlastní hudbou. V každém levelu hráč sbírá 5 mincí.",
         },
         {
             title: "Deff The Base",
             link: "/github-portfolio/unity/deffthebase",
             icon: <LuGamepad2 className="w-8 h-8 text-green-400" />,
-            desc: "Mobilní tower defense hra pro Android a iOS. Hráč brání základnu před vlnami nepřátel věžemi, zdmi a generátory štítů. Každé desáté kolo přicházejí tancí Bossové.",
+            desc: "Mobilní tower defense pro Android a iOS. Hráč brání základnu věžemi, zdmi a generátory štítů. Každé desáté kolo přicházejí Bossové.",
         },
         {
             title: "Hide and Seek",
             link: "/github-portfolio/unity/hideandseek",
             icon: <LuGamepad2 className="w-8 h-8 text-red-400" />,
-            desc: "PC hra na schovávanou s podporou klávesnice i gamepadu. Tma a zorné pole jsou implementovány přes shader, lovci a zloději mají vlastní AI.",
+            desc: "PC hra na schovávanou s podporou gamepadu. Tma a zorné pole přes shader, lovci a zloději s vlastní AI.",
         },
         {
             title: "Jumping Jello",
             link: "/github-portfolio/unity/jumpingjello",
             icon: <LuGamepad2 className="w-8 h-8 text-blue-400" />,
-            desc: "Moje největší mobilní hra pro Android a iOS. 2D platformer s 8 levely a 4 nekonečnými infinity levely, 6 odemykatelnými skiny, achievement systémem a vlastními shadery.",
+            desc: "Mobilní 2D platformer s 8 levely, 4 infinity levely, 6 skiny, achievement systémem a vlastními shadery.",
         },
     ];
 
@@ -45,7 +45,7 @@ const HomePage = () => {
             title: "Šachy 3D (Three.js)",
             link: "/github-portfolio/threejs/sachy",
             icon: <LuCode className="w-8 h-8 text-yellow-400" />,
-            desc: "3D šachy v prohlížeči s využitím Three.js.",
+            desc: "Interaktivní 3D šachové figurky v prohlížeči.",
         },
     ];
 
@@ -63,24 +63,25 @@ const HomePage = () => {
             ref={containerRef}
             className="w-full h-full overflow-auto"
         >
-            <div className="max-w-5xl mx-auto px-4 py-10 flex flex-col gap-12 justify-items-center">
-                <h1 className="text-5xl font-extrabold text-center">Vítejte na mém portfoliu</h1>
+            <div className="max-w-5xl mx-auto px-4 py-16 flex flex-col gap-16 justify-items-center">
+                <div className="text-center max-w-2xl mx-auto">
+                    <p className="text-sm font-medium tracking-widest uppercase text-cyan-400 mb-4">
+                        Fullstack Developer & 3D Specialist
+                    </p>
+                    <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight mb-6">Jakub Petráň</h1>
+                    <p className="text-slate-400 text-lg leading-relaxed">
+                        React, .NET, Unity, Three.js. Vyvíjím webové aplikace, 3D vizualizace a hry. Pracuji s CAD/BIM
+                        modely, IFC daty a AR/VR.
+                    </p>
+                </div>
 
-                <p className="text-slate-400 text-lg text-center">
-                    Jsem full-stack developer se zaměřením na 3D aplikace a vizualizace.
-                    <br />
-                    Pracuji s technologiemi jako Unity, Three.js, React a .NET.
-                    <br />
-                    Mám zkušenosti s vývojem her, webových aplikací, zpracováním komplexních dat (např. IFC modely) i AR/VR.
-                    <br />
-                    <br />
-                    Níže najdete ukázky mých projektů a odkaz na životopis.
-                </p>
-
-                <div className="flex flex-col gap-8">
-                    <div>
-                        <h2 className="text-2xl font-bold mb-4 text-purple-400 text-center">Unity Hry</h2>
-                        <div className="flex flex-wrap justify-center gap-6 pt-2 overflow-x-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-800">
+                <div className="flex flex-col gap-12">
+                    <section>
+                        <h2 className="text-xl font-bold mb-5 text-purple-400 flex items-center gap-2">
+                            <LuGamepad2 className="w-5 h-5" />
+                            Unity Hry
+                        </h2>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                             {unityGames.map((section) => (
                                 <HomeCard
                                     key={section.link}
@@ -88,15 +89,17 @@ const HomePage = () => {
                                     link={section.link}
                                     icon={section.icon}
                                     desc={section.desc}
-                                    widthClass="w-80"
                                 />
                             ))}
                         </div>
-                    </div>
+                    </section>
 
-                    <div>
-                        <h2 className="text-2xl font-bold mb-4 text-yellow-400 text-center">Three.js Projekty</h2>
-                        <div className="flex flex-wrap justify-center gap-6 pt-2 overflow-x-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-800">
+                    <section>
+                        <h2 className="text-xl font-bold mb-5 text-yellow-400 flex items-center gap-2">
+                            <LuCode className="w-5 h-5" />
+                            Three.js
+                        </h2>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                             {threeJsGames.map((section) => (
                                 <HomeCard
                                     key={section.link}
@@ -104,15 +107,17 @@ const HomePage = () => {
                                     link={section.link}
                                     icon={section.icon}
                                     desc={section.desc}
-                                    widthClass="w-80"
                                 />
                             ))}
                         </div>
-                    </div>
+                    </section>
 
-                    <div>
-                        <h2 className="text-2xl font-bold mb-4 text-cyan-400 text-center">Životopis</h2>
-                        <div className="flex flex-wrap justify-center gap-6 pt-2 overflow-x-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-800">
+                    <section>
+                        <h2 className="text-xl font-bold mb-5 text-cyan-400 flex items-center gap-2">
+                            <LuUser className="w-5 h-5" />
+                            Životopis
+                        </h2>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                             {cvSection.map((section) => (
                                 <HomeCard
                                     key={section.link}
@@ -120,11 +125,10 @@ const HomePage = () => {
                                     link={section.link}
                                     icon={section.icon}
                                     desc={section.desc}
-                                    widthClass="w-80"
                                 />
                             ))}
                         </div>
-                    </div>
+                    </section>
                 </div>
             </div>
         </div>

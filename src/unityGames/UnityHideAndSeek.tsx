@@ -3,14 +3,12 @@ const UnityHideAndSeek = () => {
         <div className="w-full h-full overflow-auto bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-slate-100">
             {/* Hero */}
             <div className="max-w-4xl mx-auto px-6 py-10">
-                <h1 className="text-4xl font-extrabold tracking-tight text-white mb-3">
-                    Hide and Seek - Hra na schovávanou
-                </h1>
+                <h1 className="text-4xl font-extrabold tracking-tight text-white mb-3">Hide and Seek</h1>
+                <p className="text-sm font-medium tracking-wide uppercase text-red-400 mb-4">Hra na schovávanou</p>
 
                 <p className="text-slate-300 text-lg leading-relaxed max-w-2xl">
-                    Má třetí hra v Unity - rychlý učební projekt zaměřený na ovládání pomocí gamepadu přes{" "}
-                    <strong className="text-white">Nový Unity Input System</strong>. Hra je pro PC a podporuje jak
-                    klávesnici, tak gamepad/controller. Tma a zorné pole jsou implementovány přes{" "}
+                    PC hra zaměřená na ovládání přes <strong className="text-white">Nový Unity Input System</strong>.
+                    Podporuje klávesnici i gamepad. Tma a zorné pole přes{" "}
                     <strong className="text-white">Standard Surface Shader</strong> s raycastingem v{" "}
                     <strong className="text-white">LateUpdate</strong>. Veškeré programování včetně AI jsem tvořil sám.
                 </p>
@@ -41,19 +39,18 @@ const UnityHideAndSeek = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">1. Hlavní menu</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        Menu umožňuje spustit novou hru nebo navázat na uloženou partii. Před startem si každý hráč zvolí
-                        svou roli - <strong className="text-white">Lovec</strong> nebo{" "}
-                        <strong className="text-white">Zloděj</strong> a preferovaný způsob ovládání -{" "}
-                        <strong className="text-white">Klávesnice</strong> nebo{" "}
-                        <strong className="text-white">Ovladač</strong>. Pomocí šipek lze nastavit přesný počet hráčů v
-                        každém týmu zvlášť.
+                        Výběr role (<strong className="text-white">Lovec</strong> /
+                        <strong className="text-white"> Zloděj</strong>) a ovládání (
+                        <strong className="text-white">Klávesnice</strong> /<strong className="text-white"> Ovladač</strong>
+                        ). Šipkami se nastaví počet hráčů v každém týmu.
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
                             src="/github-portfolio/images/hideAndSeek/menu.webp"
                             alt="Hlavní menu Hide and Seek"
-                            className="w-full object-cover" loading="lazy"
+                            className="w-full object-cover"
+                            loading="lazy"
                         />
                     </div>
 
@@ -67,9 +64,8 @@ const UnityHideAndSeek = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">2. Ovládání</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        Hra podporuje klávesnici s myší i gamepad. Pohyb a otáčení jsou na oddělených vstupech - lovec se
-                        pohybuje a míří nezávisle. Střelba lovce a schopnosti jsou mapovány na různá tlačítka podle zvoleného
-                        ovládání.
+                        Klávesnice s myší i gamepad. Pohyb a otáčení na oddělených vstupech - lovec se pohybuje a míří
+                        nezávisle.
                     </p>
 
                     <div className="overflow-hidden rounded-2xl border border-slate-700/50">
@@ -114,19 +110,19 @@ const UnityHideAndSeek = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">3. Vision a zorné pole</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        Obě role mají schopnost <strong className="text-white">Vision</strong> - rozsvítí zorné pole na 8
-                        sekund a sdílí ho v rámci týmu. Lovec má navíc <strong className="text-white">FireRate</strong>{" "}
-                        (střelba, cooldown 1 s), zloděj <strong className="text-white">Sprint</strong> (zrychlení na 1 s,
-                        cooldown 10 s). Zorné pole se počítá každý snímek v{" "}
-                        <strong className="text-white">LateUpdate</strong> raycastingem - výsledek jde do shaderu, který
-                        oblasti za překážkami ztmaví. Tma reaguje na pohyb okamžitě.
+                        Obě role mají <strong className="text-white">Vision</strong> - rozsvítí zorné pole na 8 s a sdílí ho
+                        v rámci týmu. Lovec má <strong className="text-white">FireRate</strong> (cooldown 1 s), zloděj{" "}
+                        <strong className="text-white">Sprint</strong> (1 s, cooldown 10 s). Zorné pole se počítá každý
+                        snímek v <strong className="text-white">LateUpdate</strong> raycastingem - shader ztmavuje oblasti za
+                        překážkami.
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
                             src="/github-portfolio/images/hideAndSeek/vision_firing.webp"
                             alt="Vision schopnost a střelba lovce"
-                            className="w-full object-cover" loading="lazy"
+                            className="w-full object-cover"
+                            loading="lazy"
                         />
                     </div>
 
@@ -140,16 +136,16 @@ const UnityHideAndSeek = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">4. Pohled zloděje</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        Hráč ovládá zloděje. V záběru jsou dva <strong className="text-white">AI lovci</strong> - jeden
-                        střílí na spoluhráče. Protože Vision je týmová, zloděj vidí i zorná pole svých spoluhráčů-zlodějů,
-                        nejen vlastní.
+                        Hráč ovládá zloděje. V záběru dva <strong className="text-white">AI lovci</strong> - jeden střílí na
+                        spoluhráče. Vision je týmová, zloděj vidí i zorná pole dalších zlodějů.
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
                             src="/github-portfolio/images/hideAndSeek/hiding.webp"
                             alt="Pohled zloděje - AI lovci útočí na spoluhráče"
-                            className="w-full object-cover" loading="lazy"
+                            className="w-full object-cover"
+                            loading="lazy"
                         />
                     </div>
 
@@ -163,16 +159,16 @@ const UnityHideAndSeek = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">5. Spolupráce lovců</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        Hráč hraje za lovce a vidí aktivní <strong className="text-white">Vision spoluhráče-lovce</strong>,
-                        který detekoval zloděje. Sdílená viditelnost funguje v reálném čase - lovec ví o pozicích zlodějů i
-                        bez přímého kontaktu.
+                        Hráč jako lovec vidí <strong className="text-white">Vision spoluhráče</strong>, který detekoval
+                        zloděje. Sdílená viditelnost funguje v reálném čase.
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
                             src="/github-portfolio/images/hideAndSeek/hunting_friend.webp"
                             alt="Lovec vidí Vision spoluhráče"
-                            className="w-full object-cover" loading="lazy"
+                            className="w-full object-cover"
+                            loading="lazy"
                         />
                     </div>
 
@@ -186,16 +182,16 @@ const UnityHideAndSeek = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">6. Mapa a Scene editor</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        Snímek kombinuje herní pohled lovce a{" "}
-                        <strong className="text-white">Scene okno Unity editoru</strong>. Scene view ukazuje celou mapu bez
-                        omezení - žluté obdélníky jsou překážky, barevné koule hráči a AI.
+                        Herní pohled lovce vedle <strong className="text-white">Scene okna Unity editoru</strong>. Scene view
+                        ukazuje celou mapu - žluté obdélníky jsou překážky, barevné koule hráči a AI.
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
                             src="/github-portfolio/images/hideAndSeek/hunting_with_editor.webp"
                             alt="Game view lovce a Unity Scene editor"
-                            className="w-full object-cover" loading="lazy"
+                            className="w-full object-cover"
+                            loading="lazy"
                         />
                     </div>
 

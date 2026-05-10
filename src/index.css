@@ -2,8 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
-    font-family: "Consolas";
+    font-family:
+        "Roboto",
+        system-ui,
+        -apple-system,
+        sans-serif;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgb(15 23 42);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(51 65 85);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(71 85 105);
 }
 
 @media print {

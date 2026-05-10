@@ -3,14 +3,14 @@ const UnityFindACoin = () => {
         <div className="w-full h-full overflow-auto bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-slate-100">
             {/* Hero */}
             <div className="max-w-4xl mx-auto px-6 py-10">
-                <h1 className="text-4xl font-extrabold tracking-tight text-white mb-3">Find a Coin - 2D Platformer</h1>
+                <h1 className="text-4xl font-extrabold tracking-tight text-white mb-3">Find a Coin</h1>
+                <p className="text-sm font-medium tracking-wide uppercase text-purple-400 mb-4">2D Platformer</p>
 
                 <p className="text-slate-300 text-lg leading-relaxed max-w-2xl">
-                    Má první hra vyvíjená v enginu <strong className="text-white">Unity</strong>. Jde o 2D platformer, kde
-                    hráč prochází třemi levely a v každém sbírá pět mincí. Celou hru jsem vytvořil sám - od programování
-                    v&nbsp;<strong className="text-white">C#</strong> přes grafiku až po vlastní hudbu. Tato hra pro mě
-                    znamenala první setkání s Unity i s programováním jako takovým, takže jsem se učil obojí zároveň přímo za
-                    pochodu.
+                    2D platformer ve třech levelech. Hráč skáče po plošinách a v každém levelu sbírá pět mincí. Celou hru
+                    jsem postavil sám v <strong className="text-white">Unity</strong> a{" "}
+                    <strong className="text-white">C#</strong>
+                    &nbsp;- grafiku v pixel artu, hudbu i programování. Byl to zároveň můj první projekt v Unity.
                 </p>
 
                 <div className="flex flex-wrap gap-2 mt-6">
@@ -31,16 +31,16 @@ const UnityFindACoin = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">1. Hlavní menu</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        Z hlavního menu lze spustit hru, zobrazit ovládání nebo hru ukončit. Celá grafika menu včetně pozadí
-                        a tlačítek je ručně kreslená v programu <strong className="text-white">Aseprite</strong> ve stylu
-                        pixel art.
+                        Menu nabízí start hry, zobrazení ovládání a ukončení. Grafika včetně pozadí a tlačítek je ručně
+                        kreslená v <strong className="text-white">Aseprite</strong> ve stylu pixel art.
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
                             src="/github-portfolio/images/findACoin/menu.webp"
                             alt="Hlavní menu Find a Coin"
-                            className="w-full object-cover" loading="lazy"
+                            className="w-full object-cover"
+                            loading="lazy"
                         />
                     </div>
 
@@ -54,8 +54,7 @@ const UnityFindACoin = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">2. Výběr levelu</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        Po spuštění hry se hráč dostane na obrazovku výběru levelu. K dispozici jsou tři mise, každá s
-                        odlišnou obtížností a mechanikami. Splnění každého levelu spočívá ve sběru{" "}
+                        Tři mise s rostoucí obtížností. Každý level vyžaduje sběr{" "}
                         <strong className="text-white">5 mincí</strong> rozmístěných po mapě.
                     </p>
 
@@ -63,7 +62,8 @@ const UnityFindACoin = () => {
                         <img
                             src="/github-portfolio/images/findACoin/levels.webp"
                             alt="Výběr levelu"
-                            className="w-full object-cover" loading="lazy"
+                            className="w-full object-cover"
+                            loading="lazy"
                         />
                     </div>
 
@@ -77,16 +77,16 @@ const UnityFindACoin = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">3. Level 1 - Základní platforma</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        První level je úvod do hry. Hráč se pohybuje 2D bludištěm, skáče po plošinách a hledá pět mincí.
-                        Žádné speciální mechaniky ani překážky zde nejsou - jde čistě o pochopení ovládání a struktury mapy.
-                        Cíl je nasbírat všechny mince a tím level dokončit.
+                        Úvodní level bez speciálních mechanik. Hráč se pohybuje 2D bludištěm, skáče po plošinách a hledá pět
+                        mincí. Seznamuje se s ovládáním a strukturou mapy.
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl mb-4">
                         <img
                             src="/github-portfolio/images/findACoin/level_1_game.webp"
                             alt="Gameplay Level 1"
-                            className="w-full object-cover" loading="lazy"
+                            className="w-full object-cover"
+                            loading="lazy"
                         />
                     </div>
 
@@ -98,7 +98,8 @@ const UnityFindACoin = () => {
                         <img
                             src="/github-portfolio/images/findACoin/mapa_lvl_1.webp"
                             alt="Mapa levelu 1 v Unity"
-                            className="w-full object-cover" loading="lazy"
+                            className="w-full object-cover"
+                            loading="lazy"
                         />
                     </div>
 
@@ -112,18 +113,18 @@ const UnityFindACoin = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">4. Level 2 - Double Jump</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        Druhý level přidává novou mechaniku - <strong className="text-white">double jump</strong>. Na mapě je
-                        schovaná <strong className="text-white">Double jump bedna</strong>, po jejímž sebrání hráč získá
-                        právě jeden double jump. Počet zbývajících skoků je zobrazený{" "}
-                        <strong className="text-white">vlevo nahoře</strong> vedle počítadla mincí. Protože jde o jediný
-                        pokus, je potřeba ho použít na správném místě. Cíl zůstává stejný: nasbírat 5 mincí.
+                        Přidává mechaniku <strong className="text-white">double jump</strong>. Na mapě je schovaná{" "}
+                        <strong className="text-white">Double jump bedna</strong>, po sebrání hráč získá jeden double jump.
+                        Počet zbývajících skoků je zobrazený <strong className="text-white">vlevo nahoře</strong> vedle
+                        počítadla mincí. Použít ho jde jen jednou, takže záleží na správném místě.
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl mb-4">
                         <img
                             src="/github-portfolio/images/findACoin/double_jump_box.webp"
                             alt="Double Jump Box - sprite animace"
-                            className="w-full object-cover" loading="lazy"
+                            className="w-full object-cover"
+                            loading="lazy"
                         />
                     </div>
 
@@ -136,7 +137,8 @@ const UnityFindACoin = () => {
                         <img
                             src="/github-portfolio/images/findACoin/mapa_lvl_2.webp"
                             alt="Mapa levelu 2 v Unity"
-                            className="w-full object-cover" loading="lazy"
+                            className="w-full object-cover"
+                            loading="lazy"
                         />
                     </div>
 
@@ -150,18 +152,18 @@ const UnityFindACoin = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">5. Level 3 - Láva</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        Třetí a nejtěžší level přidává k předchozím mechanikám <strong className="text-white">lávu</strong>.
-                        Část platformy tvoří lávová plocha - pokud na ni hráč vstoupí, dojde ke kolizi a hráč zemře. Na mapě
-                        je opět <strong className="text-white">Double jump bedna</strong> s jedním double jumpem viditelným
-                        vlevo nahoře. Level tak kombinuje přesné skákání, jeden double jump i vyhýbání se lávě, čímž vytváří
-                        největší výzvu celé hry.
+                        Nejtěžší level kombinuje předchozí mechaniky s <strong className="text-white">lávou</strong>. Lávová
+                        plocha zabíjí hráče při kontaktu. Na mapě je opět{" "}
+                        <strong className="text-white">Double jump bedna</strong> s jedním skokem. Přesné skákání, double
+                        jump a vyhýbání se lávě dohromady tvoří finální výzvu.
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl mb-4">
                         <img
                             src="/github-portfolio/images/findACoin/lava_ground.webp"
                             alt="Lávová podlaha - sprite tile"
-                            className="w-full object-cover" loading="lazy"
+                            className="w-full object-cover"
+                            loading="lazy"
                         />
                     </div>
 
@@ -173,7 +175,8 @@ const UnityFindACoin = () => {
                         <img
                             src="/github-portfolio/images/findACoin/mapa_lvl_3.webp"
                             alt="Mapa levelu 3 v Unity"
-                            className="w-full object-cover" loading="lazy"
+                            className="w-full object-cover"
+                            loading="lazy"
                         />
                     </div>
 
@@ -187,15 +190,15 @@ const UnityFindACoin = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">6. Herní menu</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        Přímo ve hře lze otevřít herní menu, které umožňuje pauzovat hru, vrátit se do výběru levelů nebo hru
-                        restartovat. Jednoduché a přehledné rozhraní odpovídá celkovému pixel art stylu hry.
+                        Herní menu pauzuje hru, umožňuje restart nebo návrat do výběru levelů.
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
                             src="/github-portfolio/images/findACoin/game_menu.webp"
                             alt="Herní menu ve Find a Coin"
-                            className="w-full object-cover" loading="lazy"
+                            className="w-full object-cover"
+                            loading="lazy"
                         />
                     </div>
 
@@ -209,10 +212,9 @@ const UnityFindACoin = () => {
                     <h2 className="text-2xl font-bold text-white mb-2">7. Technické zpracování animací</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-10">
-                        Všechny animace ve hře jsou implementovány jako sekvence sprite obrázků přepínaných přes Unity
-                        komponent <strong className="text-white">Animator</strong>. Přechody mezi stavy (pohyb, skok, idle)
-                        jsou řízeny herními parametry. Veškeré sprity jsem kreslil ručně v programu{" "}
-                        <strong className="text-white">Aseprite</strong> ve stylu pixel art.
+                        Sekvence sprite obrázků přepínaných přes Unity <strong className="text-white">Animator</strong>.
+                        Přechody mezi stavy (pohyb, skok, idle) řídí herní parametry. Sprity jsem kreslil ručně v{" "}
+                        <strong className="text-white">Aseprite</strong>.
                     </p>
 
                     {/* Animator overview */}
@@ -220,16 +222,16 @@ const UnityFindACoin = () => {
                         <h3 className="text-xl font-semibold text-white mb-1">Animator - přehled stavů postavy</h3>
 
                         <p className="text-slate-300 leading-relaxed mb-4">
-                            Snímek z Unity <strong className="text-white">Animator</strong> okna ukazuje kompletní animační
-                            graf hlavní postavy - kolik má akcí, stavů a jak jsou mezi sebou propojeny přes podmíněné
-                            přechody. Každý přechod je řízen parametrem (např. rychlost pohybu, zda je hráč ve vzduchu).
+                            Unity <strong className="text-white">Animator</strong> ukazuje kompletní animační graf hlavní
+                            postavy. Každý přechod mezi stavy je řízen parametrem (rychlost pohybu, pozice ve vzduchu).
                         </p>
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                             <img
                                 src="/github-portfolio/images/findACoin/animace_editor.webp"
                                 alt="Unity Animator - přehled animací postavy"
-                                className="w-full object-cover" loading="lazy"
+                                className="w-full object-cover"
+                                loading="lazy"
                             />
                         </div>
 
@@ -243,16 +245,16 @@ const UnityFindACoin = () => {
                         <h3 className="text-xl font-semibold text-white mb-1">Hráč - pohyb</h3>
 
                         <p className="text-slate-300 leading-relaxed mb-4">
-                            Animace pohybu hráče se skládá z několika sprite snímků, které na sebe plynule navazují a
-                            vytvářejí iluzi chůze. Animator automaticky přepíná mezi idle a pohybovým stavem podle aktuální
-                            rychlosti postavy.
+                            Několik sprite snímků plynule navazujících do iluze chůze. Animator přepíná mezi idle a pohybem
+                            podle aktuální rychlosti postavy.
                         </p>
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl bg-slate-800/30 flex justify-center">
                             <img
                                 src="/github-portfolio/images/findACoin/player_move.webp"
                                 alt="Hráč - sprite animace pohybu"
-                                className="max-h-72 object-contain" loading="lazy"
+                                className="max-h-72 object-contain"
+                                loading="lazy"
                             />
                         </div>
 
@@ -266,15 +268,15 @@ const UnityFindACoin = () => {
                         <h3 className="text-xl font-semibold text-white mb-1">Jump Box</h3>
 
                         <p className="text-slate-300 leading-relaxed mb-4">
-                            Jump Box je interaktivní předmět na mapě. Animace zobrazuje aktivní stav bedny - po sebrání
-                            hráčem se použije a zmizí z mapy.
+                            Interaktivní předmět na mapě. Po sebrání hráčem se použije a zmizí.
                         </p>
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl bg-slate-800/30 flex justify-center">
                             <img
                                 src="/github-portfolio/images/findACoin/jump_box.webp"
                                 alt="Jump Box - sprite animace"
-                                className="max-h-72 object-contain" loading="lazy"
+                                className="max-h-72 object-contain"
+                                loading="lazy"
                             />
                         </div>
 
@@ -288,16 +290,16 @@ const UnityFindACoin = () => {
                         <h3 className="text-xl font-semibold text-white mb-1">Láva - idle animace</h3>
 
                         <p className="text-slate-300 leading-relaxed mb-4">
-                            Láva má vlastní smyčkovanou idle animaci, která ji vizuálně oživuje. Při kolizi hráče s lávou
-                            dojde k okamžité smrti. Animace je implementována přes Animator stejně jako ostatní objekty ve
-                            hře.
+                            Smyčkovaná idle animace oživující lávový povrch. Kolize s lávou zabíjí okamžitě. Implementováno
+                            přes Animator stejně jako ostatní objekty.
                         </p>
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl bg-slate-800/30 flex justify-center">
                             <img
                                 src="/github-portfolio/images/findACoin/lava_idle.webp"
                                 alt="Láva - idle sprite animace"
-                                className="max-h-72 object-contain" loading="lazy"
+                                className="max-h-72 object-contain"
+                                loading="lazy"
                             />
                         </div>
 
@@ -312,10 +314,9 @@ const UnityFindACoin = () => {
                     <h2 className="text-2xl font-bold text-white mb-2">8. Hudba</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-6">
-                        Hra obsahuje dvě vlastní hudební skladby, které jsem složil a nahrál sám. Odlišná melodie hraje v{" "}
+                        Dvě vlastní hudební skladby, které jsem složil a nahrál. Odlišná melodie hraje v{" "}
                         <strong className="text-white">hlavním menu</strong> a jiná doprovází{" "}
-                        <strong className="text-white">průběh levelů</strong>. Ve hře nejsou žádné zvukové efekty ani
-                        particle systémy - hudba je jediným zvukovým prvkem a přispívá k atmosféře pixelového světa.
+                        <strong className="text-white">průběh levelů</strong>. Hudba je jediným zvukovým prvkem hry.
                     </p>
                 </section>
             </div>

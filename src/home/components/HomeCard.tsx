@@ -1,3 +1,4 @@
+import { FiArrowRight } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
 interface HomeCardProps {
@@ -5,21 +6,25 @@ interface HomeCardProps {
     link: string;
     icon: JSX.Element;
     desc: string;
-    widthClass?: string;
 }
 
-const HomeCard = ({ title, link, icon, desc, widthClass = "w-80" }: HomeCardProps) => {
+const HomeCard = ({ title, link, icon, desc }: HomeCardProps) => {
     return (
         <Link
             to={link}
-            className={`group p-8 bg-slate-800 rounded-2xl border border-slate-700 hover:border-cyan-500/50 transition-all hover:-translate-y-2 flex
-                flex-col items-center ${widthClass}`}
+            className="group p-6 bg-slate-800/50 rounded-xl border border-slate-700/50 hover:border-cyan-500/30 hover:bg-slate-800 transition-all
+                flex flex-col"
         >
-            <div className="mb-4 flex justify-center">{icon}</div>
+            <div className="mb-3">{icon}</div>
 
-            <h2 className="text-xl font-bold mb-2 group-hover:text-cyan-400">{title}</h2>
+            <h2 className="text-lg font-bold mb-2 group-hover:text-cyan-400 transition-colors">{title}</h2>
 
-            <p className="text-slate-400 text-sm">{desc}</p>
+            <p className="text-slate-400 text-sm leading-relaxed flex-1">{desc}</p>
+
+            <div className="mt-4 flex items-center gap-1.5 text-sm text-slate-500 group-hover:text-cyan-400 transition-colors">
+                <span>Zobrazit</span>
+                <FiArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+            </div>
         </Link>
     );
 };

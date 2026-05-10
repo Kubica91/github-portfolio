@@ -3,13 +3,14 @@ const UnityDeffTheBase = () => {
         <div className="w-full h-full overflow-auto bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-slate-100">
             {/* Hero */}
             <div className="max-w-4xl mx-auto px-6 py-10">
-                <h1 className="text-4xl font-extrabold tracking-tight text-white mb-3">Def the Base - Tower Defense</h1>
+                <h1 className="text-4xl font-extrabold tracking-tight text-white mb-3">Def the Base</h1>
+                <p className="text-sm font-medium tracking-wide uppercase text-green-400 mb-4">Tower Defense</p>
 
                 <p className="text-slate-300 text-lg leading-relaxed max-w-2xl">
-                    Má druhá mobilní strategická hra vyvíjená v enginu <strong className="text-white">Unity</strong>. Hráč
-                    brání hlavní budovu uprostřed mapy před vlnami nepřátel, kteří se náhodně objevují kolem celé mapy a
-                    vycházejí ze stromů. Programování a veškerou práci v Unity jsem měl na starost já a grafiku jsem zpočátku
-                    kreslil sám. Poté se do vývoje přidal můj bratranec a převzal design a ilustrace.
+                    Mobilní tower defense v <strong className="text-white">Unity</strong>. Hráč brání hlavní budovu uprostřed
+                    mapy před vlnami nepřátel, kteří se náhodně objevují kolem mapy a vycházejí ze stromů. Programování a
+                    veškerou práci v Unity jsem měl na starost já, grafiku zpočátku také. Později se do vývoje přidal můj
+                    bratranec a převzal design a ilustrace.
                 </p>
 
                 <div className="flex flex-wrap gap-2 mt-6">
@@ -30,18 +31,17 @@ const UnityDeffTheBase = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">1. Hlavní menu</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        Z hlavního menu lze spustit novou hru, pokračovat v rozehrané partii, přejít do tutoriálů nebo
-                        vylepšit svoje budovy (Upgrade). V options lze nastavit hlasitost hudby a zvukových efektů. V
-                        rozšířeném nastavení jsou dostupné tři obtížnosti -{" "}
-                        <strong className="text-white">Easy, Normal a Hard</strong> a tři velikosti mapy -{" "}
-                        <strong className="text-white">Small, Normal a Large</strong>.
+                        Menu nabízí novou hru, pokračování, tutoriály a upgrade budov. V nastavení jsou tři obtížnosti (
+                        <strong className="text-white">Easy, Normal, Hard</strong>) a tři velikosti mapy (
+                        <strong className="text-white">Small, Normal, Large</strong>).
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
                             src="/github-portfolio/images/defTheBase/menu_main.webp"
                             alt="Hlavní menu Def the Base"
-                            className="w-full object-cover" loading="lazy"
+                            className="w-full object-cover"
+                            loading="lazy"
                         />
                     </div>
 
@@ -55,16 +55,16 @@ const UnityDeffTheBase = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">2. Mise a tutoriály</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        Hra nabízí sadu tutoriálových misí, za jejichž splnění hráč obdrží{" "}
-                        <strong className="text-white">zlaté odměny</strong> (ale pouze jednou). Každá mise má definovaný cíl
-                        (např. přežít 20 vln), dostupné typy budov a zobrazenou výši odměny.
+                        Sada tutoriálových misí s <strong className="text-white">zlatými odměnami</strong> (jednorázovými).
+                        Každá mise má definovaný cíl (např. přežít 20 vln), povolené typy budov a výši odměny.
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
                             src="/github-portfolio/images/defTheBase/menu_missions.webp"
                             alt="Výběr misí a tutoriálů"
-                            className="w-full object-cover" loading="lazy"
+                            className="w-full object-cover"
+                            loading="lazy"
                         />
                     </div>
 
@@ -78,16 +78,16 @@ const UnityDeffTheBase = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">3. Strom vylepšení</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        Systém vylepšení umožňuje investovat získané zlato do trvalého zlepšení statistik budov - například
-                        zvýšení maximálního štítu, poškození nebo frekvence střelby. Za zhlédnutí reklamy lze získat bonusové
-                        zlato.
+                        Zlato získané z misí lze investovat do trvalého zlepšení statistik budov - vyšší štít, poškození nebo
+                        frekvence střelby. Bonusové zlato za zhlédnutí reklamy.
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
                             src="/github-portfolio/images/defTheBase/upgrade_tree.webp"
                             alt="Strom vylepšení budov"
-                            className="w-full object-cover" loading="lazy"
+                            className="w-full object-cover"
+                            loading="lazy"
                         />
                     </div>
 
@@ -101,20 +101,21 @@ const UnityDeffTheBase = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">4. Stavba základny a správa budov</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        Spodní lišta slouží k nákupu budov a jejich přetažení na mapu. K dispozici jsou:{" "}
+                        Spodní lišta pro nákup budov:{" "}
                         <strong className="text-white">
                             Minigun (150), Launcher (300), Quarry (200), Shield Generator (350)
                         </strong>{" "}
-                        a <strong className="text-white">Wall (100)</strong>. Quarry lze pokládat pouze na pole s červenou
-                        rudou. Mapa se generuje automaticky podle zvolené velikosti a rudy jsou rozmístěny po kvadrantech.
-                        Pravý panel umožňuje vybranou budovu vylepšit, opravit nebo prodat.
+                        a <strong className="text-white">Wall (100)</strong>. Quarry vyžaduje pole s rudou. Mapa se generuje
+                        automaticky podle zvolené velikosti, rudy jsou rozmístěny po kvadrantech. Pravý panel umožňuje
+                        vylepšení, opravu nebo prodej budovy.
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
                             src="/github-portfolio/images/defTheBase/gameplay_active.webp"
                             alt="Aktivní gameplay - nakupování a správa budov"
-                            className="w-full object-cover" loading="lazy"
+                            className="w-full object-cover"
+                            loading="lazy"
                         />
                     </div>
 
@@ -128,17 +129,17 @@ const UnityDeffTheBase = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">5. Animace a inteligentní zdi</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        Animace budov jsou řešeny střídáním obrázků ve stylu GIF. Po mapě se lze pohybovat jedním prstem a
-                        přibližovat/oddalovat dvěma - oddalovací limit odpovídá velikosti mapy. Zdi se{" "}
-                        <strong className="text-white">automaticky propojují</strong> se sousedními zdmi ve všech osmi
-                        směrech. Přímé sousedy jsou vždy upřednostněny před diagonálami.
+                        Animace budov střídáním obrázků (GIF princip). Mapa se ovládá jedním prstem (pohyb), dvěma (zoom).
+                        Zdi se <strong className="text-white">automaticky propojují</strong> se sousedními zdmi ve všech osmi
+                        směrech, přímé sousedy upřednostňují.
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
                             src="/github-portfolio/images/defTheBase/gameplay_build.webp"
                             alt="Automatické propojování zdí"
-                            className="w-full object-cover" loading="lazy"
+                            className="w-full object-cover"
+                            loading="lazy"
                         />
                     </div>
 
@@ -152,16 +153,16 @@ const UnityDeffTheBase = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">6. Hromadná oprava budov</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        Hra umožňuje opravit všechny poškozené budovy stejného typu najednou jediným kliknutím. Přehledně
-                        jsou zobrazeny celkové náklady na opravu každé kategorie - Miniguns, Rocket Launchers, Quarries,
-                        Shield Generators a Walls.
+                        Jedním kliknutím lze opravit všechny poškozené budovy daného typu. Zobrazeny jsou celkové náklady za
+                        Miniguns, Rocket Launchers, Quarries, Shield Generators a Walls.
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
                             src="/github-portfolio/images/defTheBase/building_management.webp"
                             alt="Hromadná oprava budov podle typu"
-                            className="w-full object-cover" loading="lazy"
+                            className="w-full object-cover"
+                            loading="lazy"
                         />
                     </div>
 
@@ -175,16 +176,16 @@ const UnityDeffTheBase = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">7. Boss vlny</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        Každé desáté kolo nastupují <strong className="text-white">Bossové</strong> v podobě tanků - výrazně
-                        odolnější než běžní nepřátelé. Tlačítkem v pravém horním rohu lze hru zrychlit a přeskočit čekání
-                        mezi vlnami.
+                        Každé desáté kolo přicházejí <strong className="text-white">Bossové</strong> v podobě tanků, výrazně
+                        odolnější než běžní nepřátelé. Tlačítkem v pravém horním rohu lze zrychlit hru.
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
                             src="/github-portfolio/images/defTheBase/boss_wave.webp"
                             alt="Boss vlna - tanky útočí na základnu"
-                            className="w-full object-cover" loading="lazy"
+                            className="w-full object-cover"
+                            loading="lazy"
                         />
                     </div>
 
@@ -198,17 +199,17 @@ const UnityDeffTheBase = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">8. Pauza a statistiky</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        Pauza zobrazuje aktuální průběh hry i historické rekordy:{" "}
-                        <strong className="text-white">nejlepší skóre, nejvyšší dosaženou vlnu</strong>, počet zabitých
-                        nepřátel a počet postavených struktur. Odtud lze také upravit hlasitost hudby a zvuků nebo se vrátit
-                        do menu.
+                        Pauza zobrazuje aktuální průběh i rekordy:{" "}
+                        <strong className="text-white">nejlepší skóre, nejvyšší vlnu</strong>, počet zabitých nepřátel a
+                        postavených struktur. Lze upravit hlasitost nebo se vrátit do menu.
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
                             src="/github-portfolio/images/defTheBase/pause_menu.webp"
                             alt="Pause menu se statistikami"
-                            className="w-full object-cover" loading="lazy"
+                            className="w-full object-cover"
+                            loading="lazy"
                         />
                     </div>
 
@@ -222,11 +223,9 @@ const UnityDeffTheBase = () => {
                     <h2 className="text-2xl font-bold text-white mb-2">9. Hudba a zvukové efekty</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-6">
-                        Hra disponuje vlastní hudební stopou - odlišnou melodií pro{" "}
-                        <strong className="text-white">hlavní menu</strong> a pro{" "}
-                        <strong className="text-white">průběh hry</strong>. Vedle hudby obsahuje hra rozsáhlou sadu zvukových
-                        efektů, které reagují na každou herní akci a přispívají k celkové atmosféře. Hlasitost hudby i efektů
-                        lze nastavit nezávisle v nastavení hry.
+                        Vlastní hudební stopa - odlišná melodie pro <strong className="text-white">menu</strong> a pro{" "}
+                        <strong className="text-white">hru</strong>. K tomu rozsáhlá sada zvukových efektů reagujících na
+                        každou akci. Hlasitost hudby a efektů lze nastavit nezávisle.
                     </p>
 
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -262,10 +261,8 @@ const UnityDeffTheBase = () => {
                     <h2 className="text-2xl font-bold text-white mb-2">10. Technické zpracování animací</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-10">
-                        Všechny animace ve hře jsou implementovány jako sekvence sprite obrázků přepínáných ve smyčce -
-                        princip obdobný formátu GIF. Jednotlivé stavy (idle, akce, zničení) jsou řízeny přes Unity komponent{" "}
-                        <strong className="text-white">Animator</strong>, který na základě herních parametrů přepíná mezi
-                        příslušnými animačními klipy.
+                        Sekvence sprite obrázků přepínaných ve smyčce (GIF princip). Stavy (idle, akce, zničení) řídí Unity{" "}
+                        <strong className="text-white">Animator</strong> na základě herních parametrů.
                     </p>
 
                     {/* Minigun */}
@@ -273,16 +270,16 @@ const UnityDeffTheBase = () => {
                         <h3 className="text-xl font-semibold text-white mb-1">Minigun</h3>
 
                         <p className="text-slate-300 leading-relaxed mb-4">
-                            Animace Minigunu se skládá z <strong className="text-white">6 snímků</strong> rozdělených do tří
-                            stavů: klidový režim (idle), střelba a zničení. Snímky na sebe plynule navazují a Animator
-                            automaticky přepíná mezi stavy podle aktuální situace na mapě.
+                            <strong className="text-white">6 snímků</strong> ve třech stavech: idle, střelba, zničení.
+                            Animator přepíná podle situace na mapě.
                         </p>
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl bg-slate-800/30 flex justify-center">
                             <img
                                 src="/github-portfolio/images/defTheBase/minigun.webp"
                                 alt="Minigun - sprite sheet animace"
-                                className="max-h-72 object-contain" loading="lazy"
+                                className="max-h-72 object-contain"
+                                loading="lazy"
                             />
                         </div>
 
@@ -296,18 +293,17 @@ const UnityDeffTheBase = () => {
                         <h3 className="text-xl font-semibold text-white mb-1">Rocket Launcher</h3>
 
                         <p className="text-slate-300 leading-relaxed mb-4">
-                            Rocket Launcher využívá <strong className="text-white">16 snímků</strong> pro tři stavy: idle,
-                            nabíjení (reload) a zničení. Na rozdíl od Minigunu způsobuje raketa při dopadu{" "}
-                            <strong className="text-white">plošné poškození (splash damage)</strong> - zasahuje všechny
-                            nepřátele v okolí místa dopadu. Vystřelená raketa má vlastní sadu snímků. Její let a výbuch jsou
-                            animovány jako samostatná sprite sekvence nezávislá na věži.
+                            <strong className="text-white">16 snímků</strong> pro idle, reload a zničení. Raketa při dopadu
+                            způsobuje <strong className="text-white">plošné poškození (splash damage)</strong>. Její let a
+                            výbuch tvoří samostatnou sprite sekvenci nezávislou na věži.
                         </p>
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl bg-slate-800/30 flex justify-center">
                             <img
                                 src="/github-portfolio/images/defTheBase/rocket_launcher.webp"
                                 alt="Rocket Launcher - sprite sheet animace"
-                                className="max-h-72 object-contain" loading="lazy"
+                                className="max-h-72 object-contain"
+                                loading="lazy"
                             />
                         </div>
 
@@ -322,17 +318,16 @@ const UnityDeffTheBase = () => {
                         <h3 className="text-xl font-semibold text-white mb-1">Nepřítel</h3>
 
                         <p className="text-slate-300 leading-relaxed mb-4">
-                            Běžní nepřátelé mají dvě animační sady o celkem{" "}
-                            <strong className="text-white">12 snímcích</strong>: pohyb v klidovém stavu (idle/chůze) a útočná
-                            animace při dosažení cíle. Přepnutí mezi stavy řídí Animator podle toho, zda nepřítel právě útočí
-                            nebo se přesouvá.
+                            <strong className="text-white">12 snímků</strong> ve dvou sadách: pohyb (idle/chůze) a útok.
+                            Animator přepíná podle toho, zda nepřítel útočí nebo se přesouvá.
                         </p>
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl bg-slate-800/30 flex justify-center">
                             <img
                                 src="/github-portfolio/images/defTheBase/enemy.webp"
                                 alt="Nepřítel - sprite sheet animace"
-                                className="max-h-72 object-contain" loading="lazy"
+                                className="max-h-72 object-contain"
+                                loading="lazy"
                             />
                         </div>
 
@@ -346,17 +341,16 @@ const UnityDeffTheBase = () => {
                         <h3 className="text-xl font-semibold text-white mb-1">Boss - nastavení Animatoru</h3>
 
                         <p className="text-slate-300 leading-relaxed mb-4">
-                            Bossové mají složitější animační graf v Unity <strong className="text-white">Animatoru</strong>.
-                            Na snímku je vidět rozložení jednotlivých animačních stavů a přechodů mezi nimi - právě
-                            přehrávaným klipem je animace střelby. Každý přechod je podmíněn herními parametry (vzdálenost od
-                            cíle, zdraví, útočný stav).
+                            Složitější animační graf v Unity <strong className="text-white">Animatoru</strong>. Přechody jsou
+                            podmíněny parametry (vzdálenost od cíle, zdraví, útočný stav).
                         </p>
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                             <img
                                 src="/github-portfolio/images/defTheBase/boss_animation.webp"
                                 alt="Boss - rozložení Animatoru v Unity"
-                                className="w-full object-cover" loading="lazy"
+                                className="w-full object-cover"
+                                loading="lazy"
                             />
                         </div>
 
@@ -370,15 +364,15 @@ const UnityDeffTheBase = () => {
                         <h3 className="text-xl font-semibold text-white mb-1">Boss - smrt</h3>
 
                         <p className="text-slate-300 leading-relaxed mb-4">
-                            Při zničení Bosse se přehraje dedikovaný snímek smrtelné animace. Ten vizuálně potvrdí hráči, že
-                            byl tank definitivně vyřazen z boje, než objekt zmizí z mapy.
+                            Dedikovaný snímek potvrzující zničení tanku, než objekt zmizí z mapy.
                         </p>
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl bg-slate-800/30 flex justify-center">
                             <img
                                 src="/github-portfolio/images/defTheBase/boss_death.webp"
                                 alt="Boss - animace smrti"
-                                className="max-h-72 object-contain" loading="lazy"
+                                className="max-h-72 object-contain"
+                                loading="lazy"
                             />
                         </div>
 
