@@ -3,6 +3,8 @@
 ## 1. Code style rules
 
 - Never use Unicode dashes (U+2013 `–`, U+2014 `—`) in source code. Always use ASCII hyphen-minus (U+002D `-`).
+- All user-facing texts must go through react-i18next (`t()`, `<Trans>`). No hardcoded strings in components.
+- Translations live in `src/locales/cs.json`. Write only to the Czech file. When `en.json` exists, do not modify it - English translations will be added separately.
 
 ---
 

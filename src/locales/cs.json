@@ -1,0 +1,419 @@
+{
+    "Nav": {
+        "Projects": "Projekty",
+        "CV": "Životopis",
+        "Show": "Zobrazit"
+    },
+
+    "Home": {
+        "Subtitle": "Fullstack Developer & 3D Specialist",
+        "Desc": "React, .NET, Unity, Three.js. Vyvíjím webové aplikace, 3D vizualizace a hry. Pracuji s CAD/BIM modely, IFC daty a AR/VR.",
+        "SectionUnity": "Unity Hry",
+        "SectionThreeJs": "Three.js",
+        "CVDesc": "Zkušenosti, vzdělání, certifikace a technologie.",
+        "FindACoinDesc": "2D platformer se třemi levely, pixel art grafikou a vlastní hudbou. V každém levelu hráč sbírá 5 mincí.",
+        "DeffTheBaseDesc": "Mobilní tower defense pro Android a iOS. Hráč brání základnu věžemi, zdmi a generátory štítů. Každé desáté kolo přicházejí Bossové.",
+        "HideAndSeekDesc": "PC hra na schovávanou s podporou gamepadu. Tma a zorné pole přes shader, lovci a zloději s vlastní AI.",
+        "JumpingJelloDesc": "Mobilní 2D platformer s 8 levely, 4 infinity levely, 6 skiny, achievement systémem a vlastními shadery.",
+        "Chess3DTitle": "Šachy 3D (Three.js)",
+        "Chess3DDesc": "Interaktivní 3D šachové figurky v prohlížeči."
+    },
+
+    "FindACoin": {
+        "Subtitle": "2D Platformer",
+        "Desc": "2D platformer ve třech levelech. Hráč skáče po plošinách a v každém levelu sbírá pět mincí. Celou hru jsem postavil sám v <b>Unity</b> a <b>C#</b> - grafiku v pixel artu, hudbu i programování. Byl to zároveň můj první projekt v Unity.",
+        "Tags": ["Unity 2D", "C#", "2D Platformer", "Pixel Art", "Aseprite", "Vlastní hudba"],
+
+        "S1Title": "1. Hlavní menu",
+        "S1Text": "Menu nabízí start hry, zobrazení ovládání a ukončení. Grafika včetně pozadí a tlačítek je ručně kreslená v <b>Aseprite</b> ve stylu pixel art.",
+        "S1ImgAlt": "Hlavní menu Find a Coin",
+        "S1Caption": "Hlavní menu s přístupem ke hře a ovládání.",
+
+        "S2Title": "2. Výběr levelu",
+        "S2Text": "Tři mise s rostoucí obtížností. Každý level vyžaduje sběr <b>5 mincí</b> rozmístěných po mapě.",
+        "S2ImgAlt": "Výběr levelu",
+        "S2Caption": "Obrazovka výběru levelu se třemi dostupnými misemi.",
+
+        "S3Title": "3. Level 1 - Základní platforma",
+        "S3Text": "Úvodní level bez speciálních mechanik. Hráč se pohybuje 2D bludištěm, skáče po plošinách a hledá pět mincí. Seznamuje se s ovládáním a strukturou mapy.",
+        "S3ImgAlt1": "Gameplay Level 1",
+        "S3Caption1": "Pohled na gameplay prvního levelu - hráč skáče po plošinách a sbírá mince.",
+        "S3ImgAlt2": "Mapa levelu 1 v Unity",
+        "S3Caption2": "Celkový pohled na mapu prvního levelu z Unity Scene View.",
+
+        "S4Title": "4. Level 2 - Double Jump",
+        "S4Text": "Přidává mechaniku <b>double jump</b>. Na mapě je schovaná <b>Double jump bedna</b>, po sebrání hráč získá jeden double jump. Počet zbývajících skoků je zobrazený <b>vlevo nahoře</b> vedle počítadla mincí. Použít ho jde jen jednou, takže záleží na správném místě.",
+        "S4ImgAlt1": "Double Jump Box - sprite animace",
+        "S4Caption1": "Sprite Double jump bedny - sebrání udělí jeden double jump zobrazený vlevo nahoře vedle počítadla mincí.",
+        "S4ImgAlt2": "Mapa levelu 2 v Unity",
+        "S4Caption2": "Mapa druhého levelu z Unity Scene View s platformami vyžadujícími double jump.",
+
+        "S5Title": "5. Level 3 - Láva",
+        "S5Text": "Nejtěžší level kombinuje předchozí mechaniky s <b>lávou</b>. Lávová plocha zabíjí hráče při kontaktu. Na mapě je opět <b>Double jump bedna</b> s jedním skokem. Přesné skákání, double jump a vyhýbání se lávě dohromady tvoří finální výzvu.",
+        "S5ImgAlt1": "Lávová podlaha - sprite tile",
+        "S5Caption1": "Sprite tile lávové podlahy - textura smrtícího terénu v třetím levelu.",
+        "S5ImgAlt2": "Mapa levelu 3 v Unity",
+        "S5Caption2": "Mapa třetího levelu z Unity Scene View - červená láva tvoří smrtící překážku.",
+
+        "S6Title": "6. Herní menu",
+        "S6Text": "Herní menu pauzuje hru, umožňuje restart nebo návrat do výběru levelů.",
+        "S6ImgAlt": "Herní menu ve Find a Coin",
+        "S6Caption": "Herní menu s možností pauzy, restartu nebo návratu do výběru levelů.",
+
+        "S7Title": "7. Technické zpracování animací",
+        "S7Text": "Sekvence sprite obrázků přepínaných přes Unity <b>Animator</b>. Přechody mezi stavy (pohyb, skok, idle) řídí herní parametry. Sprity jsem kreslil ručně v <b>Aseprite</b>.",
+
+        "S7aTitle": "Animator - přehled stavů postavy",
+        "S7aText": "Unity <b>Animator</b> ukazuje kompletní animační graf hlavní postavy. Každý přechod mezi stavy je řízen parametrem (rychlost pohybu, pozice ve vzduchu).",
+        "S7aImgAlt": "Unity Animator - přehled animací postavy",
+        "S7aCaption": "Animator okno s animačním grafem postavy - všechny stavy a přechody mezi nimi.",
+
+        "S7bTitle": "Hráč - pohyb",
+        "S7bText": "Několik sprite snímků plynule navazujících do iluze chůze. Animator přepíná mezi idle a pohybem podle aktuální rychlosti postavy.",
+        "S7bImgAlt": "Hráč - sprite animace pohybu",
+        "S7bCaption": "Sprite sekvence pohybu hlavní postavy.",
+
+        "S7cTitle": "Jump Box",
+        "S7cText": "Interaktivní předmět na mapě. Po sebrání hráčem se použije a zmizí.",
+        "S7cImgAlt": "Jump Box - sprite animace",
+        "S7cCaption": "Sprite animace Jump Boxu v idle stavu.",
+
+        "S7dTitle": "Láva - idle animace",
+        "S7dText": "Smyčkovaná idle animace oživující lávový povrch. Kolize s lávou zabíjí okamžitě. Implementováno přes Animator stejně jako ostatní objekty.",
+        "S7dImgAlt": "Láva - idle sprite animace",
+        "S7dCaption": "Sprite sekvence lávy v idle stavu - smyčka vytváří efekt bublající magmy.",
+
+        "S8Title": "8. Hudba",
+        "S8Text": "Dvě vlastní hudební skladby, které jsem složil a nahrál. Odlišná melodie hraje v <b>hlavním menu</b> a jiná doprovází <b>průběh levelů</b>. Hudba je jediným zvukovým prvkem hry."
+    },
+
+    "DeffTheBase": {
+        "Subtitle": "Tower Defense",
+        "Desc": "Mobilní tower defense v <b>Unity</b>. Hráč brání hlavní budovu uprostřed mapy před vlnami nepřátel, kteří se náhodně objevují kolem mapy a vycházejí ze stromů. Programování a veškerou práci v Unity jsem měl na starost já, grafiku zpočátku také. Později se do vývoje přidal můj bratranec a převzal design a ilustrace.",
+        "Tags": ["Unity 2D", "C#", "Tower Defense", "Procedurální mapa", "Android", "iOS"],
+
+        "S1Title": "1. Hlavní menu",
+        "S1Text": "Menu nabízí novou hru, pokračování, tutoriály a upgrade budov. V nastavení jsou tři obtížnosti (<b>Easy, Normal, Hard</b>) a tři velikosti mapy (<b>Small, Normal, Large</b>).",
+        "S1ImgAlt": "Hlavní menu Def the Base",
+        "S1Caption": "Hlavní menu s výběrem obtížnosti a přístupem ke všem herním módům.",
+
+        "S2Title": "2. Mise a tutoriály",
+        "S2Text": "Sada tutoriálových misí s <b>zlatými odměnami</b> (jednorázovými). Každá mise má definovaný cíl (např. přežít 20 vln), povolené typy budov a výši odměny.",
+        "S2ImgAlt": "Výběr misí a tutoriálů",
+        "S2Caption": "Přehled misí s cílem, povolenými budovami a zlatou odměnou za dokončení.",
+
+        "S3Title": "3. Strom vylepšení",
+        "S3Text": "Zlato získané z misí lze investovat do trvalého zlepšení statistik budov - vyšší štít, poškození nebo frekvence střelby. Bonusové zlato za zhlédnutí reklamy.",
+        "S3ImgAlt": "Strom vylepšení budov",
+        "S3Caption": "Vizuální strom vylepšení s možností odemykání nových uzlů za zlato.",
+
+        "S4Title": "4. Stavba základny a správa budov",
+        "S4Text": "Spodní lišta pro nákup budov: <b>Minigun (150), Launcher (300), Quarry (200), Shield Generator (350)</b> a <b>Wall (100)</b>. Quarry vyžaduje pole s rudou. Mapa se generuje automaticky podle zvolené velikosti, rudy jsou rozmístěny po kvadrantech. Pravý panel umožňuje vylepšení, opravu nebo prodej budovy.",
+        "S4ImgAlt": "Aktivní gameplay - nakupování a správa budov",
+        "S4Caption": "Pohled na základnu s pravým panelem pro vylepšení, opravu a prodej budov.",
+
+        "S5Title": "5. Animace a inteligentní zdi",
+        "S5Text": "Animace budov střídáním obrázků (GIF princip). Mapa se ovládá jedním prstem (pohyb), dvěma (zoom). Zdi se <b>automaticky propojují</b> se sousedními zdmi ve všech osmi směrech, přímé sousedy upřednostňují.",
+        "S5ImgAlt": "Automatické propojování zdí",
+        "S5Caption": "Zdi se inteligentně spojují do optimálního tvaru bez manuálního nastavování.",
+
+        "S6Title": "6. Hromadná oprava budov",
+        "S6Text": "Jedním kliknutím lze opravit všechny poškozené budovy daného typu. Zobrazeny jsou celkové náklady za Miniguns, Rocket Launchers, Quarries, Shield Generators a Walls.",
+        "S6ImgAlt": "Hromadná oprava budov podle typu",
+        "S6Caption": "Panel hromadné opravy zobrazující ceny za opravu každého typu struktury.",
+
+        "S7Title": "7. Boss vlny",
+        "S7Text": "Každé desáté kolo přicházejí <b>Bossové</b> v podobě tanků, výrazně odolnější než běžní nepřátelé. Tlačítkem v pravém horním rohu lze zrychlit hru.",
+        "S7ImgAlt": "Boss vlna - tanky útočí na základnu",
+        "S7Caption": "Tankoví Bossové útočící na plně postavenou základnu v pokročilé fázi hry.",
+
+        "S8Title": "8. Pauza a statistiky",
+        "S8Text": "Pauza zobrazuje aktuální průběh i rekordy: <b>nejlepší skóre, nejvyšší vlnu</b>, počet zabitých nepřátel a postavených struktur. Lze upravit hlasitost nebo se vrátit do menu.",
+        "S8ImgAlt": "Pause menu se statistikami",
+        "S8Caption": "Pause menu s přehledem Best Score, Best Wave a aktuálními statistikami průchodu.",
+
+        "S9Title": "9. Hudba a zvukové efekty",
+        "S9Text": "Vlastní hudební stopa - odlišná melodie pro <b>menu</b> a pro <b>hru</b>. K tomu rozsáhlá sada zvukových efektů reagujících na každou akci. Hlasitost hudby a efektů lze nastavit nezávisle.",
+        "S9Sounds": [
+            { "label": "Střela Minigunu", "desc": "Zvuk při každém výstřelu věže" },
+            { "label": "Zásah střely", "desc": "Zvuk při dopadu projektilu na cíl" },
+            { "label": "Střela Rocket Launcheru", "desc": "Zvuk odpálení rakety" },
+            { "label": "Splash rakety", "desc": "Výbuch při plošném dopadu rakety" },
+            { "label": "Zásah nepřítele", "desc": "Zvuk při poškození nepřítele" },
+            { "label": "Výstřel Bosse", "desc": "Specifický zvuk tankové palby" },
+            { "label": "Tlačítka", "desc": "Zpětná vazba při klepnutí na UI prvky" },
+            { "label": "Vylepšení budovy", "desc": "Zvuk při provedení upgradu" },
+            { "label": "Oprava budovy", "desc": "Zvuk při opravě poškozené struktury" },
+            { "label": "Zničení budovy", "desc": "Zvuk při pádu vlastní struktury" },
+            { "label": "Položení budovy", "desc": "Potvrzení při umístění nové stavby" },
+            { "label": "Vygenerování štítu", "desc": "Zvuk aktivace Shield Generatoru" },
+            { "label": "A hromada dalších", "desc": "..." }
+        ],
+
+        "S10Title": "10. Technické zpracování animací",
+        "S10Text": "Sekvence sprite obrázků přepínaných ve smyčce (GIF princip). Stavy (idle, akce, zničení) řídí Unity <b>Animator</b> na základě herních parametrů.",
+
+        "S10aTitle": "Minigun",
+        "S10aText": "<b>6 snímků</b> ve třech stavech: idle, střelba, zničení. Animator přepíná podle situace na mapě.",
+        "S10aImgAlt": "Minigun - sprite sheet animace",
+        "S10aCaption": "Sprite sekvence Minigunu: idle, střelba a zničení (6 snímků).",
+
+        "S10bTitle": "Rocket Launcher",
+        "S10bText": "<b>16 snímků</b> pro idle, reload a zničení. Raketa při dopadu způsobuje <b>plošné poškození (splash damage)</b>. Její let a výbuch tvoří samostatnou sprite sekvenci nezávislou na věži.",
+        "S10bImgAlt": "Rocket Launcher - sprite sheet animace",
+        "S10bCaption": "Sprite sekvence Rocket Launcheru: idle, nabíjení a zničení (16 snímků) + samostatná animace rakety.",
+
+        "S10cTitle": "Nepřítel",
+        "S10cText": "<b>12 snímků</b> ve dvou sadách: pohyb (idle/chůze) a útok. Animator přepíná podle toho, zda nepřítel útočí nebo se přesouvá.",
+        "S10cImgAlt": "Nepřítel - sprite sheet animace",
+        "S10cCaption": "Sprite sekvence nepřítele: idle a útočný stav (12 snímků).",
+
+        "S10dTitle": "Boss - nastavení Animatoru",
+        "S10dText": "Složitější animační graf v Unity <b>Animatoru</b>. Přechody jsou podmíněny parametry (vzdálenost od cíle, zdraví, útočný stav).",
+        "S10dImgAlt": "Boss - rozložení Animatoru v Unity",
+        "S10dCaption": "Animator okno s animačním grafem Bosse - aktivní klip zobrazuje animaci střelby.",
+
+        "S10eTitle": "Boss - smrt",
+        "S10eText": "Dedikovaný snímek potvrzující zničení tanku, než objekt zmizí z mapy.",
+        "S10eImgAlt": "Boss - animace smrti",
+        "S10eCaption": "Snímek zobrazující vizuální efekt zničení tankového Bosse."
+    },
+
+    "HideAndSeek": {
+        "Subtitle": "Hra na schovávanou",
+        "Desc": "PC hra zaměřená na ovládání přes <b>Nový Unity Input System</b>. Podporuje klávesnici i gamepad. Tma a zorné pole přes <b>Standard Surface Shader</b> s raycastingem v <b>LateUpdate</b>. Veškeré programování včetně AI jsem tvořil sám.",
+        "Tags": [
+            "Unity",
+            "C#",
+            "Nový Unity Input System",
+            "Standard Surface Shader",
+            "LateUpdate Raycasting",
+            "Gamepad",
+            "AI"
+        ],
+
+        "S1Title": "1. Hlavní menu",
+        "S1Text": "Výběr role (<b>Lovec</b> / <b>Zloděj</b>) a ovládání (<b>Klávesnice</b> / <b>Ovladač</b>). Šipkami se nastaví počet hráčů v každém týmu.",
+        "S1ImgAlt": "Hlavní menu Hide and Seek",
+        "S1Caption": "Menu s výběrem role, ovládání a počtu hráčů v každém týmu.",
+
+        "S2Title": "2. Ovládání",
+        "S2Text": "Klávesnice s myší i gamepad. Pohyb a otáčení na oddělených vstupech - lovec se pohybuje a míří nezávisle.",
+        "S2TableHeaders": ["Akce", "Klávesnice & Myš", "Gamepad"],
+        "S2Controls": [
+            ["Pohyb", "WASD", "Levá páčka"],
+            ["Otáčení / Míření", "Pohyb myši", "Pravá páčka"],
+            ["Střelba (Lovec)", "Levé tlačítko myši", "R1 (Right Shoulder)"],
+            ["Schopnost 1", "Pravé tlačítko myši", "Pravé akční tlačítko"],
+            ["Schopnost 2", "Levé akční tlačítko", "Levé akční tlačítko"],
+            ["Pauza / ESC", "ESC", "Start"]
+        ],
+
+        "S3Title": "3. Vision a zorné pole",
+        "S3Text": "Obě role mají <b>Vision</b> - rozsvítí zorné pole na 8 s a sdílí ho v rámci týmu. Lovec má <b>FireRate</b> (cooldown 1 s), zloděj <b>Sprint</b> (1 s, cooldown 10 s). Zorné pole se počítá každý snímek v <b>LateUpdate</b> raycastingem - shader ztmavuje oblasti za překážkami.",
+        "S3ImgAlt": "Vision schopnost a střelba lovce",
+        "S3Caption": "Aktivní Vision - zorné pole lovce a viditelné střely.",
+
+        "S4Title": "4. Pohled zloděje",
+        "S4Text": "Hráč ovládá zloděje. V záběru dva <b>AI lovci</b> - jeden střílí na spoluhráče. Vision je týmová, zloděj vidí i zorná pole dalších zlodějů.",
+        "S4ImgAlt": "Pohled zloděje - AI lovci útočí na spoluhráče",
+        "S4Caption": "Pohled zloděje: sdílená zorná pole spoluhráčů a útočící AI lovci.",
+
+        "S5Title": "5. Spolupráce lovců",
+        "S5Text": "Hráč jako lovec vidí <b>Vision spoluhráče</b>, který detekoval zloděje. Sdílená viditelnost funguje v reálném čase.",
+        "S5ImgAlt": "Lovec vidí Vision spoluhráče",
+        "S5Caption": "Zorné pole spoluhráče (Vision) odhalilo pozice zlodějů.",
+
+        "S6Title": "6. Mapa a Scene editor",
+        "S6Text": "Herní pohled lovce vedle <b>Scene okna Unity editoru</b>. Scene view ukazuje celou mapu - žluté obdélníky jsou překážky, barevné koule hráči a AI.",
+        "S6ImgAlt": "Game view lovce a Unity Scene editor",
+        "S6Caption": "Herní pohled lovce (vlevo) a Scene editor (vpravo) s přehledem celé mapy."
+    },
+
+    "JumpingJello": {
+        "Subtitle": "2D Platformer",
+        "Desc": "Mobilní 2D platformer v <b>Unity</b>. Hráč skáče po plošinách, sbírá ovoce a odemyká skiny. Programování v <b>C#</b>, návrh levelů, achievement systém, procedurální infinity levely, shadery a animace kostí - to vše jsem měl na starost já. Grafiku a ilustrace navrhl a nakreslil můj bratranec.",
+        "Tags": [
+            "Unity 2D",
+            "C#",
+            "2D Platformer",
+            "Shader Graph",
+            "Sprite Skin",
+            "IK Manager 2D",
+            "Android",
+            "iOS",
+            "Achievement systém"
+        ],
+
+        "S1Title": "1. Menu - výběr skinů",
+        "S1Text": "Obrazovka výběru skinů v <b>retro rámu televizoru</b>. Šest postav: <b>Jello</b> (odemčen od začátku), <b>Blackrook</b>, <b>Whiterook</b>, <b>Pencil</b>, <b>Monster</b> a <b>Snowman</b>. Klik na zamčený skin otočí panel a ukáže podmínku odemčení: Blackrook - 10 ovoce v levelu 1, Pencil - level 2 do 3 minut, Whiterook - 50 ovoce celkem, Monster - secret v levelu 3, Snowman - secret v levelu 7.",
+        "S1ImgAlt1": "Výběr skinů - všechny postavy",
+        "S1Caption1": "Obrazovka výběru skinů s šesti postavami - vpravo přepínače SFX a hudby, dole lišta výběru levelu.",
+        "S1ImgAlt2": "Úkol pro odemčení skinu Rookblack",
+        "S1Caption2": "Po kliknutí na zamčený skin se zobrazí jeho úkol - zde \u201eCollect 10 fruit in Level 1\u201c pro odemčení Rookblacka.",
+
+        "S2Title": "2. Menu - výběr levelů",
+        "S2Text": "Lišta <b>S, 1-12</b> naviguje mezi obrazovkami: S = skiny, 1-8 normální levely, 9-12 infinity. Televizor zobrazuje náhled levelu s odpovídajícím prostředím (les, jeskyně, město, sníh) a aktuální statistiky.",
+        "S2ImgAlt1": "Menu - Level 1 les",
+        "S2Caption1": "Level 1 - les, 10/10 ovoce.",
+        "S2ImgAlt2": "Menu - Level 3 jeskyně",
+        "S2Caption2": "Level 3 - jeskyně, hvězda sekretu 1/1.",
+        "S2ImgAlt3": "Menu - Level 5 město",
+        "S2Caption3": "Level 5 - město, 7/10 ovoce.",
+        "S2ImgAlt4": "Menu - Level 7 sníh",
+        "S2Caption4": "Level 7 - zasněžená krajina, hvězda sekretu 0/1.",
+
+        "S3Title": "3. Menu - zamčené levely",
+        "S3Text": "Nesplněné podmínky zobrazí šedé pozadí a <b>LEVEL IS LOCKED</b>. U normálních levelů je vidět počet dokončených levelů a sebraného ovoce. Infinity levely mají vlastní podmínky - např. dokončit level 7 a 8.",
+        "S3ImgAlt1": "Menu - Level 8 zamčen",
+        "S3Caption1": "Level 8 zamčen - zobrazuje dokončené levely (6/7) a sesbírané ovoce (55/70).",
+        "S3ImgAlt2": "Menu - Infinity Level 4 zamčen",
+        "S3Caption2": "Infinity Level 4 zamčen - podmínkou je nejprve odemčít levely 7 a 8.",
+
+        "S4Title": "4. Hra - Jump Meter",
+        "S4Text": "Přidržení prstu nabíjí skok - maximum po cca jedné sekundě. Síla je vizualizována přes <b>Jump Meter</b>: kruhový ukazatel, kde se tečky rozsvěcejí po 360°. Horní lišta ukazuje postup mapou, vlevo nahoře počet ovoce.",
+        "S4ImgAlt": "Jump Meter - ukazatel síly skoku",
+        "S4Caption": "Jump Meter uprostřed obrazovky - tečky se plní dokola a ukazují nabíjející se sílu skoku.",
+
+        "S5Title": "5. Hra - ovoce a sbírání",
+        "S5Text": "<b>10 kusů ovoce</b> v každém levelu - banány, třešně, hrozny, meloun, švestka. Celkový počet se počítá napříč levely a slouží jako podmínka pro odemykání levelů i skinů.",
+        "S5ImgAlt": "Všechny druhy ovoce v levelu",
+        "S5Caption": "Přehled různých druhů ovoce rozmístěného v levelu - banány, třešně, hrozny, meloun i švestka.",
+
+        "S6Title": "6. Hra - pohyblivé platformy",
+        "S6Text": "Od třetího levelu se na mapách objevují <b>pohyblivé platformy</b>. Hráč musí načasovat skok - špatné načasování znamená pád a návrat na checkpoint.",
+        "S6ImgAlt": "Pohyblivá platforma v jeskyňovém levelu",
+        "S6Caption": "Pohyblivá platforma v jeskyňovém levelu (Level 3) - ve spodní části Unity editor s přehledem mapy.",
+
+        "S7Title": "7. Hra - droni a zmrzlé platformy",
+        "S7Text1": "Od levelu 5 se objevují <b>dronoví nepřátelé</b>. Dron nelze zabít - hrozí <b>laserovým výstřelem nahoru</b>, který okamžitě zabíjí. Hráč musí počkat na fázi nabíjení a pak přeskočit.",
+        "S7Text2": "Levely 7 a 8 přidávají <b>zmrzlé klouzavé platformy</b>. Led snižuje tření, hráč po přistání klouže a může sjet do propasti. Kombinace s lasery drona tvoří nejobtížnější pasáže.",
+        "S7ImgAlt": "Dron a zmrzlé platformy v zasněženém levelu",
+        "S7Caption": "Level 7 - dron s laserovým výstřelem nahoru a klouzavé ledové platformy. Hvězda sekretu vlevo (0/1).",
+
+        "S8Title": "8. Hra - secret platformy",
+        "S8Text": "Levely 3 a 7 obsahují <b>secret platformu</b>. Nenápadný skrytý znak na jedné z platforem - hvězdičkové počítadlo vlevo (<b>0/1</b>) naznačuje existenci sekretu. Vstup teleportuje hráče do skryté oblasti s <b>secret hvězdou</b> a bedničkou se speciálním skinem.",
+        "S8ImgAlt1": "Secret platforma se skrytým znakem",
+        "S8Caption1": "Secret platforma - hvězdičkový počítadlo vlevo (0/1) naznačuje skrytý obsah.",
+        "S8ImgAlt2": "Secret hvězda a secret skin box",
+        "S8Caption2": "Skrytá oblast pod mapou - secret hvězda a bednička se speciálním skinem.",
+
+        "S9Title": "9. Achievement systém",
+        "S9Text": "Při splnění podmínky se v rohu obrazovky zobrazí notifikační banner - odemčení skinu nebo zpřístupnění levelu. Časovač <b>Achievement: čas</b> v pravém dolním rohu měří rychlost postupu.",
+        "S9ImgAlt1": "Achievement unlocked - nový skin a level",
+        "S9Caption1": "Simultánní zobrazení dvou notifikací - vlevo odemčení nového skinu Rookblack, vpravo zpřístupnění levelu 2.",
+        "S9ImgAlt2": "Achievement timer v průběhu hry",
+        "S9Caption2": "Sledování achievementu v reálném čase - časovač vpravo dole ukazuje čas od začátku levelu.",
+
+        "S10Title": "10. Dokončení levelu",
+        "S10Text": "Obrazovka <b>LEVEL DONE</b> shrnuje výkon: počet ovoce, pokusy a čas průchodu. Lze zopakovat level nebo se vrátit do menu.",
+        "S10ImgAlt": "Level Done obrazovka s výsledky",
+        "S10Caption": "Obrazovka dokončení levelu - Fruits 10/10, Attempts 1, Time 00:11.",
+
+        "S11Title": "11. Infinity levely",
+        "S11Text": "Pozice 9-12 v liště. Čtyři <b>nekonečné levely</b> s dynamicky generovanými platformami. Cílem je přežít co nejdéle a dosáhnout nejvyššího skóre. Grafická prostředí sdílejí s normálními levely.",
+        "S11ImgAlt1": "Menu - Infinity Level 1",
+        "S11Caption1": "Infinity Level 1 v menu - les, odemčen.",
+        "S11ImgAlt2": "Menu - Infinity Level 4 zamčen",
+        "S11Caption2": "Infinity Level 4 zamčen - vyžaduje odemčení levelů 7 a 8.",
+        "S11ImgAlt3": "Gameplay infinity levelu s editorem",
+        "S11Caption3": "Průběh infinity levelu - Monster skin ve skalní jeskyni. Ve spodní části Unity editor s animačními klíčovými snímky platforem.",
+
+        "S12Title": "12. Technické - kosti a animace postav",
+        "S12Text": "Postavy jsou animovány <b>kostním rigem</b>, ne sprite sheety. Tělo rozdělené na části (hlava, trup, končetiny) propojené přes <b>Sprite Skin</b> a <b>IK Manager 2D</b>. Pohyb vzniká manipulací s polohou a rotací kostí. Přechody (idle, skok, přistání) řídí <b>Animator</b>.",
+        "S12ImgAlt": "Kostní rig a Animator postavy Snowman",
+        "S12Caption": "Unity editor - postava Snowman s viditelným kostním rigem (vlevo), Animator graf se stavy a přechody (nahoře) a inspector s komponentami Sprite Skin (vpravo).",
+
+        "S13Title": "13. Technické - shadery",
+        "S13Text": "Dva vlastní shadery v Unity <b>Shader Graph</b>. Vizuální uzly (nodes) bez psaní kódu - každý uzel je matematická operace nebo vzorkování textury. Výsledek se kompiluje do HLSL a nasadí jako materiál.",
+
+        "S13aTitle": "Shader laserového drona (DronLaser)",
+        "S13aText": "Laserový paprsek dronového nepřítele. Časově animovaná noise textura s barevným gradientem (zelená -> žlutá -> červená). Parametry <b>LaserEdgeSmoothness</b>, <b>Thickness</b>, <b>Speed</b> a <b>Scale</b> lze ladit přímo v inspectoru.",
+        "S13aImgAlt": "Shader Graph laserového drona",
+        "S13aCaption": "Shader Graph shaderu DronLaser - noise textura, časová animace, barevný gradient a exponované parametry vlevo.",
+
+        "S13bTitle": "Shader efektu zásahu postavy",
+        "S13bText": "<b>Burn/dissolve efekt</b> při zásahu postavy. Noise textura s <b>step/threshold</b> operacemi postupně rozpouští sprite od okrajů. <b>Růžová kontura</b> na okraji dissolve efektu dává vizuální zpětnou vazbu.",
+        "S13bImgAlt": "Shader efektu zásahu - burn dissolve",
+        "S13bCaption": "Shader Graph burn/dissolve efektu zásahu - noise textury, threshold operace a výsledný efekt s růžovou konturou v náhledu vpravo dole."
+    },
+
+    "CV": {
+        "OpenToOpportunities": "Otevřený novým příležitostem",
+        "Subtitle": "Fullstack Developer (React / .NET) · 3D & Vizualizace",
+        "Location": "Liberec / Remote",
+        "DownloadPdf": "Stáhnout CV jako PDF",
+
+        "Profile": {
+            "Heading": "Profil",
+            "Focus": "Fullstack developer. Stavím webové aplikace, 3D vizualizace a cloudová řešení v Reactu a .NET.",
+            "CadBimExperience": "Přes 5 let vyvíjím aplikace pro práci s CAD/BIM modely, včetně interaktivní 3D vizualizace ve webu a backendu v .NET.",
+            "AdditionalSkills": "V Unity vyvíjím AR/VR aplikace a mobilní hry pro Android i iOS."
+        },
+
+        "WorkExperience": {
+            "Heading": "Pracovní zkušenosti",
+            "Period": "04/2021 - současnost",
+            "Title": "Software Developer",
+            "Company": "Proconom Software s.r.o., Liberec",
+            "CadBimVisualization": "Webové aplikace pro 3D vizualizaci CAD/BIM modelů",
+            "ForgeViewer": "Autodesk Forge Viewer - vedu a vyvíjím od začátku",
+            "ThreeJsViewer": "3D prohlížečka v Three.js - vytvořena od základu",
+            "PointCloud": "Implementace vlastních formátů point cloudových modelů",
+            "FrontendStack": "Frontend: React, TypeScript, Forge Viewer, Three.js",
+            "BackendStack": "Backend: .NET (C#), REST API",
+            "BigDataOptimization": "Optimalizace načítání a zpracování velkých JSON dat",
+            "IfcMetadata": "Zpracování a vizualizace metadat IFC souborů",
+            "CollisionDetection": "Detekce kolizí 3D modelů",
+            "BcfImportExport": "Import a export BCF (BIM Collaboration Format)",
+            "ArVrDevelopment": "AR/VR aplikace v Unity (C#)"
+        },
+
+        "TechnicalSkills": {
+            "Heading": "Technické dovednosti",
+            "Frontend": "Frontend",
+            "Backend": "Backend",
+            "3dVisualization": "3D & Vizualizace",
+            "CloudDevOps": "Cloud & DevOps",
+            "Database": "Databáze"
+        },
+
+        "Education": {
+            "Heading": "Vzdělání",
+            "Period": "2016 - 2022",
+            "University": "Technická univerzita v Liberci",
+            "Degree": "Bc. - Strojírenství",
+            "ThesisLabel": "Bakalářská práce:",
+            "ThesisTitle": "Návrh a realizace digitálního dvojčete vychystávací linky (Unity, C#)",
+            "ThesisLink": "Zobrazit práci",
+            "HighSchool": {
+                "Period": "2012 - 2016",
+                "Name": "Střední průmyslová škola, Česká Lípa",
+                "Field": "Strojírenství"
+            }
+        },
+
+        "Certifications": {
+            "Heading": "Certifikace"
+        },
+
+        "Projects": {
+            "Heading": "Další projekty",
+            "UnityGames": "Mobilní hry v Unity",
+            "UnityGamesDesc": "Vlastní mobilní hra publikovaná na Google Play (dnes stažena). Další projekty rozpracované.",
+            "Experimental": "Experimentální projekty",
+            "ExperimentalDesc": "3D a vizualizace",
+            "WordGame": "Hádej slovo - firemní webová hra",
+            "WordGameDesc": "Fullstack aplikace: React frontend, .NET backend (REST API).",
+            "CodingGames": "Kódovací výzvy",
+            "CodingGamesDesc": "Algoritmické úlohy na codingame.com"
+        },
+
+        "Languages": {
+            "Heading": "Jazyky",
+            "Czech": "Čeština",
+            "English": "Angličtina"
+        }
+    }
+}
+

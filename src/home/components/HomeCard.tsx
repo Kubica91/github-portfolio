@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { FiArrowRight } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
@@ -9,6 +10,8 @@ interface HomeCardProps {
 }
 
 const HomeCard = ({ title, link, icon, desc }: HomeCardProps) => {
+    const { t } = useTranslation();
+
     return (
         <Link
             to={link}
@@ -22,7 +25,7 @@ const HomeCard = ({ title, link, icon, desc }: HomeCardProps) => {
             <p className="text-slate-400 text-sm leading-relaxed flex-1">{desc}</p>
 
             <div className="mt-4 flex items-center gap-1.5 text-sm text-slate-500 group-hover:text-cyan-400 transition-colors">
-                <span>Zobrazit</span>
+                <span>{t("Nav.Show")}</span>
                 <FiArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
             </div>
         </Link>

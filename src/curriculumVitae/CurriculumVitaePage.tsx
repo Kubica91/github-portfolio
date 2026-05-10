@@ -24,7 +24,10 @@ const CurriculumVitaePage = () => {
     };
 
     return (
-        <div className="w-full h-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 overflow-auto print:h-auto print:overflow-visible print:bg-white">
+        <div
+            className="w-full h-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 overflow-auto print:h-auto print:overflow-visible
+                print:bg-white"
+        >
             {/* Header */}
             <header className="bg-gradient-to-r from-slate-900 via-blue-900/40 to-slate-900 border-b border-slate-700/50">
                 <div className="mx-auto max-w-4xl px-6 py-10">
@@ -32,25 +35,26 @@ const CurriculumVitaePage = () => {
                         <img
                             src="/github-portfolio/images/cv/profile.jpg"
                             alt="Jakub Petráň"
-                            className="h-36 w-36 shrink-0 rounded-2xl border-4 border-blue-400/30 object-cover shadow-lg" loading="lazy"
+                            className="h-36 w-36 shrink-0 rounded-2xl border-4 border-blue-400/30 object-cover shadow-lg"
+                            loading="lazy"
                         />
 
                         <div className="flex flex-1 flex-col items-center sm:items-start">
                             <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-400/30 bg-blue-500/10 px-4 py-1.5 text-sm text-blue-300">
                                 <span className="h-2 w-2 rounded-full bg-green-400" />
-                                {t("OpenToOpportunities")}
+                                {t("CV.OpenToOpportunities")}
                             </div>
 
                             <h1 className="mb-3 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
                                 Jakub Petráň
                             </h1>
 
-                            <p className="mb-6 text-lg font-medium text-blue-200 sm:text-xl">{t("Subtitle")}</p>
+                            <p className="mb-6 text-lg font-medium text-blue-200 sm:text-xl">{t("CV.Subtitle")}</p>
 
                             <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-slate-300">
                                 <span className="flex items-center gap-1.5">
                                     <FiMapPin className="text-blue-400" />
-                                    {t("Location")}
+                                    {t("CV.Location")}
                                 </span>
 
                                 <span className="flex items-center gap-1.5">
@@ -61,10 +65,11 @@ const CurriculumVitaePage = () => {
 
                             <button
                                 onClick={handleDownloadPdf}
-                                className="mt-6 inline-flex items-center gap-2 rounded-full bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-blue-500 no-print"
+                                className="mt-6 inline-flex items-center gap-2 rounded-full bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors
+                                    hover:bg-blue-500 no-print"
                             >
                                 <FiDownload />
-                                {t("DownloadPdf")}
+                                {t("CV.DownloadPdf")}
                             </button>
                         </div>
                     </div>
@@ -77,15 +82,15 @@ const CurriculumVitaePage = () => {
                 <section className="rounded-2xl border border-slate-700/50 bg-slate-800/50 p-8 no-boarder print:bg-white print:border-gray-200">
                     <SectionTitle
                         icon={<FiUser />}
-                        title={t("Profile")}
+                        title={t("CV.Profile.Heading")}
                     />
 
                     <div className="space-y-3 text-slate-300 leading-relaxed print:text-gray-600">
-                        <p>{t("Profile.Focus")}</p>
+                        <p>{t("CV.Profile.Focus")}</p>
 
-                        <p>{t("Profile.CadBimExperience")}</p>
+                        <p>{t("CV.Profile.CadBimExperience")}</p>
 
-                        <p>{t("Profile.AdditionalSkills")}</p>
+                        <p>{t("CV.Profile.AdditionalSkills")}</p>
                     </div>
                 </section>
 
@@ -93,68 +98,68 @@ const CurriculumVitaePage = () => {
                 <section className="rounded-2xl border border-slate-700/50 bg-slate-800/50 p-8 no-boarder print:bg-white print:border-gray-200">
                     <SectionTitle
                         icon={<FiBriefcase />}
-                        title={t("WorkExperience")}
+                        title={t("CV.WorkExperience.Heading")}
                     />
 
                     <TimelineItem
-                        period={t("WorkExperience.Period")}
-                        title={t("WorkExperience.Title")}
-                        subtitle={t("WorkExperience.Company")}
+                        period={t("CV.WorkExperience.Period")}
+                        title={t("CV.WorkExperience.Title")}
+                        subtitle={t("CV.WorkExperience.Company")}
                     >
                         <ul className="space-y-1.5 text-slate-300 print:text-gray-600">
                             <li className="flex items-start gap-2">
                                 <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500" />
-                                {t("WorkExperience.CadBimVisualization")}
+                                {t("CV.WorkExperience.CadBimVisualization")}
                             </li>
 
                             <li className="flex items-start gap-2">
                                 <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500" />
-                                {t("WorkExperience.ForgeViewer")}
+                                {t("CV.WorkExperience.ForgeViewer")}
                             </li>
 
                             <li className="flex items-start gap-2">
                                 <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500" />
-                                {t("WorkExperience.ThreeJsViewer")}
+                                {t("CV.WorkExperience.ThreeJsViewer")}
                             </li>
 
                             <li className="flex items-start gap-2">
                                 <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500" />
-                                {t("WorkExperience.PointCloud")}
+                                {t("CV.WorkExperience.PointCloud")}
                             </li>
 
                             <li className="flex items-start gap-2">
                                 <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500" />
-                                {t("WorkExperience.FrontendStack")}
+                                {t("CV.WorkExperience.FrontendStack")}
                             </li>
 
                             <li className="flex items-start gap-2">
                                 <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500" />
-                                {t("WorkExperience.BackendStack")}
+                                {t("CV.WorkExperience.BackendStack")}
                             </li>
 
                             <li className="flex items-start gap-2">
                                 <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500" />
-                                {t("WorkExperience.BigDataOptimization")}
+                                {t("CV.WorkExperience.BigDataOptimization")}
                             </li>
 
                             <li className="flex items-start gap-2">
                                 <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500" />
-                                {t("WorkExperience.IfcMetadata")}
+                                {t("CV.WorkExperience.IfcMetadata")}
                             </li>
 
                             <li className="flex items-start gap-2">
                                 <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500" />
-                                {t("WorkExperience.CollisionDetection")}
+                                {t("CV.WorkExperience.CollisionDetection")}
                             </li>
 
                             <li className="flex items-start gap-2">
                                 <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500" />
-                                {t("WorkExperience.BcfImportExport")}
+                                {t("CV.WorkExperience.BcfImportExport")}
                             </li>
 
                             <li className="flex items-start gap-2">
                                 <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500" />
-                                {t("WorkExperience.ArVrDevelopment")}
+                                {t("CV.WorkExperience.ArVrDevelopment")}
                             </li>
                         </ul>
                     </TimelineItem>
@@ -164,36 +169,36 @@ const CurriculumVitaePage = () => {
                 <section className="rounded-2xl border border-slate-700/50 bg-slate-800/50 p-8 no-boarder print:bg-white print:border-gray-200">
                     <SectionTitle
                         icon={<FiCode />}
-                        title={t("TechnicalSkills")}
+                        title={t("CV.TechnicalSkills.Heading")}
                     />
 
                     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                         <SkillCategory
-                            title={t("TechnicalSkills.Frontend")}
+                            title={t("CV.TechnicalSkills.Frontend")}
                             color="blue"
                             skills={["React", "TypeScript", "Three.js", "Autodesk Forge Viewer", "Syncfusion UI"]}
                         />
 
                         <SkillCategory
-                            title={t("TechnicalSkills.Backend")}
+                            title={t("CV.TechnicalSkills.Backend")}
                             color="green"
                             skills={["C#", ".NET", "REST API", "Node.js", "xBim"]}
                         />
 
                         <SkillCategory
-                            title={t("TechnicalSkills.3dVisualization")}
+                            title={t("CV.TechnicalSkills.3dVisualization")}
                             color="purple"
                             skills={["BIM / CAD", "IFC (Ifc.js)", "Unity (AR/VR)"]}
                         />
 
                         <SkillCategory
-                            title={t("TechnicalSkills.CloudDevOps")}
+                            title={t("CV.TechnicalSkills.CloudDevOps")}
                             color="orange"
                             skills={["Azure DevOps", "TFS"]}
                         />
 
                         <SkillCategory
-                            title={t("TechnicalSkills.Database")}
+                            title={t("CV.TechnicalSkills.Database")}
                             color="rose"
                             skills={["SQL"]}
                         />
@@ -204,33 +209,38 @@ const CurriculumVitaePage = () => {
                 <section className="rounded-2xl border border-slate-700/50 bg-slate-800/50 p-8 no-boarder print:bg-white print:border-gray-200">
                     <SectionTitle
                         icon={<FiBookOpen />}
-                        title={t("Education")}
+                        title={t("CV.Education.Heading")}
                     />
 
                     <TimelineItem
-                        period={t("Education.Period")}
-                        title={t("Education.University")}
-                        subtitle={t("Education.Degree")}
+                        period={t("CV.Education.Period")}
+                        title={t("CV.Education.University")}
+                        subtitle={t("CV.Education.Degree")}
                     >
-                        <div className="rounded-lg border border-slate-700/50 bg-slate-900/50 p-4 text-sm text-slate-300 print:bg-gray-50 print:border-gray-200 print:text-gray-600">
-                            <span className="font-semibold text-slate-100 print:text-gray-800">{t("Education.ThesisLabel")}</span>{" "}
-                            {t("Education.ThesisTitle")}
+                        <div
+                            className="rounded-lg border border-slate-700/50 bg-slate-900/50 p-4 text-sm text-slate-300 print:bg-gray-50 print:border-gray-200
+                                print:text-gray-600"
+                        >
+                            <span className="font-semibold text-slate-100 print:text-gray-800">
+                                {t("CV.Education.ThesisLabel")}
+                            </span>{" "}
+                            {t("CV.Education.ThesisTitle")}
                             <a
                                 href="https://dspace.tul.cz/items/2a2a2308-13d1-4b9b-9c96-6c75c33cc25e"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="ml-2 inline-flex items-center gap-1 text-blue-400 hover:underline print:text-blue-600"
                             >
-                                {t("Education.ThesisLink")} ↗
+                                {t("CV.Education.ThesisLink")} ↗
                             </a>
                         </div>
                     </TimelineItem>
 
                     <div className="mt-6">
                         <TimelineItem
-                            period={t("Education.HighSchool.Period")}
-                            title={t("Education.HighSchool.Name")}
-                            subtitle={t("Education.HighSchool.Field")}
+                            period={t("CV.Education.HighSchool.Period")}
+                            title={t("CV.Education.HighSchool.Name")}
+                            subtitle={t("CV.Education.HighSchool.Field")}
                         />
                     </div>
                 </section>
@@ -239,7 +249,7 @@ const CurriculumVitaePage = () => {
                 <section className="rounded-2xl border border-slate-700/50 bg-slate-800/50 p-8 no-boarder print:bg-white print:border-gray-200">
                     <SectionTitle
                         icon={<FiAward />}
-                        title={t("Certifications")}
+                        title={t("CV.Certifications.Heading")}
                     />
 
                     <div className="grid gap-4 sm:grid-cols-2">
@@ -273,36 +283,39 @@ const CurriculumVitaePage = () => {
                 <section className="rounded-2xl border border-slate-700/50 bg-slate-800/50 p-8 no-boarder print:bg-white print:border-gray-200">
                     <SectionTitle
                         icon={<FiFolder />}
-                        title={t("Projects")}
+                        title={t("CV.Projects.Heading")}
                     />
 
                     <div className="grid gap-4 sm:grid-cols-2">
                         {[
                             {
-                                title: t("Projects.UnityGames"),
-                                desc: t("Projects.UnityGamesDesc"),
+                                title: t("CV.Projects.UnityGames"),
+                                desc: t("CV.Projects.UnityGamesDesc"),
                                 icon: <LuGamepad2 />,
                                 color: "bg-purple-600",
                             },
                             {
-                                title: t("Projects.WordGame"),
-                                desc: t("Projects.WordGameDesc"),
+                                title: t("CV.Projects.WordGame"),
+                                desc: t("CV.Projects.WordGameDesc"),
                                 icon: <LuMessageSquare />,
                                 color: "bg-blue-600",
                             },
                             {
-                                title: t("Projects.CodingGames"),
-                                desc: t("Projects.CodingGamesDesc"),
+                                title: t("CV.Projects.CodingGames"),
+                                desc: t("CV.Projects.CodingGamesDesc"),
                                 icon: <LuCode />,
                                 color: "bg-yellow-500",
                             },
                         ].map((project) => (
                             <div
                                 key={project.title}
-                                className="rounded-xl border border-slate-700/50 bg-slate-900/30 p-4 transition-all hover:shadow-lg hover:border-cyan-500/50 hover:-translate-y-1 print:bg-white print:border-gray-200"
+                                className="rounded-xl border border-slate-700/50 bg-slate-900/30 p-4 transition-all hover:shadow-lg hover:border-cyan-500/50
+                                    hover:-translate-y-1 print:bg-white print:border-gray-200"
                             >
                                 <div className="mb-3 flex items-center gap-3">
-                                    <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${project.color} text-lg text-white`}>
+                                    <div
+                                        className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${project.color} text-lg text-white`}
+                                    >
                                         {project.icon}
                                     </div>
                                     <h3 className="font-bold text-white print:text-gray-900">{project.title}</h3>
@@ -318,13 +331,13 @@ const CurriculumVitaePage = () => {
                 <section className="rounded-2xl border border-slate-700/50 bg-slate-800/50 p-8 no-boarder print:bg-white print:border-gray-200">
                     <SectionTitle
                         icon={<FiGlobe />}
-                        title={t("Languages")}
+                        title={t("CV.Languages.Heading")}
                     />
 
                     <div className="flex flex-wrap gap-6">
                         {[
-                            { lang: t("Languages.Czech"), level: "C2", pct: 100 },
-                            { lang: t("Languages.English"), level: "B2", pct: 70 },
+                            { lang: t("CV.Languages.Czech"), level: "C2", pct: 100 },
+                            { lang: t("CV.Languages.English"), level: "B2", pct: 70 },
                         ].map((l) => (
                             <div
                                 key={l.lang}
@@ -357,3 +370,4 @@ const CurriculumVitaePage = () => {
 };
 
 export default CurriculumVitaePage;
+
