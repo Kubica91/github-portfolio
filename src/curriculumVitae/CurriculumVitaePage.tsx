@@ -8,11 +8,13 @@ import {
     FiDownload,
     FiFolder,
     FiGlobe,
+    FiLinkedin,
     FiMail,
     FiMapPin,
     FiUser,
 } from "react-icons/fi";
-import { LuCode, LuGamepad2, LuMessageSquare } from "react-icons/lu";
+import { LuBox, LuCode, LuGamepad2, LuMessageSquare } from "react-icons/lu";
+import { TbChessKnight } from "react-icons/tb";
 import usePersistentScroll from "../hooks/usePersistentScroll";
 import SectionTitle from "./components/SectionTitle";
 import SkillCategory from "./components/SkillCategory";
@@ -37,7 +39,7 @@ const CurriculumVitaePage = () => {
     return (
         <div
             ref={containerRef}
-            className="w-full h-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 overflow-auto print:h-auto print:overflow-visible
+            className="cv-print-scale w-full h-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 overflow-auto print:h-auto print:overflow-visible
                 print:bg-white"
         >
             {/* Header */}
@@ -73,6 +75,16 @@ const CurriculumVitaePage = () => {
                                     <FiMail className="text-blue-400" />
                                     petran97@seznam.cz
                                 </span>
+
+                                <a
+                                    href="https://www.linkedin.com/in/jakub-petráň-551b31313"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-1.5 transition-colors hover:text-blue-300 print:text-gray-600"
+                                >
+                                    <FiLinkedin className="text-blue-400" />
+                                    {t("CV.LinkedIn")}
+                                </a>
                             </div>
 
                             <button
@@ -156,6 +168,11 @@ const CurriculumVitaePage = () => {
 
                             <li className="flex items-start gap-2">
                                 <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500" />
+                                {t("CV.WorkExperience.IndexedDb")}
+                            </li>
+
+                            <li className="flex items-start gap-2">
+                                <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500" />
                                 {t("CV.WorkExperience.IfcMetadata")}
                             </li>
 
@@ -188,7 +205,7 @@ const CurriculumVitaePage = () => {
                         <SkillCategory
                             title={t("CV.TechnicalSkills.Frontend")}
                             color="blue"
-                            skills={["React", "TypeScript", "Three.js", "Autodesk Forge Viewer", "Syncfusion UI"]}
+                            skills={["React", "TypeScript", "Three.js", "IFC.js", "APS Viewer", "Syncfusion UI"]}
                         />
 
                         <SkillCategory
@@ -200,19 +217,19 @@ const CurriculumVitaePage = () => {
                         <SkillCategory
                             title={t("CV.TechnicalSkills.3dVisualization")}
                             color="purple"
-                            skills={["BIM / CAD", "IFC (Ifc.js)", "Unity (AR/VR)"]}
+                            skills={["BIM / CAD", "IFC", "Point Cloud", "Unity (AR/VR)"]}
                         />
 
                         <SkillCategory
                             title={t("CV.TechnicalSkills.CloudDevOps")}
                             color="orange"
-                            skills={["Azure DevOps", "TFS"]}
+                            skills={["Autodesk Platform Services", "Azure DevOps", "TFS"]}
                         />
 
                         <SkillCategory
                             title={t("CV.TechnicalSkills.Database")}
                             color="rose"
-                            skills={["SQL"]}
+                            skills={["SQL", "IndexedDB"]}
                         />
                     </div>
                 </section>
@@ -277,7 +294,8 @@ const CurriculumVitaePage = () => {
                         ].map((cert) => (
                             <div
                                 key={cert.name}
-                                className="flex items-center gap-4 rounded-xl border border-slate-700/50 bg-slate-900/30 p-4 print:bg-white print:border-gray-200"
+                                className="flex items-center gap-4 rounded-xl border border-slate-700/50 bg-slate-900/30 p-4 transition-all hover:shadow-lg
+                                    hover:border-cyan-500/50 hover:-translate-y-1 print:bg-white print:border-gray-200"
                             >
                                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-blue-600 text-xl text-white">
                                     <FiAward />
@@ -305,6 +323,18 @@ const CurriculumVitaePage = () => {
                                 desc: t("CV.Projects.UnityGamesDesc"),
                                 icon: <LuGamepad2 />,
                                 color: "bg-purple-600",
+                            },
+                            {
+                                title: t("CV.Projects.UnityExperiments"),
+                                desc: t("CV.Projects.UnityExperimentsDesc"),
+                                icon: <LuBox />,
+                                color: "bg-pink-600",
+                            },
+                            {
+                                title: t("CV.Projects.Chess3D"),
+                                desc: t("CV.Projects.Chess3DDesc"),
+                                icon: <TbChessKnight />,
+                                color: "bg-emerald-600",
                             },
                             {
                                 title: t("CV.Projects.WordGame"),

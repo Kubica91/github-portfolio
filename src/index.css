@@ -55,4 +55,17 @@ body {
         border: none !important;
         box-shadow: none !important;
     }
+
+    .cv-print-scale {
+        zoom: 0.85;
+    }
+
+    @-moz-document url-prefix() {
+        .cv-print-scale {
+            zoom: unset;
+            transform: scale(0.85);
+            transform-origin: top left;
+            width: 117.6471%;
+        }
+    }
 }

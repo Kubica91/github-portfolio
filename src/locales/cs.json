@@ -343,12 +343,13 @@
         "Subtitle": "Fullstack Developer (React / .NET) · 3D & Vizualizace",
         "Location": "Liberec / Remote",
         "DownloadPdf": "Stáhnout CV jako PDF",
+        "LinkedIn": "LinkedIn profil",
 
         "Profile": {
             "Heading": "Profil",
-            "Focus": "Fullstack developer. Stavím webové aplikace, 3D vizualizace a cloudová řešení v Reactu a .NET.",
-            "CadBimExperience": "Přes 5 let vyvíjím aplikace pro práci s CAD/BIM modely, včetně interaktivní 3D vizualizace ve webu a backendu v .NET.",
-            "AdditionalSkills": "V Unity vyvíjím AR/VR aplikace a mobilní hry pro Android i iOS."
+            "Focus": "Fullstack developer s více než 5 lety praxe. Stavím webové aplikace, 3D vizualizace a cloudová řešení v Reactu a .NET - od návrhu architektury až po nasazení.",
+            "CadBimExperience": "Specializuji se na práci s CAD/BIM modely a IFC daty. Vyvíjím interaktivní 3D prohlížečky v prohlížeči, optimalizuji práci s velkými objemy dat a navrhuji backend v .NET.",
+            "AdditionalSkills": "Mimo hlavní práci vyvíjím v Unity AR/VR aplikace a mobilní hry pro Android i iOS - od programování přes shadery až po publikaci na Google Play."
         },
 
         "WorkExperience": {
@@ -356,17 +357,18 @@
             "Period": "04/2021 - současnost",
             "Title": "Software Developer",
             "Company": "Proconom Software s.r.o., Liberec",
-            "CadBimVisualization": "Webové aplikace pro 3D vizualizaci CAD/BIM modelů",
-            "ForgeViewer": "Autodesk Forge Viewer - vedu a vyvíjím od začátku",
-            "ThreeJsViewer": "3D prohlížečka v Three.js - vytvořena od základu",
-            "PointCloud": "Implementace vlastních formátů point cloudových modelů",
-            "FrontendStack": "Frontend: React, TypeScript, Forge Viewer, Three.js",
-            "BackendStack": "Backend: .NET (C#), REST API",
-            "BigDataOptimization": "Optimalizace načítání a zpracování velkých JSON dat",
+            "CadBimVisualization": "Návrh a vývoj webových aplikací pro 3D vizualizaci CAD/BIM modelů",
+            "ForgeViewer": "Autodesk Platform Services (APS, dříve Forge) - hlavní projekt, který vedu a vyvíjím od začátku",
+            "ThreeJsViewer": "Vlastní 3D prohlížečka postavená na Three.js a IFC.js - vytvořena od základu",
+            "PointCloud": "Implementace vlastních formátů a vykreslování rozsáhlých point cloudových modelů",
+            "FrontendStack": "Frontend: React, TypeScript, APS Viewer, Three.js, IFC.js",
+            "BackendStack": "Backend: .NET (C#), REST API, menší přesah do Node.js a Python/JavaScript Azure Functions",
+            "BigDataOptimization": "Optimalizace načítání a zpracování velkých JSON dat (stovky MB)",
+            "IndexedDb": "Prohlížečová IndexedDB pro práci s velkým objemem modelových dat na klientu - cachování a streaming bez zatížení serveru",
             "IfcMetadata": "Zpracování a vizualizace metadat IFC souborů",
-            "CollisionDetection": "Detekce kolizí 3D modelů",
+            "CollisionDetection": "Detekce kolizí 3D modelů a vizualizace konfliktů",
             "BcfImportExport": "Import a export BCF (BIM Collaboration Format)",
-            "ArVrDevelopment": "AR/VR aplikace v Unity (C#)"
+            "ArVrDevelopment": "AR/VR aplikace v Unity (C#) pro průmyslové vizualizace"
         },
 
         "TechnicalSkills": {
@@ -400,13 +402,15 @@
         "Projects": {
             "Heading": "Další projekty",
             "UnityGames": "Mobilní hry v Unity",
-            "UnityGamesDesc": "Vlastní mobilní hra publikovaná na Google Play (dnes stažena). Další projekty rozpracované.",
-            "Experimental": "Experimentální projekty",
-            "ExperimentalDesc": "3D a vizualizace",
+            "UnityGamesDesc": "Tower defense Def the Base publikovaná na Google Play (dnes stažena), 2D platformer Find a Coin a rozpracovaný Jumping Jello.",
+            "UnityExperiments": "Unity experimenty (3D)",
+            "UnityExperimentsDesc": "Hide and Seek (PC, AI a shadery), 3D restaurace s vlastní AI číšníků a kuchařů a 3D akvárium s rybkami - prototypy zaměřené na AI, prostředí a interakci.",
+            "Chess3D": "Šachy v Three.js",
+            "Chess3DDesc": "Interaktivní 3D šachové figurky v prohlížeči. Vlastní generování geometrie, výběr a zvýraznění tahů.",
             "WordGame": "Hádej slovo - firemní webová hra",
-            "WordGameDesc": "Fullstack aplikace: React frontend, .NET backend (REST API).",
+            "WordGameDesc": "Fullstack vánoční hra: React frontend, .NET backend (REST API), denní hádanky a žebříček hráčů.",
             "CodingGames": "Kódovací výzvy",
-            "CodingGamesDesc": "Algoritmické úlohy na codingame.com"
+            "CodingGamesDesc": "Algoritmické úlohy a logické hádanky na codingame.com"
         },
 
         "Languages": {
