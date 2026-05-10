@@ -4,20 +4,18 @@
     "type": "module",
     "version": "0.0.0",
     "scripts": {
-        "dev": "pnpm i && vite",
-        "build": "tsc && vite build",
+        "dev": "pnpm i && node scripts/generateImageSizes.mjs && vite",
+        "generate-image-sizes": "node scripts/generateImageSizes.mjs",
+        "build": "node scripts/generateImageSizes.mjs && tsc && vite build",
         "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
         "preview": "vite preview",
-        "test": "vitest",
-        "predeploy": "pnpm i && pnpm run build",
-        "deploy": "gh-pages -d dist"
+        "test": "vitest"
     },
     "browserslist": [
         "> 0.1%"
     ],
     "dependencies": {
         "@types/three": "^0.184.0",
-        "gh-pages": "^6.3.0",
         "guid-typescript": "^1.0.9",
         "i18next": "^23.11.4",
         "react": "^18.3.1",

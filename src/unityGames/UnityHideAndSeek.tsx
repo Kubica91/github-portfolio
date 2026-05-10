@@ -1,5 +1,6 @@
-import { useEffect, useRef } from "react";
+﻿import { useEffect, useRef } from "react";
 import { Trans, useTranslation } from "react-i18next";
+import Img from "../components/Img";
 import usePersistentScroll from "../hooks/usePersistentScroll";
 
 const UnityHideAndSeek = () => {
@@ -52,11 +53,10 @@ const UnityHideAndSeek = () => {
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
-                        <img
+                        <Img
                             src="/github-portfolio/images/hideAndSeek/menu.webp"
                             alt={t("HideAndSeek.S1ImgAlt")}
                             className="w-full object-cover"
-                            loading="lazy"
                         />
                     </div>
 
@@ -112,11 +112,10 @@ const UnityHideAndSeek = () => {
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
-                        <img
+                        <Img
                             src="/github-portfolio/images/hideAndSeek/vision_firing.webp"
                             alt={t("HideAndSeek.S3ImgAlt")}
                             className="w-full object-cover"
-                            loading="lazy"
                         />
                     </div>
 
@@ -134,11 +133,10 @@ const UnityHideAndSeek = () => {
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
-                        <img
+                        <Img
                             src="/github-portfolio/images/hideAndSeek/hiding.webp"
                             alt={t("HideAndSeek.S4ImgAlt")}
                             className="w-full object-cover"
-                            loading="lazy"
                         />
                     </div>
 
@@ -156,11 +154,10 @@ const UnityHideAndSeek = () => {
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
-                        <img
+                        <Img
                             src="/github-portfolio/images/hideAndSeek/hunting_friend.webp"
                             alt={t("HideAndSeek.S5ImgAlt")}
                             className="w-full object-cover"
-                            loading="lazy"
                         />
                     </div>
 
@@ -178,11 +175,10 @@ const UnityHideAndSeek = () => {
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
-                        <img
+                        <Img
                             src="/github-portfolio/images/hideAndSeek/hunting_with_editor.webp"
                             alt={t("HideAndSeek.S6ImgAlt")}
                             className="w-full object-cover"
-                            loading="lazy"
                         />
                     </div>
 

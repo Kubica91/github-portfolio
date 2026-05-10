@@ -1,5 +1,6 @@
-import { useEffect, useRef } from "react";
+﻿import { useEffect, useRef } from "react";
 import { Trans, useTranslation } from "react-i18next";
+import Img from "../components/Img";
 import usePersistentScroll from "../hooks/usePersistentScroll";
 
 const UnityDeffTheBase = () => {
@@ -51,11 +52,10 @@ const UnityDeffTheBase = () => {
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
-                        <img
+                        <Img
                             src="/github-portfolio/images/defTheBase/menu_main.webp"
                             alt={t("DeffTheBase.S1ImgAlt")}
                             className="w-full object-cover"
-                            loading="lazy"
                         />
                     </div>
 
@@ -73,11 +73,10 @@ const UnityDeffTheBase = () => {
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
-                        <img
+                        <Img
                             src="/github-portfolio/images/defTheBase/menu_missions.webp"
                             alt={t("DeffTheBase.S2ImgAlt")}
                             className="w-full object-cover"
-                            loading="lazy"
                         />
                     </div>
 
@@ -95,11 +94,10 @@ const UnityDeffTheBase = () => {
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
-                        <img
+                        <Img
                             src="/github-portfolio/images/defTheBase/upgrade_tree.webp"
                             alt={t("DeffTheBase.S3ImgAlt")}
                             className="w-full object-cover"
-                            loading="lazy"
                         />
                     </div>
 
@@ -117,11 +115,10 @@ const UnityDeffTheBase = () => {
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
-                        <img
+                        <Img
                             src="/github-portfolio/images/defTheBase/gameplay_active.webp"
                             alt={t("DeffTheBase.S4ImgAlt")}
                             className="w-full object-cover"
-                            loading="lazy"
                         />
                     </div>
 
@@ -139,11 +136,10 @@ const UnityDeffTheBase = () => {
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
-                        <img
+                        <Img
                             src="/github-portfolio/images/defTheBase/gameplay_build.webp"
                             alt={t("DeffTheBase.S5ImgAlt")}
                             className="w-full object-cover"
-                            loading="lazy"
                         />
                     </div>
 
@@ -161,11 +157,10 @@ const UnityDeffTheBase = () => {
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
-                        <img
+                        <Img
                             src="/github-portfolio/images/defTheBase/building_management.webp"
                             alt={t("DeffTheBase.S6ImgAlt")}
                             className="w-full object-cover"
-                            loading="lazy"
                         />
                     </div>
 
@@ -183,11 +178,10 @@ const UnityDeffTheBase = () => {
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
-                        <img
+                        <Img
                             src="/github-portfolio/images/defTheBase/boss_wave.webp"
                             alt={t("DeffTheBase.S7ImgAlt")}
                             className="w-full object-cover"
-                            loading="lazy"
                         />
                     </div>
 
@@ -205,11 +199,10 @@ const UnityDeffTheBase = () => {
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
-                        <img
+                        <Img
                             src="/github-portfolio/images/defTheBase/pause_menu.webp"
                             alt={t("DeffTheBase.S8ImgAlt")}
                             className="w-full object-cover"
-                            loading="lazy"
                         />
                     </div>
 
@@ -257,11 +250,10 @@ const UnityDeffTheBase = () => {
                         </p>
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl bg-slate-800/30 flex justify-center">
-                            <img
+                            <Img
                                 src="/github-portfolio/images/defTheBase/minigun.webp"
                                 alt={t("DeffTheBase.S10aImgAlt")}
                                 className="max-h-72 object-contain"
-                                loading="lazy"
                             />
                         </div>
 
@@ -279,11 +271,10 @@ const UnityDeffTheBase = () => {
                         </p>
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl bg-slate-800/30 flex justify-center">
-                            <img
+                            <Img
                                 src="/github-portfolio/images/defTheBase/rocket_launcher.webp"
                                 alt={t("DeffTheBase.S10bImgAlt")}
                                 className="max-h-72 object-contain"
-                                loading="lazy"
                             />
                         </div>
 
@@ -301,11 +292,10 @@ const UnityDeffTheBase = () => {
                         </p>
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl bg-slate-800/30 flex justify-center">
-                            <img
+                            <Img
                                 src="/github-portfolio/images/defTheBase/enemy.webp"
                                 alt={t("DeffTheBase.S10cImgAlt")}
                                 className="max-h-72 object-contain"
-                                loading="lazy"
                             />
                         </div>
 
@@ -323,11 +313,10 @@ const UnityDeffTheBase = () => {
                         </p>
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
-                            <img
+                            <Img
                                 src="/github-portfolio/images/defTheBase/boss_animation.webp"
                                 alt={t("DeffTheBase.S10dImgAlt")}
                                 className="w-full object-cover"
-                                loading="lazy"
                             />
                         </div>
 
@@ -345,11 +334,10 @@ const UnityDeffTheBase = () => {
                         </p>
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl bg-slate-800/30 flex justify-center">
-                            <img
+                            <Img
                                 src="/github-portfolio/images/defTheBase/boss_death.webp"
                                 alt={t("DeffTheBase.S10eImgAlt")}
                                 className="max-h-72 object-contain"
-                                loading="lazy"
                             />
                         </div>
 

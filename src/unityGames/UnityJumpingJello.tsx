@@ -1,5 +1,6 @@
-import { useEffect, useRef } from "react";
+﻿import { useEffect, useRef } from "react";
 import { Trans, useTranslation } from "react-i18next";
+import Img from "../components/Img";
 import usePersistentScroll from "../hooks/usePersistentScroll";
 
 const UnityJumpingJello = () => {
@@ -50,11 +51,10 @@ const UnityJumpingJello = () => {
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl mb-4">
-                        <img
+                        <Img
                             src="/github-portfolio/images/jumpingJello/skins.webp"
                             alt={t("JumpingJello.S1ImgAlt1")}
                             className="w-full object-cover"
-                            loading="lazy"
                         />
                     </div>
 
@@ -63,11 +63,10 @@ const UnityJumpingJello = () => {
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
-                        <img
+                        <Img
                             src="/github-portfolio/images/jumpingJello/skins_task.webp"
                             alt={t("JumpingJello.S1ImgAlt2")}
                             className="w-full object-cover"
-                            loading="lazy"
                         />
                     </div>
 
@@ -87,11 +86,10 @@ const UnityJumpingJello = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                         <div>
                             <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
-                                <img
+                                <Img
                                     src="/github-portfolio/images/jumpingJello/menu_level_1.webp"
                                     alt={t("JumpingJello.S2ImgAlt1")}
                                     className="w-full object-cover"
-                                    loading="lazy"
                                 />
                             </div>
 
@@ -102,11 +100,10 @@ const UnityJumpingJello = () => {
 
                         <div>
                             <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
-                                <img
+                                <Img
                                     src="/github-portfolio/images/jumpingJello/menu_level_3.webp"
                                     alt={t("JumpingJello.S2ImgAlt2")}
                                     className="w-full object-cover"
-                                    loading="lazy"
                                 />
                             </div>
 
@@ -117,11 +114,10 @@ const UnityJumpingJello = () => {
 
                         <div>
                             <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
-                                <img
+                                <Img
                                     src="/github-portfolio/images/jumpingJello/menu_level_5.webp"
                                     alt={t("JumpingJello.S2ImgAlt3")}
                                     className="w-full object-cover"
-                                    loading="lazy"
                                 />
                             </div>
 
@@ -132,11 +128,10 @@ const UnityJumpingJello = () => {
 
                         <div>
                             <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
-                                <img
+                                <Img
                                     src="/github-portfolio/images/jumpingJello/menu_level_7.webp"
                                     alt={t("JumpingJello.S2ImgAlt4")}
                                     className="w-full object-cover"
-                                    loading="lazy"
                                 />
                             </div>
 
@@ -158,11 +153,10 @@ const UnityJumpingJello = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
-                                <img
+                                <Img
                                     src="/github-portfolio/images/jumpingJello/menu_level_8_closed.webp"
                                     alt={t("JumpingJello.S3ImgAlt1")}
                                     className="w-full object-cover"
-                                    loading="lazy"
                                 />
                             </div>
 
@@ -173,11 +167,10 @@ const UnityJumpingJello = () => {
 
                         <div>
                             <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
-                                <img
+                                <Img
                                     src="/github-portfolio/images/jumpingJello/menu_level_12_closed.webp"
                                     alt={t("JumpingJello.S3ImgAlt2")}
                                     className="w-full object-cover"
-                                    loading="lazy"
                                 />
                             </div>
 
@@ -197,11 +190,10 @@ const UnityJumpingJello = () => {
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
-                        <img
+                        <Img
                             src="/github-portfolio/images/jumpingJello/jump_meter.webp"
                             alt={t("JumpingJello.S4ImgAlt")}
                             className="w-full object-cover"
-                            loading="lazy"
                         />
                     </div>
 
@@ -219,11 +211,10 @@ const UnityJumpingJello = () => {
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
-                        <img
+                        <Img
                             src="/github-portfolio/images/jumpingJello/level_all_foods.webp"
                             alt={t("JumpingJello.S5ImgAlt")}
                             className="w-full object-cover"
-                            loading="lazy"
                         />
                     </div>
 
@@ -241,11 +232,10 @@ const UnityJumpingJello = () => {
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
-                        <img
+                        <Img
                             src="/github-portfolio/images/jumpingJello/level_moving_platform.webp"
                             alt={t("JumpingJello.S6ImgAlt")}
                             className="w-full object-cover"
-                            loading="lazy"
                         />
                     </div>
 
@@ -267,11 +257,10 @@ const UnityJumpingJello = () => {
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
-                        <img
+                        <Img
                             src="/github-portfolio/images/jumpingJello/level_drone.webp"
                             alt={t("JumpingJello.S7ImgAlt")}
                             className="w-full object-cover"
-                            loading="lazy"
                         />
                     </div>
 
@@ -291,11 +280,10 @@ const UnityJumpingJello = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
-                                <img
+                                <Img
                                     src="/github-portfolio/images/jumpingJello/secret_platform.webp"
                                     alt={t("JumpingJello.S8ImgAlt1")}
                                     className="w-full object-cover"
-                                    loading="lazy"
                                 />
                             </div>
 
@@ -306,11 +294,10 @@ const UnityJumpingJello = () => {
 
                         <div>
                             <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
-                                <img
+                                <Img
                                     src="/github-portfolio/images/jumpingJello/secret_ikon_box.webp"
                                     alt={t("JumpingJello.S8ImgAlt2")}
                                     className="w-full object-cover"
-                                    loading="lazy"
                                 />
                             </div>
 
@@ -330,11 +317,10 @@ const UnityJumpingJello = () => {
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl mb-4">
-                        <img
+                        <Img
                             src="/github-portfolio/images/jumpingJello/level_achivement_done.webp"
                             alt={t("JumpingJello.S9ImgAlt1")}
                             className="w-full object-cover"
-                            loading="lazy"
                         />
                     </div>
 
@@ -343,11 +329,10 @@ const UnityJumpingJello = () => {
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
-                        <img
+                        <Img
                             src="/github-portfolio/images/jumpingJello/level_achivement_text.webp"
                             alt={t("JumpingJello.S9ImgAlt2")}
                             className="w-full object-cover"
-                            loading="lazy"
                         />
                     </div>
 
@@ -365,11 +350,10 @@ const UnityJumpingJello = () => {
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
-                        <img
+                        <Img
                             src="/github-portfolio/images/jumpingJello/winning.webp"
                             alt={t("JumpingJello.S10ImgAlt")}
                             className="w-full object-cover"
-                            loading="lazy"
                         />
                     </div>
 
@@ -389,11 +373,10 @@ const UnityJumpingJello = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                         <div>
                             <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
-                                <img
+                                <Img
                                     src="/github-portfolio/images/jumpingJello/menu_level_9_infinity.webp"
                                     alt={t("JumpingJello.S11ImgAlt1")}
                                     className="w-full object-cover"
-                                    loading="lazy"
                                 />
                             </div>
 
@@ -404,11 +387,10 @@ const UnityJumpingJello = () => {
 
                         <div>
                             <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
-                                <img
+                                <Img
                                     src="/github-portfolio/images/jumpingJello/menu_level_12_closed.webp"
                                     alt={t("JumpingJello.S11ImgAlt2")}
                                     className="w-full object-cover"
-                                    loading="lazy"
                                 />
                             </div>
 
@@ -419,11 +401,10 @@ const UnityJumpingJello = () => {
                     </div>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
-                        <img
+                        <Img
                             src="/github-portfolio/images/jumpingJello/infinity_level.webp"
                             alt={t("JumpingJello.S11ImgAlt3")}
                             className="w-full object-cover"
-                            loading="lazy"
                         />
                     </div>
 
@@ -441,11 +422,10 @@ const UnityJumpingJello = () => {
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
-                        <img
+                        <Img
                             src="/github-portfolio/images/jumpingJello/animator_character.webp"
                             alt={t("JumpingJello.S12ImgAlt")}
                             className="w-full object-cover"
-                            loading="lazy"
                         />
                     </div>
 
@@ -471,11 +451,10 @@ const UnityJumpingJello = () => {
                         </p>
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
-                            <img
+                            <Img
                                 src="/github-portfolio/images/jumpingJello/laser_drone_shader.webp"
                                 alt={t("JumpingJello.S13aImgAlt")}
                                 className="w-full object-cover"
-                                loading="lazy"
                             />
                         </div>
 
@@ -493,11 +472,10 @@ const UnityJumpingJello = () => {
                         </p>
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
-                            <img
+                            <Img
                                 src="/github-portfolio/images/jumpingJello/character_dron_shader.webp"
                                 alt={t("JumpingJello.S13bImgAlt")}
                                 className="w-full object-cover"
-                                loading="lazy"
                             />
                         </div>
 

@@ -1,5 +1,6 @@
-import { useEffect, useRef } from "react";
+﻿import { useEffect, useRef } from "react";
 import { Trans, useTranslation } from "react-i18next";
+import Img from "../components/Img";
 import usePersistentScroll from "../hooks/usePersistentScroll";
 
 const UnityFindACoin = () => {
@@ -50,11 +51,10 @@ const UnityFindACoin = () => {
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
-                        <img
+                        <Img
                             src="/github-portfolio/images/findACoin/menu.webp"
                             alt={t("FindACoin.S1ImgAlt")}
                             className="w-full object-cover"
-                            loading="lazy"
                         />
                     </div>
 
@@ -72,11 +72,10 @@ const UnityFindACoin = () => {
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
-                        <img
+                        <Img
                             src="/github-portfolio/images/findACoin/levels.webp"
                             alt={t("FindACoin.S2ImgAlt")}
                             className="w-full object-cover"
-                            loading="lazy"
                         />
                     </div>
 
@@ -94,11 +93,10 @@ const UnityFindACoin = () => {
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl mb-4">
-                        <img
+                        <Img
                             src="/github-portfolio/images/findACoin/level_1_game.webp"
                             alt={t("FindACoin.S3ImgAlt1")}
                             className="w-full object-cover"
-                            loading="lazy"
                         />
                     </div>
 
@@ -107,11 +105,10 @@ const UnityFindACoin = () => {
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
-                        <img
+                        <Img
                             src="/github-portfolio/images/findACoin/mapa_lvl_1.webp"
                             alt={t("FindACoin.S3ImgAlt2")}
                             className="w-full object-cover"
-                            loading="lazy"
                         />
                     </div>
 
@@ -129,11 +126,10 @@ const UnityFindACoin = () => {
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl mb-4">
-                        <img
+                        <Img
                             src="/github-portfolio/images/findACoin/double_jump_box.webp"
                             alt={t("FindACoin.S4ImgAlt1")}
                             className="w-full object-cover"
-                            loading="lazy"
                         />
                     </div>
 
@@ -142,11 +138,10 @@ const UnityFindACoin = () => {
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
-                        <img
+                        <Img
                             src="/github-portfolio/images/findACoin/mapa_lvl_2.webp"
                             alt={t("FindACoin.S4ImgAlt2")}
                             className="w-full object-cover"
-                            loading="lazy"
                         />
                     </div>
 
@@ -164,11 +159,10 @@ const UnityFindACoin = () => {
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl mb-4">
-                        <img
+                        <Img
                             src="/github-portfolio/images/findACoin/lava_ground.webp"
                             alt={t("FindACoin.S5ImgAlt1")}
                             className="w-full object-cover"
-                            loading="lazy"
                         />
                     </div>
 
@@ -177,11 +171,10 @@ const UnityFindACoin = () => {
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
-                        <img
+                        <Img
                             src="/github-portfolio/images/findACoin/mapa_lvl_3.webp"
                             alt={t("FindACoin.S5ImgAlt2")}
                             className="w-full object-cover"
-                            loading="lazy"
                         />
                     </div>
 
@@ -199,11 +192,10 @@ const UnityFindACoin = () => {
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
-                        <img
+                        <Img
                             src="/github-portfolio/images/findACoin/game_menu.webp"
                             alt={t("FindACoin.S6ImgAlt")}
                             className="w-full object-cover"
-                            loading="lazy"
                         />
                     </div>
 
@@ -229,11 +221,10 @@ const UnityFindACoin = () => {
                         </p>
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
-                            <img
+                            <Img
                                 src="/github-portfolio/images/findACoin/animace_editor.webp"
                                 alt={t("FindACoin.S7aImgAlt")}
                                 className="w-full object-cover"
-                                loading="lazy"
                             />
                         </div>
 
@@ -251,11 +242,10 @@ const UnityFindACoin = () => {
                         </p>
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl bg-slate-800/30 flex justify-center">
-                            <img
+                            <Img
                                 src="/github-portfolio/images/findACoin/player_move.webp"
                                 alt={t("FindACoin.S7bImgAlt")}
                                 className="max-h-72 object-contain"
-                                loading="lazy"
                             />
                         </div>
 
@@ -273,11 +263,10 @@ const UnityFindACoin = () => {
                         </p>
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl bg-slate-800/30 flex justify-center">
-                            <img
+                            <Img
                                 src="/github-portfolio/images/findACoin/jump_box.webp"
                                 alt={t("FindACoin.S7cImgAlt")}
                                 className="max-h-72 object-contain"
-                                loading="lazy"
                             />
                         </div>
 
@@ -295,11 +284,10 @@ const UnityFindACoin = () => {
                         </p>
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl bg-slate-800/30 flex justify-center">
-                            <img
+                            <Img
                                 src="/github-portfolio/images/findACoin/lava_idle.webp"
                                 alt={t("FindACoin.S7dImgAlt")}
                                 className="max-h-72 object-contain"
-                                loading="lazy"
                             />
                         </div>
 
