@@ -1,17 +1,121 @@
-import { BoxGeometry, ConeGeometry, CylinderGeometry, Group, Mesh, MeshStandardMaterial, SphereGeometry } from "three";
+import {
+    BoxGeometry,
+    ConeGeometry,
+    CylinderGeometry,
+    EdgesGeometry,
+    Group,
+    LineBasicMaterial,
+    LineSegments,
+    Mesh,
+    MeshStandardMaterial,
+    SphereGeometry,
+} from "three";
 import { TextGeometry } from "three/addons/geometries/TextGeometry.js";
 import { FontLoader } from "three/addons/loaders/FontLoader.js";
 
-const material = new MeshStandardMaterial({ color: 0xffffff });
+export type ChessPieceColor = "white" | "black";
 
-function addAndShadow(group: Group, mesh: Mesh) {
-    mesh.castShadow = true;
-    mesh.receiveShadow = true;
-    group.add(mesh);
+export type ChessGroup = PawnGroup | RookGroup | KnightGroup | BishopGroup | QueenGroup | KingGroup;
+
+export interface ChessPosition {
+    x: number;
+    y: number;
 }
 
-export const GetPawnGeometry = () => {
-    const pawn = new Group();
+export class PawnGroup extends Group {
+    chessColor: ChessPieceColor;
+    chessPosition: ChessPosition;
+
+    constructor(chessColor: ChessPieceColor, chessPosition: ChessPosition) {
+        super();
+        this.chessColor = chessColor;
+        this.chessPosition = chessPosition;
+    }
+}
+
+export class RookGroup extends Group {
+    chessColor: ChessPieceColor;
+    chessPosition: ChessPosition;
+
+    constructor(chessColor: ChessPieceColor, chessPosition: ChessPosition) {
+        super();
+        this.chessColor = chessColor;
+        this.chessPosition = chessPosition;
+    }
+}
+
+export class KnightGroup extends Group {
+    chessColor: ChessPieceColor;
+    chessPosition: ChessPosition;
+
+    constructor(chessColor: ChessPieceColor, chessPosition: ChessPosition) {
+        super();
+        this.chessColor = chessColor;
+        this.chessPosition = chessPosition;
+    }
+}
+
+export class BishopGroup extends Group {
+    chessColor: ChessPieceColor;
+    chessPosition: ChessPosition;
+
+    constructor(chessColor: ChessPieceColor, chessPosition: ChessPosition) {
+        super();
+        this.chessColor = chessColor;
+        this.chessPosition = chessPosition;
+    }
+}
+
+export class QueenGroup extends Group {
+    chessColor: ChessPieceColor;
+    chessPosition: ChessPosition;
+
+    constructor(chessColor: ChessPieceColor, chessPosition: ChessPosition) {
+        super();
+        this.chessColor = chessColor;
+        this.chessPosition = chessPosition;
+    }
+}
+
+export class KingGroup extends Group {
+    chessColor: ChessPieceColor;
+    chessPosition: ChessPosition;
+
+    constructor(chessColor: ChessPieceColor, chessPosition: ChessPosition) {
+        super();
+        this.chessColor = chessColor;
+        this.chessPosition = chessPosition;
+    }
+}
+
+export const EDGE_DEFAULT_COLOR = 0x000000;
+export const SQUARE_SIZE = 1.2;
+export const EDGE_HIGHLIGHT_COLOR = 0xffd54a;
+export const SELECTED_EMISSIVE_COLOR = 0xff7043;
+
+const whiteMaterial = new MeshStandardMaterial({ color: 0xf5f5f5 });
+const blackMaterial = new MeshStandardMaterial({ color: 0x202020 });
+
+const getMaterial = (chessColor: ChessPieceColor) => (chessColor === "white" ? whiteMaterial : blackMaterial);
+
+const addAndShadow = (group: Group, mesh: Mesh) => {
+    mesh.castShadow = true;
+    mesh.receiveShadow = true;
+
+    const edges = new LineSegments(
+        new EdgesGeometry(mesh.geometry, 25),
+        new LineBasicMaterial({ color: EDGE_DEFAULT_COLOR })
+    );
+    edges.raycast = () => {};
+    mesh.add(edges);
+
+    group.add(mesh);
+};
+
+export const GetPawnGeometry = (chessColor: ChessPieceColor, chessPosition: ChessPosition) => {
+    const pawn = new PawnGroup(chessColor, chessPosition);
+    const material = getMaterial(chessColor).clone();
+
     const base = new Mesh(new CylinderGeometry(0.32, 0.38, 0.16, 32), material);
     base.position.y = 0.08;
     addAndShadow(pawn, base);
@@ -35,8 +139,10 @@ export const GetPawnGeometry = () => {
     return pawn;
 };
 
-export const GetRookGeometry = () => {
-    const rook = new Group();
+export const GetRookGeometry = (chessColor: ChessPieceColor, chessPosition: ChessPosition) => {
+    const rook = new RookGroup(chessColor, chessPosition);
+    const material = getMaterial(chessColor).clone();
+
     const base = new Mesh(new CylinderGeometry(0.36, 0.44, 0.18, 32), material);
     base.position.y = 0.09;
     addAndShadow(rook, base);
@@ -62,8 +168,10 @@ export const GetRookGeometry = () => {
     return rook;
 };
 
-export const GetKnightGeometry = () => {
-    const knight = new Group();
+export const GetKnightGeometry = (chessColor: ChessPieceColor, chessPosition: ChessPosition) => {
+    const knight = new KnightGroup(chessColor, chessPosition);
+    const material = getMaterial(chessColor).clone();
+
     const base = new Mesh(new CylinderGeometry(0.38, 0.46, 0.19, 32), material);
     base.position.y = 0.095;
     addAndShadow(knight, base);
@@ -83,11 +191,14 @@ export const GetKnightGeometry = () => {
     ear.position.x = 0.21;
     addAndShadow(knight, ear);
 
+    knight.rotation.y = chessColor === "white" ? Math.PI / 2 : -Math.PI / 2;
     return knight;
 };
 
-export const GetBishopGeometry = () => {
-    const bishop = new Group();
+export const GetBishopGeometry = (chessColor: ChessPieceColor, chessPosition: ChessPosition) => {
+    const bishop = new BishopGroup(chessColor, chessPosition);
+    const material = getMaterial(chessColor).clone();
+
     const base = new Mesh(new CylinderGeometry(0.39, 0.48, 0.19, 32), material);
     base.position.y = 0.095;
     addAndShadow(bishop, base);
@@ -116,8 +227,10 @@ export const GetBishopGeometry = () => {
     return bishop;
 };
 
-export const GetQueenGeometry = () => {
-    const queen = new Group();
+export const GetQueenGeometry = (chessColor: ChessPieceColor, chessPosition: ChessPosition) => {
+    const queen = new QueenGroup(chessColor, chessPosition);
+    const material = getMaterial(chessColor).clone();
+
     const base = new Mesh(new CylinderGeometry(0.41, 0.52, 0.21, 32), material);
     base.position.y = 0.105;
     addAndShadow(queen, base);
@@ -153,8 +266,10 @@ export const GetQueenGeometry = () => {
     return queen;
 };
 
-export const GetKingGeometry = () => {
-    const king = new Group();
+export const GetKingGeometry = (chessColor: ChessPieceColor, chessPosition: ChessPosition) => {
+    const king = new KingGroup(chessColor, chessPosition);
+    const material = getMaterial(chessColor).clone();
+
     const base = new Mesh(new CylinderGeometry(0.44, 0.56, 0.24, 32), material);
     base.position.y = 0.12;
     addAndShadow(king, base);
@@ -200,8 +315,7 @@ export const GetKingGeometry = () => {
 };
 
 export const GetChessboardGeometry = async () => {
-    const squareSize = 1.2;
-    const boardSize = 8 * squareSize;
+    const boardSize = 8 * SQUARE_SIZE;
     const board = new Group();
 
     const whiteMat = new MeshStandardMaterial({ color: 0xfafafa });
@@ -212,9 +326,9 @@ export const GetChessboardGeometry = async () => {
             const isWhite = (x + z) % 2 === 0;
             const mat = isWhite ? whiteMat : blackMat;
 
-            const square = new Mesh(new BoxGeometry(squareSize, 0.06, squareSize), mat);
-            square.position.x = (x - 3.5) * squareSize;
-            square.position.z = (z - 3.5) * squareSize;
+            const square = new Mesh(new BoxGeometry(SQUARE_SIZE, 0.06, SQUARE_SIZE), mat);
+            square.position.x = (x - 3.5) * SQUARE_SIZE;
+            square.position.z = (z - 3.5) * SQUARE_SIZE;
             square.position.y = 0.03;
             square.receiveShadow = true;
             board.add(square);
@@ -246,15 +360,15 @@ export const GetChessboardGeometry = async () => {
         });
 
         const meshTop = new Mesh(textGeo, textMat);
-        meshTop.position.x = -4 * squareSize + squareSize / 2 + x * squareSize + textSize / 2;
-        meshTop.position.z = -4 * squareSize - textSize - 0.05;
+        meshTop.position.x = -4 * SQUARE_SIZE + SQUARE_SIZE / 2 + x * SQUARE_SIZE + textSize / 2;
+        meshTop.position.z = -4 * SQUARE_SIZE - textSize - 0.05;
         meshTop.rotation.x = -Math.PI / 2;
         meshTop.rotation.z = Math.PI;
         board.add(meshTop);
 
         const meshBottom = new Mesh(textGeo, textMat);
-        meshBottom.position.x = -4 * squareSize + squareSize / 2 + x * squareSize - textSize / 2;
-        meshBottom.position.z = 4 * squareSize + textSize + 0.05;
+        meshBottom.position.x = -4 * SQUARE_SIZE + SQUARE_SIZE / 2 + x * SQUARE_SIZE - textSize / 2;
+        meshBottom.position.z = 4 * SQUARE_SIZE + textSize + 0.05;
         meshBottom.rotation.x = -Math.PI / 2;
         board.add(meshBottom);
     }
@@ -269,14 +383,14 @@ export const GetChessboardGeometry = async () => {
         });
 
         const meshLeft = new Mesh(textGeo, textMat);
-        meshLeft.position.x = -4 * squareSize - textSize - 0.05;
-        meshLeft.position.z = 4 * squareSize - squareSize / 2 - z * squareSize + textSize / 2;
+        meshLeft.position.x = -4 * SQUARE_SIZE - textSize - 0.05;
+        meshLeft.position.z = 4 * SQUARE_SIZE - SQUARE_SIZE / 2 - z * SQUARE_SIZE + textSize / 2;
         meshLeft.rotation.x = -Math.PI / 2;
         board.add(meshLeft);
 
         const meshRight = new Mesh(textGeo, textMat);
-        meshRight.position.x = 4 * squareSize + textSize + 0.05;
-        meshRight.position.z = 4 * squareSize - squareSize / 2 - z * squareSize - textSize / 2;
+        meshRight.position.x = 4 * SQUARE_SIZE + textSize + 0.05;
+        meshRight.position.z = 4 * SQUARE_SIZE - SQUARE_SIZE / 2 - z * SQUARE_SIZE - textSize / 2;
         meshRight.rotation.x = -Math.PI / 2;
         meshRight.rotation.z = -Math.PI;
         board.add(meshRight);

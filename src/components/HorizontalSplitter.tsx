@@ -5,9 +5,10 @@ interface HorizontalSplitterProps {
     minWidth: number;
     maxWidth: number;
     children: [React.ReactNode, React.ReactNode?];
+    onResize?: (newWidth: number) => void;
 }
 
-const HorizontalSplitter: React.FC<HorizontalSplitterProps> = ({ children, startWidth, minWidth, maxWidth }) => {
+const HorizontalSplitter: React.FC<HorizontalSplitterProps> = ({ children, startWidth, minWidth, maxWidth, onResize }) => {
     const [leftPercent, setLeftPercent] = useState(startWidth);
     const [dragging, setDragging] = useState(false);
 
@@ -31,8 +32,9 @@ const HorizontalSplitter: React.FC<HorizontalSplitterProps> = ({ children, start
             if (newPercent > maxWidth) newPercent = maxWidth;
 
             setLeftPercent(newPercent);
+            if (onResize) onResize(newPercent);
         },
-        [minWidth, maxWidth, dragging]
+        [minWidth, maxWidth, dragging, onResize]
     );
 
     useEffect(() => {

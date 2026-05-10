@@ -1,89 +1,132 @@
-import { useEffect, useRef } from "react";
-import { AmbientLight, DirectionalLight, Group, PCFShadowMap, PerspectiveCamera, Scene, WebGLRenderer } from "three";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Group, PerspectiveCamera, Raycaster, Scene, Vector2, WebGLRenderer } from "three";
+import HorizontalSplitter from "../../components/HorizontalSplitter";
+import { ChessGroup } from "./ChessGeometryUtils";
 import {
-    GetBishopGeometry,
-    GetChessboardGeometry,
-    GetKingGeometry,
-    GetKnightGeometry,
-    GetPawnGeometry,
-    GetQueenGeometry,
-    GetRookGeometry,
-} from "./ChessGeometryUtils";
+    ClearHighlightedPiece,
+    ClearSelectedPiece,
+    GetPieceByRaycast,
+    HighlightPiece,
+    InitializeChessScene,
+    SelectPiece,
+} from "./ChessThreeutils";
+import ChessContent from "./components/ChessContent";
 
 const ChessMainPage = () => {
+    const [selectedPiece, setSelectedPiece] = useState<ChessGroup | null>(null);
+
     const containerRef = useRef<HTMLDivElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
+    const sceneRef = useRef<Scene | null>(null);
+    const cameraRef = useRef<PerspectiveCamera | null>(null);
+    const rendererRef = useRef<WebGLRenderer | null>(null);
+    const piecesGroupRef = useRef<Group | null>(null);
+    const highlightGroupRef = useRef<ChessGroup | null>(null);
+
     useEffect(() => {
-        const ThreeJsInit = async () => {
+        const InitCanvas = async () => {
             if (!canvasRef.current || !containerRef.current) return;
 
-            const scene = new Scene();
-            const camera = new PerspectiveCamera(
-                75,
-                containerRef.current.clientWidth / containerRef.current.clientHeight,
-                0.1,
-                1000
+            const { scene, camera, renderer, piecesGroup } = await InitializeChessScene(
+                canvasRef.current,
+                containerRef.current
             );
 
-            const renderer = new WebGLRenderer({ canvas: canvasRef.current });
-            renderer.setSize(containerRef.current.clientWidth, containerRef.current.clientHeight);
-            renderer.setAnimationLoop(animate);
-
-            const figures = [
-                GetPawnGeometry(),
-                GetRookGeometry(),
-                GetKnightGeometry(),
-                GetBishopGeometry(),
-                GetQueenGeometry(),
-                GetKingGeometry(),
-            ];
-
-            const mainGroup = new Group();
-            for (let i = 0; i < figures.length; i++) {
-                const figure = figures[i];
-
-                figure.position.x = (i - 2.5) * 1.5;
-                mainGroup.add(figure);
-            }
-            scene.add(mainGroup);
-
-            const board = await GetChessboardGeometry();
-            scene.add(board);
-
-            const ambientLight = new AmbientLight(0xffffff, 0.5);
-            scene.add(ambientLight);
-
-            const dirLight = new DirectionalLight(0xffffff, 1);
-            dirLight.position.set(2, 5, 2);
-            dirLight.target = mainGroup;
-            dirLight.castShadow = true;
-            dirLight.shadow.mapSize.width = 1024;
-            dirLight.shadow.mapSize.height = 1024;
-            scene.add(dirLight);
-
-            renderer.shadowMap.enabled = true;
-            renderer.shadowMap.type = PCFShadowMap;
-
-            camera.position.set(0, 8, 0);
-            camera.lookAt(0, 0, 0);
-
-            function animate(time: number) {
-                mainGroup.rotation.y = time / 1000;
-                renderer.render(scene, camera);
-            }
+            sceneRef.current = scene;
+            cameraRef.current = camera;
+            rendererRef.current = renderer;
+            piecesGroupRef.current = piecesGroup;
         };
 
-        ThreeJsInit();
-    }, [canvasRef]);
+        InitCanvas();
+
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+
+            if (rendererRef.current) {
+                rendererRef.current.setAnimationLoop(null);
+                rendererRef.current.dispose();
+            }
+        };
+    }, []);
+
+    const handleResize = () => {
+        if (!rendererRef.current || !cameraRef.current || !containerRef.current) return;
+
+        rendererRef.current.setSize(containerRef.current.clientWidth, containerRef.current.clientHeight);
+        cameraRef.current.aspect = containerRef.current.clientWidth / containerRef.current.clientHeight;
+        cameraRef.current.updateProjectionMatrix();
+    };
+
+    const handleMouseMove = useCallback((event: React.MouseEvent<HTMLCanvasElement>) => {
+        if (!rendererRef.current || !cameraRef.current || !piecesGroupRef.current) return;
+
+        const rect = rendererRef.current.domElement.getBoundingClientRect();
+        const mouse = new Vector2(
+            ((event.clientX - rect.left) / rect.width) * 2 - 1,
+            -((event.clientY - rect.top) / rect.height) * 2 + 1
+        );
+        const raycaster = new Raycaster();
+        raycaster.setFromCamera(mouse, cameraRef.current);
+
+        const piece = GetPieceByRaycast(piecesGroupRef.current, raycaster);
+        if (piece == highlightGroupRef.current) return;
+
+        if (highlightGroupRef.current) ClearHighlightedPiece(highlightGroupRef.current);
+
+        if (piece) HighlightPiece(piece);
+
+        highlightGroupRef.current = piece;
+    }, []);
+
+    const handleClick = useCallback(
+        (event: React.MouseEvent<HTMLCanvasElement>) => {
+            if (!rendererRef.current || !cameraRef.current || !piecesGroupRef.current) return;
+
+            const rect = rendererRef.current.domElement.getBoundingClientRect();
+            const mouse = new Vector2(
+                ((event.clientX - rect.left) / rect.width) * 2 - 1,
+                -((event.clientY - rect.top) / rect.height) * 2 + 1
+            );
+            const raycaster = new Raycaster();
+            raycaster.setFromCamera(mouse, cameraRef.current);
+
+            const piece = GetPieceByRaycast(piecesGroupRef.current, raycaster);
+            if (piece === selectedPiece) return;
+
+            if (selectedPiece) ClearSelectedPiece(selectedPiece);
+
+            if (piece) SelectPiece(piece);
+
+            setSelectedPiece(piece);
+        },
+        [selectedPiece]
+    );
 
     return (
-        <div
-            className="w-full h-full"
-            ref={containerRef}
+        <HorizontalSplitter
+            startWidth={70}
+            minWidth={30}
+            maxWidth={90}
+            onResize={handleResize}
         >
-            <canvas ref={canvasRef} />
-        </div>
+            <div
+                className="w-full h-full overflow-hidden"
+                ref={containerRef}
+            >
+                <canvas
+                    ref={canvasRef}
+                    className="block w-full h-full"
+                    onMouseMove={handleMouseMove}
+                    onClick={handleClick}
+                />
+            </div>
+
+            <ChessContent selectedPiece={selectedPiece} />
+        </HorizontalSplitter>
     );
 };
 
