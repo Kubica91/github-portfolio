@@ -1,4 +1,6 @@
+import { useEffect, useRef } from "react";
 import { Trans, useTranslation } from "react-i18next";
+import usePersistentScroll from "../hooks/usePersistentScroll";
 
 const UnityHideAndSeek = () => {
     const { t } = useTranslation();
@@ -6,8 +8,17 @@ const UnityHideAndSeek = () => {
     const tableHeaders = t("HideAndSeek.S2TableHeaders", { returnObjects: true }) as string[];
     const controls = t("HideAndSeek.S2Controls", { returnObjects: true }) as string[][];
 
+    const containerRef = useRef<HTMLDivElement>(null);
+    const scroll = usePersistentScroll("hideAndSeekScroll", containerRef);
+
+    useEffect(() => {
+        if (scroll !== undefined && containerRef.current) {
+            containerRef.current.scrollTo({ top: scroll, behavior: "auto" });
+        }
+    }, [scroll]);
+
     return (
-        <div className="w-full h-full overflow-auto bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-slate-100">
+        <div ref={containerRef} className="w-full h-full overflow-auto bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-slate-100">
             {/* Hero */}
             <div className="max-w-4xl mx-auto px-6 py-10">
                 <h1 className="text-4xl font-extrabold tracking-tight text-white mb-3">Hide and Seek</h1>

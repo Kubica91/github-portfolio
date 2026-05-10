@@ -1,11 +1,22 @@
+import { useEffect, useRef } from "react";
 import { Trans, useTranslation } from "react-i18next";
+import usePersistentScroll from "../hooks/usePersistentScroll";
 
 const UnityJumpingJello = () => {
     const { t } = useTranslation();
     const tags = t("JumpingJello.Tags", { returnObjects: true }) as string[];
 
+    const containerRef = useRef<HTMLDivElement>(null);
+    const scroll = usePersistentScroll("jumpingJelloScroll", containerRef);
+
+    useEffect(() => {
+        if (scroll !== undefined && containerRef.current) {
+            containerRef.current.scrollTo({ top: scroll, behavior: "auto" });
+        }
+    }, [scroll]);
+
     return (
-        <div className="w-full h-full overflow-auto bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-slate-100">
+        <div ref={containerRef} className="w-full h-full overflow-auto bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-slate-100">
             {/* Hero */}
             <div className="max-w-4xl mx-auto px-6 py-10">
                 <h1 className="text-4xl font-extrabold tracking-tight text-white mb-3">Jumping Jello</h1>

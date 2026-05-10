@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import {
     FiAward,
@@ -12,6 +13,7 @@ import {
     FiUser,
 } from "react-icons/fi";
 import { LuCode, LuGamepad2, LuMessageSquare } from "react-icons/lu";
+import usePersistentScroll from "../hooks/usePersistentScroll";
 import SectionTitle from "./components/SectionTitle";
 import SkillCategory from "./components/SkillCategory";
 import TimelineItem from "./components/TimelineItem";
@@ -19,12 +21,22 @@ import TimelineItem from "./components/TimelineItem";
 const CurriculumVitaePage = () => {
     const { t } = useTranslation();
 
+    const containerRef = useRef<HTMLDivElement>(null);
+    const scroll = usePersistentScroll("cvPageScroll", containerRef);
+
+    useEffect(() => {
+        if (scroll !== undefined && containerRef.current) {
+            containerRef.current.scrollTo({ top: scroll, behavior: "auto" });
+        }
+    }, [scroll]);
+
     const handleDownloadPdf = () => {
         window.print();
     };
 
     return (
         <div
+            ref={containerRef}
             className="w-full h-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 overflow-auto print:h-auto print:overflow-visible
                 print:bg-white"
         >
