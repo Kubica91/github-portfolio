@@ -51,9 +51,9 @@ const UnityHideAndSeek = () => {
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
-                            src="/github-portfolio/images/hideAndSeek/menu.png"
+                            src="/github-portfolio/images/hideAndSeek/menu.webp"
                             alt="Hlavní menu Hide and Seek"
-                            className="w-full object-cover"
+                            className="w-full object-cover" loading="lazy"
                         />
                     </div>
 
@@ -124,9 +124,9 @@ const UnityHideAndSeek = () => {
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
-                            src="/github-portfolio/images/hideAndSeek/vision_firing.png"
+                            src="/github-portfolio/images/hideAndSeek/vision_firing.webp"
                             alt="Vision schopnost a střelba lovce"
-                            className="w-full object-cover"
+                            className="w-full object-cover" loading="lazy"
                         />
                     </div>
 
@@ -147,9 +147,9 @@ const UnityHideAndSeek = () => {
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
-                            src="/github-portfolio/images/hideAndSeek/hiding.png"
+                            src="/github-portfolio/images/hideAndSeek/hiding.webp"
                             alt="Pohled zloděje - AI lovci útočí na spoluhráče"
-                            className="w-full object-cover"
+                            className="w-full object-cover" loading="lazy"
                         />
                     </div>
 
@@ -170,9 +170,9 @@ const UnityHideAndSeek = () => {
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
-                            src="/github-portfolio/images/hideAndSeek/hunting_friend.png"
+                            src="/github-portfolio/images/hideAndSeek/hunting_friend.webp"
                             alt="Lovec vidí Vision spoluhráče"
-                            className="w-full object-cover"
+                            className="w-full object-cover" loading="lazy"
                         />
                     </div>
 
@@ -193,9 +193,9 @@ const UnityHideAndSeek = () => {
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
-                            src="/github-portfolio/images/hideAndSeek/hunting_with_editor.png"
+                            src="/github-portfolio/images/hideAndSeek/hunting_with_editor.webp"
                             alt="Game view lovce a Unity Scene editor"
-                            className="w-full object-cover"
+                            className="w-full object-cover" loading="lazy"
                         />
                     </div>
 

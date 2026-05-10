@@ -38,9 +38,9 @@ const UnityFindACoin = () => {
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
-                            src="/github-portfolio/images/findACoin/menu.png"
+                            src="/github-portfolio/images/findACoin/menu.webp"
                             alt="Hlavní menu Find a Coin"
-                            className="w-full object-cover"
+                            className="w-full object-cover" loading="lazy"
                         />
                     </div>
 
@@ -61,9 +61,9 @@ const UnityFindACoin = () => {
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
-                            src="/github-portfolio/images/findACoin/levels.png"
+                            src="/github-portfolio/images/findACoin/levels.webp"
                             alt="Výběr levelu"
-                            className="w-full object-cover"
+                            className="w-full object-cover" loading="lazy"
                         />
                     </div>
 
@@ -84,9 +84,9 @@ const UnityFindACoin = () => {
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl mb-4">
                         <img
-                            src="/github-portfolio/images/findACoin/level_1_game.png"
+                            src="/github-portfolio/images/findACoin/level_1_game.webp"
                             alt="Gameplay Level 1"
-                            className="w-full object-cover"
+                            className="w-full object-cover" loading="lazy"
                         />
                     </div>
 
@@ -96,9 +96,9 @@ const UnityFindACoin = () => {
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
-                            src="/github-portfolio/images/findACoin/mapa_lvl_1.png"
+                            src="/github-portfolio/images/findACoin/mapa_lvl_1.webp"
                             alt="Mapa levelu 1 v Unity"
-                            className="w-full object-cover"
+                            className="w-full object-cover" loading="lazy"
                         />
                     </div>
 
@@ -121,9 +121,9 @@ const UnityFindACoin = () => {
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl mb-4">
                         <img
-                            src="/github-portfolio/images/findACoin/double_jump_box.png"
+                            src="/github-portfolio/images/findACoin/double_jump_box.webp"
                             alt="Double Jump Box - sprite animace"
-                            className="w-full object-cover"
+                            className="w-full object-cover" loading="lazy"
                         />
                     </div>
 
@@ -134,9 +134,9 @@ const UnityFindACoin = () => {
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
-                            src="/github-portfolio/images/findACoin/mapa_lvl_2.png"
+                            src="/github-portfolio/images/findACoin/mapa_lvl_2.webp"
                             alt="Mapa levelu 2 v Unity"
-                            className="w-full object-cover"
+                            className="w-full object-cover" loading="lazy"
                         />
                     </div>
 
@@ -159,9 +159,9 @@ const UnityFindACoin = () => {
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl mb-4">
                         <img
-                            src="/github-portfolio/images/findACoin/lava_ground.png"
+                            src="/github-portfolio/images/findACoin/lava_ground.webp"
                             alt="Lávová podlaha - sprite tile"
-                            className="w-full object-cover"
+                            className="w-full object-cover" loading="lazy"
                         />
                     </div>
 
@@ -171,9 +171,9 @@ const UnityFindACoin = () => {
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
-                            src="/github-portfolio/images/findACoin/mapa_lvl_3.png"
+                            src="/github-portfolio/images/findACoin/mapa_lvl_3.webp"
                             alt="Mapa levelu 3 v Unity"
-                            className="w-full object-cover"
+                            className="w-full object-cover" loading="lazy"
                         />
                     </div>
 
@@ -193,9 +193,9 @@ const UnityFindACoin = () => {
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
-                            src="/github-portfolio/images/findACoin/game_menu.png"
+                            src="/github-portfolio/images/findACoin/game_menu.webp"
                             alt="Herní menu ve Find a Coin"
-                            className="w-full object-cover"
+                            className="w-full object-cover" loading="lazy"
                         />
                     </div>
 
@@ -227,9 +227,9 @@ const UnityFindACoin = () => {
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                             <img
-                                src="/github-portfolio/images/findACoin/animace_editor.png"
+                                src="/github-portfolio/images/findACoin/animace_editor.webp"
                                 alt="Unity Animator - přehled animací postavy"
-                                className="w-full object-cover"
+                                className="w-full object-cover" loading="lazy"
                             />
                         </div>
 
@@ -250,9 +250,9 @@ const UnityFindACoin = () => {
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl bg-slate-800/30 flex justify-center">
                             <img
-                                src="/github-portfolio/images/findACoin/player_move.png"
+                                src="/github-portfolio/images/findACoin/player_move.webp"
                                 alt="Hráč - sprite animace pohybu"
-                                className="max-h-72 object-contain"
+                                className="max-h-72 object-contain" loading="lazy"
                             />
                         </div>
 
@@ -272,9 +272,9 @@ const UnityFindACoin = () => {
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl bg-slate-800/30 flex justify-center">
                             <img
-                                src="/github-portfolio/images/findACoin/jump_box.png"
+                                src="/github-portfolio/images/findACoin/jump_box.webp"
                                 alt="Jump Box - sprite animace"
-                                className="max-h-72 object-contain"
+                                className="max-h-72 object-contain" loading="lazy"
                             />
                         </div>
 
@@ -295,9 +295,9 @@ const UnityFindACoin = () => {
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl bg-slate-800/30 flex justify-center">
                             <img
-                                src="/github-portfolio/images/findACoin/lava_idle.png"
+                                src="/github-portfolio/images/findACoin/lava_idle.webp"
                                 alt="Láva - idle sprite animace"
-                                className="max-h-72 object-contain"
+                                className="max-h-72 object-contain" loading="lazy"
                             />
                         </div>
 

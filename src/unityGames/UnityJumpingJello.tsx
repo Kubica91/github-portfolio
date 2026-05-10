@@ -59,9 +59,9 @@ const UnityJumpingJello = () => {
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl mb-4">
                         <img
-                            src="/github-portfolio/images/jumpingJello/skins.png"
+                            src="/github-portfolio/images/jumpingJello/skins.webp"
                             alt="Výběr skinů - všechny postavy"
-                            className="w-full object-cover"
+                            className="w-full object-cover" loading="lazy"
                         />
                     </div>
 
@@ -71,9 +71,9 @@ const UnityJumpingJello = () => {
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
-                            src="/github-portfolio/images/jumpingJello/skins_task.png"
+                            src="/github-portfolio/images/jumpingJello/skins_task.webp"
                             alt="Úkol pro odemčení skinu Rookblack"
-                            className="w-full object-cover"
+                            className="w-full object-cover" loading="lazy"
                         />
                     </div>
 
@@ -99,9 +99,9 @@ const UnityJumpingJello = () => {
                         <div>
                             <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                                 <img
-                                    src="/github-portfolio/images/jumpingJello/menu_level_1.png"
+                                    src="/github-portfolio/images/jumpingJello/menu_level_1.webp"
                                     alt="Menu - Level 1 les"
-                                    className="w-full object-cover"
+                                    className="w-full object-cover" loading="lazy"
                                 />
                             </div>
 
@@ -111,9 +111,9 @@ const UnityJumpingJello = () => {
                         <div>
                             <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                                 <img
-                                    src="/github-portfolio/images/jumpingJello/menu_level_3.png"
+                                    src="/github-portfolio/images/jumpingJello/menu_level_3.webp"
                                     alt="Menu - Level 3 jeskyně"
-                                    className="w-full object-cover"
+                                    className="w-full object-cover" loading="lazy"
                                 />
                             </div>
 
@@ -125,9 +125,9 @@ const UnityJumpingJello = () => {
                         <div>
                             <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                                 <img
-                                    src="/github-portfolio/images/jumpingJello/menu_level_5.png"
+                                    src="/github-portfolio/images/jumpingJello/menu_level_5.webp"
                                     alt="Menu - Level 5 město"
-                                    className="w-full object-cover"
+                                    className="w-full object-cover" loading="lazy"
                                 />
                             </div>
 
@@ -137,9 +137,9 @@ const UnityJumpingJello = () => {
                         <div>
                             <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                                 <img
-                                    src="/github-portfolio/images/jumpingJello/menu_level_7.png"
+                                    src="/github-portfolio/images/jumpingJello/menu_level_7.webp"
                                     alt="Menu - Level 7 sníh"
-                                    className="w-full object-cover"
+                                    className="w-full object-cover" loading="lazy"
                                 />
                             </div>
 
@@ -165,9 +165,9 @@ const UnityJumpingJello = () => {
                         <div>
                             <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                                 <img
-                                    src="/github-portfolio/images/jumpingJello/menu_level_8_closed.png"
+                                    src="/github-portfolio/images/jumpingJello/menu_level_8_closed.webp"
                                     alt="Menu - Level 8 zamčen"
-                                    className="w-full object-cover"
+                                    className="w-full object-cover" loading="lazy"
                                 />
                             </div>
 
@@ -179,9 +179,9 @@ const UnityJumpingJello = () => {
                         <div>
                             <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                                 <img
-                                    src="/github-portfolio/images/jumpingJello/menu_level_12_closed.png"
+                                    src="/github-portfolio/images/jumpingJello/menu_level_12_closed.webp"
                                     alt="Menu - Infinity Level 4 zamčen"
-                                    className="w-full object-cover"
+                                    className="w-full object-cover" loading="lazy"
                                 />
                             </div>
 
@@ -207,9 +207,9 @@ const UnityJumpingJello = () => {
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
-                            src="/github-portfolio/images/jumpingJello/jump_meter.png"
+                            src="/github-portfolio/images/jumpingJello/jump_meter.webp"
                             alt="Jump Meter - ukazatel síly skoku"
-                            className="w-full object-cover"
+                            className="w-full object-cover" loading="lazy"
                         />
                     </div>
 
@@ -232,9 +232,9 @@ const UnityJumpingJello = () => {
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
-                            src="/github-portfolio/images/jumpingJello/level_all_foods.png"
+                            src="/github-portfolio/images/jumpingJello/level_all_foods.webp"
                             alt="Všechny druhy ovoce v levelu"
-                            className="w-full object-cover"
+                            className="w-full object-cover" loading="lazy"
                         />
                     </div>
 
@@ -257,9 +257,9 @@ const UnityJumpingJello = () => {
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
-                            src="/github-portfolio/images/jumpingJello/level_moving_platform.png"
+                            src="/github-portfolio/images/jumpingJello/level_moving_platform.webp"
                             alt="Pohyblivá platforma v jeskyňovém levelu"
-                            className="w-full object-cover"
+                            className="w-full object-cover" loading="lazy"
                         />
                     </div>
 
@@ -289,9 +289,9 @@ const UnityJumpingJello = () => {
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
-                            src="/github-portfolio/images/jumpingJello/level_drone.png"
+                            src="/github-portfolio/images/jumpingJello/level_drone.webp"
                             alt="Dron a zmrzlé platformy v zasněženém levelu"
-                            className="w-full object-cover"
+                            className="w-full object-cover" loading="lazy"
                         />
                     </div>
 
@@ -317,9 +317,9 @@ const UnityJumpingJello = () => {
                         <div>
                             <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                                 <img
-                                    src="/github-portfolio/images/jumpingJello/secret_platform.png"
+                                    src="/github-portfolio/images/jumpingJello/secret_platform.webp"
                                     alt="Secret platforma se skrytým znakem"
-                                    className="w-full object-cover"
+                                    className="w-full object-cover" loading="lazy"
                                 />
                             </div>
 
@@ -331,9 +331,9 @@ const UnityJumpingJello = () => {
                         <div>
                             <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                                 <img
-                                    src="/github-portfolio/images/jumpingJello/secret_ikon_box.png"
+                                    src="/github-portfolio/images/jumpingJello/secret_ikon_box.webp"
                                     alt="Secret hvězda a secret skin box"
-                                    className="w-full object-cover"
+                                    className="w-full object-cover" loading="lazy"
                                 />
                             </div>
 
@@ -360,9 +360,9 @@ const UnityJumpingJello = () => {
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl mb-4">
                         <img
-                            src="/github-portfolio/images/jumpingJello/level_achivement_done.png"
+                            src="/github-portfolio/images/jumpingJello/level_achivement_done.webp"
                             alt="Achievement unlocked - nový skin a level"
-                            className="w-full object-cover"
+                            className="w-full object-cover" loading="lazy"
                         />
                     </div>
 
@@ -373,9 +373,9 @@ const UnityJumpingJello = () => {
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
-                            src="/github-portfolio/images/jumpingJello/level_achivement_text.png"
+                            src="/github-portfolio/images/jumpingJello/level_achivement_text.webp"
                             alt="Achievement timer v průběhu hry"
-                            className="w-full object-cover"
+                            className="w-full object-cover" loading="lazy"
                         />
                     </div>
 
@@ -397,9 +397,9 @@ const UnityJumpingJello = () => {
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
-                            src="/github-portfolio/images/jumpingJello/winning.png"
+                            src="/github-portfolio/images/jumpingJello/winning.webp"
                             alt="Level Done obrazovka s výsledky"
-                            className="w-full object-cover"
+                            className="w-full object-cover" loading="lazy"
                         />
                     </div>
 
@@ -426,9 +426,9 @@ const UnityJumpingJello = () => {
                         <div>
                             <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                                 <img
-                                    src="/github-portfolio/images/jumpingJello/menu_level_9_infinity.png"
+                                    src="/github-portfolio/images/jumpingJello/menu_level_9_infinity.webp"
                                     alt="Menu - Infinity Level 1"
-                                    className="w-full object-cover"
+                                    className="w-full object-cover" loading="lazy"
                                 />
                             </div>
 
@@ -440,9 +440,9 @@ const UnityJumpingJello = () => {
                         <div>
                             <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                                 <img
-                                    src="/github-portfolio/images/jumpingJello/menu_level_12_closed.png"
+                                    src="/github-portfolio/images/jumpingJello/menu_level_12_closed.webp"
                                     alt="Menu - Infinity Level 4 zamčen"
-                                    className="w-full object-cover"
+                                    className="w-full object-cover" loading="lazy"
                                 />
                             </div>
 
@@ -454,9 +454,9 @@ const UnityJumpingJello = () => {
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
-                            src="/github-portfolio/images/jumpingJello/infinity_level.png"
+                            src="/github-portfolio/images/jumpingJello/infinity_level.webp"
                             alt="Gameplay infinity levelu s editorem"
-                            className="w-full object-cover"
+                            className="w-full object-cover" loading="lazy"
                         />
                     </div>
 
@@ -483,9 +483,9 @@ const UnityJumpingJello = () => {
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
-                            src="/github-portfolio/images/jumpingJello/animator_character.png"
+                            src="/github-portfolio/images/jumpingJello/animator_character.webp"
                             alt="Kostní rig a Animator postavy Snowman"
-                            className="w-full object-cover"
+                            className="w-full object-cover" loading="lazy"
                         />
                     </div>
 
@@ -523,9 +523,9 @@ const UnityJumpingJello = () => {
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                             <img
-                                src="/github-portfolio/images/jumpingJello/laser_drone_shader.png"
+                                src="/github-portfolio/images/jumpingJello/laser_drone_shader.webp"
                                 alt="Shader Graph laserového drona"
-                                className="w-full object-cover"
+                                className="w-full object-cover" loading="lazy"
                             />
                         </div>
 
@@ -551,9 +551,9 @@ const UnityJumpingJello = () => {
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                             <img
-                                src="/github-portfolio/images/jumpingJello/character_dron_shader.png"
+                                src="/github-portfolio/images/jumpingJello/character_dron_shader.webp"
                                 alt="Shader efektu zásahu - burn dissolve"
-                                className="w-full object-cover"
+                                className="w-full object-cover" loading="lazy"
                             />
                         </div>
 

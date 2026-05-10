@@ -32,7 +32,7 @@ const CurriculumVitaePage = () => {
                         <img
                             src="/github-portfolio/images/cv/profile.jpg"
                             alt="Jakub Petráň"
-                            className="h-36 w-36 shrink-0 rounded-2xl border-4 border-blue-400/30 object-cover shadow-lg"
+                            className="h-36 w-36 shrink-0 rounded-2xl border-4 border-blue-400/30 object-cover shadow-lg" loading="lazy"
                         />
 
                         <div className="flex flex-1 flex-col items-center sm:items-start">

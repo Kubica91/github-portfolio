@@ -39,9 +39,9 @@ const UnityDeffTheBase = () => {
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
-                            src="/github-portfolio/images/defTheBase/menu_main.png"
+                            src="/github-portfolio/images/defTheBase/menu_main.webp"
                             alt="Hlavní menu Def the Base"
-                            className="w-full object-cover"
+                            className="w-full object-cover" loading="lazy"
                         />
                     </div>
 
@@ -62,9 +62,9 @@ const UnityDeffTheBase = () => {
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
-                            src="/github-portfolio/images/defTheBase/menu_missions.png"
+                            src="/github-portfolio/images/defTheBase/menu_missions.webp"
                             alt="Výběr misí a tutoriálů"
-                            className="w-full object-cover"
+                            className="w-full object-cover" loading="lazy"
                         />
                     </div>
 
@@ -85,9 +85,9 @@ const UnityDeffTheBase = () => {
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
-                            src="/github-portfolio/images/defTheBase/upgrade_tree.png"
+                            src="/github-portfolio/images/defTheBase/upgrade_tree.webp"
                             alt="Strom vylepšení budov"
-                            className="w-full object-cover"
+                            className="w-full object-cover" loading="lazy"
                         />
                     </div>
 
@@ -112,9 +112,9 @@ const UnityDeffTheBase = () => {
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
-                            src="/github-portfolio/images/defTheBase/gameplay_active.png"
+                            src="/github-portfolio/images/defTheBase/gameplay_active.webp"
                             alt="Aktivní gameplay - nakupování a správa budov"
-                            className="w-full object-cover"
+                            className="w-full object-cover" loading="lazy"
                         />
                     </div>
 
@@ -136,9 +136,9 @@ const UnityDeffTheBase = () => {
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
-                            src="/github-portfolio/images/defTheBase/gameplay_build.png"
+                            src="/github-portfolio/images/defTheBase/gameplay_build.webp"
                             alt="Automatické propojování zdí"
-                            className="w-full object-cover"
+                            className="w-full object-cover" loading="lazy"
                         />
                     </div>
 
@@ -159,9 +159,9 @@ const UnityDeffTheBase = () => {
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
-                            src="/github-portfolio/images/defTheBase/building_management.png"
+                            src="/github-portfolio/images/defTheBase/building_management.webp"
                             alt="Hromadná oprava budov podle typu"
-                            className="w-full object-cover"
+                            className="w-full object-cover" loading="lazy"
                         />
                     </div>
 
@@ -182,9 +182,9 @@ const UnityDeffTheBase = () => {
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
-                            src="/github-portfolio/images/defTheBase/boss_wave.png"
+                            src="/github-portfolio/images/defTheBase/boss_wave.webp"
                             alt="Boss vlna - tanky útočí na základnu"
-                            className="w-full object-cover"
+                            className="w-full object-cover" loading="lazy"
                         />
                     </div>
 
@@ -206,9 +206,9 @@ const UnityDeffTheBase = () => {
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <img
-                            src="/github-portfolio/images/defTheBase/pause_menu.png"
+                            src="/github-portfolio/images/defTheBase/pause_menu.webp"
                             alt="Pause menu se statistikami"
-                            className="w-full object-cover"
+                            className="w-full object-cover" loading="lazy"
                         />
                     </div>
 
@@ -280,9 +280,9 @@ const UnityDeffTheBase = () => {
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl bg-slate-800/30 flex justify-center">
                             <img
-                                src="/github-portfolio/images/defTheBase/minigun.png"
+                                src="/github-portfolio/images/defTheBase/minigun.webp"
                                 alt="Minigun - sprite sheet animace"
-                                className="max-h-72 object-contain"
+                                className="max-h-72 object-contain" loading="lazy"
                             />
                         </div>
 
@@ -305,9 +305,9 @@ const UnityDeffTheBase = () => {
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl bg-slate-800/30 flex justify-center">
                             <img
-                                src="/github-portfolio/images/defTheBase/rocket_launcher.png"
+                                src="/github-portfolio/images/defTheBase/rocket_launcher.webp"
                                 alt="Rocket Launcher - sprite sheet animace"
-                                className="max-h-72 object-contain"
+                                className="max-h-72 object-contain" loading="lazy"
                             />
                         </div>
 
@@ -330,9 +330,9 @@ const UnityDeffTheBase = () => {
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl bg-slate-800/30 flex justify-center">
                             <img
-                                src="/github-portfolio/images/defTheBase/enemy.png"
+                                src="/github-portfolio/images/defTheBase/enemy.webp"
                                 alt="Nepřítel - sprite sheet animace"
-                                className="max-h-72 object-contain"
+                                className="max-h-72 object-contain" loading="lazy"
                             />
                         </div>
 
@@ -354,9 +354,9 @@ const UnityDeffTheBase = () => {
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                             <img
-                                src="/github-portfolio/images/defTheBase/boss_animation.png"
+                                src="/github-portfolio/images/defTheBase/boss_animation.webp"
                                 alt="Boss - rozložení Animatoru v Unity"
-                                className="w-full object-cover"
+                                className="w-full object-cover" loading="lazy"
                             />
                         </div>
 
@@ -376,9 +376,9 @@ const UnityDeffTheBase = () => {
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl bg-slate-800/30 flex justify-center">
                             <img
-                                src="/github-portfolio/images/defTheBase/boss_death.png"
+                                src="/github-portfolio/images/defTheBase/boss_death.webp"
                                 alt="Boss - animace smrti"
-                                className="max-h-72 object-contain"
+                                className="max-h-72 object-contain" loading="lazy"
                             />
                         </div>
 
