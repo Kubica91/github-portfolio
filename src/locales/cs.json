@@ -418,6 +418,29 @@
             "Czech": "Čeština",
             "English": "Angličtina"
         }
+    },
+
+    "Chess": {
+        "SelectedPiece": "Vybraná figurka",
+        "NoPieceSelected": "Žádná figurka není vybraná",
+        "Position": "Pozice",
+        "PossibleMoves": "Možné tahy",
+        "MoveHistory": "Historie tahů",
+        "MovesCount": "Tahů: {{count}}",
+        "NoMoves": "Zatím žádné tahy",
+        "NewGame": "Nová hra",
+        "Pieces": {
+            "pawn": "Pěšec",
+            "rook": "Věž",
+            "knight": "Jezdec",
+            "bishop": "Střelec",
+            "queen": "Dáma",
+            "king": "Král"
+        },
+        "Color": {
+            "white": "Bílá",
+            "black": "Černá"
+        }
     }
 }
 

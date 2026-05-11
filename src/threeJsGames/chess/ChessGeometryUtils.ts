@@ -13,7 +13,7 @@ import { LineMaterial } from "three/addons/lines/LineMaterial.js";
 import { LineSegments2 } from "three/addons/lines/LineSegments2.js";
 import { LineSegmentsGeometry } from "three/addons/lines/LineSegmentsGeometry.js";
 import { FontLoader } from "three/addons/loaders/FontLoader.js";
-import { isEnemy, isInBounds, pieceAt } from "../ChessMoveUtils";
+import { isEnemy, isInBounds, pieceAt } from "./ChessMoveUtils";
 
 export type ChessPieceColor = "white" | "black";
 export type ChessPieceType = "pawn" | "rook" | "knight" | "bishop" | "queen" | "king";
@@ -50,9 +50,10 @@ export abstract class ChessPieceGroup extends Group {
         return positionToAlgebraic(this.chessPosition);
     }
 
-    getDisplayName(): string {
-        const type = this.getType();
-        return type.charAt(0).toUpperCase() + type.slice(1);
+    moveTo(target: ChessPosition) {
+        this.chessPosition = target;
+        this.hasMoved = true;
+        this.position.set((target.x - 3.5) * SQUARE_SIZE, 0, (7 - target.y - 3.5) * SQUARE_SIZE);
     }
 }
 
@@ -97,8 +98,8 @@ export class RookGroup extends ChessPieceGroup {
         const { x, y } = this.chessPosition;
 
         const directions = [
-            { dx: 1, dy: 0 },
             { dx: -1, dy: 0 },
+            { dx: 1, dy: 0 },
             { dx: 0, dy: 1 },
             { dx: 0, dy: -1 },
         ];
@@ -287,6 +288,15 @@ export class KingGroup extends ChessPieceGroup {
         }
 
         return moves;
+    }
+}
+
+export class BoardMesh extends Mesh {
+    chessPosition: ChessPosition;
+
+    constructor(chessPosition: ChessPosition) {
+        super();
+        this.chessPosition = chessPosition;
     }
 }
 
@@ -526,6 +536,8 @@ export const GetKingGeometry = (chessColor: ChessPieceColor, chessPosition: Ches
 export const GetChessboardGeometry = async () => {
     const boardSize = 8 * SQUARE_SIZE;
     const board = new Group();
+    const squaresGroup = new Group();
+    board.add(squaresGroup);
 
     const whiteMat = new MeshStandardMaterial({ color: 0xfafafa });
     const blackMat = new MeshStandardMaterial({ color: 0x222222 });
@@ -535,12 +547,14 @@ export const GetChessboardGeometry = async () => {
             const isWhite = (x + z) % 2 === 0;
             const mat = isWhite ? whiteMat : blackMat;
 
-            const square = new Mesh(new BoxGeometry(SQUARE_SIZE, 0.06, SQUARE_SIZE), mat);
+            const square = new BoardMesh({ x, y: 7 - z });
+            square.geometry = new BoxGeometry(SQUARE_SIZE, 0.06, SQUARE_SIZE);
+            square.material = mat;
             square.position.x = (x - 3.5) * SQUARE_SIZE;
             square.position.z = (z - 3.5) * SQUARE_SIZE;
             square.position.y = 0.03;
             square.receiveShadow = true;
-            board.add(square);
+            squaresGroup.add(square);
         }
     }
 
@@ -605,5 +619,5 @@ export const GetChessboardGeometry = async () => {
         board.add(meshRight);
     }
 
-    return board;
+    return { board, squaresGroup };
 };
