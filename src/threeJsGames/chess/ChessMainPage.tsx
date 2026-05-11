@@ -7,6 +7,7 @@ import {
     BuildBoardState,
     ClearHighlightedPiece,
     ClearSelectedPiece,
+    FitCameraToBoard,
     GetPieceByRaycast,
     HighlightPiece,
     InitializeChessPieces,
@@ -66,9 +67,9 @@ const ChessMainPage = () => {
     const handleResize = () => {
         if (!rendererRef.current || !cameraRef.current || !containerRef.current) return;
 
-        rendererRef.current.setSize(containerRef.current.clientWidth, containerRef.current.clientHeight);
-        cameraRef.current.aspect = containerRef.current.clientWidth / containerRef.current.clientHeight;
-        cameraRef.current.updateProjectionMatrix();
+        const { clientWidth, clientHeight } = containerRef.current;
+        rendererRef.current.setSize(clientWidth, clientHeight);
+        FitCameraToBoard(cameraRef.current, clientWidth, clientHeight);
     };
 
     const handleMouseMove = useCallback(

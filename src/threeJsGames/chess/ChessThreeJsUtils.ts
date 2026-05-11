@@ -108,14 +108,29 @@ export const InitializeChessScene = async (canvas: HTMLCanvasElement, container:
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = PCFShadowMap;
 
-    camera.position.set(0, 8, 0);
-    camera.lookAt(0, 0, 0);
+    FitCameraToBoard(camera, container.clientWidth, container.clientHeight);
 
     function animate() {
         renderer.render(scene, camera);
     }
 
     return { scene, camera, renderer, piecesGroup, squaresGroup };
+};
+
+export const FitCameraToBoard = (camera: PerspectiveCamera, width: number, height: number) => {
+    const aspect = width / height;
+    const fitSize = 8 * SQUARE_SIZE + 2.2;
+
+    const vHalfFovTan = Math.tan((camera.fov * Math.PI) / 360);
+
+    const heightForVertical = fitSize / (2 * vHalfFovTan);
+    const heightForHorizontal = fitSize / (2 * vHalfFovTan * aspect);
+    const cameraHeight = Math.max(heightForVertical, heightForHorizontal);
+
+    camera.aspect = aspect;
+    camera.position.set(0, cameraHeight, 0);
+    camera.lookAt(0, 0, 0);
+    camera.updateProjectionMatrix();
 };
 
 export const GetPieceByRaycast = (piecesGroup: Group, raycaster: Raycaster): ChessGroup | null => {
