@@ -15,6 +15,22 @@ import { LineSegmentsGeometry } from "three/addons/lines/LineSegmentsGeometry.js
 import { FontLoader } from "three/addons/loaders/FontLoader.js";
 import { isEnemy, isInBounds, pieceAt } from "./ChessMoveUtils";
 
+export const EDGE_LINEWIDTH = 0.015;
+export const SQUARE_SIZE = 1.2;
+
+export const EDGE_DEFAULT_COLOR = 0x000000;
+export const EDGE_HIGHLIGHT_COLOR = 0x38bdf8;
+
+export const MOVE_HIGHLIGHT_NORMAL = 0x0369a1;
+export const MOVE_HIGHLIGHT_CAPTURE = 0x782511;
+
+export const WHITE_PIECE_COLOR = 0xf5f5f5;
+export const BLACK_PIECE_COLOR = 0x202020;
+export const SELECTED_PIECE_COLOR = 0x0369a1;
+
+export const WHITE_SQUARE_COLOR = 0xfafafa;
+export const BLACK_SQUARE_COLOR = 0x333333;
+
 export type ChessPieceColor = "white" | "black";
 export type ChessPieceType = "pawn" | "rook" | "knight" | "bishop" | "queen" | "king";
 export type ChessGroup = ChessPieceGroup;
@@ -300,14 +316,8 @@ export class BoardMesh extends Mesh {
     }
 }
 
-export const EDGE_DEFAULT_COLOR = 0x000000;
-export const EDGE_LINEWIDTH = 0.015;
-export const SQUARE_SIZE = 1.2;
-export const EDGE_HIGHLIGHT_COLOR = 0xffd54a;
-export const SELECTED_EMISSIVE_COLOR = 0xff7043;
-
-const whiteMaterial = new MeshStandardMaterial({ color: 0xf5f5f5 });
-const blackMaterial = new MeshStandardMaterial({ color: 0x202020 });
+const whiteMaterial = new MeshStandardMaterial({ color: WHITE_PIECE_COLOR });
+const blackMaterial = new MeshStandardMaterial({ color: BLACK_PIECE_COLOR });
 
 const getMaterial = (chessColor: ChessPieceColor) => (chessColor === "white" ? whiteMaterial : blackMaterial);
 
@@ -560,7 +570,7 @@ export const GetChessboardGeometry = async () => {
 
     const base = new Mesh(
         new BoxGeometry(boardSize + 0.6, 0.08, boardSize + 0.6),
-        new MeshStandardMaterial({ color: 0x333333 })
+        new MeshStandardMaterial({ color: BLACK_SQUARE_COLOR })
     );
     base.position.y = -0.04;
     base.receiveShadow = true;
@@ -569,7 +579,7 @@ export const GetChessboardGeometry = async () => {
     const loader = new FontLoader();
     const font = await loader.loadAsync("/github-portfolio/fonts/gentilis_regular.typeface.json");
 
-    const textMat = new MeshStandardMaterial({ color: 0xfafafa });
+    const textMat = new MeshStandardMaterial({ color: WHITE_SQUARE_COLOR });
     const textSize = 0.18;
     const textDepth = 0.01;
 

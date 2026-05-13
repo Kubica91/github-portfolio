@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { BoardState, ChessGroup, positionToAlgebraic } from "../ChessGeometryUtils";
+import { getLegalMovesForPiece } from "../ChessMoveUtils";
 
 interface SelectedPieceInfoProps {
     selectedPiece: ChessGroup | null;
@@ -10,7 +11,7 @@ interface SelectedPieceInfoProps {
 const SelectedPieceInfo = ({ selectedPiece, board }: SelectedPieceInfoProps) => {
     const { t } = useTranslation();
 
-    const moves = useMemo(() => (selectedPiece ? selectedPiece.getPossibleMoves(board) : []), [selectedPiece, board]);
+    const moves = useMemo(() => (selectedPiece ? getLegalMovesForPiece(selectedPiece, board) : []), [selectedPiece, board]);
 
     return (
         <section className="border-b border-slate-700 p-4">

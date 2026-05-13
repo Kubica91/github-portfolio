@@ -1,26 +1,33 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 import { Group, PerspectiveCamera, Raycaster, Scene, Vector2, WebGLRenderer } from "three";
 import HorizontalSplitter from "../../components/HorizontalSplitter";
-import { BoardState, ChessGroup, ChessPieceColor } from "./ChessGeometryUtils";
-import { ChessMoveHistory } from "./ChessMoveUtils";
+import { BoardState, ChessGroup, ChessPieceColor, ChessPosition } from "./ChessGeometryUtils";
+import { ChessMoveHistory, getLegalMovesForPiece, hasAnyLegalMove, isKingInCheck } from "./ChessMoveUtils";
 import {
     BuildBoardState,
     ClearHighlightedPiece,
+    ClearMoveHighlights,
     ClearSelectedPiece,
     FitCameraToBoard,
     GetPieceByRaycast,
+    GetSquareByRaycast,
     HighlightPiece,
     InitializeChessPieces,
     InitializeChessScene,
     SelectPiece,
+    ShowMoveHighlights,
 } from "./ChessThreeJsUtils";
 import ChessContent from "./components/ChessContent";
 
 const ChessMainPage = () => {
+    const { t } = useTranslation();
     const [selectedPiece, setSelectedPiece] = useState<ChessGroup | null>(null);
     const [board, setBoard] = useState<BoardState>(() => Array.from({ length: 8 }, () => Array(8).fill(null)));
     const [playerTurn, setPlayerTurn] = useState<ChessPieceColor>("white");
     const [moveHistory, setMoveHistory] = useState<ChessMoveHistory[]>([]);
+    const [isGameOver, setIsGameOver] = useState(false);
 
     const containerRef = useRef<HTMLDivElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -30,13 +37,14 @@ const ChessMainPage = () => {
     const rendererRef = useRef<WebGLRenderer | null>(null);
     const piecesGroupRef = useRef<Group | null>(null);
     const squaresGroupRef = useRef<Group | null>(null);
+    const highlightsGroupRef = useRef<Group | null>(null);
     const highlightGroupRef = useRef<ChessGroup | null>(null);
 
     useEffect(() => {
         const InitCanvas = async () => {
             if (!canvasRef.current || !containerRef.current) return;
 
-            const { scene, camera, renderer, piecesGroup, squaresGroup } = await InitializeChessScene(
+            const { scene, camera, renderer, piecesGroup, squaresGroup, highlightsGroup } = await InitializeChessScene(
                 canvasRef.current,
                 containerRef.current
             );
@@ -46,6 +54,7 @@ const ChessMainPage = () => {
             rendererRef.current = renderer;
             piecesGroupRef.current = piecesGroup;
             squaresGroupRef.current = squaresGroup;
+            highlightsGroupRef.current = highlightsGroup;
 
             setBoard(BuildBoardState(piecesGroup));
         };
@@ -72,8 +81,48 @@ const ChessMainPage = () => {
         FitCameraToBoard(cameraRef.current, clientWidth, clientHeight);
     };
 
+    const applyMove = useCallback(
+        (from: ChessPosition, to: ChessPosition, isCapture: boolean) => {
+            const newBoard = board.map((row) => [...row]);
+            newBoard[from.y][from.x] = null;
+            newBoard[to.y][to.x] = selectedPiece!;
+
+            const nextPlayer: ChessPieceColor = playerTurn === "white" ? "black" : "white";
+            const inCheck = isKingInCheck(newBoard, nextPlayer);
+            const inMate = inCheck && !hasAnyLegalMove(newBoard, nextPlayer);
+
+            ClearSelectedPiece(selectedPiece!);
+            if (highlightsGroupRef.current) ClearMoveHighlights(highlightsGroupRef.current);
+
+            setBoard(newBoard);
+            setMoveHistory((prev) => [
+                ...prev,
+                {
+                    pieceType: selectedPiece!.getType(),
+                    color: selectedPiece!.chessColor,
+                    from,
+                    to,
+                    isCapture,
+                    isCheck: inCheck && !inMate,
+                    isCheckmate: inMate,
+                },
+            ]);
+            setSelectedPiece(null);
+            setPlayerTurn(nextPlayer);
+
+            if (inMate) {
+                toast.info(t("Chess.CheckmateNotify"));
+                setIsGameOver(true);
+            } else if (inCheck) {
+                toast.info(t("Chess.CheckNotify"));
+            }
+        },
+        [board, playerTurn, selectedPiece, t]
+    );
+
     const handleMouseMove = useCallback(
         (event: React.MouseEvent<HTMLCanvasElement>) => {
+            if (isGameOver) return;
             if (!rendererRef.current || !cameraRef.current || !piecesGroupRef.current) return;
 
             const rect = rendererRef.current.domElement.getBoundingClientRect();
@@ -81,6 +130,7 @@ const ChessMainPage = () => {
                 ((event.clientX - rect.left) / rect.width) * 2 - 1,
                 -((event.clientY - rect.top) / rect.height) * 2 + 1
             );
+
             const raycaster = new Raycaster();
             raycaster.setFromCamera(mouse, cameraRef.current);
 
@@ -94,11 +144,12 @@ const ChessMainPage = () => {
             if (targetPiece) HighlightPiece(targetPiece);
             highlightGroupRef.current = targetPiece;
         },
-        [playerTurn]
+        [playerTurn, isGameOver]
     );
 
     const handleClick = useCallback(
         (event: React.MouseEvent<HTMLCanvasElement>) => {
+            if (isGameOver) return;
             if (!rendererRef.current || !cameraRef.current || !piecesGroupRef.current || !squaresGroupRef.current) return;
 
             const rect = rendererRef.current.domElement.getBoundingClientRect();
@@ -106,91 +157,62 @@ const ChessMainPage = () => {
                 ((event.clientX - rect.left) / rect.width) * 2 - 1,
                 -((event.clientY - rect.top) / rect.height) * 2 + 1
             );
+
             const raycaster = new Raycaster();
             raycaster.setFromCamera(mouse, cameraRef.current);
 
             const targetPiece = GetPieceByRaycast(piecesGroupRef.current, raycaster);
 
+            // Own piece clicked - select / switch / deselect
             if (targetPiece && playerTurn === targetPiece.chessColor) {
-                if (targetPiece === selectedPiece) return;
+                if (targetPiece === selectedPiece) {
+                    if (highlightsGroupRef.current) ClearMoveHighlights(highlightsGroupRef.current);
+
+                    ClearSelectedPiece(selectedPiece);
+                    setSelectedPiece(null);
+                    return;
+                }
 
                 if (selectedPiece) ClearSelectedPiece(selectedPiece);
+
+                const legalMoves = getLegalMovesForPiece(targetPiece, board);
+
+                if (highlightsGroupRef.current)
+                    ShowMoveHighlights(legalMoves, board, targetPiece.chessColor, highlightsGroupRef.current);
 
                 SelectPiece(targetPiece);
                 setSelectedPiece(targetPiece);
                 return;
             }
 
-            if (targetPiece && selectedPiece && playerTurn !== targetPiece.chessColor) {
-                const canMove = selectedPiece.canMoveTo(targetPiece.chessPosition, board);
-                if (canMove) {
-                    const from = { ...selectedPiece.chessPosition };
-                    const to = { ...targetPiece.chessPosition };
+            if (!selectedPiece) return;
 
-                    targetPiece.removeFromParent();
-                    selectedPiece.moveTo(to);
+            // Opponent piece - try capture
+            if (targetPiece && playerTurn !== targetPiece.chessColor) {
+                const to = { ...targetPiece.chessPosition };
+                const legalMoves = getLegalMovesForPiece(selectedPiece, board);
+                if (!legalMoves.some((m) => m.x === to.x && m.y === to.y)) return;
 
-                    setBoard((prev) => {
-                        const newBoard = prev.map((row) => [...row]);
-                        newBoard[from.y][from.x] = null;
-                        newBoard[to.y][to.x] = selectedPiece;
-                        return newBoard;
-                    });
-                    setMoveHistory((prev) => [
-                        ...prev,
-                        {
-                            pieceType: selectedPiece.getType(),
-                            color: selectedPiece.chessColor,
-                            from,
-                            to,
-                            isCapture: true,
-                        },
-                    ]);
+                const from = { ...selectedPiece.chessPosition };
+                targetPiece.removeFromParent();
+                selectedPiece.moveTo(to);
 
-                    ClearSelectedPiece(selectedPiece);
-                    setSelectedPiece(null);
-
-                    setPlayerTurn((prev) => (prev === "white" ? "black" : "white"));
-                }
+                applyMove(from, to, true);
                 return;
             }
 
-            if (!selectedPiece) return;
+            // Empty square - try move
+            const targetSquarePos = GetSquareByRaycast(squaresGroupRef.current, raycaster);
+            if (!targetSquarePos) return;
 
-            const targetSquare = GetPieceByRaycast(squaresGroupRef.current, raycaster);
-            if (!targetSquare) return;
-
-            const canMove = selectedPiece.canMoveTo(targetSquare.chessPosition, board);
-            if (!canMove) return;
+            const legalMoves = getLegalMovesForPiece(selectedPiece, board);
+            if (!legalMoves.some((m) => m.x === targetSquarePos.x && m.y === targetSquarePos.y)) return;
 
             const from = { ...selectedPiece.chessPosition };
-            const to = { ...targetSquare.chessPosition };
-
-            selectedPiece.moveTo(to);
-
-            setBoard((prev) => {
-                const newBoard = prev.map((row) => [...row]);
-                newBoard[from.y][from.x] = null;
-                newBoard[to.y][to.x] = selectedPiece;
-                return newBoard;
-            });
-            setMoveHistory((prev) => [
-                ...prev,
-                {
-                    pieceType: selectedPiece.getType(),
-                    color: selectedPiece.chessColor,
-                    from,
-                    to,
-                    isCapture: false,
-                },
-            ]);
-
-            ClearSelectedPiece(selectedPiece);
-            setSelectedPiece(null);
-
-            setPlayerTurn((prev) => (prev === "white" ? "black" : "white"));
+            selectedPiece.moveTo(targetSquarePos);
+            applyMove(from, targetSquarePos, false);
         },
-        [selectedPiece, playerTurn, board]
+        [selectedPiece, playerTurn, board, isGameOver, applyMove]
     );
 
     const newGame = useCallback(() => {
@@ -202,6 +224,14 @@ const ChessMainPage = () => {
         setSelectedPiece(null);
         setPlayerTurn("white");
         setMoveHistory([]);
+        setIsGameOver(false);
+
+        if (highlightsGroupRef.current) ClearMoveHighlights(highlightsGroupRef.current);
+
+        if (highlightGroupRef.current) {
+            ClearHighlightedPiece(highlightGroupRef.current);
+            highlightGroupRef.current = null;
+        }
     }, []);
 
     return (
@@ -217,7 +247,7 @@ const ChessMainPage = () => {
             >
                 <canvas
                     ref={canvasRef}
-                    className="block w-full h-full"
+                    className={"block w-full h-full"}
                     onMouseMove={handleMouseMove}
                     onClick={handleClick}
                 />
@@ -234,3 +264,4 @@ const ChessMainPage = () => {
 };
 
 export default ChessMainPage;
+

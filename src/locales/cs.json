@@ -429,6 +429,8 @@
         "MovesCount": "Tahů: {{count}}",
         "NoMoves": "Zatím žádné tahy",
         "NewGame": "Nová hra",
+        "CheckNotify": "Šach!",
+        "CheckmateNotify": "Šachmat!",
         "Pieces": {
             "pawn": "Pěšec",
             "rook": "Věž",

@@ -1,8 +1,10 @@
 import {
     AmbientLight,
+    BoxGeometry,
     DirectionalLight,
     Group,
     Mesh,
+    MeshBasicMaterial,
     MeshStandardMaterial,
     PCFShadowMap,
     PerspectiveCamera,
@@ -13,9 +15,11 @@ import {
 import { LineMaterial } from "three/addons/lines/LineMaterial.js";
 import { LineSegments2 } from "three/addons/lines/LineSegments2.js";
 import {
+    BLACK_PIECE_COLOR,
     BoardMesh,
     BoardState,
     ChessGroup,
+    ChessPieceColor,
     ChessPieceGroup,
     ChessPosition,
     EDGE_DEFAULT_COLOR,
@@ -27,8 +31,11 @@ import {
     GetPawnGeometry,
     GetQueenGeometry,
     GetRookGeometry,
-    SELECTED_EMISSIVE_COLOR,
+    MOVE_HIGHLIGHT_CAPTURE,
+    MOVE_HIGHLIGHT_NORMAL,
+    SELECTED_PIECE_COLOR,
     SQUARE_SIZE,
+    WHITE_PIECE_COLOR,
 } from "./ChessGeometryUtils";
 
 export const BuildBoardState = (piecesGroup: Group): BoardState => {
@@ -91,6 +98,9 @@ export const InitializeChessScene = async (canvas: HTMLCanvasElement, container:
     InitializeChessPieces(piecesGroup);
     scene.add(piecesGroup);
 
+    const highlightsGroup = new Group();
+    scene.add(highlightsGroup);
+
     const { board, squaresGroup } = await GetChessboardGeometry();
     scene.add(board);
 
@@ -114,7 +124,7 @@ export const InitializeChessScene = async (canvas: HTMLCanvasElement, container:
         renderer.render(scene, camera);
     }
 
-    return { scene, camera, renderer, piecesGroup, squaresGroup };
+    return { scene, camera, renderer, piecesGroup, squaresGroup, highlightsGroup };
 };
 
 export const FitCameraToBoard = (camera: PerspectiveCamera, width: number, height: number) => {
@@ -180,7 +190,9 @@ export const SelectPiece = (piece: ChessGroup) => {
         const mesh = child as Mesh;
         if (!mesh.isMesh) return;
 
-        (mesh.material as MeshStandardMaterial).emissive.setHex(SELECTED_EMISSIVE_COLOR);
+        (mesh.material as MeshStandardMaterial).color.setHex(
+            piece.chessColor === "white" ? SELECTED_PIECE_COLOR : SELECTED_PIECE_COLOR
+        );
     });
 };
 
@@ -190,6 +202,35 @@ export const ClearSelectedPiece = (piece: ChessGroup) => {
         const mesh = child as Mesh;
         if (!mesh.isMesh) return;
 
-        (mesh.material as MeshStandardMaterial).emissive.setHex(EDGE_DEFAULT_COLOR);
+        (mesh.material as MeshStandardMaterial).color.setHex(
+            piece.chessColor === "white" ? WHITE_PIECE_COLOR : BLACK_PIECE_COLOR
+        );
     });
+};
+
+export const ShowMoveHighlights = (
+    moves: ChessPosition[],
+    board: BoardState,
+    pieceColor: ChessPieceColor,
+    highlightsGroup: Group
+) => {
+    ClearMoveHighlights(highlightsGroup);
+
+    for (const move of moves) {
+        const occupant = board[move.y][move.x];
+        const isCapture = occupant !== null && occupant.chessColor !== pieceColor;
+        const color = isCapture ? MOVE_HIGHLIGHT_CAPTURE : MOVE_HIGHLIGHT_NORMAL;
+
+        const geo = new BoxGeometry(SQUARE_SIZE - 0.06, 0.025, SQUARE_SIZE - 0.06);
+        const mat = new MeshBasicMaterial({ color });
+        const mesh = new Mesh(geo, mat);
+        mesh.position.set((move.x - 3.5) * SQUARE_SIZE, 0.075, (7 - move.y - 3.5) * SQUARE_SIZE);
+        highlightsGroup.add(mesh);
+    }
+};
+
+export const ClearMoveHighlights = (highlightsGroup: Group) => {
+    while (highlightsGroup.children.length > 0) {
+        highlightsGroup.remove(highlightsGroup.children[0]);
+    }
 };
