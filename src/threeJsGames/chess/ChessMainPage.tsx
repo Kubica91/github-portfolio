@@ -3,8 +3,10 @@ import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { Group, PerspectiveCamera, Raycaster, Scene, Vector2, WebGLRenderer } from "three";
 import HorizontalSplitter from "../../components/HorizontalSplitter";
-import { BoardState, ChessGroup, ChessPieceColor, ChessPosition } from "./ChessGeometryUtils";
-import { ChessMoveHistory, getLegalMovesForPiece, hasAnyLegalMove, isKingInCheck } from "./ChessMoveUtils";
+import PromotionDialog from "../../components/PromotionDialog";
+import { useDialog } from "../../hooks/useDialog";
+import { BoardState, ChessGroup, ChessPieceColor, ChessPosition, PromotionPieceType } from "./ChessGeometryUtils";
+import { ChessMoveHistory, getLegalMovesForPiece, hasAnyLegalMove, isKingInCheck, isPromotion } from "./ChessMoveUtils";
 import {
     BuildBoardState,
     ClearHighlightedPiece,
@@ -16,6 +18,7 @@ import {
     HighlightPiece,
     InitializeChessPieces,
     InitializeChessScene,
+    PromotePawn,
     SelectPiece,
     ShowMoveHighlights,
 } from "./ChessThreeJsUtils";
@@ -28,6 +31,9 @@ const ChessMainPage = () => {
     const [playerTurn, setPlayerTurn] = useState<ChessPieceColor>("white");
     const [moveHistory, setMoveHistory] = useState<ChessMoveHistory[]>([]);
     const [isGameOver, setIsGameOver] = useState(false);
+
+    const { isOpen: promotionOpen, open: openPromotion, resolve: resolvePromotion } = useDialog<PromotionPieceType>();
+    const promotionColorRef = useRef<ChessPieceColor>("white");
 
     const containerRef = useRef<HTMLDivElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -82,10 +88,10 @@ const ChessMainPage = () => {
     };
 
     const applyMove = useCallback(
-        (from: ChessPosition, to: ChessPosition, isCapture: boolean) => {
+        (from: ChessPosition, to: ChessPosition, isCapture: boolean, piece: ChessGroup) => {
             const newBoard = board.map((row) => [...row]);
             newBoard[from.y][from.x] = null;
-            newBoard[to.y][to.x] = selectedPiece!;
+            newBoard[to.y][to.x] = piece;
 
             const nextPlayer: ChessPieceColor = playerTurn === "white" ? "black" : "white";
             const inCheck = isKingInCheck(newBoard, nextPlayer);
@@ -98,8 +104,8 @@ const ChessMainPage = () => {
             setMoveHistory((prev) => [
                 ...prev,
                 {
-                    pieceType: selectedPiece!.getType(),
-                    color: selectedPiece!.chessColor,
+                    pieceType: piece.getType(),
+                    color: piece.chessColor,
                     from,
                     to,
                     isCapture,
@@ -111,10 +117,10 @@ const ChessMainPage = () => {
             setPlayerTurn(nextPlayer);
 
             if (inMate) {
-                toast.info(t("Chess.CheckmateNotify"));
+                toast.error(t("Chess.CheckmateNotify", { color: t(`Chess.Color.${nextPlayer}`) }), { autoClose: false });
                 setIsGameOver(true);
             } else if (inCheck) {
-                toast.info(t("Chess.CheckNotify"));
+                toast.warn(t("Chess.CheckNotify", { color: t(`Chess.Color.${nextPlayer}`) }));
             }
         },
         [board, playerTurn, selectedPiece, t]
@@ -147,8 +153,26 @@ const ChessMainPage = () => {
         [playerTurn, isGameOver]
     );
 
+    const finishMove = useCallback(
+        async (from: ChessPosition, to: ChessPosition, isCapture: boolean) => {
+            if (!selectedPiece) return;
+
+            let boardPiece: ChessGroup = selectedPiece;
+
+            if (isPromotion(selectedPiece, to) && piecesGroupRef.current) {
+                promotionColorRef.current = selectedPiece.chessColor;
+
+                const chosenType = await openPromotion();
+                boardPiece = PromotePawn(selectedPiece, chosenType, piecesGroupRef.current);
+            }
+
+            applyMove(from, to, isCapture, boardPiece);
+        },
+        [selectedPiece, openPromotion, applyMove]
+    );
+
     const handleClick = useCallback(
-        (event: React.MouseEvent<HTMLCanvasElement>) => {
+        async (event: React.MouseEvent<HTMLCanvasElement>) => {
             if (isGameOver) return;
             if (!rendererRef.current || !cameraRef.current || !piecesGroupRef.current || !squaresGroupRef.current) return;
 
@@ -167,7 +191,6 @@ const ChessMainPage = () => {
             if (targetPiece && playerTurn === targetPiece.chessColor) {
                 if (targetPiece === selectedPiece) {
                     if (highlightsGroupRef.current) ClearMoveHighlights(highlightsGroupRef.current);
-
                     ClearSelectedPiece(selectedPiece);
                     setSelectedPiece(null);
                     return;
@@ -176,7 +199,6 @@ const ChessMainPage = () => {
                 if (selectedPiece) ClearSelectedPiece(selectedPiece);
 
                 const legalMoves = getLegalMovesForPiece(targetPiece, board);
-
                 if (highlightsGroupRef.current)
                     ShowMoveHighlights(legalMoves, board, targetPiece.chessColor, highlightsGroupRef.current);
 
@@ -190,14 +212,14 @@ const ChessMainPage = () => {
             // Opponent piece - try capture
             if (targetPiece && playerTurn !== targetPiece.chessColor) {
                 const to = { ...targetPiece.chessPosition };
+                const from = { ...selectedPiece.chessPosition };
+
                 const legalMoves = getLegalMovesForPiece(selectedPiece, board);
                 if (!legalMoves.some((m) => m.x === to.x && m.y === to.y)) return;
 
-                const from = { ...selectedPiece.chessPosition };
                 targetPiece.removeFromParent();
                 selectedPiece.moveTo(to);
-
-                applyMove(from, to, true);
+                await finishMove(from, to, true);
                 return;
             }
 
@@ -210,9 +232,10 @@ const ChessMainPage = () => {
 
             const from = { ...selectedPiece.chessPosition };
             selectedPiece.moveTo(targetSquarePos);
-            applyMove(from, targetSquarePos, false);
+
+            await finishMove(from, targetSquarePos, false);
         },
-        [selectedPiece, playerTurn, board, isGameOver, applyMove]
+        [selectedPiece, playerTurn, board, isGameOver, finishMove]
     );
 
     const newGame = useCallback(() => {
@@ -235,31 +258,39 @@ const ChessMainPage = () => {
     }, []);
 
     return (
-        <HorizontalSplitter
-            startWidth={70}
-            minWidth={30}
-            maxWidth={90}
-            onResize={handleResize}
-        >
-            <div
-                className="w-full h-full overflow-hidden"
-                ref={containerRef}
+        <>
+            <HorizontalSplitter
+                startWidth={70}
+                minWidth={30}
+                maxWidth={90}
+                onResize={handleResize}
             >
-                <canvas
-                    ref={canvasRef}
-                    className={"block w-full h-full"}
-                    onMouseMove={handleMouseMove}
-                    onClick={handleClick}
-                />
-            </div>
+                <div
+                    className="w-full h-full overflow-hidden"
+                    ref={containerRef}
+                >
+                    <canvas
+                        ref={canvasRef}
+                        className="block w-full h-full"
+                        onMouseMove={handleMouseMove}
+                        onClick={handleClick}
+                    />
+                </div>
 
-            <ChessContent
-                selectedPiece={selectedPiece}
-                board={board}
-                moveHistory={moveHistory}
-                newGame={newGame}
+                <ChessContent
+                    selectedPiece={selectedPiece}
+                    board={board}
+                    moveHistory={moveHistory}
+                    newGame={newGame}
+                />
+            </HorizontalSplitter>
+
+            <PromotionDialog
+                isOpen={promotionOpen}
+                color={promotionColorRef.current}
+                onSelect={resolvePromotion}
             />
-        </HorizontalSplitter>
+        </>
     );
 };
 

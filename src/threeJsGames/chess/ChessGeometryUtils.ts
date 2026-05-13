@@ -33,6 +33,7 @@ export const BLACK_SQUARE_COLOR = 0x333333;
 
 export type ChessPieceColor = "white" | "black";
 export type ChessPieceType = "pawn" | "rook" | "knight" | "bishop" | "queen" | "king";
+export type PromotionPieceType = "queen" | "rook" | "bishop" | "knight";
 export type ChessGroup = ChessPieceGroup;
 export type BoardState = (ChessPieceGroup | null)[][];
 

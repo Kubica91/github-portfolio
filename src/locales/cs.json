@@ -431,6 +431,8 @@
         "NewGame": "Nová hra",
         "CheckNotify": "Šach!",
         "CheckmateNotify": "Šachmat!",
+        "PromoteTitle": "Povýšení pěšce",
+        "PromoteSubtitle": "Výběr figurky",
         "Pieces": {
             "pawn": "Pěšec",
             "rook": "Věž",

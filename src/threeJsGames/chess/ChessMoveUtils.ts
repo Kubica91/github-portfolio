@@ -1,4 +1,11 @@
-import { BoardState, ChessPieceColor, ChessPieceGroup, ChessPieceType, ChessPosition } from "./ChessGeometryUtils";
+import {
+    BoardState,
+    ChessGroup,
+    ChessPieceColor,
+    ChessPieceGroup,
+    ChessPieceType,
+    ChessPosition,
+} from "./ChessGeometryUtils";
 
 export interface ChessMoveHistory {
     pieceType: ChessPieceType;
@@ -18,6 +25,10 @@ export const pieceAt = (board: BoardState, p: ChessPosition): ChessPieceGroup | 
 export const isEnemy = (target: ChessPieceGroup | null, chessColor: ChessPieceColor): boolean => {
     return target !== null && target.chessColor !== chessColor;
 };
+
+export const isPromotion = (piece: ChessGroup, to: ChessPosition): boolean =>
+    piece.getType() === "pawn" &&
+    ((piece.chessColor === "white" && to.y === 7) || (piece.chessColor === "black" && to.y === 0));
 
 export const findKingPosition = (board: BoardState, color: ChessPieceColor): ChessPosition | null => {
     for (let y = 0; y < 8; y++) {
@@ -52,7 +63,7 @@ export const isKingInCheck = (board: BoardState, color: ChessPieceColor): boolea
     return isSquareAttackedBy(board, kingPos, opponent);
 };
 
-const simulateMove = (board: BoardState, from: ChessPosition, to: ChessPosition): BoardState => {
+export const simulateMove = (board: BoardState, from: ChessPosition, to: ChessPosition): BoardState => {
     const next = board.map((row) => [...row]);
     next[to.y][to.x] = next[from.y][from.x];
     next[from.y][from.x] = null;

@@ -33,6 +33,7 @@ import {
     GetRookGeometry,
     MOVE_HIGHLIGHT_CAPTURE,
     MOVE_HIGHLIGHT_NORMAL,
+    PromotionPieceType,
     SELECTED_PIECE_COLOR,
     SQUARE_SIZE,
     WHITE_PIECE_COLOR,
@@ -233,4 +234,26 @@ export const ClearMoveHighlights = (highlightsGroup: Group) => {
     while (highlightsGroup.children.length > 0) {
         highlightsGroup.remove(highlightsGroup.children[0]);
     }
+};
+
+export const PromotePawn = (pawn: ChessPieceGroup, newType: PromotionPieceType, piecesGroup: Group): ChessPieceGroup => {
+    const PROMOTION_FACTORIES: Record<
+        PromotionPieceType,
+        typeof GetQueenGeometry | typeof GetRookGeometry | typeof GetBishopGeometry | typeof GetKnightGeometry
+    > = {
+        queen: GetQueenGeometry,
+        rook: GetRookGeometry,
+        bishop: GetBishopGeometry,
+        knight: GetKnightGeometry,
+    };
+
+    const pos = { ...pawn.chessPosition };
+    pawn.removeFromParent();
+
+    const newPiece = PROMOTION_FACTORIES[newType](pawn.chessColor, pos);
+    newPiece.position.set((pos.x - 3.5) * SQUARE_SIZE, 0, (7 - pos.y - 3.5) * SQUARE_SIZE);
+    newPiece.hasMoved = true;
+    piecesGroup.add(newPiece);
+
+    return newPiece;
 };
