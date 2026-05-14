@@ -3,12 +3,11 @@ import { useTranslation } from "react-i18next";
 import { LuFolderOpen } from "react-icons/lu";
 
 interface IfcFileInputProps {
-    fileName: string | null;
     loading: boolean;
-    onFileSelected: (file: File) => void;
+    onFilesSelected: (files: File[]) => void;
 }
 
-const IfcFileInput = ({ fileName, loading, onFileSelected }: IfcFileInputProps) => {
+const IfcFileInput = ({ loading, onFilesSelected }: IfcFileInputProps) => {
     const { t } = useTranslation();
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -17,17 +16,18 @@ const IfcFileInput = ({ fileName, loading, onFileSelected }: IfcFileInputProps) 
     };
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0];
-        if (file) onFileSelected(file);
+        const files = event.target.files;
+        if (files && files.length > 0) onFilesSelected(Array.from(files));
         event.target.value = "";
     };
 
     return (
-        <section className="p-4 border-b border-slate-800 space-y-2">
+        <section className="p-4 border-b border-slate-800">
             <input
                 ref={inputRef}
                 type="file"
                 accept=".ifc"
+                multiple
                 onChange={handleChange}
                 className="hidden"
             />
@@ -42,8 +42,6 @@ const IfcFileInput = ({ fileName, loading, onFileSelected }: IfcFileInputProps) 
                 <LuFolderOpen className="w-4 h-4" />
                 {loading ? t("IfcViewer.Loading") : t("IfcViewer.OpenFile")}
             </button>
-
-            <p className="text-xs text-slate-400 truncate">{fileName ?? t("IfcViewer.NoFileLoaded")}</p>
         </section>
     );
 };

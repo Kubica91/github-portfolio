@@ -450,24 +450,34 @@
     },
 
     "IfcViewer": {
-        "OpenFile": "Otevřít IFC soubor",
-        "NoFileLoaded": "Žádný model nenahrán",
+        "OpenFile": "Otevřít IFC soubor(y)",
         "Loading": "Načítání...",
-        "LoadError": "Soubor se nepodařilo načíst.",
+        "LoadError": "Soubor {{name}} se nepodařilo načíst.",
+        "Progress": {
+            "Counter": "Načítám {{current}} / {{total}}",
+            "Stage": {
+                "geometries": "Geometrie",
+                "attributes": "Atributy",
+                "relations": "Vztahy",
+                "conversion": "Konverze"
+            }
+        },
         "Tools": {
             "Title": "Nástroje",
             "SectionPlane": "Sekční rovina (klik do scény)",
             "RemovePlanes": "Smazat všechny roviny",
             "ResetCamera": "Vystředit pohled",
-            "ShowAll": "Zobrazit vše"
+            "ShowAll": "Zobrazit vše",
+            "RemoveAllModels": "Odebrat všechny modely"
         },
         "Tree": {
             "Title": "Struktura modelu",
-            "Empty": "Nahraj IFC soubor pro zobrazení stromu."
+            "Empty": "Nahrajte IFC soubor pro zobrazení stromu.",
+            "RemoveModel": "Odebrat tento model"
         },
         "Element": {
             "Title": "Vlastnosti prvku",
-            "NoSelection": "Vyber prvek kliknutím nebo přes strom.",
+            "NoSelection": "Vyberte prvek kliknutím nebo přes strom.",
             "Type": "Typ",
             "LocalId": "Local ID"
         }

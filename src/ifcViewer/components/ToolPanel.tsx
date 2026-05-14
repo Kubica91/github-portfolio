@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { LuEye, LuFocus, LuScissorsLineDashed, LuTrash2 } from "react-icons/lu";
+import { LuEye, LuFocus, LuLayers, LuScissorsLineDashed, LuTrash2 } from "react-icons/lu";
 
 interface ToolPanelProps {
     disabled: boolean;
@@ -8,6 +8,7 @@ interface ToolPanelProps {
     onRemoveClippingPlanes: () => void;
     onResetCamera: () => void;
     onShowAll: () => void;
+    onRemoveAllModels: () => void;
 }
 
 const ToolPanel = ({
@@ -17,6 +18,7 @@ const ToolPanel = ({
     onRemoveClippingPlanes,
     onResetCamera,
     onShowAll,
+    onRemoveAllModels,
 }: ToolPanelProps) => {
     const { t } = useTranslation();
 
@@ -66,6 +68,16 @@ const ToolPanel = ({
             >
                 <LuEye className="w-4 h-4" />
                 {t("IfcViewer.Tools.ShowAll")}
+            </button>
+
+            <button
+                type="button"
+                disabled={disabled}
+                onClick={onRemoveAllModels}
+                className={`${buttonClass} bg-rose-700 hover:bg-rose-600 text-slate-100`}
+            >
+                <LuLayers className="w-4 h-4" />
+                {t("IfcViewer.Tools.RemoveAllModels")}
             </button>
         </section>
     );

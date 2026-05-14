@@ -85,16 +85,55 @@ export const disposeIfcViewer = (handle: IfcViewerHandle) => {
     handle.components.dispose();
 };
 
-export const loadIfcModel = async (handle: IfcViewerHandle, file: File): Promise<FRAGS.FragmentsModel> => {
+export type LoadStage = FRAGS.ProgressData["process"];
+
+export const loadIfcModel = async (
+    handle: IfcViewerHandle,
+    file: File,
+    onProgress?: (progress: number, stage: LoadStage) => void
+): Promise<FRAGS.FragmentsModel> => {
     const buffer = await file.arrayBuffer();
     const bytes = new Uint8Array(buffer);
 
-    const model = await handle.ifcLoader.load(bytes, true, file.name);
+    const model = await handle.ifcLoader.load(bytes, true, file.name, {
+        processData: {
+            progressCallback: (progress, data) => onProgress?.(progress, data.process),
+        },
+    });
     handle.models.set(model.modelId, model);
 
-    await fitCameraToModel(handle, model);
-
     return model;
+};
+
+export const removeModel = async (handle: IfcViewerHandle, modelId: string) => {
+    await handle.fragments.core.disposeModel(modelId);
+    handle.models.delete(modelId);
+};
+
+export const removeAllModels = async (handle: IfcViewerHandle) => {
+    const ids = Array.from(handle.models.keys());
+    for (const id of ids) {
+        await handle.fragments.core.disposeModel(id);
+    }
+    handle.models.clear();
+};
+
+export const fitCameraToAll = async (handle: IfcViewerHandle) => {
+    const models = Array.from(handle.models.values());
+    if (models.length === 0) return;
+
+    const combined = new Box3();
+    for (const m of models) {
+        if (!m.box.isEmpty()) combined.union(m.box);
+    }
+    if (combined.isEmpty()) return;
+
+    const sphere = new Sphere();
+    combined.getBoundingSphere(sphere);
+    if (sphere.radius === 0) return;
+
+    sphere.radius = Math.max(sphere.radius, 1);
+    await handle.world.camera.controls.fitToSphere(sphere, true);
 };
 
 export const raycastModel = async (

@@ -1,4 +1,3 @@
-import * as FRAGS from "@thatopen/fragments";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
@@ -8,18 +7,22 @@ import {
     clearHighlight,
     createClippingPlaneFromMouse,
     disposeIfcViewer,
-    fitCameraToModel,
+    fitCameraToAll,
     highlightItems,
     IfcViewerHandle,
     initializeIfcViewer,
     loadIfcModel,
+    LoadStage,
     raycastModel,
     removeAllClippingPlanes,
+    removeAllModels,
+    removeModel,
     setClipperEnabled,
     setItemsVisibility,
     showAll,
 } from "./IfcViewerThreeJsUtils";
 import IfcViewerContent from "./components/IfcViewerContent";
+import { ModelEntry } from "./components/ModelTree";
 
 interface SelectedElement {
     modelId: string;
@@ -28,20 +31,26 @@ interface SelectedElement {
     properties: IfcPropertyMap;
 }
 
+interface LoadingProgress {
+    current: number;
+    total: number;
+    fileName: string;
+    progress: number;
+    stage: LoadStage | null;
+}
+
 const IfcViewerMainPage = () => {
     const { t } = useTranslation();
 
     const containerRef = useRef<HTMLDivElement>(null);
     const viewerRef = useRef<IfcViewerHandle | null>(null);
-    const activeModelRef = useRef<FRAGS.FragmentsModel | null>(null);
     const clipperActiveRef = useRef(false);
     const draggedRef = useRef(false);
     const mouseDownPosRef = useRef<{ x: number; y: number } | null>(null);
 
-    const [fileName, setFileName] = useState<string | null>(null);
-    const [loading, setLoading] = useState(false);
-    const [tree, setTree] = useState<IfcTreeNode | null>(null);
-    const [hiddenIds, setHiddenIds] = useState<Set<number>>(new Set());
+    const [progress, setProgress] = useState<LoadingProgress | null>(null);
+    const [models, setModels] = useState<ModelEntry[]>([]);
+    const [hiddenIds, setHiddenIds] = useState<Map<string, Set<number>>>(new Map());
     const [clipperActive, setClipperActive] = useState(false);
     const [selected, setSelected] = useState<SelectedElement | null>(null);
 
@@ -83,31 +92,37 @@ const IfcViewerMainPage = () => {
         return () => window.removeEventListener("resize", handleResize);
     }, [handleResize]);
 
-    const handleFileSelected = useCallback(
-        async (file: File) => {
+    const handleFilesSelected = useCallback(
+        async (files: File[]) => {
             if (!viewerRef.current) return;
 
-            setLoading(true);
+            const total = files.length;
+
             try {
-                if (activeModelRef.current) {
-                    viewerRef.current.models.delete(activeModelRef.current.modelId);
-                    activeModelRef.current = null;
+                const newEntries: ModelEntry[] = [];
+
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    setProgress({ current: i + 1, total, fileName: file.name, progress: 0, stage: null });
+
+                    try {
+                        const model = await loadIfcModel(viewerRef.current, file, (p, stage) => {
+                            setProgress({ current: i + 1, total, fileName: file.name, progress: p, stage });
+                        });
+                        const tree = await buildSpatialTree(model);
+                        newEntries.push({ modelId: model.modelId, fileName: file.name, tree });
+                    } catch (error) {
+                        console.error(`IFC load failed for ${file.name}`, error);
+                        toast.error(t("IfcViewer.LoadError", { name: file.name }));
+                    }
                 }
 
-                const model = await loadIfcModel(viewerRef.current, file);
-                activeModelRef.current = model;
-
-                const spatial = await buildSpatialTree(model);
-
-                setTree(spatial);
-                setFileName(file.name);
-                setHiddenIds(new Set());
-                setSelected(null);
-            } catch (error) {
-                console.error("IFC load failed", error);
-                toast.error(t("IfcViewer.LoadError"));
+                if (newEntries.length > 0) {
+                    setModels((prev) => [...prev, ...newEntries]);
+                    await fitCameraToAll(viewerRef.current);
+                }
             } finally {
-                setLoading(false);
+                setProgress(null);
             }
         },
         [t]
@@ -134,7 +149,7 @@ const IfcViewerMainPage = () => {
             return;
         }
 
-        if (!viewerRef.current || !activeModelRef.current) return;
+        if (!viewerRef.current || viewerRef.current.models.size === 0) return;
 
         if (clipperActiveRef.current) {
             await createClippingPlaneFromMouse(viewerRef.current);
@@ -150,8 +165,11 @@ const IfcViewerMainPage = () => {
 
         await highlightItems(viewerRef.current, hit.modelId, [hit.localId]);
 
+        const model = viewerRef.current.models.get(hit.modelId);
+        if (!model) return;
+
         try {
-            const properties = await getElementProperties(activeModelRef.current, hit.localId);
+            const properties = await getElementProperties(model, hit.localId);
             setSelected({
                 modelId: hit.modelId,
                 localId: hit.localId,
@@ -181,37 +199,58 @@ const IfcViewerMainPage = () => {
 
     const handleRemoveClippingPlanes = useCallback(() => {
         if (!viewerRef.current) return;
-
         removeAllClippingPlanes(viewerRef.current);
     }, []);
 
     const handleResetCamera = useCallback(async () => {
-        if (!viewerRef.current || !activeModelRef.current) return;
-
-        await fitCameraToModel(viewerRef.current, activeModelRef.current);
+        if (!viewerRef.current) return;
+        await fitCameraToAll(viewerRef.current);
     }, []);
 
     const handleShowAll = useCallback(async () => {
         if (!viewerRef.current) return;
-
         await showAll(viewerRef.current);
-        setHiddenIds(new Set());
+        setHiddenIds(new Map());
     }, []);
 
-    const handleSelectNode = useCallback(async (node: IfcTreeNode) => {
-        if (!viewerRef.current || !activeModelRef.current) return;
+    const handleRemoveAllModels = useCallback(async () => {
+        if (!viewerRef.current) return;
+        await removeAllModels(viewerRef.current);
+        setModels([]);
+        setHiddenIds(new Map());
+        setSelected(null);
+    }, []);
+
+    const handleRemoveModel = useCallback(async (modelId: string) => {
+        if (!viewerRef.current) return;
+        await removeModel(viewerRef.current, modelId);
+
+        setModels((prev) => prev.filter((m) => m.modelId !== modelId));
+        setHiddenIds((prev) => {
+            const next = new Map(prev);
+            next.delete(modelId);
+            return next;
+        });
+        setSelected((prev) => (prev?.modelId === modelId ? null : prev));
+    }, []);
+
+    const handleSelectNode = useCallback(async (modelId: string, node: IfcTreeNode) => {
+        if (!viewerRef.current) return;
+        const model = viewerRef.current.models.get(modelId);
+        if (!model) return;
+
         if (node.localId === null) {
-            await highlightItems(viewerRef.current, activeModelRef.current.modelId, node.expressIDs);
+            await highlightItems(viewerRef.current, modelId, node.expressIDs);
             setSelected(null);
             return;
         }
 
-        await highlightItems(viewerRef.current, activeModelRef.current.modelId, [node.localId]);
+        await highlightItems(viewerRef.current, modelId, [node.localId]);
 
         try {
-            const properties = await getElementProperties(activeModelRef.current, node.localId);
+            const properties = await getElementProperties(model, node.localId);
             setSelected({
-                modelId: activeModelRef.current.modelId,
+                modelId,
                 localId: node.localId,
                 category: node.category || (typeof properties.category === "string" ? properties.category : null),
                 properties,
@@ -219,7 +258,7 @@ const IfcViewerMainPage = () => {
         } catch (error) {
             console.error("Failed to read element properties", error);
             setSelected({
-                modelId: activeModelRef.current.modelId,
+                modelId,
                 localId: node.localId,
                 category: node.category,
                 properties: {},
@@ -228,22 +267,27 @@ const IfcViewerMainPage = () => {
     }, []);
 
     const handleToggleVisibility = useCallback(
-        async (node: IfcTreeNode) => {
-            if (!viewerRef.current || !activeModelRef.current) return;
+        async (modelId: string, node: IfcTreeNode) => {
+            if (!viewerRef.current) return;
             if (node.expressIDs.length === 0) return;
 
-            const allHidden = node.expressIDs.every((id) => hiddenIds.has(id));
+            const currentSet = hiddenIds.get(modelId) ?? new Set<number>();
+            const allHidden = node.expressIDs.every((id) => currentSet.has(id));
             const visible = allHidden;
 
-            await setItemsVisibility(viewerRef.current, activeModelRef.current.modelId, node.expressIDs, visible);
+            await setItemsVisibility(viewerRef.current, modelId, node.expressIDs, visible);
 
             setHiddenIds((prev) => {
-                const next = new Set(prev);
+                const next = new Map(prev);
+                const set = new Set(next.get(modelId) ?? []);
+
                 if (visible) {
-                    for (const id of node.expressIDs) next.delete(id);
+                    for (const id of node.expressIDs) set.delete(id);
                 } else {
-                    for (const id of node.expressIDs) next.add(id);
+                    for (const id of node.expressIDs) set.add(id);
                 }
+
+                next.set(modelId, set);
                 return next;
             });
         },
@@ -266,17 +310,18 @@ const IfcViewerMainPage = () => {
             />
 
             <IfcViewerContent
-                fileName={fileName}
-                loading={loading}
-                tree={tree}
+                progress={progress}
+                models={models}
                 hiddenIds={hiddenIds}
                 clipperActive={clipperActive}
                 selected={selected}
-                onFileSelected={handleFileSelected}
+                onFilesSelected={handleFilesSelected}
                 onToggleClipper={handleToggleClipper}
                 onRemoveClippingPlanes={handleRemoveClippingPlanes}
                 onResetCamera={handleResetCamera}
                 onShowAll={handleShowAll}
+                onRemoveAllModels={handleRemoveAllModels}
+                onRemoveModel={handleRemoveModel}
                 onSelectNode={handleSelectNode}
                 onToggleVisibility={handleToggleVisibility}
             />

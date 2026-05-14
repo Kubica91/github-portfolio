@@ -1,53 +1,76 @@
 import { IfcPropertyMap, IfcTreeNode } from "../IfcTreeUtils";
+import { LoadStage } from "../IfcViewerThreeJsUtils";
 import ElementInfo from "./ElementInfo";
 import IfcFileInput from "./IfcFileInput";
-import ModelTree from "./ModelTree";
+import LoadingProgress from "./LoadingProgress";
+import ModelTree, { ModelEntry } from "./ModelTree";
 import ToolPanel from "./ToolPanel";
 
+interface ProgressState {
+    current: number;
+    total: number;
+    fileName: string;
+    progress: number;
+    stage: LoadStage | null;
+}
+
 interface IfcViewerContentProps {
-    fileName: string | null;
-    loading: boolean;
-    tree: IfcTreeNode | null;
-    hiddenIds: Set<number>;
+    progress: ProgressState | null;
+    models: ModelEntry[];
+    hiddenIds: Map<string, Set<number>>;
     clipperActive: boolean;
     selected: {
+        modelId: string;
         localId: number;
         category: string | null;
         properties: IfcPropertyMap;
     } | null;
-    onFileSelected: (file: File) => void;
+    onFilesSelected: (files: File[]) => void;
     onToggleClipper: () => void;
     onRemoveClippingPlanes: () => void;
     onResetCamera: () => void;
     onShowAll: () => void;
-    onSelectNode: (node: IfcTreeNode) => void;
-    onToggleVisibility: (node: IfcTreeNode) => void;
+    onRemoveAllModels: () => void;
+    onRemoveModel: (modelId: string) => void;
+    onSelectNode: (modelId: string, node: IfcTreeNode) => void;
+    onToggleVisibility: (modelId: string, node: IfcTreeNode) => void;
 }
 
 const IfcViewerContent = ({
-    fileName,
-    loading,
-    tree,
+    progress,
+    models,
     hiddenIds,
     clipperActive,
     selected,
-    onFileSelected,
+    onFilesSelected,
     onToggleClipper,
     onRemoveClippingPlanes,
     onResetCamera,
     onShowAll,
+    onRemoveAllModels,
+    onRemoveModel,
     onSelectNode,
     onToggleVisibility,
 }: IfcViewerContentProps) => {
-    const noModel = tree === null;
+    const noModel = models.length === 0;
+    const loading = progress !== null;
 
     return (
         <div className="w-full h-full flex flex-col bg-slate-900 text-slate-100 overflow-y-auto">
             <IfcFileInput
-                fileName={fileName}
                 loading={loading}
-                onFileSelected={onFileSelected}
+                onFilesSelected={onFilesSelected}
             />
+
+            {progress && (
+                <LoadingProgress
+                    current={progress.current}
+                    total={progress.total}
+                    fileName={progress.fileName}
+                    progress={progress.progress}
+                    stage={progress.stage}
+                />
+            )}
 
             <ToolPanel
                 disabled={noModel}
@@ -56,14 +79,17 @@ const IfcViewerContent = ({
                 onRemoveClippingPlanes={onRemoveClippingPlanes}
                 onResetCamera={onResetCamera}
                 onShowAll={onShowAll}
+                onRemoveAllModels={onRemoveAllModels}
             />
 
             <ModelTree
-                tree={tree}
+                models={models}
                 hiddenIds={hiddenIds}
-                selectedId={selected?.localId ?? null}
+                selectedModelId={selected?.modelId ?? null}
+                selectedLocalId={selected?.localId ?? null}
                 onSelectNode={onSelectNode}
                 onToggleVisibility={onToggleVisibility}
+                onRemoveModel={onRemoveModel}
             />
 
             <ElementInfo selected={selected} />
