@@ -157,6 +157,7 @@ export const raycastModel = async (
 
 export const highlightItems = async (handle: IfcViewerHandle, modelId: string, localIds: number[]) => {
     await handle.fragments.resetHighlight();
+
     if (localIds.length === 0) return;
     await handle.fragments.highlight(HIGHLIGHT_STYLE, { [modelId]: new Set(localIds) });
 };
@@ -167,6 +168,7 @@ export const clearHighlight = async (handle: IfcViewerHandle) => {
 
 export const setItemsVisibility = async (handle: IfcViewerHandle, modelId: string, localIds: number[], visible: boolean) => {
     if (localIds.length === 0) return;
+
     await handle.hider.set(visible, { [modelId]: new Set(localIds) });
     handle.fragments.core.update(true);
 };
@@ -183,6 +185,7 @@ export const setClipperEnabled = (handle: IfcViewerHandle, enabled: boolean) => 
 
 export const createClippingPlaneFromMouse = async (handle: IfcViewerHandle) => {
     if (!handle.clipper.enabled) return;
+
     await handle.clipper.create(handle.world);
 };
 
