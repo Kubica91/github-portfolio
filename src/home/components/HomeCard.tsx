@@ -26,6 +26,7 @@ const HomeCard = ({ title, link, icon, desc }: HomeCardProps) => {
 
             <div className="mt-4 flex items-center gap-1.5 text-sm text-slate-500 group-hover:text-cyan-400 transition-colors">
                 <span>{t("Nav.Show")}</span>
+
                 <FiArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
             </div>
         </Link>
@@ -33,3 +34,4 @@ const HomeCard = ({ title, link, icon, desc }: HomeCardProps) => {
 };
 
 export default HomeCard;
+

@@ -17,7 +17,10 @@ const UnityJumpingJello = () => {
     }, [scroll]);
 
     return (
-        <div ref={containerRef} className="w-full h-full overflow-auto bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-slate-100">
+        <div
+            ref={containerRef}
+            className="w-full h-full overflow-auto bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-slate-100"
+        >
             {/* Hero */}
             <div className="max-w-4xl mx-auto px-6 py-10">
                 <h1 className="text-4xl font-extrabold tracking-tight text-white mb-3">Jumping Jello</h1>
@@ -26,7 +29,10 @@ const UnityJumpingJello = () => {
                 </p>
 
                 <p className="text-slate-300 text-lg leading-relaxed max-w-2xl">
-                    <Trans i18nKey="JumpingJello.Desc" components={{ b: <strong className="text-white" /> }} />
+                    <Trans
+                        i18nKey="JumpingJello.Desc"
+                        components={{ b: <strong className="text-white" /> }}
+                    />
                 </p>
 
                 <div className="flex flex-wrap gap-2 mt-6">
@@ -47,7 +53,10 @@ const UnityJumpingJello = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">{t("JumpingJello.S1Title")}</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        <Trans i18nKey="JumpingJello.S1Text" components={{ b: <strong className="text-white" /> }} />
+                        <Trans
+                            i18nKey="JumpingJello.S1Text"
+                            components={{ b: <strong className="text-white" /> }}
+                        />
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl mb-4">
@@ -58,9 +67,7 @@ const UnityJumpingJello = () => {
                         />
                     </div>
 
-                    <p className="text-slate-400 text-sm mb-8 text-center italic">
-                        {t("JumpingJello.S1Caption1")}
-                    </p>
+                    <p className="text-slate-400 text-sm mb-8 text-center italic">{t("JumpingJello.S1Caption1")}</p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <Img
@@ -70,9 +77,7 @@ const UnityJumpingJello = () => {
                         />
                     </div>
 
-                    <p className="text-slate-400 text-sm mt-2 text-center italic">
-                        {t("JumpingJello.S1Caption2")}
-                    </p>
+                    <p className="text-slate-400 text-sm mt-2 text-center italic">{t("JumpingJello.S1Caption2")}</p>
                 </section>
 
                 {/* Level select */}
@@ -80,7 +85,10 @@ const UnityJumpingJello = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">{t("JumpingJello.S2Title")}</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        <Trans i18nKey="JumpingJello.S2Text" components={{ b: <strong className="text-white" /> }} />
+                        <Trans
+                            i18nKey="JumpingJello.S2Text"
+                            components={{ b: <strong className="text-white" /> }}
+                        />
                     </p>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
@@ -93,9 +101,7 @@ const UnityJumpingJello = () => {
                                 />
                             </div>
 
-                            <p className="text-slate-400 text-sm mt-1 text-center italic">
-                                {t("JumpingJello.S2Caption1")}
-                            </p>
+                            <p className="text-slate-400 text-sm mt-1 text-center italic">{t("JumpingJello.S2Caption1")}</p>
                         </div>
 
                         <div>
@@ -107,9 +113,7 @@ const UnityJumpingJello = () => {
                                 />
                             </div>
 
-                            <p className="text-slate-400 text-sm mt-1 text-center italic">
-                                {t("JumpingJello.S2Caption2")}
-                            </p>
+                            <p className="text-slate-400 text-sm mt-1 text-center italic">{t("JumpingJello.S2Caption2")}</p>
                         </div>
 
                         <div>
@@ -121,9 +125,7 @@ const UnityJumpingJello = () => {
                                 />
                             </div>
 
-                            <p className="text-slate-400 text-sm mt-1 text-center italic">
-                                {t("JumpingJello.S2Caption3")}
-                            </p>
+                            <p className="text-slate-400 text-sm mt-1 text-center italic">{t("JumpingJello.S2Caption3")}</p>
                         </div>
 
                         <div>
@@ -135,9 +137,7 @@ const UnityJumpingJello = () => {
                                 />
                             </div>
 
-                            <p className="text-slate-400 text-sm mt-1 text-center italic">
-                                {t("JumpingJello.S2Caption4")}
-                            </p>
+                            <p className="text-slate-400 text-sm mt-1 text-center italic">{t("JumpingJello.S2Caption4")}</p>
                         </div>
                     </div>
                 </section>
@@ -147,7 +147,10 @@ const UnityJumpingJello = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">{t("JumpingJello.S3Title")}</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        <Trans i18nKey="JumpingJello.S3Text" components={{ b: <strong className="text-white" /> }} />
+                        <Trans
+                            i18nKey="JumpingJello.S3Text"
+                            components={{ b: <strong className="text-white" /> }}
+                        />
                     </p>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -160,9 +163,7 @@ const UnityJumpingJello = () => {
                                 />
                             </div>
 
-                            <p className="text-slate-400 text-sm mt-1 text-center italic">
-                                {t("JumpingJello.S3Caption1")}
-                            </p>
+                            <p className="text-slate-400 text-sm mt-1 text-center italic">{t("JumpingJello.S3Caption1")}</p>
                         </div>
 
                         <div>
@@ -174,9 +175,7 @@ const UnityJumpingJello = () => {
                                 />
                             </div>
 
-                            <p className="text-slate-400 text-sm mt-1 text-center italic">
-                                {t("JumpingJello.S3Caption2")}
-                            </p>
+                            <p className="text-slate-400 text-sm mt-1 text-center italic">{t("JumpingJello.S3Caption2")}</p>
                         </div>
                     </div>
                 </section>
@@ -186,7 +185,10 @@ const UnityJumpingJello = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">{t("JumpingJello.S4Title")}</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        <Trans i18nKey="JumpingJello.S4Text" components={{ b: <strong className="text-white" /> }} />
+                        <Trans
+                            i18nKey="JumpingJello.S4Text"
+                            components={{ b: <strong className="text-white" /> }}
+                        />
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
@@ -197,9 +199,7 @@ const UnityJumpingJello = () => {
                         />
                     </div>
 
-                    <p className="text-slate-400 text-sm mt-2 text-center italic">
-                        {t("JumpingJello.S4Caption")}
-                    </p>
+                    <p className="text-slate-400 text-sm mt-2 text-center italic">{t("JumpingJello.S4Caption")}</p>
                 </section>
 
                 {/* Fruits */}
@@ -207,7 +207,10 @@ const UnityJumpingJello = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">{t("JumpingJello.S5Title")}</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        <Trans i18nKey="JumpingJello.S5Text" components={{ b: <strong className="text-white" /> }} />
+                        <Trans
+                            i18nKey="JumpingJello.S5Text"
+                            components={{ b: <strong className="text-white" /> }}
+                        />
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
@@ -218,9 +221,7 @@ const UnityJumpingJello = () => {
                         />
                     </div>
 
-                    <p className="text-slate-400 text-sm mt-2 text-center italic">
-                        {t("JumpingJello.S5Caption")}
-                    </p>
+                    <p className="text-slate-400 text-sm mt-2 text-center italic">{t("JumpingJello.S5Caption")}</p>
                 </section>
 
                 {/* Moving platforms */}
@@ -228,7 +229,10 @@ const UnityJumpingJello = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">{t("JumpingJello.S6Title")}</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        <Trans i18nKey="JumpingJello.S6Text" components={{ b: <strong className="text-white" /> }} />
+                        <Trans
+                            i18nKey="JumpingJello.S6Text"
+                            components={{ b: <strong className="text-white" /> }}
+                        />
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
@@ -239,9 +243,7 @@ const UnityJumpingJello = () => {
                         />
                     </div>
 
-                    <p className="text-slate-400 text-sm mt-2 text-center italic">
-                        {t("JumpingJello.S6Caption")}
-                    </p>
+                    <p className="text-slate-400 text-sm mt-2 text-center italic">{t("JumpingJello.S6Caption")}</p>
                 </section>
 
                 {/* Drone enemy */}
@@ -249,11 +251,17 @@ const UnityJumpingJello = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">{t("JumpingJello.S7Title")}</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        <Trans i18nKey="JumpingJello.S7Text1" components={{ b: <strong className="text-white" /> }} />
+                        <Trans
+                            i18nKey="JumpingJello.S7Text1"
+                            components={{ b: <strong className="text-white" /> }}
+                        />
                     </p>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        <Trans i18nKey="JumpingJello.S7Text2" components={{ b: <strong className="text-white" /> }} />
+                        <Trans
+                            i18nKey="JumpingJello.S7Text2"
+                            components={{ b: <strong className="text-white" /> }}
+                        />
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
@@ -264,9 +272,7 @@ const UnityJumpingJello = () => {
                         />
                     </div>
 
-                    <p className="text-slate-400 text-sm mt-2 text-center italic">
-                        {t("JumpingJello.S7Caption")}
-                    </p>
+                    <p className="text-slate-400 text-sm mt-2 text-center italic">{t("JumpingJello.S7Caption")}</p>
                 </section>
 
                 {/* Secret */}
@@ -274,7 +280,10 @@ const UnityJumpingJello = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">{t("JumpingJello.S8Title")}</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        <Trans i18nKey="JumpingJello.S8Text" components={{ b: <strong className="text-white" /> }} />
+                        <Trans
+                            i18nKey="JumpingJello.S8Text"
+                            components={{ b: <strong className="text-white" /> }}
+                        />
                     </p>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -287,9 +296,7 @@ const UnityJumpingJello = () => {
                                 />
                             </div>
 
-                            <p className="text-slate-400 text-sm mt-1 text-center italic">
-                                {t("JumpingJello.S8Caption1")}
-                            </p>
+                            <p className="text-slate-400 text-sm mt-1 text-center italic">{t("JumpingJello.S8Caption1")}</p>
                         </div>
 
                         <div>
@@ -301,9 +308,7 @@ const UnityJumpingJello = () => {
                                 />
                             </div>
 
-                            <p className="text-slate-400 text-sm mt-1 text-center italic">
-                                {t("JumpingJello.S8Caption2")}
-                            </p>
+                            <p className="text-slate-400 text-sm mt-1 text-center italic">{t("JumpingJello.S8Caption2")}</p>
                         </div>
                     </div>
                 </section>
@@ -313,7 +318,10 @@ const UnityJumpingJello = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">{t("JumpingJello.S9Title")}</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        <Trans i18nKey="JumpingJello.S9Text" components={{ b: <strong className="text-white" /> }} />
+                        <Trans
+                            i18nKey="JumpingJello.S9Text"
+                            components={{ b: <strong className="text-white" /> }}
+                        />
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl mb-4">
@@ -324,9 +332,7 @@ const UnityJumpingJello = () => {
                         />
                     </div>
 
-                    <p className="text-slate-400 text-sm mb-8 text-center italic">
-                        {t("JumpingJello.S9Caption1")}
-                    </p>
+                    <p className="text-slate-400 text-sm mb-8 text-center italic">{t("JumpingJello.S9Caption1")}</p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <Img
@@ -336,9 +342,7 @@ const UnityJumpingJello = () => {
                         />
                     </div>
 
-                    <p className="text-slate-400 text-sm mt-2 text-center italic">
-                        {t("JumpingJello.S9Caption2")}
-                    </p>
+                    <p className="text-slate-400 text-sm mt-2 text-center italic">{t("JumpingJello.S9Caption2")}</p>
                 </section>
 
                 {/* Winning */}
@@ -346,7 +350,10 @@ const UnityJumpingJello = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">{t("JumpingJello.S10Title")}</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        <Trans i18nKey="JumpingJello.S10Text" components={{ b: <strong className="text-white" /> }} />
+                        <Trans
+                            i18nKey="JumpingJello.S10Text"
+                            components={{ b: <strong className="text-white" /> }}
+                        />
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
@@ -357,9 +364,7 @@ const UnityJumpingJello = () => {
                         />
                     </div>
 
-                    <p className="text-slate-400 text-sm mt-2 text-center italic">
-                        {t("JumpingJello.S10Caption")}
-                    </p>
+                    <p className="text-slate-400 text-sm mt-2 text-center italic">{t("JumpingJello.S10Caption")}</p>
                 </section>
 
                 {/* Infinity levels */}
@@ -367,7 +372,10 @@ const UnityJumpingJello = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">{t("JumpingJello.S11Title")}</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        <Trans i18nKey="JumpingJello.S11Text" components={{ b: <strong className="text-white" /> }} />
+                        <Trans
+                            i18nKey="JumpingJello.S11Text"
+                            components={{ b: <strong className="text-white" /> }}
+                        />
                     </p>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
@@ -380,9 +388,7 @@ const UnityJumpingJello = () => {
                                 />
                             </div>
 
-                            <p className="text-slate-400 text-sm mt-1 text-center italic">
-                                {t("JumpingJello.S11Caption1")}
-                            </p>
+                            <p className="text-slate-400 text-sm mt-1 text-center italic">{t("JumpingJello.S11Caption1")}</p>
                         </div>
 
                         <div>
@@ -394,9 +400,7 @@ const UnityJumpingJello = () => {
                                 />
                             </div>
 
-                            <p className="text-slate-400 text-sm mt-1 text-center italic">
-                                {t("JumpingJello.S11Caption2")}
-                            </p>
+                            <p className="text-slate-400 text-sm mt-1 text-center italic">{t("JumpingJello.S11Caption2")}</p>
                         </div>
                     </div>
 
@@ -408,9 +412,7 @@ const UnityJumpingJello = () => {
                         />
                     </div>
 
-                    <p className="text-slate-400 text-sm mt-2 text-center italic">
-                        {t("JumpingJello.S11Caption3")}
-                    </p>
+                    <p className="text-slate-400 text-sm mt-2 text-center italic">{t("JumpingJello.S11Caption3")}</p>
                 </section>
 
                 {/* Bones & animation */}
@@ -418,7 +420,10 @@ const UnityJumpingJello = () => {
                     <h2 className="text-2xl font-bold text-white mb-2">{t("JumpingJello.S12Title")}</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-6">
-                        <Trans i18nKey="JumpingJello.S12Text" components={{ b: <strong className="text-white" /> }} />
+                        <Trans
+                            i18nKey="JumpingJello.S12Text"
+                            components={{ b: <strong className="text-white" /> }}
+                        />
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
@@ -429,9 +434,7 @@ const UnityJumpingJello = () => {
                         />
                     </div>
 
-                    <p className="text-slate-400 text-sm mt-2 text-center italic">
-                        {t("JumpingJello.S12Caption")}
-                    </p>
+                    <p className="text-slate-400 text-sm mt-2 text-center italic">{t("JumpingJello.S12Caption")}</p>
                 </section>
 
                 {/* Shaders */}
@@ -439,7 +442,10 @@ const UnityJumpingJello = () => {
                     <h2 className="text-2xl font-bold text-white mb-2">{t("JumpingJello.S13Title")}</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-10">
-                        <Trans i18nKey="JumpingJello.S13Text" components={{ b: <strong className="text-white" /> }} />
+                        <Trans
+                            i18nKey="JumpingJello.S13Text"
+                            components={{ b: <strong className="text-white" /> }}
+                        />
                     </p>
 
                     {/* Laser drone shader */}
@@ -447,7 +453,10 @@ const UnityJumpingJello = () => {
                         <h3 className="text-xl font-semibold text-white mb-1">{t("JumpingJello.S13aTitle")}</h3>
 
                         <p className="text-slate-300 leading-relaxed mb-4">
-                            <Trans i18nKey="JumpingJello.S13aText" components={{ b: <strong className="text-white" /> }} />
+                            <Trans
+                                i18nKey="JumpingJello.S13aText"
+                                components={{ b: <strong className="text-white" /> }}
+                            />
                         </p>
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
@@ -458,9 +467,7 @@ const UnityJumpingJello = () => {
                             />
                         </div>
 
-                        <p className="text-slate-400 text-sm mt-2 text-center italic">
-                            {t("JumpingJello.S13aCaption")}
-                        </p>
+                        <p className="text-slate-400 text-sm mt-2 text-center italic">{t("JumpingJello.S13aCaption")}</p>
                     </div>
 
                     {/* Character burn shader */}
@@ -468,7 +475,10 @@ const UnityJumpingJello = () => {
                         <h3 className="text-xl font-semibold text-white mb-1">{t("JumpingJello.S13bTitle")}</h3>
 
                         <p className="text-slate-300 leading-relaxed mb-4">
-                            <Trans i18nKey="JumpingJello.S13bText" components={{ b: <strong className="text-white" /> }} />
+                            <Trans
+                                i18nKey="JumpingJello.S13bText"
+                                components={{ b: <strong className="text-white" /> }}
+                            />
                         </p>
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
@@ -479,9 +489,7 @@ const UnityJumpingJello = () => {
                             />
                         </div>
 
-                        <p className="text-slate-400 text-sm mt-2 text-center italic">
-                            {t("JumpingJello.S13bCaption")}
-                        </p>
+                        <p className="text-slate-400 text-sm mt-2 text-center italic">{t("JumpingJello.S13bCaption")}</p>
                     </div>
                 </section>
             </div>

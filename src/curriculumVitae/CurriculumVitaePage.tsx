@@ -39,8 +39,8 @@ const CurriculumVitaePage = () => {
     return (
         <div
             ref={containerRef}
-            className="cv-print-scale w-full h-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 overflow-auto print:h-auto print:overflow-visible
-                print:bg-white"
+            className="cv-print-scale w-full h-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 overflow-auto print:h-auto
+                print:overflow-visible print:bg-white"
         >
             {/* Header */}
             <header className="bg-gradient-to-r from-slate-900 via-blue-900/40 to-slate-900 border-b border-slate-700/50">
@@ -412,4 +412,3 @@ const CurriculumVitaePage = () => {
 };
 
 export default CurriculumVitaePage;
-

@@ -16,3 +16,4 @@ const SectionTitle = ({ icon, title }: SectionTitleProps) => (
 );
 
 export default SectionTitle;
+

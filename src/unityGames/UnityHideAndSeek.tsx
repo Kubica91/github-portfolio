@@ -19,16 +19,20 @@ const UnityHideAndSeek = () => {
     }, [scroll]);
 
     return (
-        <div ref={containerRef} className="w-full h-full overflow-auto bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-slate-100">
+        <div
+            ref={containerRef}
+            className="w-full h-full overflow-auto bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-slate-100"
+        >
             {/* Hero */}
             <div className="max-w-4xl mx-auto px-6 py-10">
                 <h1 className="text-4xl font-extrabold tracking-tight text-white mb-3">Hide and Seek</h1>
-                <p className="text-sm font-medium tracking-wide uppercase text-red-400 mb-4">
-                    {t("HideAndSeek.Subtitle")}
-                </p>
+                <p className="text-sm font-medium tracking-wide uppercase text-red-400 mb-4">{t("HideAndSeek.Subtitle")}</p>
 
                 <p className="text-slate-300 text-lg leading-relaxed max-w-2xl">
-                    <Trans i18nKey="HideAndSeek.Desc" components={{ b: <strong className="text-white" /> }} />
+                    <Trans
+                        i18nKey="HideAndSeek.Desc"
+                        components={{ b: <strong className="text-white" /> }}
+                    />
                 </p>
 
                 <div className="flex flex-wrap gap-2 mt-6">
@@ -49,7 +53,10 @@ const UnityHideAndSeek = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">{t("HideAndSeek.S1Title")}</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        <Trans i18nKey="HideAndSeek.S1Text" components={{ b: <strong className="text-white" /> }} />
+                        <Trans
+                            i18nKey="HideAndSeek.S1Text"
+                            components={{ b: <strong className="text-white" /> }}
+                        />
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
@@ -60,25 +67,24 @@ const UnityHideAndSeek = () => {
                         />
                     </div>
 
-                    <p className="text-slate-400 text-sm mt-2 text-center italic">
-                        {t("HideAndSeek.S1Caption")}
-                    </p>
+                    <p className="text-slate-400 text-sm mt-2 text-center italic">{t("HideAndSeek.S1Caption")}</p>
                 </section>
 
                 {/* Controls */}
                 <section>
                     <h2 className="text-2xl font-bold text-white mb-1">{t("HideAndSeek.S2Title")}</h2>
 
-                    <p className="text-slate-300 leading-relaxed mb-5">
-                        {t("HideAndSeek.S2Text")}
-                    </p>
+                    <p className="text-slate-300 leading-relaxed mb-5">{t("HideAndSeek.S2Text")}</p>
 
                     <div className="overflow-hidden rounded-2xl border border-slate-700/50">
                         <table className="w-full text-sm">
                             <thead>
                                 <tr className="bg-slate-800/80 text-left">
                                     {tableHeaders.map((header) => (
-                                        <th key={header} className="px-4 py-3 text-slate-300 font-semibold">
+                                        <th
+                                            key={header}
+                                            className="px-4 py-3 text-slate-300 font-semibold"
+                                        >
                                             {header}
                                         </th>
                                     ))}
@@ -108,7 +114,10 @@ const UnityHideAndSeek = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">{t("HideAndSeek.S3Title")}</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        <Trans i18nKey="HideAndSeek.S3Text" components={{ b: <strong className="text-white" /> }} />
+                        <Trans
+                            i18nKey="HideAndSeek.S3Text"
+                            components={{ b: <strong className="text-white" /> }}
+                        />
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
@@ -119,9 +128,7 @@ const UnityHideAndSeek = () => {
                         />
                     </div>
 
-                    <p className="text-slate-400 text-sm mt-2 text-center italic">
-                        {t("HideAndSeek.S3Caption")}
-                    </p>
+                    <p className="text-slate-400 text-sm mt-2 text-center italic">{t("HideAndSeek.S3Caption")}</p>
                 </section>
 
                 {/* Hiding */}
@@ -129,7 +136,10 @@ const UnityHideAndSeek = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">{t("HideAndSeek.S4Title")}</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        <Trans i18nKey="HideAndSeek.S4Text" components={{ b: <strong className="text-white" /> }} />
+                        <Trans
+                            i18nKey="HideAndSeek.S4Text"
+                            components={{ b: <strong className="text-white" /> }}
+                        />
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
@@ -140,9 +150,7 @@ const UnityHideAndSeek = () => {
                         />
                     </div>
 
-                    <p className="text-slate-400 text-sm mt-2 text-center italic">
-                        {t("HideAndSeek.S4Caption")}
-                    </p>
+                    <p className="text-slate-400 text-sm mt-2 text-center italic">{t("HideAndSeek.S4Caption")}</p>
                 </section>
 
                 {/* Hunting friend */}
@@ -150,7 +158,10 @@ const UnityHideAndSeek = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">{t("HideAndSeek.S5Title")}</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        <Trans i18nKey="HideAndSeek.S5Text" components={{ b: <strong className="text-white" /> }} />
+                        <Trans
+                            i18nKey="HideAndSeek.S5Text"
+                            components={{ b: <strong className="text-white" /> }}
+                        />
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
@@ -161,9 +172,7 @@ const UnityHideAndSeek = () => {
                         />
                     </div>
 
-                    <p className="text-slate-400 text-sm mt-2 text-center italic">
-                        {t("HideAndSeek.S5Caption")}
-                    </p>
+                    <p className="text-slate-400 text-sm mt-2 text-center italic">{t("HideAndSeek.S5Caption")}</p>
                 </section>
 
                 {/* Scene editor */}
@@ -171,7 +180,10 @@ const UnityHideAndSeek = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">{t("HideAndSeek.S6Title")}</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        <Trans i18nKey="HideAndSeek.S6Text" components={{ b: <strong className="text-white" /> }} />
+                        <Trans
+                            i18nKey="HideAndSeek.S6Text"
+                            components={{ b: <strong className="text-white" /> }}
+                        />
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
@@ -182,9 +194,7 @@ const UnityHideAndSeek = () => {
                         />
                     </div>
 
-                    <p className="text-slate-400 text-sm mt-2 text-center italic">
-                        {t("HideAndSeek.S6Caption")}
-                    </p>
+                    <p className="text-slate-400 text-sm mt-2 text-center italic">{t("HideAndSeek.S6Caption")}</p>
                 </section>
             </div>
         </div>

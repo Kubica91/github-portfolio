@@ -13,7 +13,10 @@ const TimelineItem = ({ period, title, subtitle, children }: TimelineItemProps) 
         </div>
 
         <div className="flex flex-col items-start pb-4">
-            <span className="mb-1 inline-block rounded-full bg-blue-900/50 px-3 py-0.5 text-xs font-semibold text-blue-300 print:bg-blue-100 print:text-blue-700">
+            <span
+                className="mb-1 inline-block rounded-full bg-blue-900/50 px-3 py-0.5 text-xs font-semibold text-blue-300 print:bg-blue-100
+                    print:text-blue-700"
+            >
                 {period}
             </span>
 
@@ -27,3 +30,4 @@ const TimelineItem = ({ period, title, subtitle, children }: TimelineItemProps) 
 );
 
 export default TimelineItem;
+

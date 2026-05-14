@@ -23,7 +23,8 @@ const SkillCategory = ({ title, skills, color }: SkillCategoryProps) => {
                 {skills.map((skill) => (
                     <span
                         key={skill}
-                        className={`rounded-full border ${colors.border} bg-slate-800/60 px-3 py-1 text-sm font-medium ${colors.text} print:bg-white print:border-gray-300 print:text-gray-700`}
+                        className={`rounded-full border ${colors.border} bg-slate-800/60 px-3 py-1 text-sm font-medium ${colors.text} print:bg-white
+                        print:border-gray-300 print:text-gray-700`}
                     >
                         {skill}
                     </span>
@@ -34,3 +35,4 @@ const SkillCategory = ({ title, skills, color }: SkillCategoryProps) => {
 };
 
 export default SkillCategory;
+

@@ -24,13 +24,13 @@ import {
     ChessPosition,
     EDGE_DEFAULT_COLOR,
     EDGE_HIGHLIGHT_COLOR,
-    GetBishopGeometry,
-    GetChessboardGeometry,
-    GetKingGeometry,
-    GetKnightGeometry,
-    GetPawnGeometry,
-    GetQueenGeometry,
-    GetRookGeometry,
+    getBishopGeometry,
+    getChessboardGeometry,
+    getKingGeometry,
+    getKnightGeometry,
+    getPawnGeometry,
+    getQueenGeometry,
+    getRookGeometry,
     MOVE_HIGHLIGHT_CAPTURE,
     MOVE_HIGHLIGHT_NORMAL,
     PromotionPieceType,
@@ -39,7 +39,7 @@ import {
     WHITE_PIECE_COLOR,
 } from "./ChessGeometryUtils";
 
-export const BuildBoardState = (piecesGroup: Group): BoardState => {
+export const buildBoardState = (piecesGroup: Group): BoardState => {
     const board: BoardState = Array.from({ length: 8 }, () => Array<ChessPieceGroup | null>(8).fill(null));
     for (const child of piecesGroup.children) {
         if (child instanceof ChessPieceGroup) {
@@ -50,7 +50,7 @@ export const BuildBoardState = (piecesGroup: Group): BoardState => {
     return board;
 };
 
-export const InitializeChessPieces = (piecesGroup: Group) => {
+export const initializeChessPieces = (piecesGroup: Group) => {
     while (piecesGroup.children.length > 0) {
         piecesGroup.remove(piecesGroup.children[0]);
     }
@@ -62,24 +62,24 @@ export const InitializeChessPieces = (piecesGroup: Group) => {
     };
 
     const backRankFactories = [
-        GetRookGeometry,
-        GetKnightGeometry,
-        GetBishopGeometry,
-        GetQueenGeometry,
-        GetKingGeometry,
-        GetBishopGeometry,
-        GetKnightGeometry,
-        GetRookGeometry,
+        getRookGeometry,
+        getKnightGeometry,
+        getBishopGeometry,
+        getQueenGeometry,
+        getKingGeometry,
+        getBishopGeometry,
+        getKnightGeometry,
+        getRookGeometry,
     ];
 
     for (let x = 0; x < 8; x++) {
         const whiteBack = backRankFactories[x]("white", { x, y: 0 });
         placePiece(whiteBack, x, 0);
 
-        const whitePawn = GetPawnGeometry("white", { x, y: 1 });
+        const whitePawn = getPawnGeometry("white", { x, y: 1 });
         placePiece(whitePawn, x, 1);
 
-        const blackPawn = GetPawnGeometry("black", { x, y: 6 });
+        const blackPawn = getPawnGeometry("black", { x, y: 6 });
         placePiece(blackPawn, x, 6);
 
         const blackBack = backRankFactories[x]("black", { x, y: 7 });
@@ -87,7 +87,7 @@ export const InitializeChessPieces = (piecesGroup: Group) => {
     }
 };
 
-export const InitializeChessScene = async (canvas: HTMLCanvasElement, container: HTMLDivElement) => {
+export const initializeChessScene = async (canvas: HTMLCanvasElement, container: HTMLDivElement) => {
     const scene = new Scene();
     const camera = new PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
 
@@ -96,13 +96,13 @@ export const InitializeChessScene = async (canvas: HTMLCanvasElement, container:
     renderer.setAnimationLoop(animate);
 
     const piecesGroup = new Group();
-    InitializeChessPieces(piecesGroup);
+    initializeChessPieces(piecesGroup);
     scene.add(piecesGroup);
 
     const highlightsGroup = new Group();
     scene.add(highlightsGroup);
 
-    const { board, squaresGroup } = await GetChessboardGeometry();
+    const { board, squaresGroup } = await getChessboardGeometry();
     scene.add(board);
 
     const ambientLight = new AmbientLight(0xffffff, 0.5);
@@ -119,7 +119,7 @@ export const InitializeChessScene = async (canvas: HTMLCanvasElement, container:
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = PCFShadowMap;
 
-    FitCameraToBoard(camera, container.clientWidth, container.clientHeight);
+    fitCameraToBoard(camera, container.clientWidth, container.clientHeight);
 
     function animate() {
         renderer.render(scene, camera);
@@ -128,7 +128,7 @@ export const InitializeChessScene = async (canvas: HTMLCanvasElement, container:
     return { scene, camera, renderer, piecesGroup, squaresGroup, highlightsGroup };
 };
 
-export const FitCameraToBoard = (camera: PerspectiveCamera, width: number, height: number) => {
+export const fitCameraToBoard = (camera: PerspectiveCamera, width: number, height: number) => {
     const aspect = width / height;
     const fitSize = 8 * SQUARE_SIZE + 2.2;
 
@@ -144,7 +144,7 @@ export const FitCameraToBoard = (camera: PerspectiveCamera, width: number, heigh
     camera.updateProjectionMatrix();
 };
 
-export const GetPieceByRaycast = (piecesGroup: Group, raycaster: Raycaster): ChessGroup | null => {
+export const getPieceByRaycast = (piecesGroup: Group, raycaster: Raycaster): ChessGroup | null => {
     const intersects = raycaster.intersectObjects(piecesGroup.children, true);
     if (intersects.length > 0) {
         let intersectedObject = intersects[0].object;
@@ -161,7 +161,7 @@ export const GetPieceByRaycast = (piecesGroup: Group, raycaster: Raycaster): Che
     return null;
 };
 
-export const GetSquareByRaycast = (squaresGroup: Group, raycaster: Raycaster): ChessPosition | null => {
+export const getSquareByRaycast = (squaresGroup: Group, raycaster: Raycaster): ChessPosition | null => {
     const intersects = raycaster.intersectObjects(squaresGroup.children, false);
     if (intersects.length === 0) return null;
 
@@ -171,21 +171,21 @@ export const GetSquareByRaycast = (squaresGroup: Group, raycaster: Raycaster): C
     return hit.chessPosition;
 };
 
-export const HighlightPiece = (piece: ChessGroup) => {
+export const highlightPiece = (piece: ChessGroup) => {
     piece.traverse((child) => {
         if (!(child instanceof LineSegments2)) return;
         (child.material as LineMaterial).color.setHex(EDGE_HIGHLIGHT_COLOR);
     });
 };
 
-export const ClearHighlightedPiece = (piece: ChessGroup) => {
+export const clearHighlightedPiece = (piece: ChessGroup) => {
     piece.traverse((child) => {
         if (!(child instanceof LineSegments2)) return;
         (child.material as LineMaterial).color.setHex(EDGE_DEFAULT_COLOR);
     });
 };
 
-export const SelectPiece = (piece: ChessGroup) => {
+export const selectPiece = (piece: ChessGroup) => {
     piece.traverse((child) => {
         if (child instanceof LineSegments2) return;
         const mesh = child as Mesh;
@@ -197,7 +197,7 @@ export const SelectPiece = (piece: ChessGroup) => {
     });
 };
 
-export const ClearSelectedPiece = (piece: ChessGroup) => {
+export const clearSelectedPiece = (piece: ChessGroup) => {
     piece.traverse((child) => {
         if (child instanceof LineSegments2) return;
         const mesh = child as Mesh;
@@ -209,13 +209,13 @@ export const ClearSelectedPiece = (piece: ChessGroup) => {
     });
 };
 
-export const ShowMoveHighlights = (
+export const showMoveHighlights = (
     moves: ChessPosition[],
     board: BoardState,
     pieceColor: ChessPieceColor,
     highlightsGroup: Group
 ) => {
-    ClearMoveHighlights(highlightsGroup);
+    clearMoveHighlights(highlightsGroup);
 
     for (const move of moves) {
         const occupant = board[move.y][move.x];
@@ -230,21 +230,21 @@ export const ShowMoveHighlights = (
     }
 };
 
-export const ClearMoveHighlights = (highlightsGroup: Group) => {
+export const clearMoveHighlights = (highlightsGroup: Group) => {
     while (highlightsGroup.children.length > 0) {
         highlightsGroup.remove(highlightsGroup.children[0]);
     }
 };
 
-export const PromotePawn = (pawn: ChessPieceGroup, newType: PromotionPieceType, piecesGroup: Group): ChessPieceGroup => {
+export const promotePawn = (pawn: ChessPieceGroup, newType: PromotionPieceType, piecesGroup: Group): ChessPieceGroup => {
     const PROMOTION_FACTORIES: Record<
         PromotionPieceType,
-        typeof GetQueenGeometry | typeof GetRookGeometry | typeof GetBishopGeometry | typeof GetKnightGeometry
+        typeof getQueenGeometry | typeof getRookGeometry | typeof getBishopGeometry | typeof getKnightGeometry
     > = {
-        queen: GetQueenGeometry,
-        rook: GetRookGeometry,
-        bishop: GetBishopGeometry,
-        knight: GetKnightGeometry,
+        queen: getQueenGeometry,
+        rook: getRookGeometry,
+        bishop: getBishopGeometry,
+        knight: getKnightGeometry,
     };
 
     const pos = { ...pawn.chessPosition };

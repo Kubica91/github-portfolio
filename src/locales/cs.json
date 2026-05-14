@@ -16,7 +16,9 @@
         "HideAndSeekDesc": "PC hra na schovávanou s podporou gamepadu. Tma a zorné pole přes shader, lovci a zloději s vlastní AI.",
         "JumpingJelloDesc": "Mobilní 2D platformer s 8 levely, 4 infinity levely, 6 skiny, achievement systémem a vlastními shadery.",
         "Chess3DTitle": "Šachy 3D (Three.js)",
-        "Chess3DDesc": "Interaktivní 3D šachové figurky v prohlížeči."
+        "Chess3DDesc": "Interaktivní 3D šachové figurky v prohlížeči.",
+        "IfcViewerTitle": "IFC prohlížečka",
+        "IfcViewerDesc": "Nahrání .ifc modelu z disku, sekční rovina, strom prvků a vlastnosti."
     },
 
     "FindACoin": {
@@ -444,6 +446,30 @@
         "Color": {
             "white": "Bílá",
             "black": "Černá"
+        }
+    },
+
+    "IfcViewer": {
+        "OpenFile": "Otevřít IFC soubor",
+        "NoFileLoaded": "Žádný model nenahrán",
+        "Loading": "Načítání...",
+        "LoadError": "Soubor se nepodařilo načíst.",
+        "Tools": {
+            "Title": "Nástroje",
+            "SectionPlane": "Sekční rovina (klik do scény)",
+            "RemovePlanes": "Smazat všechny roviny",
+            "ResetCamera": "Vystředit pohled",
+            "ShowAll": "Zobrazit vše"
+        },
+        "Tree": {
+            "Title": "Struktura modelu",
+            "Empty": "Nahraj IFC soubor pro zobrazení stromu."
+        },
+        "Element": {
+            "Title": "Vlastnosti prvku",
+            "NoSelection": "Vyber prvek kliknutím nebo přes strom.",
+            "Type": "Typ",
+            "LocalId": "Local ID"
         }
     }
 }

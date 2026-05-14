@@ -3,6 +3,7 @@ import { ToastContainer } from "react-toastify";
 import CurriculumVitaePage from "./curriculumVitae/CurriculumVitaePage";
 import HomePage from "./home/HomePage";
 import useGoatCounter from "./hooks/useGoatCounter";
+import IfcViewerMainPage from "./ifcViewer/IfcViewerMainPage";
 import ChessMainPage from "./threeJsGames/chess/ChessMainPage";
 import TopNavigationBar from "./topNavigationBar/TopNavigationBar";
 import UnityDeffTheBase from "./unityGames/UnityDeffTheBase";
@@ -23,29 +24,40 @@ const AppRoutes = () => {
                         path="/github-portfolio"
                         element={<HomePage />}
                     />
+
                     <Route
                         path="/github-portfolio/cv"
                         element={<CurriculumVitaePage />}
                     />
+
                     <Route
                         path="/github-portfolio/unity/findacoin"
                         element={<UnityFindACoin />}
                     />
+
                     <Route
                         path="/github-portfolio/unity/deffthebase"
                         element={<UnityDeffTheBase />}
                     />
+
                     <Route
                         path="/github-portfolio/unity/hideandseek"
                         element={<UnityHideAndSeek />}
                     />
+
                     <Route
                         path="/github-portfolio/unity/jumpingjello"
                         element={<UnityJumpingJello />}
                     />
+
                     <Route
                         path="/github-portfolio/threejs/sachy"
                         element={<ChessMainPage />}
+                    />
+
+                    <Route
+                        path="/github-portfolio/threejs/ifc-prohlizecka"
+                        element={<IfcViewerMainPage />}
                     />
                 </Routes>
             </div>

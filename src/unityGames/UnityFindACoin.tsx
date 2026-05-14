@@ -17,16 +17,20 @@ const UnityFindACoin = () => {
     }, [scroll]);
 
     return (
-        <div ref={containerRef} className="w-full h-full overflow-auto bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-slate-100">
+        <div
+            ref={containerRef}
+            className="w-full h-full overflow-auto bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-slate-100"
+        >
             {/* Hero */}
             <div className="max-w-4xl mx-auto px-6 py-10">
                 <h1 className="text-4xl font-extrabold tracking-tight text-white mb-3">Find a Coin</h1>
-                <p className="text-sm font-medium tracking-wide uppercase text-purple-400 mb-4">
-                    {t("FindACoin.Subtitle")}
-                </p>
+                <p className="text-sm font-medium tracking-wide uppercase text-purple-400 mb-4">{t("FindACoin.Subtitle")}</p>
 
                 <p className="text-slate-300 text-lg leading-relaxed max-w-2xl">
-                    <Trans i18nKey="FindACoin.Desc" components={{ b: <strong className="text-white" /> }} />
+                    <Trans
+                        i18nKey="FindACoin.Desc"
+                        components={{ b: <strong className="text-white" /> }}
+                    />
                 </p>
 
                 <div className="flex flex-wrap gap-2 mt-6">
@@ -47,7 +51,10 @@ const UnityFindACoin = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">{t("FindACoin.S1Title")}</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        <Trans i18nKey="FindACoin.S1Text" components={{ b: <strong className="text-white" /> }} />
+                        <Trans
+                            i18nKey="FindACoin.S1Text"
+                            components={{ b: <strong className="text-white" /> }}
+                        />
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
@@ -58,9 +65,7 @@ const UnityFindACoin = () => {
                         />
                     </div>
 
-                    <p className="text-slate-400 text-sm mt-2 text-center italic">
-                        {t("FindACoin.S1Caption")}
-                    </p>
+                    <p className="text-slate-400 text-sm mt-2 text-center italic">{t("FindACoin.S1Caption")}</p>
                 </section>
 
                 {/* Level select */}
@@ -68,7 +73,10 @@ const UnityFindACoin = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">{t("FindACoin.S2Title")}</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        <Trans i18nKey="FindACoin.S2Text" components={{ b: <strong className="text-white" /> }} />
+                        <Trans
+                            i18nKey="FindACoin.S2Text"
+                            components={{ b: <strong className="text-white" /> }}
+                        />
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
@@ -79,18 +87,14 @@ const UnityFindACoin = () => {
                         />
                     </div>
 
-                    <p className="text-slate-400 text-sm mt-2 text-center italic">
-                        {t("FindACoin.S2Caption")}
-                    </p>
+                    <p className="text-slate-400 text-sm mt-2 text-center italic">{t("FindACoin.S2Caption")}</p>
                 </section>
 
                 {/* Level 1 */}
                 <section>
                     <h2 className="text-2xl font-bold text-white mb-1">{t("FindACoin.S3Title")}</h2>
 
-                    <p className="text-slate-300 leading-relaxed mb-5">
-                        {t("FindACoin.S3Text")}
-                    </p>
+                    <p className="text-slate-300 leading-relaxed mb-5">{t("FindACoin.S3Text")}</p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl mb-4">
                         <Img
@@ -100,9 +104,7 @@ const UnityFindACoin = () => {
                         />
                     </div>
 
-                    <p className="text-slate-400 text-sm mb-6 text-center italic">
-                        {t("FindACoin.S3Caption1")}
-                    </p>
+                    <p className="text-slate-400 text-sm mb-6 text-center italic">{t("FindACoin.S3Caption1")}</p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <Img
@@ -112,9 +114,7 @@ const UnityFindACoin = () => {
                         />
                     </div>
 
-                    <p className="text-slate-400 text-sm mt-2 text-center italic">
-                        {t("FindACoin.S3Caption2")}
-                    </p>
+                    <p className="text-slate-400 text-sm mt-2 text-center italic">{t("FindACoin.S3Caption2")}</p>
                 </section>
 
                 {/* Level 2 */}
@@ -122,7 +122,10 @@ const UnityFindACoin = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">{t("FindACoin.S4Title")}</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        <Trans i18nKey="FindACoin.S4Text" components={{ b: <strong className="text-white" /> }} />
+                        <Trans
+                            i18nKey="FindACoin.S4Text"
+                            components={{ b: <strong className="text-white" /> }}
+                        />
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl mb-4">
@@ -133,9 +136,7 @@ const UnityFindACoin = () => {
                         />
                     </div>
 
-                    <p className="text-slate-400 text-sm mb-6 text-center italic">
-                        {t("FindACoin.S4Caption1")}
-                    </p>
+                    <p className="text-slate-400 text-sm mb-6 text-center italic">{t("FindACoin.S4Caption1")}</p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <Img
@@ -145,9 +146,7 @@ const UnityFindACoin = () => {
                         />
                     </div>
 
-                    <p className="text-slate-400 text-sm mt-2 text-center italic">
-                        {t("FindACoin.S4Caption2")}
-                    </p>
+                    <p className="text-slate-400 text-sm mt-2 text-center italic">{t("FindACoin.S4Caption2")}</p>
                 </section>
 
                 {/* Level 3 */}
@@ -155,7 +154,10 @@ const UnityFindACoin = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">{t("FindACoin.S5Title")}</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        <Trans i18nKey="FindACoin.S5Text" components={{ b: <strong className="text-white" /> }} />
+                        <Trans
+                            i18nKey="FindACoin.S5Text"
+                            components={{ b: <strong className="text-white" /> }}
+                        />
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl mb-4">
@@ -166,9 +168,7 @@ const UnityFindACoin = () => {
                         />
                     </div>
 
-                    <p className="text-slate-400 text-sm mb-6 text-center italic">
-                        {t("FindACoin.S5Caption1")}
-                    </p>
+                    <p className="text-slate-400 text-sm mb-6 text-center italic">{t("FindACoin.S5Caption1")}</p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <Img
@@ -178,18 +178,14 @@ const UnityFindACoin = () => {
                         />
                     </div>
 
-                    <p className="text-slate-400 text-sm mt-2 text-center italic">
-                        {t("FindACoin.S5Caption2")}
-                    </p>
+                    <p className="text-slate-400 text-sm mt-2 text-center italic">{t("FindACoin.S5Caption2")}</p>
                 </section>
 
                 {/* In-game menu */}
                 <section>
                     <h2 className="text-2xl font-bold text-white mb-1">{t("FindACoin.S6Title")}</h2>
 
-                    <p className="text-slate-300 leading-relaxed mb-5">
-                        {t("FindACoin.S6Text")}
-                    </p>
+                    <p className="text-slate-300 leading-relaxed mb-5">{t("FindACoin.S6Text")}</p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <Img
@@ -199,9 +195,7 @@ const UnityFindACoin = () => {
                         />
                     </div>
 
-                    <p className="text-slate-400 text-sm mt-2 text-center italic">
-                        {t("FindACoin.S6Caption")}
-                    </p>
+                    <p className="text-slate-400 text-sm mt-2 text-center italic">{t("FindACoin.S6Caption")}</p>
                 </section>
 
                 {/* Animations */}
@@ -209,7 +203,10 @@ const UnityFindACoin = () => {
                     <h2 className="text-2xl font-bold text-white mb-2">{t("FindACoin.S7Title")}</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-10">
-                        <Trans i18nKey="FindACoin.S7Text" components={{ b: <strong className="text-white" /> }} />
+                        <Trans
+                            i18nKey="FindACoin.S7Text"
+                            components={{ b: <strong className="text-white" /> }}
+                        />
                     </p>
 
                     {/* Animator overview */}
@@ -217,7 +214,10 @@ const UnityFindACoin = () => {
                         <h3 className="text-xl font-semibold text-white mb-1">{t("FindACoin.S7aTitle")}</h3>
 
                         <p className="text-slate-300 leading-relaxed mb-4">
-                            <Trans i18nKey="FindACoin.S7aText" components={{ b: <strong className="text-white" /> }} />
+                            <Trans
+                                i18nKey="FindACoin.S7aText"
+                                components={{ b: <strong className="text-white" /> }}
+                            />
                         </p>
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
@@ -228,18 +228,14 @@ const UnityFindACoin = () => {
                             />
                         </div>
 
-                        <p className="text-slate-400 text-sm mt-2 text-center italic">
-                            {t("FindACoin.S7aCaption")}
-                        </p>
+                        <p className="text-slate-400 text-sm mt-2 text-center italic">{t("FindACoin.S7aCaption")}</p>
                     </div>
 
                     {/* Player move */}
                     <div className="mb-12">
                         <h3 className="text-xl font-semibold text-white mb-1">{t("FindACoin.S7bTitle")}</h3>
 
-                        <p className="text-slate-300 leading-relaxed mb-4">
-                            {t("FindACoin.S7bText")}
-                        </p>
+                        <p className="text-slate-300 leading-relaxed mb-4">{t("FindACoin.S7bText")}</p>
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl bg-slate-800/30 flex justify-center">
                             <Img
@@ -249,18 +245,14 @@ const UnityFindACoin = () => {
                             />
                         </div>
 
-                        <p className="text-slate-400 text-sm mt-2 text-center italic">
-                            {t("FindACoin.S7bCaption")}
-                        </p>
+                        <p className="text-slate-400 text-sm mt-2 text-center italic">{t("FindACoin.S7bCaption")}</p>
                     </div>
 
                     {/* Jump box */}
                     <div className="mb-12">
                         <h3 className="text-xl font-semibold text-white mb-1">{t("FindACoin.S7cTitle")}</h3>
 
-                        <p className="text-slate-300 leading-relaxed mb-4">
-                            {t("FindACoin.S7cText")}
-                        </p>
+                        <p className="text-slate-300 leading-relaxed mb-4">{t("FindACoin.S7cText")}</p>
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl bg-slate-800/30 flex justify-center">
                             <Img
@@ -270,18 +262,14 @@ const UnityFindACoin = () => {
                             />
                         </div>
 
-                        <p className="text-slate-400 text-sm mt-2 text-center italic">
-                            {t("FindACoin.S7cCaption")}
-                        </p>
+                        <p className="text-slate-400 text-sm mt-2 text-center italic">{t("FindACoin.S7cCaption")}</p>
                     </div>
 
                     {/* Lava idle */}
                     <div className="mb-12">
                         <h3 className="text-xl font-semibold text-white mb-1">{t("FindACoin.S7dTitle")}</h3>
 
-                        <p className="text-slate-300 leading-relaxed mb-4">
-                            {t("FindACoin.S7dText")}
-                        </p>
+                        <p className="text-slate-300 leading-relaxed mb-4">{t("FindACoin.S7dText")}</p>
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl bg-slate-800/30 flex justify-center">
                             <Img
@@ -291,9 +279,7 @@ const UnityFindACoin = () => {
                             />
                         </div>
 
-                        <p className="text-slate-400 text-sm mt-2 text-center italic">
-                            {t("FindACoin.S7dCaption")}
-                        </p>
+                        <p className="text-slate-400 text-sm mt-2 text-center italic">{t("FindACoin.S7dCaption")}</p>
                     </div>
                 </section>
 
@@ -302,7 +288,10 @@ const UnityFindACoin = () => {
                     <h2 className="text-2xl font-bold text-white mb-2">{t("FindACoin.S8Title")}</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-6">
-                        <Trans i18nKey="FindACoin.S8Text" components={{ b: <strong className="text-white" /> }} />
+                        <Trans
+                            i18nKey="FindACoin.S8Text"
+                            components={{ b: <strong className="text-white" /> }}
+                        />
                     </p>
                 </section>
             </div>

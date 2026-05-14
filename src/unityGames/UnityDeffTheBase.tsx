@@ -18,7 +18,10 @@ const UnityDeffTheBase = () => {
     }, [scroll]);
 
     return (
-        <div ref={containerRef} className="w-full h-full overflow-auto bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-slate-100">
+        <div
+            ref={containerRef}
+            className="w-full h-full overflow-auto bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-slate-100"
+        >
             {/* Hero */}
             <div className="max-w-4xl mx-auto px-6 py-10">
                 <h1 className="text-4xl font-extrabold tracking-tight text-white mb-3">Def the Base</h1>
@@ -27,7 +30,10 @@ const UnityDeffTheBase = () => {
                 </p>
 
                 <p className="text-slate-300 text-lg leading-relaxed max-w-2xl">
-                    <Trans i18nKey="DeffTheBase.Desc" components={{ b: <strong className="text-white" /> }} />
+                    <Trans
+                        i18nKey="DeffTheBase.Desc"
+                        components={{ b: <strong className="text-white" /> }}
+                    />
                 </p>
 
                 <div className="flex flex-wrap gap-2 mt-6">
@@ -48,7 +54,10 @@ const UnityDeffTheBase = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">{t("DeffTheBase.S1Title")}</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        <Trans i18nKey="DeffTheBase.S1Text" components={{ b: <strong className="text-white" /> }} />
+                        <Trans
+                            i18nKey="DeffTheBase.S1Text"
+                            components={{ b: <strong className="text-white" /> }}
+                        />
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
@@ -59,9 +68,7 @@ const UnityDeffTheBase = () => {
                         />
                     </div>
 
-                    <p className="text-slate-400 text-sm mt-2 text-center italic">
-                        {t("DeffTheBase.S1Caption")}
-                    </p>
+                    <p className="text-slate-400 text-sm mt-2 text-center italic">{t("DeffTheBase.S1Caption")}</p>
                 </section>
 
                 {/* Missions */}
@@ -69,7 +76,10 @@ const UnityDeffTheBase = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">{t("DeffTheBase.S2Title")}</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        <Trans i18nKey="DeffTheBase.S2Text" components={{ b: <strong className="text-white" /> }} />
+                        <Trans
+                            i18nKey="DeffTheBase.S2Text"
+                            components={{ b: <strong className="text-white" /> }}
+                        />
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
@@ -80,18 +90,14 @@ const UnityDeffTheBase = () => {
                         />
                     </div>
 
-                    <p className="text-slate-400 text-sm mt-2 text-center italic">
-                        {t("DeffTheBase.S2Caption")}
-                    </p>
+                    <p className="text-slate-400 text-sm mt-2 text-center italic">{t("DeffTheBase.S2Caption")}</p>
                 </section>
 
                 {/* Upgrade */}
                 <section>
                     <h2 className="text-2xl font-bold text-white mb-1">{t("DeffTheBase.S3Title")}</h2>
 
-                    <p className="text-slate-300 leading-relaxed mb-5">
-                        {t("DeffTheBase.S3Text")}
-                    </p>
+                    <p className="text-slate-300 leading-relaxed mb-5">{t("DeffTheBase.S3Text")}</p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <Img
@@ -101,9 +107,7 @@ const UnityDeffTheBase = () => {
                         />
                     </div>
 
-                    <p className="text-slate-400 text-sm mt-2 text-center italic">
-                        {t("DeffTheBase.S3Caption")}
-                    </p>
+                    <p className="text-slate-400 text-sm mt-2 text-center italic">{t("DeffTheBase.S3Caption")}</p>
                 </section>
 
                 {/* Gameplay */}
@@ -111,7 +115,10 @@ const UnityDeffTheBase = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">{t("DeffTheBase.S4Title")}</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        <Trans i18nKey="DeffTheBase.S4Text" components={{ b: <strong className="text-white" /> }} />
+                        <Trans
+                            i18nKey="DeffTheBase.S4Text"
+                            components={{ b: <strong className="text-white" /> }}
+                        />
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
@@ -122,9 +129,7 @@ const UnityDeffTheBase = () => {
                         />
                     </div>
 
-                    <p className="text-slate-400 text-sm mt-2 text-center italic">
-                        {t("DeffTheBase.S4Caption")}
-                    </p>
+                    <p className="text-slate-400 text-sm mt-2 text-center italic">{t("DeffTheBase.S4Caption")}</p>
                 </section>
 
                 {/* Animations + Walls */}
@@ -132,7 +137,10 @@ const UnityDeffTheBase = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">{t("DeffTheBase.S5Title")}</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        <Trans i18nKey="DeffTheBase.S5Text" components={{ b: <strong className="text-white" /> }} />
+                        <Trans
+                            i18nKey="DeffTheBase.S5Text"
+                            components={{ b: <strong className="text-white" /> }}
+                        />
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
@@ -143,18 +151,14 @@ const UnityDeffTheBase = () => {
                         />
                     </div>
 
-                    <p className="text-slate-400 text-sm mt-2 text-center italic">
-                        {t("DeffTheBase.S5Caption")}
-                    </p>
+                    <p className="text-slate-400 text-sm mt-2 text-center italic">{t("DeffTheBase.S5Caption")}</p>
                 </section>
 
                 {/* Repair all */}
                 <section>
                     <h2 className="text-2xl font-bold text-white mb-1">{t("DeffTheBase.S6Title")}</h2>
 
-                    <p className="text-slate-300 leading-relaxed mb-5">
-                        {t("DeffTheBase.S6Text")}
-                    </p>
+                    <p className="text-slate-300 leading-relaxed mb-5">{t("DeffTheBase.S6Text")}</p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
                         <Img
@@ -164,9 +168,7 @@ const UnityDeffTheBase = () => {
                         />
                     </div>
 
-                    <p className="text-slate-400 text-sm mt-2 text-center italic">
-                        {t("DeffTheBase.S6Caption")}
-                    </p>
+                    <p className="text-slate-400 text-sm mt-2 text-center italic">{t("DeffTheBase.S6Caption")}</p>
                 </section>
 
                 {/* Boss wave */}
@@ -174,7 +176,10 @@ const UnityDeffTheBase = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">{t("DeffTheBase.S7Title")}</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        <Trans i18nKey="DeffTheBase.S7Text" components={{ b: <strong className="text-white" /> }} />
+                        <Trans
+                            i18nKey="DeffTheBase.S7Text"
+                            components={{ b: <strong className="text-white" /> }}
+                        />
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
@@ -185,9 +190,7 @@ const UnityDeffTheBase = () => {
                         />
                     </div>
 
-                    <p className="text-slate-400 text-sm mt-2 text-center italic">
-                        {t("DeffTheBase.S7Caption")}
-                    </p>
+                    <p className="text-slate-400 text-sm mt-2 text-center italic">{t("DeffTheBase.S7Caption")}</p>
                 </section>
 
                 {/* Pause menu */}
@@ -195,7 +198,10 @@ const UnityDeffTheBase = () => {
                     <h2 className="text-2xl font-bold text-white mb-1">{t("DeffTheBase.S8Title")}</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-5">
-                        <Trans i18nKey="DeffTheBase.S8Text" components={{ b: <strong className="text-white" /> }} />
+                        <Trans
+                            i18nKey="DeffTheBase.S8Text"
+                            components={{ b: <strong className="text-white" /> }}
+                        />
                     </p>
 
                     <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
@@ -206,9 +212,7 @@ const UnityDeffTheBase = () => {
                         />
                     </div>
 
-                    <p className="text-slate-400 text-sm mt-2 text-center italic">
-                        {t("DeffTheBase.S8Caption")}
-                    </p>
+                    <p className="text-slate-400 text-sm mt-2 text-center italic">{t("DeffTheBase.S8Caption")}</p>
                 </section>
 
                 {/* Audio */}
@@ -216,7 +220,10 @@ const UnityDeffTheBase = () => {
                     <h2 className="text-2xl font-bold text-white mb-2">{t("DeffTheBase.S9Title")}</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-6">
-                        <Trans i18nKey="DeffTheBase.S9Text" components={{ b: <strong className="text-white" /> }} />
+                        <Trans
+                            i18nKey="DeffTheBase.S9Text"
+                            components={{ b: <strong className="text-white" /> }}
+                        />
                     </p>
 
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -238,7 +245,10 @@ const UnityDeffTheBase = () => {
                     <h2 className="text-2xl font-bold text-white mb-2">{t("DeffTheBase.S10Title")}</h2>
 
                     <p className="text-slate-300 leading-relaxed mb-10">
-                        <Trans i18nKey="DeffTheBase.S10Text" components={{ b: <strong className="text-white" /> }} />
+                        <Trans
+                            i18nKey="DeffTheBase.S10Text"
+                            components={{ b: <strong className="text-white" /> }}
+                        />
                     </p>
 
                     {/* Minigun */}
@@ -246,7 +256,10 @@ const UnityDeffTheBase = () => {
                         <h3 className="text-xl font-semibold text-white mb-1">{t("DeffTheBase.S10aTitle")}</h3>
 
                         <p className="text-slate-300 leading-relaxed mb-4">
-                            <Trans i18nKey="DeffTheBase.S10aText" components={{ b: <strong className="text-white" /> }} />
+                            <Trans
+                                i18nKey="DeffTheBase.S10aText"
+                                components={{ b: <strong className="text-white" /> }}
+                            />
                         </p>
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl bg-slate-800/30 flex justify-center">
@@ -257,9 +270,7 @@ const UnityDeffTheBase = () => {
                             />
                         </div>
 
-                        <p className="text-slate-400 text-sm mt-2 text-center italic">
-                            {t("DeffTheBase.S10aCaption")}
-                        </p>
+                        <p className="text-slate-400 text-sm mt-2 text-center italic">{t("DeffTheBase.S10aCaption")}</p>
                     </div>
 
                     {/* Rocket Launcher */}
@@ -267,7 +278,10 @@ const UnityDeffTheBase = () => {
                         <h3 className="text-xl font-semibold text-white mb-1">{t("DeffTheBase.S10bTitle")}</h3>
 
                         <p className="text-slate-300 leading-relaxed mb-4">
-                            <Trans i18nKey="DeffTheBase.S10bText" components={{ b: <strong className="text-white" /> }} />
+                            <Trans
+                                i18nKey="DeffTheBase.S10bText"
+                                components={{ b: <strong className="text-white" /> }}
+                            />
                         </p>
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl bg-slate-800/30 flex justify-center">
@@ -278,9 +292,7 @@ const UnityDeffTheBase = () => {
                             />
                         </div>
 
-                        <p className="text-slate-400 text-sm mt-2 text-center italic">
-                            {t("DeffTheBase.S10bCaption")}
-                        </p>
+                        <p className="text-slate-400 text-sm mt-2 text-center italic">{t("DeffTheBase.S10bCaption")}</p>
                     </div>
 
                     {/* Enemy */}
@@ -288,7 +300,10 @@ const UnityDeffTheBase = () => {
                         <h3 className="text-xl font-semibold text-white mb-1">{t("DeffTheBase.S10cTitle")}</h3>
 
                         <p className="text-slate-300 leading-relaxed mb-4">
-                            <Trans i18nKey="DeffTheBase.S10cText" components={{ b: <strong className="text-white" /> }} />
+                            <Trans
+                                i18nKey="DeffTheBase.S10cText"
+                                components={{ b: <strong className="text-white" /> }}
+                            />
                         </p>
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl bg-slate-800/30 flex justify-center">
@@ -299,9 +314,7 @@ const UnityDeffTheBase = () => {
                             />
                         </div>
 
-                        <p className="text-slate-400 text-sm mt-2 text-center italic">
-                            {t("DeffTheBase.S10cCaption")}
-                        </p>
+                        <p className="text-slate-400 text-sm mt-2 text-center italic">{t("DeffTheBase.S10cCaption")}</p>
                     </div>
 
                     {/* Boss Animator */}
@@ -309,7 +322,10 @@ const UnityDeffTheBase = () => {
                         <h3 className="text-xl font-semibold text-white mb-1">{t("DeffTheBase.S10dTitle")}</h3>
 
                         <p className="text-slate-300 leading-relaxed mb-4">
-                            <Trans i18nKey="DeffTheBase.S10dText" components={{ b: <strong className="text-white" /> }} />
+                            <Trans
+                                i18nKey="DeffTheBase.S10dText"
+                                components={{ b: <strong className="text-white" /> }}
+                            />
                         </p>
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl">
@@ -320,18 +336,14 @@ const UnityDeffTheBase = () => {
                             />
                         </div>
 
-                        <p className="text-slate-400 text-sm mt-2 text-center italic">
-                            {t("DeffTheBase.S10dCaption")}
-                        </p>
+                        <p className="text-slate-400 text-sm mt-2 text-center italic">{t("DeffTheBase.S10dCaption")}</p>
                     </div>
 
                     {/* Boss Death */}
                     <div>
                         <h3 className="text-xl font-semibold text-white mb-1">{t("DeffTheBase.S10eTitle")}</h3>
 
-                        <p className="text-slate-300 leading-relaxed mb-4">
-                            {t("DeffTheBase.S10eText")}
-                        </p>
+                        <p className="text-slate-300 leading-relaxed mb-4">{t("DeffTheBase.S10eText")}</p>
 
                         <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-xl bg-slate-800/30 flex justify-center">
                             <Img
@@ -341,9 +353,7 @@ const UnityDeffTheBase = () => {
                             />
                         </div>
 
-                        <p className="text-slate-400 text-sm mt-2 text-center italic">
-                            {t("DeffTheBase.S10eCaption")}
-                        </p>
+                        <p className="text-slate-400 text-sm mt-2 text-center italic">{t("DeffTheBase.S10eCaption")}</p>
                     </div>
                 </section>
             </div>

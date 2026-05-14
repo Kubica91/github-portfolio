@@ -30,6 +30,7 @@ const TopNavigationBar = () => {
 
                 <div className="flex items-center gap-6">
                     {navLink("/github-portfolio", t("Nav.Projects"))}
+
                     {navLink("/github-portfolio/cv", t("Nav.CV"))}
 
                     <div className="flex items-center gap-1.5 text-sm font-medium text-slate-300">
@@ -43,3 +44,4 @@ const TopNavigationBar = () => {
 };
 
 export default TopNavigationBar;
+

@@ -8,19 +8,19 @@ import { useDialog } from "../../hooks/useDialog";
 import { BoardState, ChessGroup, ChessPieceColor, ChessPosition, PromotionPieceType } from "./ChessGeometryUtils";
 import { ChessMoveHistory, getLegalMovesForPiece, hasAnyLegalMove, isKingInCheck, isPromotion } from "./ChessMoveUtils";
 import {
-    BuildBoardState,
-    ClearHighlightedPiece,
-    ClearMoveHighlights,
-    ClearSelectedPiece,
-    FitCameraToBoard,
-    GetPieceByRaycast,
-    GetSquareByRaycast,
-    HighlightPiece,
-    InitializeChessPieces,
-    InitializeChessScene,
-    PromotePawn,
-    SelectPiece,
-    ShowMoveHighlights,
+    buildBoardState,
+    clearHighlightedPiece,
+    clearMoveHighlights,
+    clearSelectedPiece,
+    fitCameraToBoard,
+    getPieceByRaycast,
+    getSquareByRaycast,
+    highlightPiece,
+    initializeChessPieces,
+    initializeChessScene,
+    promotePawn,
+    selectPiece,
+    showMoveHighlights,
 } from "./ChessThreeJsUtils";
 import ChessContent from "./components/ChessContent";
 
@@ -47,10 +47,10 @@ const ChessMainPage = () => {
     const highlightGroupRef = useRef<ChessGroup | null>(null);
 
     useEffect(() => {
-        const InitCanvas = async () => {
+        const initCanvas = async () => {
             if (!canvasRef.current || !containerRef.current) return;
 
-            const { scene, camera, renderer, piecesGroup, squaresGroup, highlightsGroup } = await InitializeChessScene(
+            const { scene, camera, renderer, piecesGroup, squaresGroup, highlightsGroup } = await initializeChessScene(
                 canvasRef.current,
                 containerRef.current
             );
@@ -62,10 +62,10 @@ const ChessMainPage = () => {
             squaresGroupRef.current = squaresGroup;
             highlightsGroupRef.current = highlightsGroup;
 
-            setBoard(BuildBoardState(piecesGroup));
+            setBoard(buildBoardState(piecesGroup));
         };
 
-        InitCanvas();
+        initCanvas();
 
         window.addEventListener("resize", handleResize);
 
@@ -84,7 +84,7 @@ const ChessMainPage = () => {
 
         const { clientWidth, clientHeight } = containerRef.current;
         rendererRef.current.setSize(clientWidth, clientHeight);
-        FitCameraToBoard(cameraRef.current, clientWidth, clientHeight);
+        fitCameraToBoard(cameraRef.current, clientWidth, clientHeight);
     };
 
     const applyMove = useCallback(
@@ -97,8 +97,8 @@ const ChessMainPage = () => {
             const inCheck = isKingInCheck(newBoard, nextPlayer);
             const inMate = inCheck && !hasAnyLegalMove(newBoard, nextPlayer);
 
-            ClearSelectedPiece(selectedPiece!);
-            if (highlightsGroupRef.current) ClearMoveHighlights(highlightsGroupRef.current);
+            clearSelectedPiece(selectedPiece!);
+            if (highlightsGroupRef.current) clearMoveHighlights(highlightsGroupRef.current);
 
             setBoard(newBoard);
             setMoveHistory((prev) => [
@@ -117,10 +117,10 @@ const ChessMainPage = () => {
             setPlayerTurn(nextPlayer);
 
             if (inMate) {
-                toast.error(t("Chess.CheckmateNotify", { color: t(`Chess.Color.${nextPlayer}`) }), { autoClose: false });
+                toast.info(t("Chess.CheckmateNotify", { color: t(`Chess.Color.${nextPlayer}`) }), { autoClose: false });
                 setIsGameOver(true);
             } else if (inCheck) {
-                toast.warn(t("Chess.CheckNotify", { color: t(`Chess.Color.${nextPlayer}`) }));
+                toast.info(t("Chess.CheckNotify", { color: t(`Chess.Color.${nextPlayer}`) }));
             }
         },
         [board, playerTurn, selectedPiece, t]
@@ -140,14 +140,14 @@ const ChessMainPage = () => {
             const raycaster = new Raycaster();
             raycaster.setFromCamera(mouse, cameraRef.current);
 
-            const targetPiece = GetPieceByRaycast(piecesGroupRef.current, raycaster);
+            const targetPiece = getPieceByRaycast(piecesGroupRef.current, raycaster);
 
             if (targetPiece == highlightGroupRef.current) return;
             if (targetPiece && playerTurn !== targetPiece.chessColor) return;
 
-            if (highlightGroupRef.current) ClearHighlightedPiece(highlightGroupRef.current);
+            if (highlightGroupRef.current) clearHighlightedPiece(highlightGroupRef.current);
 
-            if (targetPiece) HighlightPiece(targetPiece);
+            if (targetPiece) highlightPiece(targetPiece);
             highlightGroupRef.current = targetPiece;
         },
         [playerTurn, isGameOver]
@@ -163,7 +163,7 @@ const ChessMainPage = () => {
                 promotionColorRef.current = selectedPiece.chessColor;
 
                 const chosenType = await openPromotion();
-                boardPiece = PromotePawn(selectedPiece, chosenType, piecesGroupRef.current);
+                boardPiece = promotePawn(selectedPiece, chosenType, piecesGroupRef.current);
             }
 
             applyMove(from, to, isCapture, boardPiece);
@@ -185,24 +185,24 @@ const ChessMainPage = () => {
             const raycaster = new Raycaster();
             raycaster.setFromCamera(mouse, cameraRef.current);
 
-            const targetPiece = GetPieceByRaycast(piecesGroupRef.current, raycaster);
+            const targetPiece = getPieceByRaycast(piecesGroupRef.current, raycaster);
 
             // Own piece clicked - select / switch / deselect
             if (targetPiece && playerTurn === targetPiece.chessColor) {
                 if (targetPiece === selectedPiece) {
-                    if (highlightsGroupRef.current) ClearMoveHighlights(highlightsGroupRef.current);
-                    ClearSelectedPiece(selectedPiece);
+                    if (highlightsGroupRef.current) clearMoveHighlights(highlightsGroupRef.current);
+                    clearSelectedPiece(selectedPiece);
                     setSelectedPiece(null);
                     return;
                 }
 
-                if (selectedPiece) ClearSelectedPiece(selectedPiece);
+                if (selectedPiece) clearSelectedPiece(selectedPiece);
 
                 const legalMoves = getLegalMovesForPiece(targetPiece, board);
                 if (highlightsGroupRef.current)
-                    ShowMoveHighlights(legalMoves, board, targetPiece.chessColor, highlightsGroupRef.current);
+                    showMoveHighlights(legalMoves, board, targetPiece.chessColor, highlightsGroupRef.current);
 
-                SelectPiece(targetPiece);
+                selectPiece(targetPiece);
                 setSelectedPiece(targetPiece);
                 return;
             }
@@ -224,7 +224,7 @@ const ChessMainPage = () => {
             }
 
             // Empty square - try move
-            const targetSquarePos = GetSquareByRaycast(squaresGroupRef.current, raycaster);
+            const targetSquarePos = getSquareByRaycast(squaresGroupRef.current, raycaster);
             if (!targetSquarePos) return;
 
             const legalMoves = getLegalMovesForPiece(selectedPiece, board);
@@ -242,17 +242,17 @@ const ChessMainPage = () => {
         if (!piecesGroupRef.current) return;
         piecesGroupRef.current.clear();
 
-        InitializeChessPieces(piecesGroupRef.current);
-        setBoard(BuildBoardState(piecesGroupRef.current));
+        initializeChessPieces(piecesGroupRef.current);
+        setBoard(buildBoardState(piecesGroupRef.current));
         setSelectedPiece(null);
         setPlayerTurn("white");
         setMoveHistory([]);
         setIsGameOver(false);
 
-        if (highlightsGroupRef.current) ClearMoveHighlights(highlightsGroupRef.current);
+        if (highlightsGroupRef.current) clearMoveHighlights(highlightsGroupRef.current);
 
         if (highlightGroupRef.current) {
-            ClearHighlightedPiece(highlightGroupRef.current);
+            clearHighlightedPiece(highlightGroupRef.current);
             highlightGroupRef.current = null;
         }
     }, []);

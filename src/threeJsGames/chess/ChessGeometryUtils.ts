@@ -342,7 +342,7 @@ const addAndShadow = (group: Group, mesh: Mesh) => {
     group.add(mesh);
 };
 
-export const GetPawnGeometry = (chessColor: ChessPieceColor, chessPosition: ChessPosition) => {
+export const getPawnGeometry = (chessColor: ChessPieceColor, chessPosition: ChessPosition) => {
     const pawn = new PawnGroup(chessColor, chessPosition);
     const material = getMaterial(chessColor).clone();
 
@@ -369,7 +369,7 @@ export const GetPawnGeometry = (chessColor: ChessPieceColor, chessPosition: Ches
     return pawn;
 };
 
-export const GetRookGeometry = (chessColor: ChessPieceColor, chessPosition: ChessPosition) => {
+export const getRookGeometry = (chessColor: ChessPieceColor, chessPosition: ChessPosition) => {
     const rook = new RookGroup(chessColor, chessPosition);
     const material = getMaterial(chessColor).clone();
 
@@ -398,7 +398,7 @@ export const GetRookGeometry = (chessColor: ChessPieceColor, chessPosition: Ches
     return rook;
 };
 
-export const GetKnightGeometry = (chessColor: ChessPieceColor, chessPosition: ChessPosition) => {
+export const getKnightGeometry = (chessColor: ChessPieceColor, chessPosition: ChessPosition) => {
     const knight = new KnightGroup(chessColor, chessPosition);
     const material = getMaterial(chessColor).clone();
 
@@ -425,7 +425,7 @@ export const GetKnightGeometry = (chessColor: ChessPieceColor, chessPosition: Ch
     return knight;
 };
 
-export const GetBishopGeometry = (chessColor: ChessPieceColor, chessPosition: ChessPosition) => {
+export const getBishopGeometry = (chessColor: ChessPieceColor, chessPosition: ChessPosition) => {
     const bishop = new BishopGroup(chessColor, chessPosition);
     const material = getMaterial(chessColor).clone();
 
@@ -457,7 +457,7 @@ export const GetBishopGeometry = (chessColor: ChessPieceColor, chessPosition: Ch
     return bishop;
 };
 
-export const GetQueenGeometry = (chessColor: ChessPieceColor, chessPosition: ChessPosition) => {
+export const getQueenGeometry = (chessColor: ChessPieceColor, chessPosition: ChessPosition) => {
     const queen = new QueenGroup(chessColor, chessPosition);
     const material = getMaterial(chessColor).clone();
 
@@ -496,7 +496,7 @@ export const GetQueenGeometry = (chessColor: ChessPieceColor, chessPosition: Che
     return queen;
 };
 
-export const GetKingGeometry = (chessColor: ChessPieceColor, chessPosition: ChessPosition) => {
+export const getKingGeometry = (chessColor: ChessPieceColor, chessPosition: ChessPosition) => {
     const king = new KingGroup(chessColor, chessPosition);
     const material = getMaterial(chessColor).clone();
 
@@ -544,7 +544,7 @@ export const GetKingGeometry = (chessColor: ChessPieceColor, chessPosition: Ches
     return king;
 };
 
-export const GetChessboardGeometry = async () => {
+export const getChessboardGeometry = async () => {
     const boardSize = 8 * SQUARE_SIZE;
     const board = new Group();
     const squaresGroup = new Group();

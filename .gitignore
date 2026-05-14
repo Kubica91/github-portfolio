@@ -142,3 +142,6 @@ dist
 
 # Built Visual Studio Code Extensions
 *.vsix
+
+# web-ifc WASM files copied from node_modules at build/dev start
+public/wasm/
