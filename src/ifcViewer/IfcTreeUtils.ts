@@ -1,4 +1,4 @@
-import * as FRAGS from "@thatopen/fragments";
+import { FragmentsModel, ItemAttribute, SpatialTreeItem } from "@thatopen/fragments";
 
 export interface IfcTreeNode {
     id: string;
@@ -21,7 +21,7 @@ const formatLabel = (category: string | null, localId: number | null) => {
     return "?";
 };
 
-const convertNode = (raw: FRAGS.SpatialTreeItem, path: string): IfcTreeNode => {
+const convertNode = (raw: SpatialTreeItem, path: string): IfcTreeNode => {
     const id = `${path}/${raw.category ?? "?"}-${raw.localId ?? "n"}`;
     const children = (raw.children ?? []).map((child, index) => convertNode(child, `${id}-${index}`));
 
@@ -39,12 +39,76 @@ const convertNode = (raw: FRAGS.SpatialTreeItem, path: string): IfcTreeNode => {
     };
 };
 
-export const buildSpatialTree = async (model: FRAGS.FragmentsModel): Promise<IfcTreeNode> => {
+export const buildSpatialTree = async (model: FragmentsModel): Promise<IfcTreeNode> => {
     const raw = await model.getSpatialStructure();
     return convertNode(raw, "root");
 };
 
-export const getElementProperties = async (model: FRAGS.FragmentsModel, localId: number): Promise<IfcPropertyMap> => {
+export const buildCategoryMap = async (model: FragmentsModel): Promise<Map<string, number[]>> => {
+    const categories = await model.getCategories();
+    const result = new Map<string, number[]>();
+    if (categories.length === 0) return result;
+
+    const patterns = categories.map((c) => new RegExp(`^${c.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}$`));
+    const items = await model.getItemsOfCategories(patterns);
+
+    for (const [category, localIds] of Object.entries(items)) {
+        if (localIds.length > 0) result.set(category, localIds);
+    }
+    return result;
+};
+
+export const collectByCategory = (node: IfcTreeNode): Map<string, number[]> => {
+    const result = new Map<string, number[]>();
+
+    const visit = (n: IfcTreeNode) => {
+        if (n.localId !== null && n.category) {
+            const list = result.get(n.category) ?? [];
+            list.push(n.localId);
+            result.set(n.category, list);
+        }
+        for (const child of n.children) visit(child);
+    };
+
+    visit(node);
+    return result;
+};
+
+export const matchesNode = (node: IfcTreeNode, query: string): boolean => {
+    if (!query) return true;
+
+    const q = query.toLowerCase();
+    return node.label.toLowerCase().includes(q) || node.category.toLowerCase().includes(q);
+};
+
+export interface TreeFilterResult {
+    visible: Set<string>;
+    expanded: Set<string>;
+}
+
+export const collectVisibleNodeIds = (root: IfcTreeNode, query: string): TreeFilterResult => {
+    const visible = new Set<string>();
+    const expanded = new Set<string>();
+
+    const visit = (node: IfcTreeNode): boolean => {
+        const selfMatch = matchesNode(node, query);
+        let childMatch = false;
+
+        for (const child of node.children) {
+            if (visit(child)) childMatch = true;
+        }
+
+        if (selfMatch || childMatch) visible.add(node.id);
+        if (childMatch) expanded.add(node.id);
+
+        return selfMatch || childMatch;
+    };
+
+    visit(root);
+    return { visible, expanded };
+};
+
+export const getElementProperties = async (model: FragmentsModel, localId: number): Promise<IfcPropertyMap> => {
     const [data] = await model.getItemsData([localId], {
         attributesDefault: true,
     });
@@ -55,7 +119,7 @@ export const getElementProperties = async (model: FRAGS.FragmentsModel, localId:
     for (const [key, value] of Object.entries(data)) {
         if (Array.isArray(value)) continue;
 
-        const attr = value as FRAGS.ItemAttribute;
+        const attr = value as ItemAttribute;
         if (attr && typeof attr === "object" && "value" in attr) {
             const raw = attr.value;
             if (raw === null || raw === undefined) continue;

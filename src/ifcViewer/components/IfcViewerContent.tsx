@@ -1,9 +1,13 @@
+import { useState } from "react";
+import HorizontalSplitter from "../../components/HorizontalSplitter";
 import { IfcPropertyMap, IfcTreeNode } from "../IfcTreeUtils";
 import { LoadStage } from "../IfcViewerThreeJsUtils";
+import CategoryLegend from "./CategoryLegend";
 import ElementInfo from "./ElementInfo";
 import IfcFileInput from "./IfcFileInput";
 import LoadingProgress from "./LoadingProgress";
 import ModelTree, { ModelEntry } from "./ModelTree";
+import ShortcutsLegend from "./ShortcutsLegend";
 import ToolPanel from "./ToolPanel";
 
 interface ProgressState {
@@ -18,7 +22,9 @@ interface IfcViewerContentProps {
     progress: ProgressState | null;
     models: ModelEntry[];
     hiddenIds: Map<string, Set<number>>;
-    clipperActive: boolean;
+    measureActive: boolean;
+    colorByCategory: boolean;
+    categoryCounts: Map<string, number>;
     selected: {
         modelId: string;
         localId: number;
@@ -26,8 +32,9 @@ interface IfcViewerContentProps {
         properties: IfcPropertyMap;
     } | null;
     onFilesSelected: (files: File[]) => void;
-    onToggleClipper: () => void;
-    onRemoveClippingPlanes: () => void;
+    onToggleMeasure: () => void;
+    onClearMeasurements: () => void;
+    onToggleColorByCategory: () => void;
     onResetCamera: () => void;
     onShowAll: () => void;
     onRemoveAllModels: () => void;
@@ -40,11 +47,14 @@ const IfcViewerContent = ({
     progress,
     models,
     hiddenIds,
-    clipperActive,
+    measureActive,
+    colorByCategory,
+    categoryCounts,
     selected,
     onFilesSelected,
-    onToggleClipper,
-    onRemoveClippingPlanes,
+    onToggleMeasure,
+    onClearMeasurements,
+    onToggleColorByCategory,
     onResetCamera,
     onShowAll,
     onRemoveAllModels,
@@ -52,48 +62,67 @@ const IfcViewerContent = ({
     onSelectNode,
     onToggleVisibility,
 }: IfcViewerContentProps) => {
+    const [showShortcuts, setShowShortcuts] = useState(false);
+
     const noModel = models.length === 0;
     const loading = progress !== null;
 
     return (
-        <div className="w-full h-full flex flex-col bg-slate-900 text-slate-100 overflow-y-auto">
-            <IfcFileInput
-                loading={loading}
-                onFilesSelected={onFilesSelected}
-            />
+        <>
+            <HorizontalSplitter
+                startWidth={45}
+                minWidth={25}
+                maxWidth={75}
+            >
+                <div className="w-full h-full flex flex-col bg-slate-900 text-slate-100 overflow-y-auto">
+                    <IfcFileInput
+                        loading={loading}
+                        onFilesSelected={onFilesSelected}
+                    />
 
-            {progress && (
-                <LoadingProgress
-                    current={progress.current}
-                    total={progress.total}
-                    fileName={progress.fileName}
-                    progress={progress.progress}
-                    stage={progress.stage}
-                />
-            )}
+                    {progress && (
+                        <LoadingProgress
+                            current={progress.current}
+                            total={progress.total}
+                            fileName={progress.fileName}
+                            progress={progress.progress}
+                            stage={progress.stage}
+                        />
+                    )}
 
-            <ToolPanel
-                disabled={noModel}
-                clipperActive={clipperActive}
-                onToggleClipper={onToggleClipper}
-                onRemoveClippingPlanes={onRemoveClippingPlanes}
-                onResetCamera={onResetCamera}
-                onShowAll={onShowAll}
-                onRemoveAllModels={onRemoveAllModels}
-            />
+                    <ToolPanel
+                        disabled={noModel}
+                        measureActive={measureActive}
+                        colorByCategory={colorByCategory}
+                        onToggleMeasure={onToggleMeasure}
+                        onClearMeasurements={onClearMeasurements}
+                        onToggleColorByCategory={onToggleColorByCategory}
+                        onResetCamera={onResetCamera}
+                        onShowAll={onShowAll}
+                        onRemoveAllModels={onRemoveAllModels}
+                        onShowShortcuts={() => setShowShortcuts(true)}
+                    />
 
-            <ModelTree
-                models={models}
-                hiddenIds={hiddenIds}
-                selectedModelId={selected?.modelId ?? null}
-                selectedLocalId={selected?.localId ?? null}
-                onSelectNode={onSelectNode}
-                onToggleVisibility={onToggleVisibility}
-                onRemoveModel={onRemoveModel}
-            />
+                    {colorByCategory && <CategoryLegend byCategory={categoryCounts} />}
+                </div>
 
-            <ElementInfo selected={selected} />
-        </div>
+                <div className="w-full h-full flex flex-col bg-slate-900 text-slate-100 overflow-y-auto">
+                    <ModelTree
+                        models={models}
+                        hiddenIds={hiddenIds}
+                        selectedModelId={selected?.modelId ?? null}
+                        selectedLocalId={selected?.localId ?? null}
+                        onSelectNode={onSelectNode}
+                        onToggleVisibility={onToggleVisibility}
+                        onRemoveModel={onRemoveModel}
+                    />
+
+                    <ElementInfo selected={selected} />
+                </div>
+            </HorizontalSplitter>
+
+            {showShortcuts && <ShortcutsLegend onClose={() => setShowShortcuts(false)} />}
+        </>
     );
 };
 

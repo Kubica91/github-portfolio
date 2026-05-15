@@ -1,6 +1,11 @@
 import { LuChevronDown, LuChevronRight, LuEye, LuEyeOff } from "react-icons/lu";
 import { IfcTreeNode } from "../IfcTreeUtils";
 
+interface NodeFilter {
+    visible: Set<string>;
+    expanded: Set<string>;
+}
+
 interface ModelTreeNodeViewProps {
     modelId: string;
     node: IfcTreeNode;
@@ -12,6 +17,7 @@ interface ModelTreeNodeViewProps {
     selectedLocalId: number | null;
     onSelectNode: (modelId: string, node: IfcTreeNode) => void;
     onToggleVisibility: (modelId: string, node: IfcTreeNode) => void;
+    filter: NodeFilter | null;
 }
 
 const ModelTreeNodeView = ({
@@ -25,14 +31,17 @@ const ModelTreeNodeView = ({
     selectedLocalId,
     onSelectNode,
     onToggleVisibility,
+    filter,
 }: ModelTreeNodeViewProps) => {
+    if (filter && !filter.visible.has(node.id)) return null;
+
     const isNodeHidden = (node: IfcTreeNode, hidden: Set<number>) => {
         if (node.expressIDs.length === 0) return false;
         return node.expressIDs.every((id) => hidden.has(id));
     };
 
     const hasChildren = node.children.length > 0;
-    const isOpen = expanded.has(node.id);
+    const isOpen = filter ? filter.expanded.has(node.id) || expanded.has(node.id) : expanded.has(node.id);
     const isHidden = isNodeHidden(node, hidden);
     const isSelected = selectedModelId === modelId && selectedLocalId !== null && node.localId === selectedLocalId;
 
@@ -83,6 +92,7 @@ const ModelTreeNodeView = ({
                             selectedLocalId={selectedLocalId}
                             onSelectNode={onSelectNode}
                             onToggleVisibility={onToggleVisibility}
+                            filter={filter}
                         />
                     ))}
                 </ul>
@@ -92,3 +102,4 @@ const ModelTreeNodeView = ({
 };
 
 export default ModelTreeNodeView;
+

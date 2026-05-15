@@ -1,34 +1,63 @@
-import * as OBC from "@thatopen/components";
-import * as FRAGS from "@thatopen/fragments";
-import { Box3, Color, Sphere, Vector2 } from "three";
+import {
+    Clipper,
+    Components,
+    FragmentsManager,
+    Hider,
+    IfcLoader,
+    SimpleCamera,
+    SimplePlane,
+    SimpleRenderer,
+    SimpleScene,
+    SimpleWorld,
+    Worlds,
+} from "@thatopen/components";
+import { FragmentsModel, MaterialDefinition, ProgressData, RenderedFaces } from "@thatopen/fragments";
+import {
+    Box3,
+    BufferGeometry,
+    CanvasTexture,
+    Color,
+    Group,
+    Line,
+    LineBasicMaterial,
+    Mesh,
+    Raycaster,
+    Sphere,
+    Sprite,
+    SpriteMaterial,
+    Vector2,
+    Vector3,
+} from "three";
 
-export type IfcWorld = OBC.SimpleWorld<OBC.SimpleScene, OBC.SimpleCamera, OBC.SimpleRenderer>;
+export type IfcWorld = SimpleWorld<SimpleScene, SimpleCamera, SimpleRenderer>;
 
 export interface IfcViewerHandle {
-    components: OBC.Components;
+    components: Components;
     world: IfcWorld;
-    fragments: OBC.FragmentsManager;
-    ifcLoader: OBC.IfcLoader;
-    clipper: OBC.Clipper;
-    hider: OBC.Hider;
-    models: Map<string, FRAGS.FragmentsModel>;
+    fragments: FragmentsManager;
+    ifcLoader: IfcLoader;
+    clipper: Clipper;
+    hider: Hider;
+    models: Map<string, FragmentsModel>;
+    measureGroup: Group;
+    measurePoints: Vector3[];
 }
 
-const HIGHLIGHT_STYLE: FRAGS.MaterialDefinition = {
+const HIGHLIGHT_STYLE: MaterialDefinition = {
     color: new Color(0xffc857),
-    renderedFaces: FRAGS.RenderedFaces.TWO,
+    renderedFaces: RenderedFaces.TWO,
     opacity: 1,
     transparent: false,
 };
 
 export const initializeIfcViewer = async (container: HTMLElement): Promise<IfcViewerHandle> => {
-    const components = new OBC.Components();
-    const worlds = components.get(OBC.Worlds);
+    const components = new Components();
+    const worlds = components.get(Worlds);
 
-    const world = worlds.create<OBC.SimpleScene, OBC.SimpleCamera, OBC.SimpleRenderer>();
-    world.scene = new OBC.SimpleScene(components);
-    world.renderer = new OBC.SimpleRenderer(components, container);
-    world.camera = new OBC.SimpleCamera(components);
+    const world = worlds.create<SimpleScene, SimpleCamera, SimpleRenderer>();
+    world.scene = new SimpleScene(components);
+    world.renderer = new SimpleRenderer(components, container);
+    world.camera = new SimpleCamera(components);
 
     components.init();
 
@@ -37,8 +66,8 @@ export const initializeIfcViewer = async (container: HTMLElement): Promise<IfcVi
 
     world.camera.controls.setLookAt(15, 15, 15, 0, 0, 0);
 
-    const fragments = components.get(OBC.FragmentsManager);
-    const workerUrl = await OBC.FragmentsManager.getWorker();
+    const fragments = components.get(FragmentsManager);
+    const workerUrl = await FragmentsManager.getWorker();
     fragments.init(workerUrl);
 
     world.camera.controls.addEventListener("rest", () => {
@@ -54,7 +83,7 @@ export const initializeIfcViewer = async (container: HTMLElement): Promise<IfcVi
         fragments.core.update(true);
     });
 
-    const ifcLoader = components.get(OBC.IfcLoader);
+    const ifcLoader = components.get(IfcLoader);
     await ifcLoader.setup({
         autoSetWasm: false,
         wasm: {
@@ -63,11 +92,15 @@ export const initializeIfcViewer = async (container: HTMLElement): Promise<IfcVi
         },
     });
 
-    const clipper = components.get(OBC.Clipper);
+    const clipper = components.get(Clipper);
     clipper.enabled = false;
     clipper.visible = false;
 
-    const hider = components.get(OBC.Hider);
+    const hider = components.get(Hider);
+
+    const measureGroup = new Group();
+    measureGroup.name = "ifc-measurements";
+    world.scene.three.add(measureGroup);
 
     return {
         components,
@@ -77,6 +110,8 @@ export const initializeIfcViewer = async (container: HTMLElement): Promise<IfcVi
         clipper,
         hider,
         models: new Map(),
+        measureGroup,
+        measurePoints: [],
     };
 };
 
@@ -85,13 +120,13 @@ export const disposeIfcViewer = (handle: IfcViewerHandle) => {
     handle.components.dispose();
 };
 
-export type LoadStage = FRAGS.ProgressData["process"];
+export type LoadStage = ProgressData["process"];
 
 export const loadIfcModel = async (
     handle: IfcViewerHandle,
     file: File,
     onProgress?: (progress: number, stage: LoadStage) => void
-): Promise<FRAGS.FragmentsModel> => {
+): Promise<FragmentsModel> => {
     const buffer = await file.arrayBuffer();
     const bytes = new Uint8Array(buffer);
 
@@ -115,6 +150,7 @@ export const removeAllModels = async (handle: IfcViewerHandle) => {
     for (const id of ids) {
         await handle.fragments.core.disposeModel(id);
     }
+
     handle.models.clear();
 };
 
@@ -152,6 +188,7 @@ export const raycastModel = async (
     });
 
     if (!result) return null;
+
     return { modelId: result.fragments.modelId, localId: result.localId };
 };
 
@@ -159,6 +196,7 @@ export const highlightItems = async (handle: IfcViewerHandle, modelId: string, l
     await handle.fragments.resetHighlight();
 
     if (localIds.length === 0) return;
+
     await handle.fragments.highlight(HIGHLIGHT_STYLE, { [modelId]: new Set(localIds) });
 };
 
@@ -189,11 +227,100 @@ export const createClippingPlaneFromMouse = async (handle: IfcViewerHandle) => {
     await handle.clipper.create(handle.world);
 };
 
+export const createClippingPlaneFromRaycast = async (
+    handle: IfcViewerHandle,
+    event: { clientX: number; clientY: number }
+): Promise<boolean> => {
+    if (!handle.clipper.enabled) {
+        handle.clipper.enabled = true;
+        handle.clipper.visible = true;
+    }
+
+    const dom = handle.world.renderer?.three.domElement;
+    if (!dom) return false;
+
+    const mouse = new Vector2(event.clientX, event.clientY);
+
+    const result = await handle.fragments.raycast({
+        camera: handle.world.camera.three,
+        mouse,
+        dom,
+    });
+
+    if (!result) return false;
+
+    const point = (result as { point?: Vector3 }).point;
+    const normal = (result as { normal?: Vector3 }).normal;
+    if (!point || !normal) return false;
+
+    const flipped = normal.clone().negate();
+    handle.clipper.createFromNormalAndCoplanarPoint(handle.world, flipped, point.clone());
+    return true;
+};
+
 export const removeAllClippingPlanes = (handle: IfcViewerHandle) => {
     handle.clipper.deleteAll();
 };
 
-export const fitCameraToModel = async (handle: IfcViewerHandle, model?: FRAGS.FragmentsModel) => {
+export interface ClippingPlaneHit {
+    plane: SimplePlane;
+    planeId: string;
+}
+
+export const raycastClippingPlane = (
+    handle: IfcViewerHandle,
+    event: { clientX: number; clientY: number }
+): ClippingPlaneHit | null => {
+    const dom = handle.world.renderer?.three.domElement;
+    if (!dom) return null;
+
+    const rect = dom.getBoundingClientRect();
+    const ndc = new Vector2(
+        ((event.clientX - rect.left) / rect.width) * 2 - 1,
+        -((event.clientY - rect.top) / rect.height) * 2 + 1
+    );
+
+    const raycaster = new Raycaster();
+    raycaster.setFromCamera(ndc, handle.world.camera.three);
+
+    const meshes: Mesh[] = [];
+    const meshToPlane = new Map<Mesh, ClippingPlaneHit>();
+
+    for (const [planeId, plane] of handle.clipper.list) {
+        for (const mesh of plane.meshes) {
+            meshes.push(mesh);
+            meshToPlane.set(mesh, { plane, planeId });
+        }
+    }
+
+    if (meshes.length === 0) return null;
+
+    const intersects = raycaster.intersectObjects(meshes, false);
+    if (intersects.length === 0) return null;
+
+    return meshToPlane.get(intersects[0].object as Mesh) ?? null;
+};
+
+export const flipClippingPlane = (handle: IfcViewerHandle, planeId: string) => {
+    const plane = handle.clipper.list.get(planeId);
+    if (!plane) return;
+
+    const newNormal = plane.normal.clone().negate();
+    const origin = plane.origin.clone();
+
+    handle.clipper.delete(handle.world, planeId);
+    handle.clipper.createFromNormalAndCoplanarPoint(handle.world, newNormal, origin);
+};
+
+export const deleteClippingPlane = async (handle: IfcViewerHandle, planeId: string) => {
+    await handle.clipper.delete(handle.world, planeId);
+};
+
+export const hasClippingPlanes = (handle: IfcViewerHandle): boolean => {
+    return handle.clipper.list.size > 0;
+};
+
+export const fitCameraToModel = async (handle: IfcViewerHandle, model?: FragmentsModel) => {
     const target = model ?? Array.from(handle.models.values())[0];
     if (!target) return;
 
@@ -207,5 +334,198 @@ export const fitCameraToModel = async (handle: IfcViewerHandle, model?: FRAGS.Fr
     sphere.radius = Math.max(sphere.radius, 1);
 
     await handle.world.camera.controls.fitToSphere(sphere, true);
+};
+
+export const focusOnItem = async (handle: IfcViewerHandle, modelId: string, localId: number) => {
+    const model = handle.models.get(modelId);
+    if (!model) return;
+
+    const [box] = await model.getBoxes([localId]);
+    if (!box || box.isEmpty()) return;
+
+    const sphere = new Sphere();
+    box.getBoundingSphere(sphere);
+    if (sphere.radius === 0) return;
+
+    sphere.radius = Math.max(sphere.radius, 1);
+    await handle.world.camera.controls.fitToSphere(sphere, true);
+};
+
+interface RaycastHit {
+    modelId: string;
+    localId: number;
+    point: Vector3;
+}
+
+export const raycastModelDetailed = async (
+    handle: IfcViewerHandle,
+    event: { clientX: number; clientY: number }
+): Promise<RaycastHit | null> => {
+    const dom = handle.world.renderer?.three.domElement;
+    if (!dom) return null;
+
+    const mouse = new Vector2(event.clientX, event.clientY);
+
+    const result = await handle.fragments.raycast({
+        camera: handle.world.camera.three,
+        mouse,
+        dom,
+    });
+
+    if (!result) return null;
+
+    const point = (result as { point?: Vector3 }).point;
+    if (!point) return { modelId: result.fragments.modelId, localId: result.localId, point: new Vector3() };
+
+    return { modelId: result.fragments.modelId, localId: result.localId, point: point.clone() };
+};
+
+const createDistanceLabel = (text: string): Sprite => {
+    const canvas = document.createElement("canvas");
+    canvas.width = 256;
+    canvas.height = 64;
+
+    const ctx = canvas.getContext("2d");
+    if (ctx) {
+        ctx.fillStyle = "rgba(15, 23, 42, 0.85)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = "#86efac";
+        ctx.font = "bold 32px sans-serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(text, canvas.width / 2, canvas.height / 2);
+    }
+
+    const texture = new CanvasTexture(canvas);
+    texture.needsUpdate = true;
+
+    const material = new SpriteMaterial({ map: texture, depthTest: false, transparent: true });
+    const sprite = new Sprite(material);
+    sprite.scale.set(2, 0.5, 1);
+
+    return sprite;
+};
+
+export const addMeasurePoint = (handle: IfcViewerHandle, point: Vector3) => {
+    handle.measurePoints.push(point.clone());
+
+    if (handle.measurePoints.length < 2) return;
+
+    const [a, b] = handle.measurePoints;
+    const geometry = new BufferGeometry().setFromPoints([a, b]);
+    const material = new LineBasicMaterial({ color: 0x22d3ee, depthTest: false, linewidth: 2 });
+    const line = new Line(geometry, material);
+    line.renderOrder = 999;
+
+    const distance = a.distanceTo(b);
+    const label = createDistanceLabel(`${distance.toFixed(2)} m`);
+    label.position.copy(a).lerp(b, 0.5);
+    label.renderOrder = 1000;
+
+    handle.measureGroup.add(line);
+    handle.measureGroup.add(label);
+    handle.measurePoints = [];
+};
+
+export const clearMeasurements = (handle: IfcViewerHandle) => {
+    for (const child of [...handle.measureGroup.children]) {
+        handle.measureGroup.remove(child);
+        const obj = child as Line | Sprite;
+        const mat = (obj as { material?: { dispose?: () => void; map?: { dispose?: () => void } } }).material;
+        const geo = (obj as { geometry?: { dispose?: () => void } }).geometry;
+        geo?.dispose?.();
+        mat?.map?.dispose?.();
+        mat?.dispose?.();
+    }
+    handle.measurePoints = [];
+};
+
+export const cancelMeasureInProgress = (handle: IfcViewerHandle) => {
+    handle.measurePoints = [];
+};
+
+export const categoryHexColor = (category: string): number => {
+    let hash = 0;
+    for (let i = 0; i < category.length; i++) {
+        hash = (hash * 31 + category.charCodeAt(i)) & 0xffffffff;
+    }
+    const hue = Math.abs(hash) % 360;
+    return hslToHex(hue, 65, 55);
+};
+
+const hslToHex = (h: number, s: number, l: number): number => {
+    const sN = s / 100;
+    const lN = l / 100;
+    const c = (1 - Math.abs(2 * lN - 1)) * sN;
+    const x = c * (1 - Math.abs(((h / 60) % 2) - 1));
+    const m = lN - c / 2;
+
+    let r = 0;
+    let g = 0;
+    let b = 0;
+
+    if (h < 60) {
+        r = c;
+        g = x;
+    } else if (h < 120) {
+        r = x;
+        g = c;
+    } else if (h < 180) {
+        g = c;
+        b = x;
+    } else if (h < 240) {
+        g = x;
+        b = c;
+    } else if (h < 300) {
+        r = x;
+        b = c;
+    } else {
+        r = c;
+        b = x;
+    }
+
+    const R = Math.round((r + m) * 255);
+    const G = Math.round((g + m) * 255);
+    const B = Math.round((b + m) * 255);
+
+    return (R << 16) | (G << 8) | B;
+};
+
+export const applyCategoryColoring = async (
+    handle: IfcViewerHandle,
+    byCategoryByModel: Map<string, Map<string, number[]>>
+) => {
+    for (const [modelId, categoryMap] of byCategoryByModel) {
+        const model = handle.models.get(modelId);
+        if (!model) {
+            continue;
+        }
+
+        await model.resetColor(undefined);
+
+        for (const [category, localIds] of categoryMap) {
+            if (localIds.length === 0) continue;
+            const color = new Color(categoryHexColor(category));
+            await model.setColor(localIds, color);
+        }
+    }
+
+    await handle.fragments.core.update(true);
+};
+
+export const clearCategoryColoring = async (handle: IfcViewerHandle) => {
+    for (const model of handle.models.values()) {
+        await model.resetColor(undefined);
+    }
+    await handle.fragments.core.update(true);
+};
+
+export const highlightSelectionOverBackground = async (handle: IfcViewerHandle, modelId: string, localIds: number[]) => {
+    await handle.fragments.resetHighlight();
+
+    if (localIds.length > 0) {
+        await handle.fragments.highlight(HIGHLIGHT_STYLE, { [modelId]: new Set(localIds) });
+    }
 };
 

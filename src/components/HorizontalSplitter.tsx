@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
 interface HorizontalSplitterProps {
     startWidth: number;
@@ -11,6 +11,7 @@ interface HorizontalSplitterProps {
 const HorizontalSplitter: React.FC<HorizontalSplitterProps> = ({ children, startWidth, minWidth, maxWidth, onResize }) => {
     const [leftPercent, setLeftPercent] = useState(startWidth);
     const [dragging, setDragging] = useState(false);
+    const containerRef = useRef<HTMLDivElement>(null);
 
     const onMouseDown = useCallback(() => {
         setDragging(true);
@@ -26,8 +27,13 @@ const HorizontalSplitter: React.FC<HorizontalSplitterProps> = ({ children, start
         (e: MouseEvent) => {
             if (!dragging) return;
 
-            const vw = window.innerWidth;
-            let newPercent = (e.clientX / vw) * 100;
+            const container = containerRef.current;
+            if (!container) return;
+
+            const rect = container.getBoundingClientRect();
+            if (rect.width === 0) return;
+
+            let newPercent = ((e.clientX - rect.left) / rect.width) * 100;
             if (newPercent < minWidth) newPercent = minWidth;
             if (newPercent > maxWidth) newPercent = maxWidth;
 
@@ -57,7 +63,10 @@ const HorizontalSplitter: React.FC<HorizontalSplitterProps> = ({ children, start
     }
 
     return (
-        <div className="w-full h-full flex overflow-hidden">
+        <div
+            ref={containerRef}
+            className="w-full h-full flex overflow-hidden"
+        >
             <div
                 className="h-full overflow-auto transition-all duration-200"
                 style={{
@@ -82,10 +91,12 @@ const HorizontalSplitter: React.FC<HorizontalSplitterProps> = ({ children, start
                         ${dragging ? "bg-sky-300" : "bg-slate-300 group-hover:bg-sky-300"}`}
                     style={{ height: "calc(50% - 16px)" }}
                 />
+
                 <div
                     className={`mx-auto h-8 w-1.5 rounded bg-slate-500 transition-all duration-200 shadow-sm
                         ${dragging ? "bg-sky-500" : "group-hover:bg-sky-500"}`}
                 />
+
                 <div
                     className={`absolute left-1/2 bottom-0 w-px -translate-x-1/2 transition-all duration-200
                         ${dragging ? "bg-sky-300" : "bg-slate-300 group-hover:bg-sky-300"}`}

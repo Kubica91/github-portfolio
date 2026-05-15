@@ -1,28 +1,42 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import HorizontalSplitter from "../components/HorizontalSplitter";
-import { buildSpatialTree, getElementProperties, IfcPropertyMap, IfcTreeNode } from "./IfcTreeUtils";
+import { buildCategoryMap, buildSpatialTree, getElementProperties, IfcPropertyMap, IfcTreeNode } from "./IfcTreeUtils";
 import {
+    addMeasurePoint,
+    applyCategoryColoring,
+    cancelMeasureInProgress,
+    clearCategoryColoring,
     clearHighlight,
-    createClippingPlaneFromMouse,
+    clearMeasurements,
+    ClippingPlaneHit,
+    createClippingPlaneFromRaycast,
+    deleteClippingPlane,
     disposeIfcViewer,
     fitCameraToAll,
+    flipClippingPlane,
+    focusOnItem,
+    hasClippingPlanes,
     highlightItems,
+    highlightSelectionOverBackground,
     IfcViewerHandle,
     initializeIfcViewer,
     loadIfcModel,
     LoadStage,
+    raycastClippingPlane,
     raycastModel,
+    raycastModelDetailed,
     removeAllClippingPlanes,
     removeAllModels,
     removeModel,
-    setClipperEnabled,
     setItemsVisibility,
     showAll,
 } from "./IfcViewerThreeJsUtils";
+import ContextMenu, { ContextMenuItem } from "./components/ContextMenu";
 import IfcViewerContent from "./components/IfcViewerContent";
 import { ModelEntry } from "./components/ModelTree";
+import { useIfcKeyboardShortcuts } from "./hooks/useIfcKeyboardShortcuts";
 
 interface SelectedElement {
     modelId: string;
@@ -39,20 +53,55 @@ interface LoadingProgress {
     stage: LoadStage | null;
 }
 
+interface ContextMenuState {
+    x: number;
+    y: number;
+    hit: { modelId: string; localId: number } | null;
+    planeHit: ClippingPlaneHit | null;
+    hasPlanes: boolean;
+}
+
+const DRAG_THRESHOLD_SQ = 16;
+
 const IfcViewerMainPage = () => {
     const { t } = useTranslation();
 
     const containerRef = useRef<HTMLDivElement>(null);
     const viewerRef = useRef<IfcViewerHandle | null>(null);
-    const clipperActiveRef = useRef(false);
-    const draggedRef = useRef(false);
-    const mouseDownPosRef = useRef<{ x: number; y: number } | null>(null);
+    const measureActiveRef = useRef(false);
+    const colorByCategoryRef = useRef(false);
+    const leftDraggedRef = useRef(false);
+    const leftDownPosRef = useRef<{ x: number; y: number } | null>(null);
+    const rightDraggedRef = useRef(false);
+    const rightDownPosRef = useRef<{ x: number; y: number } | null>(null);
+    const lastMousePosRef = useRef<{ x: number; y: number } | null>(null);
 
     const [progress, setProgress] = useState<LoadingProgress | null>(null);
     const [models, setModels] = useState<ModelEntry[]>([]);
     const [hiddenIds, setHiddenIds] = useState<Map<string, Set<number>>>(new Map());
-    const [clipperActive, setClipperActive] = useState(false);
+    const [measureActive, setMeasureActive] = useState(false);
+    const [colorByCategory, setColorByCategory] = useState(false);
     const [selected, setSelected] = useState<SelectedElement | null>(null);
+    const [contextMenu, setContextMenu] = useState<ContextMenuState | null>(null);
+
+    const byCategoryByModel = useMemo(() => {
+        const map = new Map<string, Map<string, number[]>>();
+        for (const m of models) {
+            map.set(m.modelId, m.categories);
+        }
+        return map;
+    }, [models]);
+
+    const categoryCounts = useMemo(() => {
+        const counts = new Map<string, number>();
+        for (const perModel of byCategoryByModel.values()) {
+            for (const [category, ids] of perModel) {
+                counts.set(category, (counts.get(category) ?? 0) + ids.length);
+            }
+        }
+
+        return counts;
+    }, [byCategoryByModel]);
 
     useEffect(() => {
         let cancelled = false;
@@ -92,6 +141,28 @@ const IfcViewerMainPage = () => {
         return () => window.removeEventListener("resize", handleResize);
     }, [handleResize]);
 
+    const restoreCategoryColoring = useCallback(async () => {
+        if (!viewerRef.current) return;
+        if (!colorByCategoryRef.current) return;
+
+        const byModel = new Map<string, Map<string, number[]>>();
+        for (const [modelId, perCategory] of byCategoryByModel) {
+            byModel.set(modelId, perCategory);
+        }
+
+        await applyCategoryColoring(viewerRef.current, byModel);
+    }, [byCategoryByModel]);
+
+    const applySelection = useCallback(async (modelId: string, localIds: number[]) => {
+        if (!viewerRef.current) return;
+
+        if (colorByCategoryRef.current) {
+            await highlightSelectionOverBackground(viewerRef.current, modelId, localIds);
+        } else {
+            await highlightItems(viewerRef.current, modelId, localIds);
+        }
+    }, []);
+
     const handleFilesSelected = useCallback(
         async (files: File[]) => {
             if (!viewerRef.current) return;
@@ -109,8 +180,11 @@ const IfcViewerMainPage = () => {
                         const model = await loadIfcModel(viewerRef.current, file, (p, stage) => {
                             setProgress({ current: i + 1, total, fileName: file.name, progress: p, stage });
                         });
+
                         const tree = await buildSpatialTree(model);
-                        newEntries.push({ modelId: model.modelId, fileName: file.name, tree });
+                        const categories = await buildCategoryMap(model);
+
+                        newEntries.push({ modelId: model.modelId, fileName: file.name, tree, categories });
                     } catch (error) {
                         console.error(`IFC load failed for ${file.name}`, error);
                         toast.error(t("IfcViewer.LoadError", { name: file.name }));
@@ -119,6 +193,7 @@ const IfcViewerMainPage = () => {
 
                 if (newEntries.length > 0) {
                     setModels((prev) => [...prev, ...newEntries]);
+
                     await fitCameraToAll(viewerRef.current);
                 }
             } finally {
@@ -128,101 +203,156 @@ const IfcViewerMainPage = () => {
         [t]
     );
 
+    useEffect(() => {
+        if (!viewerRef.current) return;
+        if (!colorByCategoryRef.current) return;
+
+        void restoreCategoryColoring();
+    }, [byCategoryByModel, restoreCategoryColoring]);
+
     const handleMouseDown = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
-        mouseDownPosRef.current = { x: event.clientX, y: event.clientY };
-        draggedRef.current = false;
+        if (event.button === 0) {
+            leftDownPosRef.current = { x: event.clientX, y: event.clientY };
+            leftDraggedRef.current = false;
+
+            setContextMenu(null);
+        } else if (event.button === 2) {
+            rightDownPosRef.current = { x: event.clientX, y: event.clientY };
+            rightDraggedRef.current = false;
+        }
     }, []);
 
     const handleMouseMove = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
-        const start = mouseDownPosRef.current;
-        if (!start) return;
+        lastMousePosRef.current = { x: event.clientX, y: event.clientY };
 
-        const dx = event.clientX - start.x;
-        const dy = event.clientY - start.y;
-
-        if (dx * dx + dy * dy > 16) draggedRef.current = true;
-    }, []);
-
-    const handleCanvasClick = useCallback(async (event: React.MouseEvent<HTMLDivElement>) => {
-        if (draggedRef.current) {
-            draggedRef.current = false;
-            return;
+        const left = leftDownPosRef.current;
+        if (left) {
+            const dx = event.clientX - left.x;
+            const dy = event.clientY - left.y;
+            if (dx * dx + dy * dy > DRAG_THRESHOLD_SQ) leftDraggedRef.current = true;
         }
 
-        if (!viewerRef.current || viewerRef.current.models.size === 0) return;
-
-        if (clipperActiveRef.current) {
-            await createClippingPlaneFromMouse(viewerRef.current);
-            return;
-        }
-
-        const hit = await raycastModel(viewerRef.current, event);
-        if (!hit) {
-            await clearHighlight(viewerRef.current);
-            setSelected(null);
-            return;
-        }
-
-        await highlightItems(viewerRef.current, hit.modelId, [hit.localId]);
-
-        const model = viewerRef.current.models.get(hit.modelId);
-        if (!model) return;
-
-        try {
-            const properties = await getElementProperties(model, hit.localId);
-            setSelected({
-                modelId: hit.modelId,
-                localId: hit.localId,
-                category: typeof properties.category === "string" ? properties.category : null,
-                properties,
-            });
-        } catch (error) {
-            console.error("Failed to read element properties", error);
-            setSelected({
-                modelId: hit.modelId,
-                localId: hit.localId,
-                category: null,
-                properties: {},
-            });
+        const right = rightDownPosRef.current;
+        if (right) {
+            const dx = event.clientX - right.x;
+            const dy = event.clientY - right.y;
+            if (dx * dx + dy * dy > DRAG_THRESHOLD_SQ) rightDraggedRef.current = true;
         }
     }, []);
 
-    const handleToggleClipper = useCallback(() => {
+    const handleCanvasClick = useCallback(
+        async (event: React.MouseEvent<HTMLDivElement>) => {
+            if (leftDraggedRef.current) {
+                leftDraggedRef.current = false;
+                return;
+            }
+
+            if (!viewerRef.current || viewerRef.current.models.size === 0) return;
+
+            if (measureActiveRef.current) {
+                const hit = await raycastModelDetailed(viewerRef.current, event);
+                if (hit) addMeasurePoint(viewerRef.current, hit.point);
+                return;
+            }
+
+            const hit = await raycastModel(viewerRef.current, event);
+            if (!hit) {
+                await clearHighlight(viewerRef.current);
+
+                if (colorByCategoryRef.current) await restoreCategoryColoring();
+                setSelected(null);
+                return;
+            }
+
+            await applySelection(hit.modelId, [hit.localId]);
+
+            const model = viewerRef.current.models.get(hit.modelId);
+            if (!model) return;
+
+            try {
+                const properties = await getElementProperties(model, hit.localId);
+                setSelected({
+                    modelId: hit.modelId,
+                    localId: hit.localId,
+                    category: typeof properties.category === "string" ? properties.category : null,
+                    properties,
+                });
+            } catch (error) {
+                console.error("Failed to read element properties", error);
+                setSelected({
+                    modelId: hit.modelId,
+                    localId: hit.localId,
+                    category: null,
+                    properties: {},
+                });
+            }
+        },
+        [applySelection, restoreCategoryColoring]
+    );
+
+    const handleToggleMeasure = useCallback(() => {
         if (!viewerRef.current) return;
 
-        const next = !clipperActiveRef.current;
-        clipperActiveRef.current = next;
+        const next = !measureActiveRef.current;
+        measureActiveRef.current = next;
 
-        setClipperEnabled(viewerRef.current, next);
-        setClipperActive(next);
+        if (!next) cancelMeasureInProgress(viewerRef.current);
+
+        setMeasureActive(next);
     }, []);
 
-    const handleRemoveClippingPlanes = useCallback(() => {
+    const handleClearMeasurements = useCallback(() => {
         if (!viewerRef.current) return;
-        removeAllClippingPlanes(viewerRef.current);
+
+        clearMeasurements(viewerRef.current);
     }, []);
+
+    const handleToggleColorByCategory = useCallback(async () => {
+        if (!viewerRef.current) return;
+
+        const next = !colorByCategoryRef.current;
+        colorByCategoryRef.current = next;
+        setColorByCategory(next);
+
+        if (next) {
+            await applyCategoryColoring(viewerRef.current, byCategoryByModel);
+            if (selected) {
+                await highlightSelectionOverBackground(viewerRef.current, selected.modelId, [selected.localId]);
+            }
+        } else {
+            await clearCategoryColoring(viewerRef.current);
+            if (selected) {
+                await highlightItems(viewerRef.current, selected.modelId, [selected.localId]);
+            }
+        }
+    }, [byCategoryByModel, selected]);
 
     const handleResetCamera = useCallback(async () => {
         if (!viewerRef.current) return;
+
         await fitCameraToAll(viewerRef.current);
     }, []);
 
     const handleShowAll = useCallback(async () => {
         if (!viewerRef.current) return;
+
         await showAll(viewerRef.current);
         setHiddenIds(new Map());
     }, []);
 
     const handleRemoveAllModels = useCallback(async () => {
         if (!viewerRef.current) return;
+
         await removeAllModels(viewerRef.current);
         setModels([]);
         setHiddenIds(new Map());
         setSelected(null);
+        clearMeasurements(viewerRef.current);
     }, []);
 
     const handleRemoveModel = useCallback(async (modelId: string) => {
         if (!viewerRef.current) return;
+
         await removeModel(viewerRef.current, modelId);
 
         setModels((prev) => prev.filter((m) => m.modelId !== modelId));
@@ -234,37 +364,40 @@ const IfcViewerMainPage = () => {
         setSelected((prev) => (prev?.modelId === modelId ? null : prev));
     }, []);
 
-    const handleSelectNode = useCallback(async (modelId: string, node: IfcTreeNode) => {
-        if (!viewerRef.current) return;
-        const model = viewerRef.current.models.get(modelId);
-        if (!model) return;
+    const handleSelectNode = useCallback(
+        async (modelId: string, node: IfcTreeNode) => {
+            if (!viewerRef.current) return;
+            const model = viewerRef.current.models.get(modelId);
+            if (!model) return;
 
-        if (node.localId === null) {
-            await highlightItems(viewerRef.current, modelId, node.expressIDs);
-            setSelected(null);
-            return;
-        }
+            if (node.localId === null) {
+                await applySelection(modelId, node.expressIDs);
+                setSelected(null);
+                return;
+            }
 
-        await highlightItems(viewerRef.current, modelId, [node.localId]);
+            await applySelection(modelId, [node.localId]);
 
-        try {
-            const properties = await getElementProperties(model, node.localId);
-            setSelected({
-                modelId,
-                localId: node.localId,
-                category: node.category || (typeof properties.category === "string" ? properties.category : null),
-                properties,
-            });
-        } catch (error) {
-            console.error("Failed to read element properties", error);
-            setSelected({
-                modelId,
-                localId: node.localId,
-                category: node.category,
-                properties: {},
-            });
-        }
-    }, []);
+            try {
+                const properties = await getElementProperties(model, node.localId);
+                setSelected({
+                    modelId,
+                    localId: node.localId,
+                    category: node.category || (typeof properties.category === "string" ? properties.category : null),
+                    properties,
+                });
+            } catch (error) {
+                console.error("Failed to read element properties", error);
+                setSelected({
+                    modelId,
+                    localId: node.localId,
+                    category: node.category,
+                    properties: {},
+                });
+            }
+        },
+        [applySelection]
+    );
 
     const handleToggleVisibility = useCallback(
         async (modelId: string, node: IfcTreeNode) => {
@@ -294,30 +427,238 @@ const IfcViewerMainPage = () => {
         [hiddenIds]
     );
 
+    const handleFocusAtCursor = useCallback(async () => {
+        if (!viewerRef.current || viewerRef.current.models.size === 0) return;
+
+        const pos = lastMousePosRef.current;
+        if (!pos) return;
+
+        const hit = await raycastModel(viewerRef.current, { clientX: pos.x, clientY: pos.y });
+        if (!hit) return;
+
+        await focusOnItem(viewerRef.current, hit.modelId, hit.localId);
+    }, []);
+
+    const handleHideAtCursor = useCallback(async () => {
+        if (!viewerRef.current || viewerRef.current.models.size === 0) return;
+
+        const pos = lastMousePosRef.current;
+        if (!pos) return;
+
+        const hit = await raycastModel(viewerRef.current, { clientX: pos.x, clientY: pos.y });
+        if (!hit) return;
+
+        await setItemsVisibility(viewerRef.current, hit.modelId, [hit.localId], false);
+
+        setHiddenIds((prev) => {
+            const next = new Map(prev);
+            const set = new Set(next.get(hit.modelId) ?? []);
+            set.add(hit.localId);
+            next.set(hit.modelId, set);
+            return next;
+        });
+    }, []);
+
+    const handlePanicClear = useCallback(async () => {
+        if (!viewerRef.current) return;
+
+        setContextMenu(null);
+
+        if (measureActiveRef.current) {
+            measureActiveRef.current = false;
+            setMeasureActive(false);
+        }
+        cancelMeasureInProgress(viewerRef.current);
+        clearMeasurements(viewerRef.current);
+
+        removeAllClippingPlanes(viewerRef.current);
+
+        await clearHighlight(viewerRef.current);
+        if (colorByCategoryRef.current) await restoreCategoryColoring();
+        setSelected(null);
+
+        await showAll(viewerRef.current);
+        setHiddenIds(new Map());
+    }, [restoreCategoryColoring]);
+
+    const handleDelete = useCallback(() => {
+        if (!viewerRef.current) return;
+
+        if (measureActiveRef.current) {
+            clearMeasurements(viewerRef.current);
+            return;
+        }
+
+        removeAllClippingPlanes(viewerRef.current);
+        clearMeasurements(viewerRef.current);
+    }, []);
+
+    useIfcKeyboardShortcuts(
+        {
+            onResetCamera: () => void handleResetCamera(),
+            onPanicClear: () => void handlePanicClear(),
+            onFocusAtCursor: () => void handleFocusAtCursor(),
+            onHideAtCursor: () => void handleHideAtCursor(),
+            onToggleMeasure: handleToggleMeasure,
+            onToggleColorByCategory: () => void handleToggleColorByCategory(),
+            onDelete: handleDelete,
+        },
+        models.length > 0
+    );
+
+    const handleContextMenu = useCallback(async (event: React.MouseEvent<HTMLDivElement>) => {
+        event.preventDefault();
+
+        if (rightDraggedRef.current) {
+            rightDraggedRef.current = false;
+            rightDownPosRef.current = null;
+            return;
+        }
+        rightDownPosRef.current = null;
+
+        if (!viewerRef.current || viewerRef.current.models.size === 0) return;
+
+        const planeHit = raycastClippingPlane(viewerRef.current, event);
+        const hit = planeHit ? null : await raycastModel(viewerRef.current, event);
+
+        setContextMenu({
+            x: event.clientX,
+            y: event.clientY,
+            hit,
+            planeHit,
+            hasPlanes: hasClippingPlanes(viewerRef.current),
+        });
+    }, []);
+
+    const handleAddPlaneAt = useCallback(async (event: { clientX: number; clientY: number }) => {
+        if (!viewerRef.current) return;
+
+        await createClippingPlaneFromRaycast(viewerRef.current, event);
+    }, []);
+
+    const contextMenuItems = useMemo<ContextMenuItem[]>(() => {
+        if (!contextMenu) return [];
+
+        const items: ContextMenuItem[] = [];
+
+        items.push({
+            label: t("IfcViewer.ContextMenu.ShowAll"),
+            shortcut: "Esc",
+            onClick: () => void handlePanicClear(),
+            separatorAfter: contextMenu.hit !== null || contextMenu.planeHit !== null || contextMenu.hasPlanes,
+        });
+
+        if (contextMenu.hit) {
+            const hit = contextMenu.hit;
+
+            items.push({
+                label: t("IfcViewer.ContextMenu.FocusOnElement"),
+                shortcut: "F",
+                onClick: async () => {
+                    if (!viewerRef.current) return;
+
+                    await focusOnItem(viewerRef.current, hit.modelId, hit.localId);
+                },
+            });
+
+            items.push({
+                label: t("IfcViewer.ContextMenu.HideElement"),
+                shortcut: "H",
+                onClick: async () => {
+                    if (!viewerRef.current) return;
+
+                    await setItemsVisibility(viewerRef.current, hit.modelId, [hit.localId], false);
+                    setHiddenIds((prev) => {
+                        const next = new Map(prev);
+                        const set = new Set(next.get(hit.modelId) ?? []);
+                        set.add(hit.localId);
+                        next.set(hit.modelId, set);
+                        return next;
+                    });
+                },
+                separatorAfter: true,
+            });
+
+            items.push({
+                label: t("IfcViewer.ContextMenu.AddPlane"),
+                onClick: () => void handleAddPlaneAt({ clientX: contextMenu.x, clientY: contextMenu.y }),
+                separatorAfter: contextMenu.hasPlanes,
+            });
+        }
+
+        if (contextMenu.planeHit) {
+            const planeId = contextMenu.planeHit.planeId;
+
+            items.push({
+                label: t("IfcViewer.ContextMenu.FlipPlane"),
+                onClick: () => {
+                    if (!viewerRef.current) return;
+                    flipClippingPlane(viewerRef.current, planeId);
+                },
+            });
+
+            items.push({
+                label: t("IfcViewer.ContextMenu.DeletePlane"),
+                onClick: () => {
+                    if (!viewerRef.current) return;
+                    void deleteClippingPlane(viewerRef.current, planeId);
+                },
+                danger: true,
+                separatorAfter: contextMenu.hasPlanes,
+            });
+        }
+
+        if (contextMenu.hasPlanes) {
+            items.push({
+                label: t("IfcViewer.ContextMenu.DeleteAllPlanes"),
+                onClick: () => {
+                    if (!viewerRef.current) return;
+                    removeAllClippingPlanes(viewerRef.current);
+                },
+                danger: true,
+            });
+        }
+
+        return items;
+    }, [contextMenu, t, handlePanicClear, handleAddPlaneAt]);
+
     return (
         <HorizontalSplitter
-            startWidth={70}
-            minWidth={30}
-            maxWidth={90}
+            startWidth={55}
+            minWidth={25}
+            maxWidth={85}
             onResize={handleResize}
         >
             <div
                 ref={containerRef}
-                className="w-full h-full overflow-hidden"
+                className="w-full h-full overflow-hidden relative"
                 onMouseDown={handleMouseDown}
                 onMouseMove={handleMouseMove}
                 onClick={handleCanvasClick}
-            />
+                onContextMenu={handleContextMenu}
+            >
+                {contextMenu && (
+                    <ContextMenu
+                        x={contextMenu.x}
+                        y={contextMenu.y}
+                        items={contextMenuItems}
+                        onClose={() => setContextMenu(null)}
+                    />
+                )}
+            </div>
 
             <IfcViewerContent
                 progress={progress}
                 models={models}
                 hiddenIds={hiddenIds}
-                clipperActive={clipperActive}
+                measureActive={measureActive}
+                colorByCategory={colorByCategory}
+                categoryCounts={categoryCounts}
                 selected={selected}
                 onFilesSelected={handleFilesSelected}
-                onToggleClipper={handleToggleClipper}
-                onRemoveClippingPlanes={handleRemoveClippingPlanes}
+                onToggleMeasure={handleToggleMeasure}
+                onClearMeasurements={handleClearMeasurements}
+                onToggleColorByCategory={() => void handleToggleColorByCategory()}
                 onResetCamera={handleResetCamera}
                 onShowAll={handleShowAll}
                 onRemoveAllModels={handleRemoveAllModels}

@@ -464,16 +464,48 @@
         },
         "Tools": {
             "Title": "Nástroje",
-            "SectionPlane": "Sekční rovina (klik do scény)",
-            "RemovePlanes": "Smazat všechny roviny",
+            "Measure": "Měření (klik na dva body)",
+            "ClearMeasure": "Smazat měření",
+            "ColorByCategory": "Barvit podle kategorie",
             "ResetCamera": "Vystředit pohled",
             "ShowAll": "Zobrazit vše",
-            "RemoveAllModels": "Odebrat všechny modely"
+            "RemoveAllModels": "Odebrat všechny modely",
+            "Shortcuts": "Klávesové zkratky"
         },
         "Tree": {
             "Title": "Struktura modelu",
             "Empty": "Nahrajte IFC soubor pro zobrazení stromu.",
-            "RemoveModel": "Odebrat tento model"
+            "RemoveModel": "Odebrat tento model",
+            "SearchPlaceholder": "Hledat ve stromu..."
+        },
+        "Legend": {
+            "Title": "Legenda kategorií"
+        },
+        "ContextMenu": {
+            "ShowAll": "Reset (zobrazit vše)",
+            "FocusOnElement": "Soustředit na prvek",
+            "HideElement": "Skrýt prvek",
+            "AddPlane": "Přidat rovinu",
+            "FlipPlane": "Převrátit rovinu",
+            "DeletePlane": "Smazat rovinu",
+            "DeleteAllPlanes": "Smazat všechny roviny"
+        },
+        "Shortcuts": {
+            "Title": "Klávesové zkratky",
+            "Close": "Zavřít",
+            "ResetCamera": "Vystředit pohled",
+            "FocusAtCursor": "Soustředit na prvek pod kurzorem",
+            "ShowAll": "Reset (zobrazit vše)",
+            "HideAtCursor": "Skrýt prvek pod kurzorem",
+            "ToggleMeasure": "Zapnout / vypnout měření",
+            "ToggleColorByCategory": "Barvit podle kategorie",
+            "Delete": "Smazat roviny / měření",
+            "RightClick": "Kontextové menu",
+            "RightClickKey": "PTM",
+            "RightDrag": "Otáčení kamery",
+            "RightDragKey": "PTM + tažení",
+            "Wheel": "Přiblížení / oddálení",
+            "WheelKey": "Kolečko"
         },
         "Element": {
             "Title": "Vlastnosti prvku",
