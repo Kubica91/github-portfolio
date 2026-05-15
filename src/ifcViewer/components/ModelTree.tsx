@@ -120,7 +120,7 @@ const ModelTree = ({
                 )}
             </div>
 
-            <div className="overflow-y-auto max-h-96 -mx-2">
+            <div className="overflow-y-auto -mx-2">
                 {models.length === 0 ? (
                     <p className="text-sm text-slate-500 px-2">{t("IfcViewer.Tree.Empty")}</p>
                 ) : (
