@@ -32,11 +32,13 @@ import {
     removeModel,
     setItemsVisibility,
     showAll,
+    updateMeasurePreview,
 } from "./IfcViewerThreeJsUtils";
 import ContextMenu, { ContextMenuItem } from "./components/ContextMenu";
 import IfcViewerContent from "./components/IfcViewerContent";
 import { ModelEntry } from "./components/ModelTree";
 import { useIfcKeyboardShortcuts } from "./hooks/useIfcKeyboardShortcuts";
+import { useMeasurementSnap } from "./hooks/useMeasurementSnap";
 
 interface SelectedElement {
     modelId: string;
@@ -83,6 +85,17 @@ const IfcViewerMainPage = () => {
     const [colorByCategory, setColorByCategory] = useState(false);
     const [selected, setSelected] = useState<SelectedElement | null>(null);
     const [contextMenu, setContextMenu] = useState<ContextMenuState | null>(null);
+
+    const { snapResult, handleSnapMouseMove, handleSnapMouseLeave, resolveClickPoint } = useMeasurementSnap(
+        viewerRef,
+        measureActive
+    );
+
+    useEffect(() => {
+        if (!viewerRef.current) return;
+        if (!measureActive || !snapResult) return;
+        updateMeasurePreview(viewerRef.current, snapResult.point);
+    }, [snapResult, measureActive]);
 
     const byCategoryByModel = useMemo(() => {
         const map = new Map<string, Map<string, number[]>>();
@@ -222,23 +235,34 @@ const IfcViewerMainPage = () => {
         }
     }, []);
 
-    const handleMouseMove = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
-        lastMousePosRef.current = { x: event.clientX, y: event.clientY };
+    const handleMouseMove = useCallback(
+        (event: React.MouseEvent<HTMLDivElement>) => {
+            lastMousePosRef.current = { x: event.clientX, y: event.clientY };
 
-        const left = leftDownPosRef.current;
-        if (left) {
-            const dx = event.clientX - left.x;
-            const dy = event.clientY - left.y;
-            if (dx * dx + dy * dy > DRAG_THRESHOLD_SQ) leftDraggedRef.current = true;
-        }
+            const left = leftDownPosRef.current;
+            if (left) {
+                const dx = event.clientX - left.x;
+                const dy = event.clientY - left.y;
+                if (dx * dx + dy * dy > DRAG_THRESHOLD_SQ) leftDraggedRef.current = true;
+            }
 
-        const right = rightDownPosRef.current;
-        if (right) {
-            const dx = event.clientX - right.x;
-            const dy = event.clientY - right.y;
-            if (dx * dx + dy * dy > DRAG_THRESHOLD_SQ) rightDraggedRef.current = true;
-        }
-    }, []);
+            const right = rightDownPosRef.current;
+            if (right) {
+                const dx = event.clientX - right.x;
+                const dy = event.clientY - right.y;
+                if (dx * dx + dy * dy > DRAG_THRESHOLD_SQ) rightDraggedRef.current = true;
+            }
+
+            if (measureActiveRef.current) {
+                handleSnapMouseMove({ clientX: event.clientX, clientY: event.clientY });
+            }
+        },
+        [handleSnapMouseMove]
+    );
+
+    const handleMouseLeave = useCallback(() => {
+        handleSnapMouseLeave();
+    }, [handleSnapMouseLeave]);
 
     const handleCanvasClick = useCallback(
         async (event: React.MouseEvent<HTMLDivElement>) => {
@@ -250,8 +274,13 @@ const IfcViewerMainPage = () => {
             if (!viewerRef.current || viewerRef.current.models.size === 0) return;
 
             if (measureActiveRef.current) {
-                const hit = await raycastModelDetailed(viewerRef.current, event);
-                if (hit) addMeasurePoint(viewerRef.current, hit.point);
+                const snapped = await resolveClickPoint({ clientX: event.clientX, clientY: event.clientY });
+                if (snapped) {
+                    addMeasurePoint(viewerRef.current, snapped);
+                } else {
+                    const hit = await raycastModelDetailed(viewerRef.current, event);
+                    if (hit) addMeasurePoint(viewerRef.current, hit.point);
+                }
                 return;
             }
 
@@ -287,7 +316,7 @@ const IfcViewerMainPage = () => {
                 });
             }
         },
-        [applySelection, restoreCategoryColoring]
+        [applySelection, restoreCategoryColoring, resolveClickPoint]
     );
 
     const handleToggleMeasure = useCallback(() => {
@@ -634,6 +663,7 @@ const IfcViewerMainPage = () => {
                 className="w-full h-full overflow-hidden relative"
                 onMouseDown={handleMouseDown}
                 onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
                 onClick={handleCanvasClick}
                 onContextMenu={handleContextMenu}
             >
@@ -655,6 +685,7 @@ const IfcViewerMainPage = () => {
                 colorByCategory={colorByCategory}
                 categoryCounts={categoryCounts}
                 selected={selected}
+                snapResult={snapResult}
                 onFilesSelected={handleFilesSelected}
                 onToggleMeasure={handleToggleMeasure}
                 onClearMeasurements={handleClearMeasurements}

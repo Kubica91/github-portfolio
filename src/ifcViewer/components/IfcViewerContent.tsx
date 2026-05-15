@@ -2,12 +2,14 @@ import { useState } from "react";
 import HorizontalSplitter from "../../components/HorizontalSplitter";
 import { IfcPropertyMap, IfcTreeNode } from "../IfcTreeUtils";
 import { LoadStage } from "../IfcViewerThreeJsUtils";
+import { SnapResult } from "../MeasurementSnapUtils";
 import CategoryLegend from "./CategoryLegend";
 import ElementInfo from "./ElementInfo";
 import IfcFileInput from "./IfcFileInput";
 import LoadingProgress from "./LoadingProgress";
 import ModelTree, { ModelEntry } from "./ModelTree";
 import ShortcutsLegend from "./ShortcutsLegend";
+import SnapIndicator from "./SnapIndicator";
 import ToolPanel from "./ToolPanel";
 
 interface ProgressState {
@@ -31,6 +33,7 @@ interface IfcViewerContentProps {
         category: string | null;
         properties: IfcPropertyMap;
     } | null;
+    snapResult: SnapResult | null;
     onFilesSelected: (files: File[]) => void;
     onToggleMeasure: () => void;
     onClearMeasurements: () => void;
@@ -51,6 +54,7 @@ const IfcViewerContent = ({
     colorByCategory,
     categoryCounts,
     selected,
+    snapResult,
     onFilesSelected,
     onToggleMeasure,
     onClearMeasurements,
@@ -122,6 +126,8 @@ const IfcViewerContent = ({
             </HorizontalSplitter>
 
             {showShortcuts && <ShortcutsLegend onClose={() => setShowShortcuts(false)} />}
+
+            {measureActive && <SnapIndicator snap={snapResult} />}
         </>
     );
 };

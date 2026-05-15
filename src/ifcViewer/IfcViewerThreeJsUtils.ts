@@ -41,6 +41,8 @@ export interface IfcViewerHandle {
     models: Map<string, FragmentsModel>;
     measureGroup: Group;
     measurePoints: Vector3[];
+    previewLine: Line | null;
+    previewLabel: Sprite | null;
 }
 
 const HIGHLIGHT_STYLE: MaterialDefinition = {
@@ -112,6 +114,8 @@ export const initializeIfcViewer = async (container: HTMLElement): Promise<IfcVi
         models: new Map(),
         measureGroup,
         measurePoints: [],
+        previewLine: null,
+        previewLabel: null,
     };
 };
 
@@ -380,31 +384,48 @@ export const raycastModelDetailed = async (
     return { modelId: result.fragments.modelId, localId: result.localId, point: point.clone() };
 };
 
+const LABEL_CANVAS_WIDTH = 192;
+const LABEL_CANVAS_HEIGHT = 48;
+const LABEL_SPRITE_WIDTH = 0.9;
+const LABEL_SPRITE_HEIGHT = 0.225;
+
+const drawDistanceLabel = (canvas: HTMLCanvasElement, text: string) => {
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "rgba(15, 23, 42, 0.85)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "#86efac";
+    ctx.font = "bold 24px sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(text, canvas.width / 2, canvas.height / 2);
+};
+
 const createDistanceLabel = (text: string): Sprite => {
     const canvas = document.createElement("canvas");
-    canvas.width = 256;
-    canvas.height = 64;
-
-    const ctx = canvas.getContext("2d");
-    if (ctx) {
-        ctx.fillStyle = "rgba(15, 23, 42, 0.85)";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        ctx.fillStyle = "#86efac";
-        ctx.font = "bold 32px sans-serif";
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.fillText(text, canvas.width / 2, canvas.height / 2);
-    }
+    canvas.width = LABEL_CANVAS_WIDTH;
+    canvas.height = LABEL_CANVAS_HEIGHT;
+    drawDistanceLabel(canvas, text);
 
     const texture = new CanvasTexture(canvas);
     texture.needsUpdate = true;
 
     const material = new SpriteMaterial({ map: texture, depthTest: false, transparent: true });
     const sprite = new Sprite(material);
-    sprite.scale.set(2, 0.5, 1);
+    sprite.scale.set(LABEL_SPRITE_WIDTH, LABEL_SPRITE_HEIGHT, 1);
 
     return sprite;
+};
+
+const updateDistanceLabel = (sprite: Sprite, text: string) => {
+    const material = sprite.material as SpriteMaterial;
+    const canvas = material.map?.image as HTMLCanvasElement | undefined;
+    if (!canvas) return;
+    drawDistanceLabel(canvas, text);
+    if (material.map) material.map.needsUpdate = true;
 };
 
 export const addMeasurePoint = (handle: IfcViewerHandle, point: Vector3) => {
@@ -426,9 +447,66 @@ export const addMeasurePoint = (handle: IfcViewerHandle, point: Vector3) => {
     handle.measureGroup.add(line);
     handle.measureGroup.add(label);
     handle.measurePoints = [];
+
+    clearMeasurePreview(handle);
+};
+
+export const updateMeasurePreview = (handle: IfcViewerHandle, currentPoint: Vector3) => {
+    if (handle.measurePoints.length !== 1) {
+        clearMeasurePreview(handle);
+        return;
+    }
+
+    const start = handle.measurePoints[0];
+    const distance = start.distanceTo(currentPoint);
+    const text = `${distance.toFixed(2)} m`;
+
+    if (!handle.previewLine) {
+        const geometry = new BufferGeometry().setFromPoints([start, currentPoint]);
+        const material = new LineBasicMaterial({
+            color: 0x22d3ee,
+            depthTest: false,
+            transparent: true,
+            opacity: 0.7,
+        });
+        handle.previewLine = new Line(geometry, material);
+        handle.previewLine.renderOrder = 998;
+        handle.measureGroup.add(handle.previewLine);
+    } else {
+        const geo = handle.previewLine.geometry as BufferGeometry;
+        geo.setFromPoints([start, currentPoint]);
+        geo.computeBoundingSphere();
+    }
+
+    if (!handle.previewLabel) {
+        handle.previewLabel = createDistanceLabel(text);
+        handle.previewLabel.renderOrder = 999;
+        handle.measureGroup.add(handle.previewLabel);
+    } else {
+        updateDistanceLabel(handle.previewLabel, text);
+    }
+    handle.previewLabel.position.copy(start).lerp(currentPoint, 0.5);
+};
+
+export const clearMeasurePreview = (handle: IfcViewerHandle) => {
+    if (handle.previewLine) {
+        handle.measureGroup.remove(handle.previewLine);
+        (handle.previewLine.geometry as BufferGeometry).dispose();
+        (handle.previewLine.material as LineBasicMaterial).dispose();
+        handle.previewLine = null;
+    }
+    if (handle.previewLabel) {
+        handle.measureGroup.remove(handle.previewLabel);
+        const mat = handle.previewLabel.material as SpriteMaterial;
+        mat.map?.dispose();
+        mat.dispose();
+        handle.previewLabel = null;
+    }
 };
 
 export const clearMeasurements = (handle: IfcViewerHandle) => {
+    clearMeasurePreview(handle);
+
     for (const child of [...handle.measureGroup.children]) {
         handle.measureGroup.remove(child);
         const obj = child as Line | Sprite;
@@ -443,6 +521,7 @@ export const clearMeasurements = (handle: IfcViewerHandle) => {
 
 export const cancelMeasureInProgress = (handle: IfcViewerHandle) => {
     handle.measurePoints = [];
+    clearMeasurePreview(handle);
 };
 
 export const categoryHexColor = (category: string): number => {
